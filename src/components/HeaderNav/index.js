@@ -11,7 +11,7 @@ function HeaderNav(){
     const navigate = useNavigate();
     const logout = () => {
         newLocalStorage.delete("token")
-        navigate('/')
+        navigate(location.hash)
     }
     return (
         <nav>
