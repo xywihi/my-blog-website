@@ -1,6 +1,7 @@
 const path = require("path")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
     entry: './src/index.js', //入口文件
     output: {
@@ -10,8 +11,10 @@ module.exports = {
     },
     devServer: {
         static: path.join(__dirname, 'public'),
+        open:true, // 开启服务器时，自动打开页面
         port: 3000,
     },
+    mode: "development",
     module: {
         rules: [
             {
@@ -48,7 +51,8 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: 'styles.css'
-        })
+        }),
+        new BundleAnalyzerPlugin()  //创建一个可交互的树形地图，以展示打包后文件的大小
     ],
     optimization: {
         splitChunks: {
