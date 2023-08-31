@@ -52,7 +52,19 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: 'styles.css'
         }),
-        new BundleAnalyzerPlugin()  //创建一个可交互的树形地图，以展示打包后文件的大小
+        new BundleAnalyzerPlugin({
+            //   analyzerMode: 'server',
+              analyzerHost: '127.0.0.1',
+              analyzerPort: '9000',
+            //   reportFilename: 'report.html',
+            //   defaultSizes: 'parsed',
+            //   openAnalyzer: true,
+            //   generateStatsFile: false,
+            //   statsFilename: 'stats.json',
+            //   statsOptions: null,
+            //   excludeAssets: null,
+            //   logLevel: info
+        })  //创建一个可交互的树形地图，以展示打包后文件的大小
     ],
     optimization: {
         splitChunks: {

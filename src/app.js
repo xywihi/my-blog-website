@@ -1,44 +1,30 @@
-import React,{ Suspense }  from "react";
-import ReactDOM from 'react-dom/client'
-import { BrowserRouter, HashRouter, Route, Routes,Link } from 'react-router-dom'
-import ErrorBoundary from "./components/ErrorBoundary"
-// import Home from "./pages/home"
-// import News from "./pages/news"
-// import User from "./pages/user"
+import React,{ Suspense, useEffect }  from "react";
+import {  HashRouter, Route, Routes } from 'react-router-dom'
+import util from './util'
+import HeaderNav from "./components/HeaderNav";
 const Home = React.lazy(() => import('./pages/home'))
 const News = React.lazy(() => import('./pages/news'))
 const User = React.lazy(() => import('./pages/user'))
+const ErrorBoundary = React.lazy(() => import('./components/ErrorBoundary'))
+const newLocalStorage = new util.LocalStorage;
 export default function App(){
+    useEffect(() => {
+        newLocalStorage.set("token",'Ber sddjjkwjfhiheh87687212ihr2khfjk')
+        return () => {
+            console.log('销毁当前项目')
+        }
+    }, [])
     return (
-        <>
-            
         <HashRouter basename="/">
-        <nav>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/news">News</Link>
-                </li>
-                <li>
-                    <Link to="/user">User</Link>
-                </li>
-            </ul>
-        </nav>
-            <Suspense fallback={<div>Loading...</div>} >
-            <Routes>
-                
-                <Route exact path="/" element={<Home/>}></Route>
-                <Route  path="/news" element={<News/>}></Route>
-                <Route  path="/user" element={<User/>}></Route>
-            </Routes> 
-                    <ErrorBoundary>
-                </ErrorBoundary>  
+            <HeaderNav/>
+            <Suspense fallback={<div>Loading...</div>}>
+                <Routes>
+                    <Route exact path="/" Component={()=><Home key="home"/>}></Route>
+                    <Route path="/news" Component={()=>util.RouteGuard(<News key="news"/>)}></Route>
+                    <Route path="/user" Component={()=><User key="user"/>}></Route>
+                </Routes> 
+                <ErrorBoundary/>
             </Suspense>
-            
         </HashRouter>
-        </>
-        
     )
 }
