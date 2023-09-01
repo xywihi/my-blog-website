@@ -1,9 +1,17 @@
-import React,{useEffect} from "react";
+import React,{useEffect, useState} from "react";
+import './styles.less'
 export default function Home(props){
     useEffect(() => {
-        console.log('********',props.history)
+        // throwError()
     }, [])
+    // const throwError = () => {
+    //     console.log('--------------------', 1/0)
+    //     return 1/0
+    //     // throw new Error('This is a simulated error.');
+    // };
     return (
-        <div>Home</div>
+        <div>
+            <span>cccccc</span>
+        </div>
     )
 }

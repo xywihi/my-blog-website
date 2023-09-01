@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body {
+  font-family: sans-serif;
+}
+
+/* 设置全局链接颜色 */
+a {
+  /* color: #333; */
+  text-decoration: none;
+}
+  
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+button {
+  background-color: #007acc;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.flexB{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flexS{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.ma12{
+    margin: 12px;
+}
+.ma24{
+    margin: 24px;
+}
+.maH12{
+    margin: 0 12px;
+}
+.maV24{
+    margin: 24px 0;
+}
+.maV12{
+    margin: 0 12px;
+}
+.maV24{
+    padding: 24px 0;
+}
+.pa12{
+    padding: 12px;
+}
+.pa24{
+    padding: 24px;
+}
+.paH12{
+    padding: 0 12px;
+}
+.paV24{
+    padding: 24px 0;
+}
+.paV12{
+    padding: 0 12px;
+}
+.paV24{
+    padding: 24px 0;
+}
+
+
+.fontB{
+    font-weight: bold;
+}
+.font18{
+    font-size: 18px;
+}
+.font24{
+    font-size: 24px;
+}

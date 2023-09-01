@@ -1,6 +1,4 @@
 export default class LocalStorage {
-    constructor(){
-    }
     set = (key,value) => {
         return localStorage.setItem(key,value)
     }
