@@ -33,12 +33,12 @@ export default function App(){
         <HashRouter basename="/">
             <ErrorBoundary>
                 <div  className={theme}>
-                    <div className="bg1 project textColor">
-                        <header>
+                    <div className="bg2_blue project textColor">
+                        <header className="bg1">
                             <HeaderNav changeTheme={changeTheme}  theme={theme}/>
                         </header>
                         <main >
-                            <Suspense fallback={<div>Loading...</div>}>
+                            <Suspense fallback={<div className="center"><span>Loading...</span></div>}>
                                 <Routes>
                                     <Route exact path="/" Component={()=><Home key="home"/>}></Route>
                                     <Route path="/news" Component={()=>util.RouteGuard(<News key="news"/>)}></Route>

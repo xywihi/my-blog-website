@@ -1,7 +1,96 @@
-// @import 'src/variables.less';
-.logo{
-    width: 120px;
+
+
+#waterfall-container-out {
+    // display: grid;
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    column-gap: 25px;
+  }
+#waterfall-container {
+    // display: grid;
+    display: grid;
+    grid-auto-rows: 5px;
+    // column-gap: 10px;
+    grid-template-columns: repeat(auto-fill, calc(50% - 15px));
+    align-items: start;
+    justify-content: space-between;
+  }
+.leftBox{
+    margin-bottom: 25px;
 }
-.header{
-    // background-color: @them-default.bg1;
+.waterfall-item {
+  break-inside: avoid; /* 防止项目跨列 */
+  margin-bottom: 25px; /* 项目之间的垂直间距 */
+  
+}
+.item1{
+    height:370px;
+    grid-row-end: span calc(75 + 5);
+}
+.item2{
+    height: 240px;
+    grid-row-end: span calc(48 + 5);
+    display: grid;
+    grid-auto-rows: 5px;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 25px;
+    align-items: start;
+    justify-content: space-between;
+    background: none;
+    .item2_inner1{
+        height:240px;
+        grid-row-end: span calc(48 + 5);
+    }
+    .item2_inner2{
+        height:240px;
+        grid-row-end: span calc(48 + 5);
+    }
+    .item2_inner3{
+        background: none;
+        height:240px;
+        display: grid;
+        // column-count: 1; /* 列数 */
+        row-gap: 15px; /* 列之间的间距 */
+
+        grid-template-rows: 1fr 1fr;
+        .item2_inner3_inner1{
+            margin: 0;
+            img{
+                object-fit: cover;
+                height: 60px;
+                width: 60px;
+                border-radius: 50px;
+            }
+        }
+        .item2_inner3_inner2{
+            margin: 0;
+        }
+    }
+}
+.item3{
+    height: 240px;
+    grid-row-end: span calc(48 + 5);
+    display: grid;
+    grid-auto-rows: 5px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 25px;
+    align-items: start;
+    justify-content: space-between;
+    background: none;
+    .item3_inner1{
+        height:240px;
+        grid-row-end: span calc(48 + 5);
+    }
+    .item3_inner2{
+        height:240px;
+        grid-row-end: span calc(48 + 5);
+    }
+}
+.item4{
+    height:370px;
+    grid-row-end: span calc(71 + 5);
+}
+.item5{
+    height:240px;
+    grid-row-end: span calc(48 + 5);
 }

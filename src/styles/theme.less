@@ -1,8 +1,13 @@
 html,body,#root,.project{
     height: 100%;
+    transition: all 1s ease-out;
 }
 .light{
     height: 100%;
+    header{
+        position: sticky;
+        top: 0;
+    }
     .textColor,a{
         color: #333
     };
@@ -17,17 +22,40 @@ html,body,#root,.project{
         background-color: #fff;
     }
     .bg2{
-        background-color: #cccccc;
+        background-color: #fcfcfc;
+    }
+    .bg2_blue{
+        background-color: #f2f4f5;
     }
     .bg3{
         background-color: #f3f3f3;
     }
+    .cardBox{
+        cursor: pointer;
+        .title{
+            font-weight: bold;
+        }
+        /* transform: scale(1.03); */
+        transition: all 0.5s ease-out;
+        &:hover{
+            box-shadow: #d2dde7 0px 4px 24px;
+            transform: scale(1.03);
+            /* border: 2px solid #d2dde7; */
+            background-color: #aadfdb;
+            
+        }
+       
+    }
 }
 .dark{
     height: 100%;
+    header{
+        position: sticky;
+        top: 0;
+    }
     // display: none;
     .textColor,a{
-        color: #fff
+        color: #b9b9b9
     };
     
     .textColorGgray{
@@ -38,12 +66,31 @@ html,body,#root,.project{
         color: #51a1a1;
     }
     .bg1{
-        background-color: #333;
+        background-color: #1e1f21;
     }
     .bg2{
         background-color: #616161;
     }
+    .bg2_blue{
+        background-color: #2d3133;
+    }
     .bg3{
         background-color: #8f8f8f;
+    }
+    .cardBox{
+        cursor: pointer;
+        .title{
+            font-weight: bold;
+        }
+        /* transform: scale(1.03); */
+        transition: all 0.5s ease-out;
+        &:hover{
+            box-shadow: #1e1f20 0px 4px 24px;
+            transform: scale(1.03);
+            /* border: 2px solid #d2dde7; */
+            background-color: #1c2625;
+    
+        }
+       
     }
 }
