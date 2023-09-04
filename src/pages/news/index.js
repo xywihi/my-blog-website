@@ -1,4 +1,8 @@
 import React, {useEffect} from "react";
+import {  HashRouter, Route, Routes } from 'react-router-dom'
+
+const Person = React.lazy(() => import('./pages/person'))
+const Community = React.lazy(() => import('./pages/community'))
 function News(){
     useEffect(() => {
         return () => {
@@ -6,7 +10,10 @@ function News(){
         }
     }, [])
     return (
-        <div>News</div>
+        <Routes>
+            <Route  path="community" Component={()=><Community key="community"/>}></Route>
+            <Route  path="person" Component={()=><Person key="person"/>}></Route>
+        </Routes>
     )
 }
 

@@ -34,23 +34,32 @@ export default function App(){
         <HashRouter basename="/">
             <ErrorBoundary>
                 <div  className={theme}>
-                    <div className="bg1 project textColor">
-                        <header className="flexB pa24">
+                    <div className="bg2_blue project textColor">
+                        <header className="flexB pa24 bg1">
                             <span className="logo maH24">LOGO</span>
                             <div className="flexB">
                                 {/* <HeaderNav  theme={theme}/> */}
                                 <ThemeSwitch changeTheme={changeTheme}/>
                             </div>
                         </header>
-                        <main className="flexB paH24">
-                            <aside className="paH12 paV12 bg2 borderR12">
+                        <main className="flexBS pa24">
+                            <aside className="paH12 paV24 bg1 borderR12">
                                 <HeaderNav changeTheme={changeTheme} direction="vertical" theme={theme}/>
                             </aside>
-                            <div className="paH24 paV12 flexFull">
+                            <div className="paH24 flexFull">
                                 <Suspense fallback={<div>Loading...</div>}>
                                     <Routes>
-                                        <Route exact path="/" Component={()=><Home key="home"/>}></Route>
-                                        <Route path="/news" Component={()=>util.RouteGuard(<News key="news"/>)}></Route>
+                                        <Route exact path="/"  Component={()=><Home key="home"/>}></Route>
+                                        <Route  path="/news/*" Component={()=>util.RouteGuard(<News key="news"/>)} 
+                                            children={
+                                                [
+                                                    
+                                                ]
+                                            }
+                                        >
+                                            
+                                        </Route>
+                                        
                                         <Route path="/user" Component={()=><User key="user"/>}></Route>
                                     </Routes> 
                                 </Suspense>

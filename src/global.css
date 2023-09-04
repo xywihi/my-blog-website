@@ -7,10 +7,11 @@
 body {
   font-family: sans-serif;
 }
+
 aside{
     width:15vw;
     min-width: 120px;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 140px);
 }
 /* 设置全局链接颜色 */
 a {
@@ -25,6 +26,9 @@ ul, ol, li {
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
+}
+img{
+    object-fit: cover;
 }
 .heightFull{
     height: 100%;
@@ -50,10 +54,20 @@ button {
     justify-content: space-between;
     align-items: center;
 }
+.flexBS{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
 .flexS{
     display: flex;
     justify-content: start;
     align-items: center;
+}
+.flexSS{
+    display: flex;
+    justify-content: start;
+    align-items: start;
 }
 .flexSC{
     display: flex;
@@ -79,6 +93,18 @@ button {
 }
 .ma24{
     margin: 24px;
+}
+.maL12{
+    margin-left: 12px;
+}
+.maR12{
+    margin-right: 12px;
+}
+.maB12{
+    margin-bottom: 12px;
+}
+.maB24{
+    margin-bottom: 24px;
 }
 .maH12{
     margin-left: 12px;
@@ -123,6 +149,9 @@ button {
 .fontB{
     font-weight: bold;
 }
+.fontSmall{
+    font-size: 12px;
+}
 .font18{
     font-size: 18px;
 }
@@ -140,4 +169,12 @@ button {
 }
 .borderR50{
     border-radius: 50px;
+
+}
+
+.center{
+    height: calc(100vh - 160px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

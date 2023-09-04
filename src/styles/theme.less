@@ -1,8 +1,13 @@
 html,body,#root,.project{
     height: 100%;
+    transition: all 1s ease-out;
 }
 .light{
     height: 100%;
+    header{
+        position: sticky;
+        top: 0;
+    }
     .textColor,a{
         color: #333
     };
@@ -17,17 +22,122 @@ html,body,#root,.project{
         background-color: #fff;
     }
     .bg2{
-        background-color: #f7f7f7;
+        background-color: #fcfcfc;
+    }
+    .bg2_blue{
+        background-color: #e8eaeb;
     }
     .bg3{
         background-color: #f3f3f3;
     }
+    .cardBox{
+        cursor: pointer;
+        .title{
+            font-weight: bold;
+        }
+        /* transform: scale(1.03); */
+        transition: all 0.5s ease-out;
+        &:hover{
+            box-shadow: #d2dde7 0px 4px 24px;
+            transform: scale(1.03);
+            /* border: 2px solid #d2dde7; */
+            background-color: #aadfdb;
+            
+        }
+       
+    }
+    .navBtn{
+        position: relative;
+        transition: all 0.5s ease-out;
+        
+    }
+    .activeNavFartherBox{
+        .moreIcon{
+            transition: all 0.3s ease-out;
+            transform: rotateZ(180deg);
+        }
+        &:hover{
+        background-color: rgb(243, 243, 243);
+        transform: translateX(12px);
+        width: calc(100% - 12px);
+        padding-left: 24px;
+        .moreIcon{
+            transform: rotateZ(90deg);
+        }
+        }
+    }
+    .activeNavOld{
+        background-color: rgb(243, 243, 243);
+        transform: translateX(12px);
+        transition: all 0.5s ease-out;
+        width: calc(100% - 12px);
+        padding-left: 24px;
+        &::before{
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: calc(50% - 6px);
+            width: 4px;
+            height: 12px;
+            border-radius: 12px;
+            background-color: aquamarine;
+            
+        }
+    }
+    .activeNavOldNoB{
+        background-color: rgb(243, 243, 243);
+        transform: translateX(12px);
+        transition: all 0.5s ease-out;
+        width: calc(100% - 12px);
+        padding-left: 24px;
+    }
+    .activeNav{
+        &:hover{
+            background-color: rgb(243, 243, 243);
+            transform: translateX(12px);
+            transition: all 0.5s ease-out;
+            width: calc(100% - 12px);
+            padding-left: 24px;
+            &::before{
+                content: "";
+                position: absolute;
+                left: 12px;
+                top: calc(50% - 6px);
+                width: 4px;
+                height: 12px;
+                border-radius: 12px;
+                background-color: aquamarine;
+                
+            }
+        }
+    }
+    .logout{
+        position: relative;
+        transition: all 0.5s ease-out;
+        width: 100%;
+        cursor: pointer;
+        &:hover{
+            background-color: rgb(243, 243, 243);
+            transform: translateX(12px);
+            width: calc(100% - 12px);
+            &::before{
+                content: "退出";
+                position: absolute;
+                right: 12px;
+                font-size: small;
+            }
+        }
+    }
 }
 .dark{
     height: 100%;
+    header{
+        position: sticky;
+        top: 0;
+    }
     // display: none;
     .textColor,a{
-        color: #fff
+        color: #b9b9b9
     };
     
     .textColorGgray{
@@ -38,12 +148,116 @@ html,body,#root,.project{
         color: #51a1a1;
     }
     .bg1{
-        background-color: #333;
+        background-color: #1e1f21;
     }
     .bg2{
         background-color: #616161;
     }
+    .bg2_blue{
+        background-color: #2d3133;
+    }
     .bg3{
-        background-color: #8f8f8f;
+        background-color: #4c4c4c;
+    }
+    .cardBox{
+        cursor: pointer;
+        .title{
+            font-weight: bold;
+        }
+        /* transform: scale(1.03); */
+        transition: all 0.5s ease-out;
+        &:hover{
+            box-shadow: #1e1f20 0px 4px 24px;
+            transform: scale(1.03);
+            /* border: 2px solid #d2dde7; */
+            background-color: #1c2625;
+    
+        }
+       
+    }
+    .logout{
+        position: relative;
+        transition: all 0.5s ease-out;
+        width: 100%;
+        cursor: pointer;
+        &:hover{
+            background-color: #1c2625;
+            transform: translateX(12px);
+            width: calc(100% - 12px);
+            &::before{
+                content: "退出";
+                position: absolute;
+                right: 12px;
+                font-size: small;
+            }
+        }
+    }
+
+
+
+    .navBtn{
+        position: relative;
+        transition: all 0.5s ease-out;
+        
+    }
+    .activeNavFartherBox{
+        .moreIcon{
+            transition: all 0.3s ease-out;
+            transform: rotateZ(180deg);
+        }
+        &:hover{
+        background-color: #1c2625;
+        transform: translateX(12px);
+        width: calc(100% - 12px);
+        padding-left: 24px;
+        .moreIcon{
+            transform: rotateZ(90deg);
+        }
+        }
+    }
+    .activeNavOld{
+        background-color: #1c2625;
+        transform: translateX(12px);
+        transition: all 0.5s ease-out;
+        width: calc(100% - 12px);
+        padding-left: 24px;
+        &::before{
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: calc(50% - 6px);
+            width: 4px;
+            height: 12px;
+            border-radius: 12px;
+            background-color: #5c7c79;
+            
+        }
+    }
+    .activeNavOldNoB{
+        background-color: #1c2625;
+        transform: translateX(12px);
+        transition: all 0.5s ease-out;
+        width: calc(100% - 12px);
+        padding-left: 24px;
+    }
+    .activeNav{
+        &:hover{
+            background-color: #1c2625;
+            transform: translateX(12px);
+            transition: all 0.5s ease-out;
+            width: calc(100% - 12px);
+            padding-left: 24px;
+            &::before{
+                content: "";
+                position: absolute;
+                left: 12px;
+                top: calc(50% - 6px);
+                width: 4px;
+                height: 12px;
+                border-radius: 12px;
+                background-color: #5c7c79;
+                
+            }
+        }
     }
 }
