@@ -7,21 +7,34 @@
 body {
   font-family: sans-serif;
 }
-
+aside{
+    width:15vw;
+    min-width: 120px;
+    height: calc(100vh - 120px);
+}
 /* 设置全局链接颜色 */
 a {
   /* color: #333; */
   text-decoration: none;
 }
   
-ul, ol {
+ul, ol, li {
   list-style: none;
+  width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: normal;
 }
-
+.heightFull{
+    height: 100%;
+}
+.widthFull{
+    width: 100%;
+}
+.opacityHalf{
+    opacity: 20%;
+}
 button {
   background-color: #007acc;
   color: #fff;
@@ -42,7 +55,25 @@ button {
     justify-content: start;
     align-items: center;
 }
-
+.flexSC{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+}
+.row{
+    flex-direction: row;
+}
+.column{
+    flex-direction:column;
+}
+.flexFull{
+    flex: 1;
+}
+.grid{
+    display: grid;
+    grid-template-columns: 150px 1fr 90px;
+}
 .ma12{
     margin: 12px;
 }
@@ -50,16 +81,20 @@ button {
     margin: 24px;
 }
 .maH12{
-    margin: 0 12px;
+    margin-left: 12px;
+    margin-right: 12px;
 }
-.maV24{
-    margin: 24px 0;
+.maH24{
+    margin-left: 24px;
+    margin-right: 24px;
 }
 .maV12{
-    margin: 0 12px;
+    margin-top: 12px;
+    margin-bottom: 12px;
 }
 .maV24{
-    padding: 24px 0;
+    margin-top: 24px;
+    margin-bottom: 24px;
 }
 .pa12{
     padding: 12px;
@@ -68,16 +103,20 @@ button {
     padding: 24px;
 }
 .paH12{
-    padding: 0 12px;
+    padding-left: 12px;
+    padding-right: 12px;
 }
-.paV24{
-    padding: 24px 0;
+.paH24{
+    padding-left: 24px;
+    padding-right: 24px;
 }
 .paV12{
-    padding: 0 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 .paV24{
-    padding: 24px 0;
+    padding-top: 24px;
+    padding-bottom: 24px;
 }
 
 
@@ -89,4 +128,16 @@ button {
 }
 .font24{
     font-size: 24px;
+}
+
+
+
+.borderR6{
+    border-radius: 6px;
+}
+.borderR12{
+    border-radius: 12px;
+}
+.borderR50{
+    border-radius: 50px;
 }
