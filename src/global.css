@@ -122,6 +122,9 @@ button {
     margin-top: 24px;
     margin-bottom: 24px;
 }
+.pa6{
+    padding: 6px;
+}
 .pa12{
     padding: 12px;
 }
