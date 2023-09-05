@@ -1,9 +1,10 @@
 import * as echarts from 'echarts';
 import React,{useEffect, useRef} from 'react';
 import HttpRequire from "../../../http/require"
+import echartData from "../../../http/data/echart.json"
 const SmoothedLine = () => {
     const ref = useRef()
-    var ROOT_PATH = 'https://echarts.apache.org/examples';
+    var ROOT_PATH = 'https://localhost';
     var myChart
     useEffect(()=>{
         var chartDom = document.getElementById('smoothedLine');
@@ -15,7 +16,7 @@ const SmoothedLine = () => {
     },[])
     async function run() {
         const require = new HttpRequire
-        let _rawData = await require.get(ROOT_PATH + '/data/asset/data/life-expectancy-table.json')
+        let _rawData = echartData
         const options = {
             dataset: [
               {

@@ -3,9 +3,9 @@ let xhr = new XMLHttpRequest();
     get(url,params){
         return new Promise((resolve,reject)=>{
             xhr.open("get",url,true);
-            xhr.setRequestHeader('content-type', 'application/json');
-            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-            xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
+            // xhr.setRequestHeader('content-type', 'application/json');
+            // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            // xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
             xhr.send(JSON.stringify(params))
             xhr.onload = function() {
                 // console.log(JSON.parse(xhr.response));

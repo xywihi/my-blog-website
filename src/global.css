@@ -8,6 +8,11 @@ body {
   font-family: sans-serif;
 }
 
+header{
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
 aside{
     width:15vw;
     min-width: 120px;
@@ -88,6 +93,16 @@ button {
     display: grid;
     grid-template-columns: 150px 1fr 90px;
 }
+.ma6{
+    margin: 6px;
+}
+.maB6{
+    margin-bottom: 6px;
+}
+.maV6{
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
 .ma12{
     margin: 12px;
 }
@@ -125,6 +140,10 @@ button {
 .pa6{
     padding: 6px;
 }
+.paV6{
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
 .pa12{
     padding: 12px;
 }
@@ -147,13 +166,20 @@ button {
     padding-top: 24px;
     padding-bottom: 24px;
 }
-
+/* color */
+.gray{
+    color: #969696;
+}
+/* font */
 
 .fontB{
     font-weight: bold;
 }
 .fontSmall{
     font-size: 12px;
+}
+.font14{
+    font-size: 14px;
 }
 .font18{
     font-size: 18px;
@@ -162,8 +188,7 @@ button {
     font-size: 24px;
 }
 
-
-
+/* border */
 .borderR6{
     border-radius: 6px;
 }
@@ -172,12 +197,23 @@ button {
 }
 .borderR50{
     border-radius: 50px;
-
 }
-
 .center{
     height: calc(100vh - 160px);
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.textSingeLine{
+    /* text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+    white-space: nowrap; */
+        /*溢出部分隐藏*/
+        overflow: hidden;
+        /*禁止换行*/
+        white-space: nowrap;
+        /*显示省略号*/
+        text-overflow: ellipsis;
 }

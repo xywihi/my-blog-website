@@ -1,8 +1,8 @@
 const path = require("path")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+// const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+// const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const webpack = require('webpack')
 const devMode = process.env.NODE_ENV !== 'production'
 let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -60,16 +60,27 @@ module.exports = {
                         }
                     }
                 ]
-            }
+            },
+            {
+                test: /\.(mp3|wav|ogg)$/i, // 匹配音频文件扩展名
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: 'audio/[name].[ext]', // 输出的文件路径和名称
+                        },
+                    },
+                ],
+            },
         ]
     },
     plugins: [
-        new UglifyJsPlugin({
-            cache: true,
-            parallel: true,
-            // sourceMap: true // set to true if you want JS source maps
-        }),
-        new OptimizeCSSAssetsPlugin(),
+        // new UglifyJsPlugin({
+        //     cache: true,
+        //     parallel: true,
+        //     // sourceMap: true // set to true if you want JS source maps
+        // }),
+        // new OptimizeCSSAssetsPlugin(),
         new webpack.DefinePlugin({
              // 在这里定义你的全局变量
              API_ADDRESS:JSON.stringify("http://127.0.0.1:80"),

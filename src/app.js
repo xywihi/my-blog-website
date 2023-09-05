@@ -4,6 +4,7 @@ import util from './util'
 import HeaderNav from "./components/HeaderNav";
 import './global.css'
 import themestyle from "./styles/theme.less"
+// import "./styles/ioniccss.css"
 import ThemeSwitch from "./components/themeSwitch"
 import config from './config'
 import { addNotice } from "./store/actions";
