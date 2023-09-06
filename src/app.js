@@ -17,7 +17,7 @@ const User = React.lazy(() => import('./pages/user'))
 const ErrorBoundary = React.lazy(() => import('./components/ErrorBoundary'))
 const newLocalStorage = new util.LocalStorage;
 const test_notices = [
-    {text:'郑爽和吴亦凡的百度百科都已修改，郑爽介绍内容中却还有作品名单',id:1,unmont:false}
+    // {text:'郑爽和吴亦凡的百度百科都已修改，郑爽介绍内容中却还有作品名单',id:1,unmont:false}
 ]
 const App = ({notices,addNotice}) =>{
     const [theme,setTheme] = useState('light');

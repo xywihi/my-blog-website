@@ -1,21 +1,19 @@
 import React,{useEffect, useState} from "react";
 import './styles.less'
 import {IonIcon} from "@ionic/react"
-import { menu, play, pause,bookOutline } from 'ionicons/icons';
+import { menu, play, pause,bookOutline, colorWand } from 'ionicons/icons';
 import AudioPlayer from "../../components/audioPlayer"
 import SmoothedLine from "../../components/echarts/smoothedLine"
-import musc from "../../assets/audio/shine.mp3"
-import news from "../../assets/audio/new.mp3"
-import starts from "../../assets/audio/starts.mp3"
-import unknown from "../../assets/audio/unknown.mp3"
-const audios = [{name:"Shine",resource:musc},{name:"New Normal",resource:news},{name:"we'll be the starts",resource:starts}]
+
+import ExamCountdown from "./components/examCountdown"
+import TimeWeather from "./components/timeWeather"
+import MusicPlayer from "./components/musicPlayer"
 export default function Home(props){
     const [currentDate,setCurrentDate] = useState(new Date())
     const [currentAudio,setCurrentAudio] = useState(null)
     useEffect(() => {
         // throwError()
         console.log('-----------',currentDate.getMinutes().toString().length)
-        setCurrentAudio(audios[0])
         let timer = setInterval(()=>{
             setCurrentDate(new Date())
         },10000)
@@ -42,22 +40,11 @@ export default function Home(props){
                     </div>
                     <div className="waterfall-item borderR12 item2" >
                         <div className="waterfall-item borderR12 item2_inner1 bg1 pa24 cardBox" >
-                            <div className="maB12">
-                                {currentAudio && <AudioPlayer resource={currentAudio.resource}/>}
-                            </div>
-                            <ul>
-                                {audios.map(item=><li key={item.name} className="paV12 flexB" onClick={()=>changeAudio(item)}><span>{item.name}</span><IonIcon icon={ (currentAudio && currentAudio.name===item.name) ? pause : play} size="36px"></IonIcon></li>)}
-                            </ul>
+                            <MusicPlayer/>
                         </div>
                         <div className="waterfall-item borderR12 item2_inner2 bg1 pa24 cardBox" >
-                            <div className="item2_inner2_inner1 maB24 flexB column">
-                                <div className="fontB">{Math.ceil((new Date("2023/10/28")-new Date())/(1000*60*60*24))}</div>
-                                <span className="fontSmall gray">2023/10/28-2023/10/29</span>
-                            </div>
-                            <div className="item2_inner2_inner2 flexB column">
-                                <IonIcon className="maB12" icon={bookOutline} size="36px"></IonIcon>
-                                <div>自考倒计时</div>
-                            </div>
+                            <ExamCountdown/>
+                            
                         </div>
                         <div className="waterfall-item borderR12 item2_inner3" >
                             <div className="waterfall-item borderR12 item2_inner3_inner1 bg1 pa24 flexS cardBox" >
@@ -67,12 +54,7 @@ export default function Home(props){
                                     <span className="fontSmall">疯狂努力拼搏中...</span>
                                 </label>
                             </div>
-                            <div className="waterfall-item borderR12 item2_inner3_inner2 bg1 paH24 paV12 cardBox" >
-                                <div className="item2_inner3_inner2_inner1 flexS">{(currentDate.getHours().toString().length>1 ? '':'0')+currentDate.getHours()}<span className="flicker">:</span>{(currentDate.getMinutes().toString().length>1 ? '':'0')+currentDate.getMinutes()}</div>
-                                <div className="item2_inner3_inner2_inner2">{currentDate.getMonth()+1}月</div>
-                                <div className="item2_inner3_inner2_inner3 gray">{currentDate.getFullYear()}/{currentDate.getMonth()+1}/{currentDate.getDate()}</div>
-                                <div className="item2_inner3_inner2_inner3 gray">晴</div>
-                            </div>
+                            <TimeWeather/>
                         </div>
                     </div>
                     <div className="newsBox waterfall-item borderR12 item3" >

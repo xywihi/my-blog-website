@@ -1,0 +1,43 @@
+.audioPlayerBox{
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    img{
+        width:48px;
+        height:48px;
+        border-radius: 50px;
+        animation: audioPlayer 2s linear;
+        animation-iteration-count: infinite;
+    }
+    audio{
+        position: absolute;
+
+    }
+    .audioPlayer{
+        transition: all 0.5s ease-out;
+    };
+    .audioPlayerInfo{
+        width: 110px
+    };
+}
+.stopAudio{
+    transform: scale(0);
+    width: 0;
+}
+.activeAudio{
+    transform: scale(1);
+    width: auto;
+}
+.pauseAudio{
+    img{
+        animation: none;
+    }
+}
+@keyframes audioPlayer {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+  }

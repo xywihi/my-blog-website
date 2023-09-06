@@ -35,6 +35,8 @@ h1, h2, h3, h4, h5, h6 {
 img{
     object-fit: cover;
 }
+
+
 .heightFull{
     height: 100%;
 }
@@ -99,15 +101,15 @@ button {
 .maB6{
     margin-bottom: 6px;
 }
+.maR6{
+    margin-right: 6px;
+}
 .maV6{
     margin-top: 6px;
     margin-bottom: 6px;
 }
 .ma12{
     margin: 12px;
-}
-.ma24{
-    margin: 24px;
 }
 .maL12{
     margin-left: 12px;
@@ -118,23 +120,54 @@ button {
 .maB12{
     margin-bottom: 12px;
 }
-.maB24{
-    margin-bottom: 24px;
-}
+
 .maH12{
     margin-left: 12px;
     margin-right: 12px;
+}
+
+.maV12{
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.ma16{
+    margin: 16px;
+}
+.maL16{
+    margin-left: 16px;
+}
+.maR16{
+    margin-right: 16px;
+}
+.maB16{
+    margin-bottom: 16px;
+}
+
+.maH16{
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.maV16{
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.ma24{
+    margin: 24px;
 }
 .maH24{
     margin-left: 24px;
     margin-right: 24px;
 }
-.maV12{
-    margin-top: 12px;
-    margin-bottom: 12px;
-}
 .maV24{
     margin-top: 24px;
+    margin-bottom: 24px;
+}
+.maR24{
+    margin-right: 24px;
+}
+.maB24{
     margin-bottom: 24px;
 }
 .pa6{
@@ -204,7 +237,22 @@ button {
     align-items: center;
     justify-content: center;
 }
-
+/* display */
+.opacity0{
+    opacity:0
+}
+.opacity50{
+    opacity:0.5
+}
+.opacity100{
+    opacity:1
+}
+.hidden{
+    visibility:hidden;
+}
+.displayNone{
+    display: none;
+}
 .textSingeLine{
     /* text-overflow: ellipsis;
     overflow: hidden;
