@@ -5,6 +5,7 @@ import { bookOutline, colorWand, calendar, checkmarkCircle } from 'ionicons/icon
 const ExamCountdown = (props) => {
     const ref = useRef()
     const [edit,setEdit] = useState(false)
+    const [showExams,setShowExams] = useState(false)
     const [date,setDate] = useState('2023/10/28')
     useEffect(() => {
         // throwError()
@@ -23,7 +24,7 @@ const ExamCountdown = (props) => {
         setDate(event.target.value.replace(/-/g,'/'))
       }
     return (
-        <div  className={styles.item2_inner2}>
+        <div  className={styles.item2_inner2}  onMouseEnter={()=>setShowExams(!showExams)} onMouseLeave={()=>setShowExams(!showExams)}>
             <div className={`${styles.editIcon} flexB widthFull`}>
                 <span>{edit && '编辑内容'}</span>
                 <IonIcon icon={edit ? checkmarkCircle : colorWand} size="36px" onClick={handleEdit}></IonIcon>
@@ -40,8 +41,18 @@ const ExamCountdown = (props) => {
                 </div>
             }
             <div className="flexB column">
-                <IonIcon className="maB12" icon={bookOutline} size="36px"></IonIcon>
-                <div>自考倒计时</div>
+                {
+                    !showExams ?
+                    <>
+                        <IonIcon className="maB12" icon={bookOutline} size="36px"></IonIcon>
+                        <div>自考倒计时</div>
+                    </> :
+                    <ul className={styles.examsBox}>
+                        <li className="fontSmall">C++程序设计</li>
+                        <li className="fontSmall">计算机网络原理</li>
+                    </ul>
+                }
+                
             </div>
         </div>
     )

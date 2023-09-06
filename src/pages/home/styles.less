@@ -26,6 +26,10 @@
 .item1{
     height:370px;
     grid-row-end: span calc(75 + 5);
+    img{
+        height: 100%;
+        width: 100%;
+    }
 }
 .item2{
     height: 240px;
@@ -144,14 +148,3 @@
     top:0;
     right:0;
 }
-@keyframes flicker {
-    0% {
-        opacity: 0;
-    }
-    50% {
-        opacity: 100%;
-    }
-    100% {
-        opacity: 0;
-    }
-  }

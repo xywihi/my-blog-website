@@ -26,7 +26,7 @@ const TimeWeather = (props) => {
     }, [])
     return (
         <div className={`waterfall-item borderR12 ${styles.item2_inner3_inner2} bg1 paH24 paV12 cardBox`} >
-            <div className={`${styles.item2_inner3_inner2_inner1} flexS`}>{(currentDate.getHours().toString().length>1 ? '':'0')+currentDate.getHours()}<span className="flicker">:</span>{(currentDate.getMinutes().toString().length>1 ? '':'0')+currentDate.getMinutes()}</div>
+            <div className={`${styles.item2_inner3_inner2_inner1} flexS`}>{(currentDate.getHours().toString().length>1 ? '':'0')+currentDate.getHours()}<span className={styles.flicker}>:</span>{(currentDate.getMinutes().toString().length>1 ? '':'0')+currentDate.getMinutes()}</div>
             <div className={styles.item2_inner3_inner2_inner2}>{currentDate.getMonth()+1}月</div>
             <div className={`${styles.item2_inner3_inner2_inner3} gray`}>{currentDate.getFullYear()}/{currentDate.getMonth()+1}/{currentDate.getDate()}</div>
             {weather ? <div className={`${styles.item2_inner3_inner2_inner3} gray flexS`}>

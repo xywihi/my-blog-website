@@ -33,10 +33,8 @@ export default function Home(props){
     return (
         <div className="bg2_blue">
             <div id="waterfall-container">
-                    <div className="waterfall-item borderR12 item1 bg1 pa24 cardBox" >
-                        <h3 className="title maB12">
-                            最近状态
-                        </h3>
+                    <div className="waterfall-item borderR12 item1 bg1 cardBox" >
+                        <img className="borderR12" src="https://images.unsplash.com/photo-1528834342297-fdefb9a5a92b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80"/>
                     </div>
                     <div className="waterfall-item borderR12 item2" >
                         <div className="waterfall-item borderR12 item2_inner1 bg1 pa24 cardBox" >
@@ -86,7 +84,7 @@ export default function Home(props){
                                 <span>粉丝留言</span> <IonIcon className="maR12" icon={menu} size="36px"></IonIcon>
                             </h3>
                             <div className="content flexB column flexFull widthFull">
-                                <div className="messageInnerBox bg3 borderR12 pa12 flexFull maB12 widthFull flexBS column">
+                                <div className="messageInnerBox bg3 borderR6 pa12 flexFull maB12 widthFull flexBS column">
                                     <div className="font14">6月生日冠名争夺战结束,恭喜粉丝为@时代少年团-贺峻霖解锁惊喜福利</div>
                                     <div className="flexB gray widthFull fontSmall"><span>8/23</span><span>四川</span></div>
                                 </div>
@@ -102,7 +100,7 @@ export default function Home(props){
                     </div>
                     <div className="waterfall-item borderR12 item4 bg1 pa24 cardBox" >
                         <h3 className="title maB12">
-                            数据展示
+                            最新数据走势
                         </h3>
                         <SmoothedLine/>
                     </div>
