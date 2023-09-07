@@ -5,7 +5,7 @@
   }
 
 body {
-  font-family: sans-serif;
+  font-family: 'Source Han Sans SC', sans-serif;
 }
 
 header{
@@ -56,6 +56,11 @@ button {
   cursor: pointer;
 }
 
+.flexC{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .flexB{
     display: flex;
     justify-content: space-between;
@@ -156,6 +161,9 @@ button {
 .ma24{
     margin: 24px;
 }
+.maL24{
+    margin-left: 24px;
+}
 .maH24{
     margin-left: 24px;
     margin-right: 24px;
@@ -172,6 +180,17 @@ button {
 }
 .pa6{
     padding: 6px;
+}
+.paV6{
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+.pa6{
+    padding: 6px;
+}
+.paH6{
+    padding-left: 6px;
+    padding-right: 6px;
 }
 .paV6{
     padding-top: 6px;
@@ -204,6 +223,9 @@ button {
     color: #969696;
 }
 /* font */
+.font_wenyue{
+    font-family: 'huxiao', sans-serif;
+}
 
 .fontB{
     font-weight: bold;
@@ -241,6 +263,9 @@ button {
 .opacity0{
     opacity:0
 }
+.opacity20{
+    opacity:0.2
+}
 .opacity50{
     opacity:0.5
 }
@@ -265,3 +290,5 @@ button {
         /*显示省略号*/
         text-overflow: ellipsis;
 }
+
+

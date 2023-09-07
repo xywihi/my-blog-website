@@ -62,6 +62,18 @@ module.exports = {
                 ]
             },
             {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options:{
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }
+                ]
+            },
+            {
                 test: /\.(mp3|wav|ogg)$/i, // 匹配音频文件扩展名
                 use: [
                     {

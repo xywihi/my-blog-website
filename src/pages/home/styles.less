@@ -25,10 +25,23 @@
 }
 .item1{
     height:370px;
+    display:grid;
+    grid-template-columns: 1fr 280px;
     grid-row-end: span calc(75 + 5);
+    h1{
+        letter-spacing: 12px;
+    }
+    h3{
+        line-height: 32px;
+    }
+    h5{
+        line-height: 24px;
+    }
     img{
         height: 100%;
         width: 100%;
+        border-top-left-radius: 12px;
+        border-bottom-left-radius: 12px;
     }
 }
 .item2{
@@ -136,7 +149,7 @@
 //news--------------------------------------------------------------
 .newsBox{
     ul{
-        width: 302px;
+        width: 316px;
     }
 }
 .newsItemBox{

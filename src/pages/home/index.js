@@ -1,21 +1,48 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect, useState, useRef, createRef} from "react";
 import './styles.less'
 import {IonIcon} from "@ionic/react"
-import { menu, play, pause,bookOutline, colorWand } from 'ionicons/icons';
-import AudioPlayer from "../../components/audioPlayer"
+import { menu, language } from 'ionicons/icons';
 import SmoothedLine from "../../components/echarts/smoothedLine"
 
 import ExamCountdown from "./components/examCountdown"
 import TimeWeather from "./components/timeWeather"
 import MusicPlayer from "./components/musicPlayer"
+import Translate from "../../components/translate"
+const banners = [
+    {
+        url:"https://images.unsplash.com/photo-1599272585578-03bfc70032b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE4fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
+        title:"平淡人生,浮躁心态",
+        subtitle:"平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
+        time:"2023/09/01",
+        id:0
+    },
+    {
+        url:"https://images.unsplash.com/photo-1587113538625-8ab80f5ad01f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        title:"平淡人生,浮躁心态",
+        subtitle:"平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
+        time:"2023/09/03",
+        id:0
+    },
+    {
+        url:"https://images.unsplash.com/photo-1517462035531-76bc910a6903?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+        title:"平淡人生,浮躁心态",
+        subtitle:"平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
+        time:"2023/09/10",
+        id:0
+    },
+]
 export default function Home(props){
     const [currentDate,setCurrentDate] = useState(new Date())
-    const [currentAudio,setCurrentAudio] = useState(null)
+    const [selectedOption,setSelectedOption] = useState('zh')
+    const ref = useRef(0)
+    const childTranslate = createRef(null)
     useEffect(() => {
         // throwError()
         console.log('-----------',currentDate.getMinutes().toString().length)
         let timer = setInterval(()=>{
             setCurrentDate(new Date())
+            ref.current = ref.current<banners.length-1 ? ref.current+1 : 0
+            console.log('/////////',ref.current)
         },10000)
         return ()=>{
             clearTimeout(timer)
@@ -26,15 +53,26 @@ export default function Home(props){
     //     return 1/0
     //     // throw new Error('This is a simulated error.');
     // };
-    const changeAudio = (item)=>{
-        console.log('/////////',item)
-        setCurrentAudio(item)
+    const handleTranslate = ()=>{
+        childTranslate.current.handleTranslate()
     }
     return (
         <div className="bg2_blue">
             <div id="waterfall-container">
                     <div className="waterfall-item borderR12 item1 bg1 cardBox" >
-                        <img className="borderR12" src="https://images.unsplash.com/photo-1528834342297-fdefb9a5a92b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1932&q=80"/>
+                        <div>
+                            <img src={banners[ref.current].url}/>
+                        </div>
+                        <div className="pa24 flexBS column">
+                            <h1 className="font_wenyue fontB">
+                                <p>平淡人生</p>
+                                <p>浮躁心态</p>
+                            </h1>
+                            <h5>
+                                <p className="maB12">{banners[ref.current].subtitle}</p>
+                                <p className="gray">{banners[ref.current].time}</p>
+                            </h5>
+                        </div>
                     </div>
                     <div className="waterfall-item borderR12 item2" >
                         <div className="waterfall-item borderR12 item2_inner1 bg1 pa24 cardBox" >
@@ -58,22 +96,22 @@ export default function Home(props){
                     <div className="newsBox waterfall-item borderR12 item3" >
                         <div className="waterfall-item borderR12 item3_inner1 bg1 pa24 cardBox" >
                             <h3 className="title maB12 flexB">
-                                <span>最新动态</span> <IonIcon className="maR12" icon={menu} size="36px"></IonIcon>
+                                <span>最新动态</span> <div className="cursor icon_hover"><IonIcon icon={menu} size="36px"></IonIcon></div>
                             </h3>
                             <ul>
-                                <li className="newsItemBox flexB maB6 pa6">
+                                <li className="newsItemBox flexB maB6 paV6">
                                     <span className="textSingeLine maR12 font14">人间有神兽，来自九重天</span>
                                     <span className="fontSmall gray">2023/09/05</span>
                                 </li>
-                                <li className="newsItemBox flexB maB6 pa6 font14">
+                                <li className="newsItemBox flexB maB6 paV6 font14">
                                     <span className="textSingeLine maR12">一部关于电影浪漫的作品，欢迎光临梦想与拼搏的世界！ </span>
                                     <span className="fontSmall gray">2023/09/05</span>
                                 </li>
-                                <li className="newsItemBox flexB maB6 pa6 font14">
+                                <li className="newsItemBox flexB maB6 paV6 font14">
                                     <span className="textSingeLine maR12">主题曲是花谱唱的，很好听</span>
                                     <span className="fontSmall gray">2023/09/05</span>
                                 </li>
-                                <li className="newsItemBox flexB maB6 pa6 font14">
+                                <li className="newsItemBox flexB maB6 paV6 font14">
                                     <span className="textSingeLine maR12">探索属于你的新世界</span>
                                     <span className="fontSmall gray">2023/09/05</span>
                                 </li>
@@ -81,7 +119,7 @@ export default function Home(props){
                         </div>
                         <div className="waterfall-item borderR12 item3_inner2 bg1 pa24 cardBox messagesBox flexSS column " >
                             <h3 className="title maB12 flexB widthFull">
-                                <span>粉丝留言</span> <IonIcon className="maR12" icon={menu} size="36px"></IonIcon>
+                                <span>粉丝留言</span> <div className="cursor icon_hover"><IonIcon icon={menu} size="36px"></IonIcon></div>
                             </h3>
                             <div className="content flexB column flexFull widthFull">
                                 <div className="messageInnerBox bg3 borderR6 pa12 flexFull maB12 widthFull flexBS column">
@@ -105,9 +143,41 @@ export default function Home(props){
                         <SmoothedLine/>
                     </div>
                     <div className="waterfall-item borderR12 item5 bg1 pa24 cardBox" >
-                        <h3 className="title maB12">
-                            数据展示
-                        </h3>
+                        <div className="flexB maB24">
+                            <h3 className="title">
+                                汉英翻译
+                            </h3>
+                            <div className="flexB">
+                                <label>
+                                    <input
+                                        type="radio"
+                                        value="zh"
+                                        checked={selectedOption === 'zh'}
+                                        onChange={(e)=>{
+                                            console.log(e.target.value)
+                                            setSelectedOption(e.target.value)
+                                        }}
+                                        className="maR6"
+                                    />
+                                    中译英
+                                </label>
+                                <label className="maL12">
+                                    <input
+                                        type="radio"
+                                        value="en"
+                                        checked={selectedOption === 'en'}
+                                        onChange={(e)=>setSelectedOption(e.target.value)}
+                                        className="maR6"
+                                    />
+                                    英译中
+                                </label>
+                                <div className="maL16 paV6 paH12 borderR12 bg2_blue icon_hover cursor flexB" onClick={handleTranslate}>
+                                    <IonIcon icon={language} size="36px"></IonIcon>
+                                    <span className="maL12">翻译</span>
+                                </div>
+                            </div>
+                        </div>
+                        <Translate type={selectedOption} ref={childTranslate}/>
                     </div>
                 </div>
         </div>

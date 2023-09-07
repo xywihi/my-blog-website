@@ -28,10 +28,13 @@ const MusicPlayer = ({music,playMusic}) => {
             <AudioPlayer data={music} activeOther={activeOther}/>
             </div>
             <ul>
-                {audios.map(item=>
-                    <li key={item.id} className="paV12 flexB" onClick={()=>changeAudio(item)}>
-                        <span>{item.name}</span>
-                        {(music && music.id===item.id) && <IonIcon icon={ (music.pause || activeOther) ? pause : play} size="36px"></IonIcon>}
+                {audios.map((item,index)=>
+                    <li key={item.id}  onClick={()=>changeAudio(item)}>
+                        <div className="paV12 flexB">
+                            <span className="textSingeLine">{item.name}</span>
+                            {(music && music.id===item.id) && <IonIcon icon={ (music.pause || activeOther) ? pause : play} size="36px"></IonIcon>}
+                        </div>
+                        {index!=(audios.length-1) && <hr className="opacity20"/>}
                     </li>)}
             </ul>
         </div>

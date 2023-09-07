@@ -3,12 +3,15 @@ import {  HashRouter, Route, Routes } from 'react-router-dom'
 import util from './util'
 import HeaderNav from "./components/HeaderNav";
 import './global.css'
+import './style.less'
 import themestyle from "./styles/theme.less"
 // import "./styles/ioniccss.css"
 import ThemeSwitch from "./components/themeSwitch"
 import config from './config'
 import { addNotice } from "./store/actions";
 import {connect} from 'react-redux'
+import { IonIcon } from "@ionic/react";
+import { notifications } from 'ionicons/icons';
 // import Notices from "./components/notices"
 const Notices = React.lazy(() => import('./components/notices'))
 const Home = React.lazy(() => import('./pages/home'))
@@ -59,7 +62,7 @@ const App = ({notices,addNotice}) =>{
                             <div className="flexB">
                                 {/* <HeaderNav  theme={theme}/> */}
                                 <ThemeSwitch changeTheme={changeTheme}/>
-                                <div onClick={addNotices}>添加通知</div>
+                                <div className="noticeBtn_after paH6 maH12 borderR50 bg3" onClick={addNotices}><IonIcon className="icon_hover" icon={notifications}></IonIcon></div>
                             </div>
                         </header>
                         <main className="flexBS pa24">
