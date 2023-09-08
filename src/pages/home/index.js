@@ -35,19 +35,17 @@ const banners = [
 export default function Home(props){
     const [currentDate,setCurrentDate] = useState(new Date())
     const [selectedOption,setSelectedOption] = useState('zh')
-    let currentImage = useRef(null)
+    const currentImage = useRef(null)
     const childTranslate = createRef(null)
     useEffect(() => {
         // throwError()
-        getRadomImg()
+        console.log('-----------',currentDate.getMinutes().toString().length)
         let timer = setInterval(()=>{
             setCurrentDate(new Date())
-            getRadomImg()
+            
         },10000)
         return ()=>{
             clearTimeout(timer)
-            
-
         }
     }, [])
     // const throwError = () => {
@@ -58,17 +56,12 @@ export default function Home(props){
     const handleTranslate = ()=>{
         childTranslate.current.handleTranslate()
     }
-    const getRadomImg = ()=>{
-        currentImage.current =  <img src={"https://loremflickr.com/473/370"}/>
-        console.log('-----------',currentImage.current)
-
-    }
     return (
         <div className="bg2_blue">
             <div id="waterfall-container">
                     <div className="waterfall-item borderR12 item1 bg1 cardBox" >
                         <div>
-                            {currentImage.current}
+                            <img src={"https://loremflickr.com/473/370"}/>
                         </div>
                         <div className="pa24 flexBS column">
                             <h1 className="font_wenyue fontB">
