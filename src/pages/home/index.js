@@ -8,24 +8,25 @@ import ExamCountdown from "./components/examCountdown"
 import TimeWeather from "./components/timeWeather"
 import MusicPlayer from "./components/musicPlayer"
 import Translate from "../../components/translate"
+import HttpRequire from "../../http/require";
 const banners = [
     {
         url:"https://images.unsplash.com/photo-1599272585578-03bfc70032b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE4fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-        title:"平淡人生,浮躁心态",
+        title:"平淡人生，浮躁心态",
         subtitle:"平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
         time:"2023/09/01",
         id:0
     },
     {
         url:"https://images.unsplash.com/photo-1587113538625-8ab80f5ad01f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-        title:"平淡人生,浮躁心态",
-        subtitle:"平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
+        title:"没心没肺，快乐加倍",
+        subtitle:"事压不垮人，但是情绪会压垮人，所以不要被情绪所绑架，学会和自己和解，做一个只记得快乐的人，没心没肺快乐翻倍！",
         time:"2023/09/03",
         id:0
     },
     {
         url:"https://images.unsplash.com/photo-1517462035531-76bc910a6903?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
-        title:"平淡人生,浮躁心态",
+        title:"平淡人生，浮躁心态",
         subtitle:"平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
         time:"2023/09/10",
         id:0
@@ -34,15 +35,14 @@ const banners = [
 export default function Home(props){
     const [currentDate,setCurrentDate] = useState(new Date())
     const [selectedOption,setSelectedOption] = useState('zh')
-    const ref = useRef(0)
+    const currentImage = useRef(null)
     const childTranslate = createRef(null)
     useEffect(() => {
         // throwError()
         console.log('-----------',currentDate.getMinutes().toString().length)
         let timer = setInterval(()=>{
             setCurrentDate(new Date())
-            ref.current = ref.current<banners.length-1 ? ref.current+1 : 0
-            console.log('/////////',ref.current)
+            
         },10000)
         return ()=>{
             clearTimeout(timer)
@@ -61,16 +61,15 @@ export default function Home(props){
             <div id="waterfall-container">
                     <div className="waterfall-item borderR12 item1 bg1 cardBox" >
                         <div>
-                            <img src={banners[ref.current].url}/>
+                            <img src={"https://picsum.photos/473/370?grayscale"}/>
                         </div>
                         <div className="pa24 flexBS column">
                             <h1 className="font_wenyue fontB">
-                                <p>平淡人生</p>
-                                <p>浮躁心态</p>
+                                {banners[0].title.split("，").map(item=> <p key={item}>{item}</p>)}
                             </h1>
                             <h5>
-                                <p className="maB12">{banners[ref.current].subtitle}</p>
-                                <p className="gray">{banners[ref.current].time}</p>
+                                <p className="maB12">{banners[0].subtitle}</p>
+                                <p className="gray">{banners[0].time}</p>
                             </h5>
                         </div>
                     </div>

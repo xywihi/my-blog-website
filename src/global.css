@@ -278,6 +278,25 @@ button {
 .displayNone{
     display: none;
 }
+
+/* position */
+.relative{
+    position: relative;
+}
+.absolute{
+    position: absolute;
+}
+
+/* animation动画 */
+.running {
+    animation-play-state: running!important;
+  }
+
+
+/* 当需要暂停动画时，添加一个类并设置animation-play-state为paused */
+.paused {
+  animation-play-state: paused!important;
+}
 .textSingeLine{
     /* text-overflow: ellipsis;
     overflow: hidden;

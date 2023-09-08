@@ -12,7 +12,7 @@ const TimeWeather = (props) => {
         const http = new HttpRequire
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=zh_cn`;
         http.get(apiUrl).then(res=>{
-            console.log("res",res)
+            // console.log("res",res)
             if(res.cod===200){
                 setWeather(res.weather[0])
             }

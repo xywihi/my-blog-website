@@ -3,17 +3,18 @@ import styles from './style.module.less';
 
 const AudioPlayer = ({data,activeOther}) => {
     const ref = useRef();
-    const timer=null;
+    let ownTimer=null;
     const [audioData,setAudioData] = useState({currentTime:"--:--",totalDuration:"--:--"})
     const [playAudio,setPlayAudio] = useState("stop")
     useEffect(()=>{
         if(ref.current){
             ref.current.addEventListener('ended', () => {
+                console.log('....................')
                 play()
               });
         }
         return ()=>{
-            clearInterval(timer)
+            clearInterval(ownTimer)
         }
     },[])
     useEffect(()=>{
@@ -25,7 +26,6 @@ const AudioPlayer = ({data,activeOther}) => {
     },[data])
     const play = () => {
         let audio = ref.current;
-        console.log('resource----8888',activeOther)
         audio.pause();
         if(activeOther){
             audio.currentTime = 0;
@@ -36,15 +36,12 @@ const AudioPlayer = ({data,activeOther}) => {
                 audio.play()
             };
         }
-       
-        
-        
-        let timer = setInterval(() => {
-            console.log('-----------',ref.current.currentTime)
+        ownTimer = setInterval(() => {
             setAudioData({currentTime:handleTime(ref.current.currentTime) ,totalDuration:handleTime(ref.current.duration)})
         }, 1000);  
     }
     const handleTime=(time)=>{
+        if(!time) return "00:00"
         let issingleNum = (num)=>{
             return `${num.toString().length>1 ? num : '0'+num}`
         }
@@ -52,7 +49,7 @@ const AudioPlayer = ({data,activeOther}) => {
             return num==60 ? '00' : issingleNum(num)
         }
         
-        return issingleNum(Math.ceil(time/60)) + ":"+is60(Math.ceil(time%60))
+        return issingleNum(Math.floor(time/60)) + ":"+is60(Math.ceil(time%60))
     }
     return (
         <div className={`${styles.audioPlayerBox} flexS`}>
@@ -63,13 +60,13 @@ const AudioPlayer = ({data,activeOther}) => {
                     Your browser does not support the audio element.
                 </audio>
             }
-            
             {
-                playAudio!="stop" &&
-                <div className={`${styles.audioPlayer} maR16 ${styles[`${data ? activeOther ? 'active' : data.pause ? playAudio : 'pause' : playAudio }Audio`]}`}>
-                    <img src='https://tse4-mm.cn.bing.net/th/id/OIF-C.a8xSz4omfgM1xB6n3UVwig?pid=ImgDet&rs=1' />
+                data && 
+                <div className={`${styles.audioPlayer} maR12 ${styles[`${data ?  'active' :  playAudio }Audio`]}`}>
+                    <img className={(data.pause || activeOther) ? 'running' : 'paused'} src='https://tse4-mm.cn.bing.net/th/id/OIF-C.a8xSz4omfgM1xB6n3UVwig?pid=ImgDet&rs=1' />
                 </div>
             }
+            
             <div className={styles.audioPlayerInfo}>
                 <div className='font18 maB6 textSingeLine'>{data ? data.name : "-"}</div>
                 <div className='fontSmall gray'>
