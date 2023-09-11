@@ -65,11 +65,11 @@ const App = ({notices,addNotice}) =>{
                                 <div className="noticeBtn_after paH6 maH12 borderR50 bg3" onClick={addNotices}><IonIcon className="icon_hover" icon={notifications}></IonIcon></div>
                             </div>
                         </header>
-                        <main className="flexBS pa24">
-                            <aside className="paH12 paV24 bg1 borderR12">
+                        <main className="flexBS pa24 bg2_blue">
+                            <aside className="maR24 paH12 paV24 bg1 borderR12">
                                 <HeaderNav changeTheme={changeTheme} direction="vertical" theme={theme}/>
                             </aside>
-                            <div className="paH24 flexFull">
+                            <div className="contentBox flexFull">
                                 {!showNotice && <Notices data={notices} length={notices.length}/>}
                                 <Suspense fallback={<div>Loading...</div>}>
                                     

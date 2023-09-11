@@ -6,4 +6,75 @@
 header {
     // background-color: @light-bg1;
 }
-
+.activeNavOld{
+    transform: translateX(12px);
+    transition: all 0.5s ease-out;
+    width: calc(100% - 12px);
+    &::before{
+        content: "";
+        position: absolute;
+        left: 12px;
+        top: calc(50% - 6px);
+        width: 4px;
+        height: 12px;
+        border-radius: 12px;
+        
+    }
+}
+.activeNavOldNoB{
+    transform: translateX(12px);
+    transition: all 0.5s ease-out;
+    width: calc(100% - 12px);
+    padding-left: 24px;
+}
+.activeNav{
+    &:hover{
+        transform: translateX(12px);
+        transition: all 0.5s ease-out;
+        width: calc(100% - 12px);
+        padding-left: 24px;
+        &::before{
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: calc(50% - 6px);
+            width: 4px;
+            height: 12px;
+            border-radius: 12px;
+            
+        }
+    }
+}
+@media screen and (max-width: 1400px) {
+    .navBox{
+        span{
+            display: none;
+        }
+        .navBtn{
+            padding: 12px 0;
+            &::before{
+                display: none;
+            }
+        }
+        .activeNavOld{
+            background: none!important; 
+            transform: none; 
+            transition: none; 
+            width: auto; 
+            padding-left: 0!important;
+        }
+        .navBtn{
+            pointer-events: none;
+    
+        }
+        li, li div,.logout{
+            margin: 0 auto;
+        }
+        li a{
+            justify-content: center;
+        }
+        .moreIcon{
+            display: none;
+        }
+    }
+}

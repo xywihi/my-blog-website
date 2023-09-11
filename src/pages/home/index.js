@@ -81,7 +81,7 @@ export default function Home(props){
                             <ExamCountdown/>
                             
                         </div>
-                        <div className="waterfall-item borderR12 item2_inner3" >
+                        <div className="waterfall-item borderR12 item2_inner3 screen_big" >
                             <div className="waterfall-item borderR12 item2_inner3_inner1 bg1 pa24 flexS cardBox" >
                                 <img alt="Silhouette of a person's head" src="https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=195&h=180&c=7&r=0&o=5&pid=1.7" />
                                 <label className="maH12">
@@ -90,6 +90,18 @@ export default function Home(props){
                                 </label>
                             </div>
                             <TimeWeather/>
+                        </div>
+                    </div>
+                    <div className="waterfall-item borderR12 screen_mid" >
+                        <div className="waterfall-item borderR12 screen_mid_inner1 bg1 pa24 flexS cardBox" >
+                            <img alt="Silhouette of a person's head" src="https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=195&h=180&c=7&r=0&o=5&pid=1.7" />
+                            <label className="maH12">
+                                <h4 className="fontB">Anln</h4>
+                                <span className="fontSmall">疯狂努力拼搏中...</span>
+                            </label>
+                        </div>
+                        <div className="screen_mid_inner2">
+                        <TimeWeather/>
                         </div>
                     </div>
                     <div className="newsBox waterfall-item borderR12 item3" >
@@ -139,7 +151,10 @@ export default function Home(props){
                         <h3 className="title maB12">
                             最新数据走势
                         </h3>
-                        <SmoothedLine/>
+                        <div className="smoothedLine">
+                            <SmoothedLine/>
+                        </div>
+                       
                     </div>
                     <div className="waterfall-item borderR12 item5 bg1 pa24 cardBox" >
                         <div className="flexB maB24">

@@ -1,8 +1,9 @@
 .item2_inner3_inner2{
     margin: 0;
+    height: 100%;
     display: grid;
     grid-template-columns: 1fr 45px;
-    grid-template-rows: 52px auto;
+    grid-template-rows: auto 45px;
     align-items: center;
     .item2_inner3_inner2_inner1{
         font-size: 32px;
@@ -35,4 +36,9 @@
     100% {
         opacity: 0;
     }
+  }
+
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    justify-content: space-around;
   }

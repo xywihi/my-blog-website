@@ -25,32 +25,32 @@ function HeaderNav({changeTheme, direction,routes}){
         setActiveNavIndex(index)
     }
     return (
-        <nav className={direction=="vertical" ? 'flexSC heightFull' : 'flexB heightFull'} >
+        <nav className={direction=="vertical" ? 'navBox flexSC heightFull' : 'navBox flexB heightFull'} >
             
             <ul className={direction=="vertical" ? 'flexSC' : 'flexB'}>
                 {
                     allRoutes.map((item,index)=>(
                         <li key={item.path} onMouseEnter={()=>activeNav(index)} onMouseLeave={()=>activeNav(null)} 
-                        className={`navBtn  paH12 maB12 borderR6 ${(!item.children) ? 'activeNav' : 'activeNavFartherBox'} ${((currentRoute.indexOf(item.path)!=-1 && item.path != '/' && !item.children) || item.path == currentRoute) ? 'activeNavOld' : (currentRoute.indexOf(item.path)!=-1 && item.children) ? 'activeNavOldNoB' : ''}`}>
+                        className={`navBtn pa12  borderR6 ${(!item.children) ? 'activeNav' : 'activeNavFartherBox'} ${((currentRoute.indexOf(item.path)!=-1 && item.path != '/' && !item.children) || item.path == currentRoute) ? 'activeNavOld' : (currentRoute.indexOf(item.path)!=-1 && item.children) ? 'activeNavOldNoB' : ''}`}>
                             {
                                 !item.children ? 
                                 <Link to={item.path} className="flexS" onClick={()=>setCurrentRoute(item.path)}>
-                                    <IonIcon className="maR12" icon={item.icon} size="36px"></IonIcon>
-                                    <div className={direction=="vertical" ? "maV12" : "maH12"}>{item.text}</div>
+                                    <IonIcon icon={item.icon} size="36px"></IonIcon>
+                                    <span className="maL12">{item.text}</span>
                                 </Link> :
-                                <div className={direction=="vertical" ? "maV12 flexB" : "maH12 flexB"}>
+                                <div className="flexB">
                                     <div className="flexS">
-                                        <IonIcon className="maR12" icon={item.icon} size="36px"></IonIcon>
-                                        <span>{item.text}</span>
+                                        <IonIcon  icon={item.icon} size="36px"></IonIcon>
+                                        <span className="maL12">{item.text}</span>
                                     </div>
                                      {item.children &&<IonIcon className="moreIcon" icon={play} size="36px" onClick={logout}></IonIcon>}</div>
                             }
                             {
                                 item.children && activeNavIndex==index && 
                                 <ul className="maL12">{item.children.map(it=>
-                                        <li  key={it.path} className={`paH12 borderR6 activeNav ${(currentRoute==it.path) ? 'activeNavOld' : ''}`}>
+                                        <li  key={it.path} className={`pa12 borderR6 activeNav ${(currentRoute==it.path) ? 'activeNavOld' : ''}`}>
                                             <Link to={it.path} className="flexB" onClick={()=>setCurrentRoute(it.path)}>
-                                                <div className={direction=="vertical" ? "maV12" : "maH12"}>{it.text}</div>
+                                                <span >{it.text}</span>
                                             </Link>
                                         </li>
                                     )}
@@ -61,7 +61,7 @@ function HeaderNav({changeTheme, direction,routes}){
                 }
                 
             </ul>
-            <div className={direction=="vertical" ? "logout pa12 borderR6 maV12" : "logout pa12 borderR6 maH12"} title="退出"><IonIcon icon={exit} size="36px" onClick={logout}></IonIcon></div>
+            <div className={direction=="vertical" ? "logout borderR6" : "logout borderR6 maV12"} title="退出"><IonIcon icon={exit} size="36px" onClick={logout}></IonIcon></div>
         </nav>
     )
 }

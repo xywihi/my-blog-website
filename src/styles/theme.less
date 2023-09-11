@@ -3,7 +3,6 @@ html,body,#root,.project{
     transition: all 1s ease-out;
 }
 .light{
-    height: 100%;
     .textColor,a{
         color: #333
     };
@@ -71,70 +70,34 @@ html,body,#root,.project{
         }
     }
     .activeNavOld{
-        background-color: rgb(243, 243, 243);
-        transform: translateX(12px);
-        transition: all 0.5s ease-out;
-        width: calc(100% - 12px);
         padding-left: 24px;
+        background-color: rgb(243, 243, 243);
         &::before{
             content: "";
-            position: absolute;
-            left: 12px;
-            top: calc(50% - 6px);
-            width: 4px;
-            height: 12px;
-            border-radius: 12px;
             background-color: aquamarine;
             
         }
     }
     .activeNavOldNoB{
         background-color: rgb(243, 243, 243);
-        transform: translateX(12px);
-        transition: all 0.5s ease-out;
-        width: calc(100% - 12px);
-        padding-left: 24px;
     }
     .activeNav{
         &:hover{
             background-color: rgb(243, 243, 243);
-            transform: translateX(12px);
-            transition: all 0.5s ease-out;
-            width: calc(100% - 12px);
-            padding-left: 24px;
             &::before{
                 content: "";
-                position: absolute;
-                left: 12px;
-                top: calc(50% - 6px);
-                width: 4px;
-                height: 12px;
-                border-radius: 12px;
                 background-color: aquamarine;
                 
             }
         }
     }
     .logout{
-        position: relative;
-        transition: all 0.5s ease-out;
-        width: 100%;
-        cursor: pointer;
         &:hover{
             background-color: rgb(243, 243, 243);
-            transform: translateX(12px);
-            width: calc(100% - 12px);
-            &::before{
-                content: "退出";
-                position: absolute;
-                right: 12px;
-                font-size: small;
-            }
         }
     }
 }
 .dark{
-    height: 100%;
     // display: none;
     .textColor,a{
         color: #b9b9b9
