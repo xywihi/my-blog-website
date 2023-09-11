@@ -1,14 +1,13 @@
 .audioPlayerBox{
     position: relative;
-    // display: grid;
-    // grid-template-columns: auto 1fr;
-    display: flex;
+    display: grid;
     img{
         width:48px;
         height:48px;
         border-radius: 50px;
         animation: audioPlayer 2s linear;
         animation-iteration-count: infinite;
+        
     }
     audio{
         position: absolute;
@@ -18,7 +17,7 @@
         transition: all 0.5s ease-out;
     };
     .audioPlayerInfo{
-        width: 110px
+        width: 100px;
     };
 }
 .stopAudio{

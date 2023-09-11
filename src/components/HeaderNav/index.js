@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Link, useNavigate } from 'react-router-dom'
-import util from '../../util'
+import util from '@/util'
 import './styles.less'
 import {IonIcon} from "@ionic/react"
 import { exit,play,home,newspaper, person } from 'ionicons/icons';

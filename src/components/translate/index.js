@@ -1,13 +1,15 @@
 import React, {useEffect, useState, forwardRef, useImperativeHandle} from "react"
 import CryptoJS from "crypto-js"
-import HttpRequire from "../../http/require"
+import HttpRequire from "@/http/require"
 import styles from './style.module.less'
 import {IonIcon} from "@ionic/react"
 import { arrowForward } from 'ionicons/icons';
+import {Loader} from "../animaIcons"
 const URL = "https://fanyi-api.baidu.com/api/trans/vip/translate"
 const Translate =({type}, ref) => {
     const [str,setStr] = useState('')
     const [translatedStr,setTranslatedStr] = useState([])
+    const [loading,setLoading] = useState(false)
     useEffect(()=>{
         
         return ()=>{
@@ -20,6 +22,7 @@ const Translate =({type}, ref) => {
       );
     const handleTranslate = () => {
         console.log("str",str)
+        setLoading(true)
         const require = new HttpRequire;
         // 要散列的字符串
         const inputString = "Hello, MD5!";
@@ -38,6 +41,7 @@ const Translate =({type}, ref) => {
         let NEW_URL = URL + `?q=${encodeURIComponent(str)}&from=${type}&to=${type=='zh' ? 'en' : 'zh'}&appid=${api}&salt=${random}&sign=${MD5}`
         require.get(NEW_URL).then(res=>{
             console.log("trans",res)
+            setLoading(false)
             setTranslatedStr(res.trans_result)
         }).catch(error=>{
             console.log(error)
@@ -53,10 +57,9 @@ const Translate =({type}, ref) => {
                     e.key === 'Enter' && handleTranslate()
                 }}
                 >
-
                 </textarea >
             <div className="flexC">
-                <IonIcon  icon={arrowForward} size="18px"></IonIcon>
+                {loading ? <Loader/> : <IonIcon  icon={arrowForward} size="18px"></IonIcon>}
             </div>
             <div className="pa12 borderR12 bg3">
                 {translatedStr.map(item=><p>{item.dst}</p>)}

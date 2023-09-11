@@ -32,6 +32,7 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
+    "@craco/craco": "^7.1.0",
     "@ionic/react": "^7.3.2",
     "@reduxjs/toolkit": "^1.9.5",
     "crypto-js": "^4.1.1",

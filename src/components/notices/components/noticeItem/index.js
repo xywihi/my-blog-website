@@ -3,7 +3,7 @@ import styles from'./style.module.less'
 import {IonIcon} from "@ionic/react"
 import { close } from 'ionicons/icons';
 import {connect} from 'react-redux'
-import {updateNotice,} from '../../../../store/actions'
+import {updateNotice,} from '@/store/actions'
 const NoticesItem =({data,notices,updateNotice,stopUpdateNotice}) => {
     const [toUnmont,setToUnmont]=useState(false)
     const [length]=useState(notices.filter(it=>!it.unmont).length)

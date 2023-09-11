@@ -2,12 +2,13 @@ import React,{useEffect, useState, useRef, createRef} from "react";
 import './styles.less'
 import {IonIcon} from "@ionic/react"
 import { menu, language } from 'ionicons/icons';
-import SmoothedLine from "../../components/echarts/smoothedLine"
 
 import ExamCountdown from "./components/examCountdown"
 import TimeWeather from "./components/timeWeather"
-import MusicPlayer from "./components/musicPlayer"
+import MusicPlayer from "../../components/musicPlayer"
 import Translate from "../../components/translate"
+import SmoothedLine from "../../components/echarts/smoothedLine"
+import ChatAi from "../../components/chatAi"
 import HttpRequire from "../../http/require";
 const banners = [
     {
@@ -61,7 +62,7 @@ export default function Home(props){
             <div id="waterfall-container">
                     <div className="waterfall-item borderR12 item1 bg1 cardBox" >
                         <div>
-                            <img src={"https://loremflickr.com/473/370"}/>
+                            <img src={"https://loremflickr.com/473/370/mountain"}/>
                         </div>
                         <div className="pa24 flexBS column">
                             <h1 className="font_wenyue fontB">
@@ -140,6 +141,7 @@ export default function Home(props){
                             最新数据走势
                         </h3>
                         <SmoothedLine/>
+                        {/* <ChatAi/> */}
                     </div>
                     <div className="waterfall-item borderR12 item5 bg1 pa24 cardBox" >
                         <div className="flexB maB24">

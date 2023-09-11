@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {  HashRouter, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 const Person = React.lazy(() => import('./pages/person'))
 const Community = React.lazy(() => import('./pages/community'))

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react"
 import NoticesItem from "./components/noticeItem";
 import styles from './style.module.less'
 import { connect } from 'react-redux';
-import {controllUpdateNotice} from '../../store/actions'
+import {controllUpdateNotice} from '@/store/actions'
 const NoticesBox =({length,notices,stopUpdateNotice,controllUpdateNotice}) => {
     
     useEffect(()=>{
