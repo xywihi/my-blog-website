@@ -354,6 +354,8 @@
     }
     .item3{
         grid-template-columns:1fr;
+        height: 480px;
+        grid-row-end: span calc(102 + 5);
     }
     .item5{
         height:340px;
@@ -371,7 +373,10 @@
     .screen_big,.item2 .item2_inner3{
         display: none;
     }
+    .item3 .item3_inner1{
+        width: calc(100vw - 48px);
+    }
     .newsBox ul{
-        width: 320px;
+        width: 100%;
     }
 }
