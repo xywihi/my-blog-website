@@ -347,6 +347,17 @@
             // }
         } 
     }
+    .item1{
+        grid-template-columns:1fr;
+        grid-template-rows: 200px 1fr;
+        &>div{
+            height: 100%;
+        }
+        h1{
+            font-size: 24px;
+            display: flex;
+        }
+    }
     .item2{
         height: 480px;
         grid-row-end: span calc(102 + 5);
