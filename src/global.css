@@ -15,8 +15,8 @@ header{
 }
 aside{
     width:15vw;
-    min-width: 120px;
-    height: calc(100vh - 140px);
+    min-width: 48px;
+    height: calc(100vh - 130px);
 }
 /* 设置全局链接颜色 */
 a {
