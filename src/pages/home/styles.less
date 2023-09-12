@@ -350,6 +350,13 @@
     .item1{
         grid-template-columns:1fr;
         grid-template-rows: 200px 1fr;
+        &>div:first-child{
+            img{
+                border-radius: 0;
+                border-top-left-radius: 12px;
+                border-top-right-radius: 12px;
+            }
+        }
         &>div{
             height: 100%;
         }
