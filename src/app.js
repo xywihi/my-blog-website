@@ -1,5 +1,5 @@
 import React,{ Suspense, useEffect, useState }  from "react";
-import {  HashRouter, Route, Routes } from 'react-router-dom'
+import {  HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import util from './util'
 import HeaderNav from "./components/HeaderNav";
 import './global.css'
@@ -77,6 +77,7 @@ const App = ({notices,addNotice}) =>{
                                         <Route exact path="/"  Component={()=><Home key="home"/>}></Route>
                                         <Route  path="/news/*" Component={()=>util.RouteGuard(<News key="news"/>)} ></Route>
                                         <Route path="/user" Component={()=><User key="user"/>}></Route>
+                                        <Route path="/*" Component={()=><Navigate to="/"/>}></Route>
                                     </Routes> 
                                 </Suspense>
                             </div>

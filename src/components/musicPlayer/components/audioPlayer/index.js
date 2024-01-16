@@ -31,7 +31,7 @@ const AudioPlayer = ({data,activeOther,handleRadomMusic},ref) => {
             };
         }
         ownTimer = setInterval(() => {
-            setAudioData({currentTime:handleTime(ownRef.current.currentTime) ,totalDuration:handleTime(ownRef.current.duration)})
+            ownRef.current && setAudioData({currentTime:handleTime(ownRef.current.currentTime) ,totalDuration:handleTime(ownRef.current.duration)})
         }, 1000);  
     }
     const handleTime=(time)=>{

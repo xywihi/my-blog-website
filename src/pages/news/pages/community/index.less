@@ -1,0 +1,26 @@
+.community_box{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 55% auto;
+    grid-template-rows: 100%;
+    column-gap: 24px;
+    .hotestNews_box{
+        display: grid;
+        grid-template-columns: auto 300px;
+        grid-template-rows: 100%;
+        column-gap: 18px;
+        .hotestNews{
+            img{
+                width: 100%;
+                height: 200px;
+            }
+            section{
+                line-height: 2em;
+            }
+            .hotestNews_content_box{
+                height: calc(100% - 220px);
+                overflow-y: auto;
+            }
+        }
+    }
+}
