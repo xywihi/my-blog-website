@@ -1,0 +1,50 @@
+.audioPlayerBox{
+    position: relative;
+    display: grid;
+    img{
+        width:48px;
+        height:48px;
+        border-radius: 50px;
+        animation: audioPlayer 2s linear;
+        animation-iteration-count: infinite;
+        
+    }
+    audio{
+        position: absolute;
+
+    }
+    .audioPlayer{
+        transition: all 0.5s ease-out;
+    };
+    .audioPlayerInfo{
+        width: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin-bottom: 7px;
+    };
+}
+.stopAudio{
+    transform: scale(0);
+    width: 0;
+}
+.activeAudio{
+    transform: scale(1);
+    width: auto;
+}
+.pauseAudio{
+    img{
+        animation: none;
+    }
+}
+.musicName{
+    min-width: 100px;
+}
+@keyframes audioPlayer {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+  }

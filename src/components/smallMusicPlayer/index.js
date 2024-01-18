@@ -8,7 +8,7 @@ import musc from "@/assets/audio/shine.mp3"
 import news from "@/assets/audio/new.mp3"
 import starts from "@/assets/audio/starts.mp3"
 import AudioPlayer from "./components/audioPlayer"
-import UpDown from "../animaIcons/upDown";
+
 import HttpRequire from "@/http/require"
 const audios = [{name:"Shine",resource:musc,pause:false,id:0},{name:"New Normal",resource:news,pause:false,id:1},{name:"we'll be the starts",resource:starts,pause:false,id:2}]
 const r = [
@@ -32,7 +32,7 @@ const r = [
     'cf3a18fb9b1634e0db7872258cd82bbb',
     'cf3a18fb9b1634e0db7872258cd82bbb',
 ]
-const MusicPlayer = ({music,playMusic}) => {
+const SmallMusicPlayer = ({music,playMusic}) => {
     const [activeOther,setActiveOther] = useState(true)
     const [currentRadio,setCurrentRadio] = useState(null)
     const childTranslate = createRef(null)
@@ -66,7 +66,7 @@ const MusicPlayer = ({music,playMusic}) => {
         <div className={`${styles.item2_inner1}`} data-url='https://tse4-mm.cn.bing.net/th/id/OIF-C.a8xSz4omfgM1xB6n3UVwig?pid=ImgDet&rs=1'>
             <div className={`${styles.playerBox} flexB maB12 relative`}>
                 <AudioPlayer data={currentRadio} activeOther={activeOther} ref={childTranslate} handleRadomMusic={handleRadomMusic}/>
-                <div>
+                <div className="maL24">
                     <div className="icon_hover cursor" onClick={handleRadomMusic}>
                         <IonIcon icon={shuffle} size="36px" ></IonIcon>
                     </div>
@@ -75,16 +75,7 @@ const MusicPlayer = ({music,playMusic}) => {
                     </div>
                 </div>
             </div>
-            {(currentRadio) && <UpDown active={currentRadio.pause} length={20}/>}
-            <ul>
-                {audios.map((item,index)=>
-                    <li key={item.id} className="cursor" onClick={()=>changeAudio(item)}>
-                        <div className="paV12 flexB">
-                            <span className={`${(currentRadio && currentRadio.id===item.id) ? "text_active" : ""} textSingeLine font14`}>{item.name}</span>
-                        </div>
-                        {index!=(audios.length-1) && <hr className="opacity20"/>}
-                    </li>)}
-            </ul>
+            
         </div>
     )
 }
@@ -97,4 +88,4 @@ const mapDispatchToProps = {
 };
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(MusicPlayer)
+export default connect(mapStateToProps,mapDispatchToProps)(SmallMusicPlayer)
