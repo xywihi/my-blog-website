@@ -1,9 +1,9 @@
-export const addNotice = (data) => ({
-  type: 'ADDNOTICE',
+export const updateNoticeNum = (data) => ({
+  type: 'UPDATENOTICENUM',
   data
 });
-export const updateNotice = (data) => ({
-  type: 'UPDATENOTICE',
+export const handleHiddeNotices = (data) => ({
+  type: 'HIDDENOTICES',
   data
 });
 export const controllUpdateNotice = (data) => ({

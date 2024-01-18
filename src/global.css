@@ -233,6 +233,12 @@ button {
 .pa12{
     padding: 12px;
 }
+.paL12{
+    padding-left: 12px;
+}
+.paR12{
+    padding-right: 12px;
+}
 .pa24{
     padding: 24px;
 }
@@ -242,6 +248,12 @@ button {
 }
 .paH24{
     padding-left: 24px;
+    padding-right: 24px;
+}
+.paL24{
+    padding-left: 24px;
+}
+.paR24{
     padding-right: 24px;
 }
 .paV12{
@@ -348,7 +360,6 @@ button {
 
 /* 自定义滑动条样式 */
 .scrollbarBox{
-    padding: 0;
     li{
         list-style: none;
     }
