@@ -12,6 +12,7 @@ import { addNotice } from "./store/actions";
 import {connect} from 'react-redux'
 import { IonIcon } from "@ionic/react";
 import { notifications } from 'ionicons/icons';
+import socket from "./http/socke"
 // import Notices from "./components/notices"
 const Notices = React.lazy(() => import('./components/notices'))
 const Home = React.lazy(() => import('./pages/home'))
@@ -27,7 +28,12 @@ const App = ({notices,addNotice}) =>{
     const [showNotice,setShowNotice] = useState(false);
     useEffect(() => {
         newLocalStorage.set("token",'Ber sddjjkwjfhiheh87687212ihr2khfjk')
-        addNotice(test_notices)
+        
+        // console.log('socket',socket)
+        // socket.on('message', (data) => {
+        //     console.log('接收到服务器消息:', data);
+        //     data && addNotice(data)
+        // });
         return () => {
             console.log('销毁当前项目')
         }
@@ -35,9 +41,9 @@ const App = ({notices,addNotice}) =>{
     useEffect(() => {
         console.log('777777777777777777777',config)
     }, [config])
-    useEffect(() => {
-        setShowNotice(notices.every(it=>it.unmont))
-    }, [notices])
+    // useEffect(() => {
+    //     setShowNotice(notices.every(it=>it.unmont))
+    // }, [notices])
     const changeTheme = (e) => {
         setTheme(()=>{
             let value = !e.target.checked?"light":'dark'
@@ -70,9 +76,8 @@ const App = ({notices,addNotice}) =>{
                                 <HeaderNav changeTheme={changeTheme} direction="vertical" theme={theme}/>
                             </aside>
                             <div className="contentBox flexFull">
-                                {!showNotice && <Notices data={notices} length={notices.length}/>}
+                                {!showNotice && <Notices/>}
                                 <Suspense fallback={<div>Loading...</div>}>
-                                    
                                     <Routes>
                                         <Route exact path="/"  Component={()=><Home key="home"/>}></Route>
                                         <Route  path="/news/*" Component={()=>util.RouteGuard(<News key="news"/>)} ></Route>

@@ -3,9 +3,11 @@
     border: 1px solid #333;
     position: relative;
     right:20px;
-    transition: all 0.5s ease-out;
-    animation: slideIn 0.5s ease-out;
+    // transition: all 0.5s ease-out;
+    // animation: slideIn 0.5s ease-out;
+    word-wrap: break-word;
     .closeBtn{
+        display: none;
         position: absolute;
         top:-12px;
         right:-12px;
@@ -15,12 +17,18 @@
         padding: 0;
         opacity: 0;
     }
+    &:hover{
+        .closeBtn{
+            display: block;
+        } 
+    }
 }
 .toUnmont{
     height: 0;
     padding: 0;
     opacity: 0;
     margin: 0;
+    display: none;
 }
 
 @keyframes slideIn {

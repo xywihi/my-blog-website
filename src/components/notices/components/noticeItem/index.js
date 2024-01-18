@@ -1,50 +1,59 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useState, useRef,useMemo } from "react"
 import styles from'./style.module.less'
 import {IonIcon} from "@ionic/react"
 import { close } from 'ionicons/icons';
 import {connect} from 'react-redux'
-import {updateNotice,} from '@/store/actions'
-const NoticesItem =({data,notices,updateNotice,stopUpdateNotice}) => {
-    const [toUnmont,setToUnmont]=useState(false)
+const NoticesItem =({data,index,notices,updateNotice,stopUpdateNotice}) => {
     const [length]=useState(notices.filter(it=>!it.unmont).length)
     const countRef = useRef(stopUpdateNotice);
     const timerRef = useRef(null);
     useEffect(()=>{
         // setLength(notices.filter(it=>!it.unmont).length)
         // stopUpdateNotice && clearTimeout(timer)
-
+        if(!stopUpdateNotice){
+            console.log('!!!!!!!!',length)
+            
+            // timerRef.current = setTimeout(() => {
+                
+            //     console.log('data------------',data)
+                updateNotice(false,data)
+            //     // setToUnmont(true)
+            // }, 3000);
+        }else{
+            // console.log('timer',timerRef.current)
+            // clearTimeout(timerRef.current)
+            return
+        }
         return ()=>{
-            clearTimeout(timerRef.current)
         }
     },[])
-    useEffect(()=>{
-        if(length){
-            countRef.current = stopUpdateNotice;
-            let unmontLength = notices.filter(it=>it.unmont).length
-            if(!stopUpdateNotice){
-                console.log('!!!!!!!!',countRef.current,length)
+    // useEffect(()=>{
+    //     console.log("stopUpdateNotice",stopUpdateNotice)
+    //     if(length){
+    //         countRef.current = stopUpdateNotice;
+    //         let unmontLength = notices.filter(it=>it.unmont).length
+    //         // if(!stopUpdateNotice){
+    //         //     console.log('!!!!!!!!',countRef.current,length)
                 
-                timerRef.current = setTimeout(() => {
-                    console.log(',,,,,,,,,,,,,',countRef.current,length)
+    //         //     timerRef.current = setTimeout(() => {
+    //         //         console.log(',,,,,,,,,,,,,',countRef.current,length)
                     
-                    if(countRef.current)  {
+    //         //         if(countRef.current)  {
                         
-                        return
-                    };
-                    updateNotice(data)
-                    // setToUnmont(true)
-                }, (stopUpdateNotice ? (length-unmontLength) : length) * 3000);
-                console.log('timer111',timerRef.current)
-            }else{
-                console.log('timer',timerRef.current)
-                clearTimeout(timerRef.current)
-                
-            }
-        }
-        // stopUpdateNotice && clearTimeout(timer)
-    },[stopUpdateNotice])
+    //         //             return
+    //         //         };
+    //         //         console.log('data------------',data)
+    //         //         updateNotice(data)
+    //         //         // setToUnmont(true)
+    //         //     }, (stopUpdateNotice ? (length-unmontLength) : length) * 6000);
+    //         console.log('???????',index)
+            
+    //     }
+    //     // stopUpdateNotice && clearTimeout(timer)
+    // },[stopUpdateNotice])
     return (
-        <div className={[styles.box+' '+"box pa24 maB12 bg3 borderR12" + ' ' + (data.unmont ? styles.toUnmont : '')]}>
+        !data.unmont && 
+        <div className={[styles.box+' '+"box pa24 maB12 bg3 borderR12"]}>
             {
                 !data.unmont && 
                 <>
@@ -60,14 +69,4 @@ const NoticesItem =({data,notices,updateNotice,stopUpdateNotice}) => {
     )
 }
 
-const mapStateToProps = (state) => ({
-    notices: state.reducer.notices,
-    stopUpdateNotice: state.reducer.stopUpdateNotice,
-  });
-const mapDispatchToProps = {
-    updateNotice,
-    
-};
-
-
-export default connect(mapStateToProps,mapDispatchToProps)(NoticesItem)
+export default NoticesItem

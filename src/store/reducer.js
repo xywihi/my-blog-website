@@ -11,9 +11,11 @@ let text=(data)=>{
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'ADDNOTICE':
-      return { ...state, notices:action.data};
+      console.log("-----====",state.notices,action)
+      return { ...state, notices:[...state.notices,action.data]};
     case 'UPDATENOTICE':
       let newNotices = state.notices.map(item=>{
+        
         if(item.id==action.data.id){
           return {...item,unmont:true}
         }else{

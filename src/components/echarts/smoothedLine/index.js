@@ -7,6 +7,7 @@ const SmoothedLine = () => {
     var ROOT_PATH = 'https://echarts.apache.org/examples';
     var myChart
     useEffect(()=>{
+      console.log("cccccc")
         var chartDom = document.getElementById('smoothedLine');
         myChart = echarts.init(chartDom);
         run()        
@@ -94,5 +95,13 @@ const SmoothedLine = () => {
     return (<div ref={ref} id="smoothedLine"  style={{ width: '100%', height: '100%' }}></div>)
 }
 
-
-export default SmoothedLine;
+function areEqual(prevProps, nextProps) {
+  console.log("prevProps, nextProps",prevProps, nextProps)
+  return false;
+  /*
+  return true if passing nextProps to render would return
+  the same result as passing prevProps to render,
+  otherwise return false
+  */
+}
+export default React.memo(SmoothedLine, areEqual);

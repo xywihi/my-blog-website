@@ -51,7 +51,7 @@ const Translate =({type}, ref) => {
     return (
         <div className={styles.translateBox}>
             {/* <input placeholder="在这里输入需要翻译的内容..." rows="5" cols="50" type="textarea" className="borderR12"/> */}
-            <textarea placeholder="在这里输入需要翻译的内容..." className="borderR12 pa12 fontB" 
+            <textarea placeholder="在这里输入需要翻译的内容..." className="borderR12 bg3 pa12 fontB" 
                 onChange={(e)=>setStr(e.target.value)}
                 onKeyDown={(e)=>{
                     e.key === 'Enter' && handleTranslate()

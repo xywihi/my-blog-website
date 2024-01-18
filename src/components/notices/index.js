@@ -2,61 +2,67 @@ import React, {useEffect, useState} from "react"
 import NoticesItem from "./components/noticeItem";
 import styles from './style.module.less'
 import { connect } from 'react-redux';
-import {controllUpdateNotice} from '@/store/actions'
-const NoticesBox =({length,notices,stopUpdateNotice,controllUpdateNotice}) => {
-    
+import {controllUpdateNotice} from '@/store/actions';
+import {IonIcon} from "@ionic/react";
+import { close } from 'ionicons/icons';
+import socket from "../../http/socke"
+const NoticesBox =() => {
+    const [stopUpdateNotice,setStopUpdateNotice]=useState(false)
+    const [notices,setNotices]=useState([])
     useEffect(()=>{
-        console.log("oldV11111", length)
-        
+        socket.on('message', (data) => {
+            console.log('接收到服务器消息:', data);
+            data && setNotices(pre=>{
+                return [...pre,data]
+            })
+        });
         return ()=>{
             // clearInterval(timer)
         }
     },[])
-    // useEffect(()=>{
-    //     let timer
-    //     clearInterval(timer)
-    //     timer = setInterval(() => {
-    //         // setArr(oldV=>{
-    //         //     // if (oldV.length==0){
-    //         //     //     clearInterval(timer);
-    //         //     //     return oldV;
-    //         //     // }
-    //         //     // let test = JSON.parse(JSON.stringify(oldV))
-    //         //     // console.log('ooooo',test)
-    //         //     // test.splice(0,1)
-    //         //     // console.log(test)
-    //         //     // return test
-    //         //     return []
-    //         // })
-    //         console.log("oldV22222", data.length,unmontNoticesNum)
-    //         setUnmontNoticesNum(oldV=>{
-    //             console.log("oldV",oldV,data.length)
-    //             if(data.length>oldV){
-    //                 return oldV+1
-    //             }else{
-    //                 clearInterval(timer)
-    //                 return oldV
-    //             }
-    //         })
-            
-    //     }, 3000);
-    // },[data])
-    const handleControllUpdate = () => {
-        controllUpdateNotice(!stopUpdateNotice)
+    const handleControllUpdate = (controllUpdate,item) => {
+        // controllUpdateNotice(!stopUpdateNotice)
+        setStopUpdateNotice(controllUpdate)
+        setTimeout(() => {
+            // setToUnmont(true)
+            handleUpdateNotice(item ? item : notices[0])
+        }, 3000);
+    }
+    const handleUpdateNotice = (data) => {
+        
+          setNotices(pre=>{
+            let newNotices = pre.map(item=>{
+                if(item.id==data.id){
+                  return {...item,unmont:true}
+                }else{
+                  return item
+                }
+              })
+            console.log("vvvvvvvvvvvvvv",pre,data)
+            return newNotices
+        })
+    }
+    const handleClearNotices = () => {
+          setNotices([])
     }
     return (
-        <div  className={styles.box} onMouseEnter={handleControllUpdate} onMouseLeave={handleControllUpdate}>
-            {notices.length>0 && notices.map((item,index)=><NoticesItem key={item.id} data={item}/>)}
+        notices.length>0 && 
+        <div className={styles.box} onMouseEnter={()=>handleControllUpdate(true)} onMouseLeave={()=>handleControllUpdate(false)}>
+            <IonIcon className={styles.clear_btn+' '+"maB12 bg1 pa6 borderR50 "} icon={close} size="18px" onClick={handleClearNotices}></IonIcon>
+            <div>
+                {notices.map((item,index)=><NoticesItem key={item.id} index={index} stopUpdateNotice={stopUpdateNotice} notices={notices} updateNotice={handleControllUpdate} data={item}/>)}
+            </div>
         </div>
     )
 }
 
-const mapStateToProps = (state) => ({
-    notices: state.reducer.notices,
-    stopUpdateNotice:state.reducer.stopUpdateNotice
-  });
-const mapDispatchToProps = {
-    controllUpdateNotice,
-};
+// const mapStateToProps = (state) => ({
+//     notices: state.reducer.notices,
+//     // stopUpdateNotice:state.reducer.stopUpdateNotice
+//   });
+// const mapDispatchToProps = {
+//     controllUpdateNotice,
+// };
 
-export default connect(mapStateToProps,mapDispatchToProps)(NoticesBox)
+// export default connect(mapStateToProps,mapDispatchToProps)(NoticesBox)
+export default NoticesBox

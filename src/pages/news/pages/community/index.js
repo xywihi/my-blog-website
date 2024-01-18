@@ -1,23 +1,153 @@
 import React, {useEffect} from "react";
+import { eyeOutline, calendarOutline,flameOutline,heartOutline,heart } from 'ionicons/icons';
+import {IonIcon} from "@ionic/react"
 import "./index.less";
+
 function Community(){
+    const commentsArr=[
+        {
+            id:0,
+            user:"哈利波特",
+            content:"哈哈哈！这技术可以。",
+            time:1705471828754,
+            likes:12,
+            imgUrl:"https://tse1-mm.cn.bing.net/th/id/OIP-C.ofjm5a8hxRo_o7HYH3MxQgHaHX?w=202&h=200&c=7&r=0&o=5&pid=1.7",
+        },
+        {
+            id:1,
+            user:"小鲁班",
+            content:"哈哈哈！这技术可以。看看接下来的表现吧！",
+            time:1705471730118,
+            likes:12,
+            imgUrl:"https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=195&h=180&c=7&r=0&o=5&pid=1.7",
+        },
+        {
+            id:2,
+            user:"阿尔法",
+            content:"哈哈哈！这技术可以。",
+            time:1705471600118,
+            likes:76,
+            imgUrl:"https://tse1-mm.cn.bing.net/th/id/OIP-C.7GGt63j6XvfNNA9iFsjDXgHaFj?w=234&h=180&c=7&r=0&o=5&pid=1.7",
+        },
+        {
+            id:3,
+            user:"詹姆斯",
+            content:"哈哈哈！这技术可以。",
+            time:1705471550118,
+            likes:23,
+            imgUrl:"https://tse3-mm.cn.bing.net/th/id/OIP-C.dN6NLMe9_qgenDX1VRyOOQAAAA?w=158&h=180&c=7&r=0&o=5&pid=1.7",
+        },
+        {
+            id:4,
+            user:"约翰·凯尔",
+            content:"哈哈哈！这技术可以。",
+            time:1705471430118,
+            likes:2,
+            imgUrl:"https://tse2-mm.cn.bing.net/th/id/OIP-C.yUorDiY6WO0l_0p-5aNtqQHaHa?w=200&h=200&c=7&r=0&o=5&pid=1.7",
+        },
+        {
+            id:5,
+            user:"小宇宙",
+            content:"哈哈哈！这技术可以。",
+            time:1705470730118,
+            likes:0,
+            imgUrl:"https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=195&h=180&c=7&r=0&o=5&pid=1.7",
+        },
+        {
+            id:6,
+            user:"魔镜本源",
+            content:"哈哈哈！这技术可以。",
+            time:1705443730118,
+            likes:0,
+            imgUrl:"https://tse2-mm.cn.bing.net/th/id/OIP-C.yUorDiY6WO0l_0p-5aNtqQHaHa?w=200&h=200&c=7&r=0&o=5&pid=1.7",
+        },
+        {
+            id:7,
+            user:"阿尔法",
+            content:"哈哈哈！这技术可以。",
+            time:1705431730118,
+            likes:0,
+            imgUrl:"https://tse1-mm.cn.bing.net/th/id/OIP-C.7GGt63j6XvfNNA9iFsjDXgHaFj?w=234&h=180&c=7&r=0&o=5&pid=1.7",
+        },
+        {
+            id:8,
+            user:"詹姆斯",
+            content:"哈哈哈！这技术可以。",
+            time:1705421730118,
+            likes:0,
+            imgUrl:"https://tse3-mm.cn.bing.net/th/id/OIP-C.dN6NLMe9_qgenDX1VRyOOQAAAA?w=158&h=180&c=7&r=0&o=5&pid=1.7",
+        },
+        {
+            id:9,
+            user:"约翰·凯尔",
+            content:"哈哈哈！这技术可以。",
+            time:1705421730118,
+            likes:0,
+            imgUrl:"https://tse2-mm.cn.bing.net/th/id/OIP-C.yUorDiY6WO0l_0p-5aNtqQHaHa?w=200&h=200&c=7&r=0&o=5&pid=1.7",
+        },
+        {
+            id:10,
+            user:"小宇宙",
+            content:"哈哈哈！这技术可以。",
+            time:1705421730118,
+            likes:0,
+            imgUrl:"https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=195&h=180&c=7&r=0&o=5&pid=1.7",
+        },
+        {
+            id:11,
+            user:"魔镜本源",
+            content:"哈哈哈！这技术可以。",
+            time:1700972031240,
+            likes:0,
+            imgUrl:"https://tse2-mm.cn.bing.net/th/id/OIP-C.yUorDiY6WO0l_0p-5aNtqQHaHa?w=200&h=200&c=7&r=0&o=5&pid=1.7",
+        },
+    ]
     useEffect(() => {
+        
         return () => {
-            console.log('我被销毁了')
+            
         }
     }, [])
+    const getTimeText=(timeNum)=>{
+        let timestamp = new Date().getTime();
+        let second = Math.ceil((timestamp-timeNum)/1000);
+        if(second>59){
+            let minutes = Math.ceil(second/60);
+            if(minutes>60){
+                let hours = Math.ceil(minutes/60);
+                if(hours>24){
+                    let days = Math.ceil(hours/24);
+                    if(days>3){
+                        let date=(new Date(timeNum).getMonth()+1)+"/"+new Date(timeNum).getDate();
+                        if(new Date().getFullYear()!=new Date(timeNum).getFullYear()){
+                            let date=(new Date(timeNum).getFullYear())+"/"+(new Date(timeNum).getMonth()+1)+"/"+new Date(timeNum).getDate();
+                            return date;
+                        }
+                        return date;
+                        
+                    }
+                    return days+"天前";
+                }
+                return hours+"小时前";
+            }
+            return minutes+"分钟前";
+        }
+        return second+"秒前";
+    }
     return (
         <div className="community_box">
-            <div className="hotestNews_box bg1 borderR12 pa24">
-                <div className="hotestNews">
+            <div>
+            <h2 className="maB12">最新动态</h2>
+            <div className="hotestNews_box bg1 borderR12">
+                <div className="hotestNews pa24">
                     <div className="maB12">
                         <img className="borderR6"  src={"https://loremflickr.com/473/370/mountain"}/>
                         <div></div>
                     </div>
-                    <div className="hotestNews_content_box">
+                    <div className="hotestNews_content_box scrollbarBox">
                         <h2 className="maB6 fontB">科技前沿 | 《流浪地球2》的这项“黑科技”,获工信部支持</h2>
                         <hr className="maV12 opacity20"/>
-                        <p>
+                        <div className="hotestNews_content_box_text">
                             <section className="maB12">
                             2023年电影春节档，《流浪地球2》《满江红》上映数日即以逾10亿元票房一路“领跑”。其中，科幻背景的《流浪地球2》不仅取得了票房的成功，也带火了包括浸没液冷计算机、外骨骼等“黑科技”。
                             </section>
@@ -36,22 +166,167 @@ function Community(){
                             </section>
                             <section className="maB12">与电影中稍有不同的是，工信部此番实施方案将外骨骼机器人的发展放在养老服务方面。</section>
                             
-                        </p>
+                        </div>
                     </div>
                 </div>
-                <div className="hotestNews_comment_area paH12">
-                    <h3 className="maB6 fontB maB12">评论区</h3>
-                    <ul className="bg3 pa12 borderR6">
-                        <li>
-                            <p>哈哈哈！这技术可以。</p>
-                        </li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                <div className="hotestNews_comment_area bg3 pa24">
+                    <div className="hotestNews_comment_header_box flexB">
+                        <h3 className="maB6 fontB">评论区</h3>
+                        <p>总共120条</p>
+                    </div>
+                    <hr className="maV12 opacity20"/>
+                    <div className="borderR6 hotestNews_comment_area_box scrollbarBox">
+                    <ul className="borderR6 hotestNews_comment_area_box_text">
+                        {commentsArr.map((item,index)=>(
+                            <li key={item.id}>
+                                <img src={item.imgUrl}/>
+                                <div className="widthFull">
+                                    <div className="flexB">
+                                        <div>
+                                            <p className="name textColorGgray2">{item.user}</p>
+                                            <p className="content flexB">{item.content}</p>
+                                        </div>
+                                        <div className="flexB maL12"><span className="maR3 fontSmall">{item.likes ? item.likes : "" }</span><IonIcon icon={item.likes>0?heart:heartOutline} color={"#fff"} size="36px"></IonIcon></div>
+                                    </div>
+                                    <p className="font10 maT3 textColorGgray">{getTimeText(item.time)}</p>
+                                </div>
+                            </li>
+                        ))}
+                        
+                        
+                    </ul>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div className="newest_news_box">
+                <div className="header_box flexBS maB12">
+                    <h2>社区动态</h2>
+                    <div className="flexB">
+                        <input className="pa12" placeholder="通过关键词搜索..."/>
+                        <div className="search_btn bg4 widthFull paH12 textColorWhite">
+                            搜索
+                        </div>
+                    </div>
+                </div>
+                <div className="borderR12 newest_news_box_content_outbox scrollbarBox">
+                    <ul className="borderR6 newest_news_box_content_box">
+                            <li className="borderR12 bg3">
+                                <div className="flexS borderR12 bg2 pa12">
+                                    <img src={"https://loremflickr.com/473/370/science"}/>
+                                    <div>
+                                        <h3 className="maB6">推动中国金融高质量发展</h3>
+                                        <p className="content">1月16日，国家主席习近平在中央党校发表重要讲话。习近平强调：要坚定不移走中国特色金融发展之路，推动我国金融高质量发展。</p>
+                                    </div>
+                                </div>
+                                <div className="bottomContent_box flexB pa12">
+                                    <div className="flexB">
+                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">320</span></p>
+                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">102</span></p>
+                                    </div>
+                                    <p className="flexB">
+                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">2024-1-13</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li className="borderR12 bg3">
+                                <div className="flexS borderR12 bg2 pa12">
+                                    <img src={"https://loremflickr.com/473/370/people"}/>
+                                    <div>
+                                        <h3 className="maB6">2023年中国GDP超126万亿 增长5.2%</h3>
+                                        <p className="content">17日，国家统计局发布数据初步核算2023年中国国内生产总值（GDP）超126万亿元，比上年增长5.2%。</p>
+                                    </div>
+                                </div>
+                                <div className="bottomContent_box flexB pa12">
+                                    <div className="flexB">
+                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">320</span></p>
+                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">102</span></p>
+                                    </div>
+                                    <p className="flexB">
+                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">2024-1-13</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li className="borderR12 bg3">
+                                
+                                <div className="flexS borderR12 bg2 pa12">
+                                    <img src={"https://loremflickr.com/473/370/school"}/>
+                                    <div>
+                                        <h3 className="maB6">清华毕业生80%都出国了?校方辟谣</h3>
+                                        <p className="content">近日，清华就业工作会召，清华大学针对网传的“清华毕业生80%都出国”，作出回应。</p>
+                                    </div>
+                                </div>
+                                <div className="bottomContent_box flexB pa12">
+                                    <div className="flexB">
+                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">320</span></p>
+                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">102</span></p>
+                                    </div>
+                                    <p className="flexB">
+                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">2024-1-13</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li className="borderR12 bg3">
+                                
+                                <div className="flexS borderR12 bg2 pa12">
+                                    <img src={"https://loremflickr.com/473/370/nation"}/>
+                                    <div>
+                                        <h3 className="maB6">和平统一可能性已丧失?国台办回应</h3>
+                                        <p className="content">17日，国台办发言人陈斌华就近期两岸热点问题答记者问：我们反对“台独”分裂图谋的行动坚决有力，解决台湾问题的</p>
+                                    </div>
+                                </div>
+                                <div className="bottomContent_box flexB pa12">
+                                    <div className="flexB">
+                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">320</span></p>
+                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">102</span></p>
+                                    </div>
+                                    <p className="flexB">
+                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">2024-1-13</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li className="borderR12 bg3">
+                                
+                                <div className="flexS borderR12 bg2 pa12">
+                                <img src={"https://loremflickr.com/473/370/china"}/>
+                                <div>
+                                    <h3 className="maB6">2023年中国出生人口902万人</h3>
+                                    <p className="content">1月17日，国家统计局发布数据显示，年末全国人口140967万人，比上年末减少208万人，全年出生人口902万人。</p>
+                                </div>
+                                </div>
+                                <div className="bottomContent_box flexB pa12">
+                                    <div className="flexB">
+                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">320</span></p>
+                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">102</span></p>
+                                    </div>
+                                    <p className="flexB">
+                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">2024-1-13</span>
+                                    </p>
+                                </div>
+                            </li>
+                            <li className="borderR12 bg3">
+                                <div className="flexS borderR12 bg2 pa12">
+                                <img src={"https://loremflickr.com/473/370/china"}/>
+                                <div>
+                                    <h3 className="maB6">2023年中国出生人口902万人</h3>
+                                    <p className="content">1月17日，国家统计局发布数据显示，年末全国人口140967万人，比上年末减少208万人，全年出生人口902万人。</p>
+                                </div>
+                                </div>
+                                <div className="bottomContent_box flexB pa12">
+                                    <div className="flexB">
+                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">320</span></p>
+                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">102</span></p>
+                                    </div>
+                                    <p className="flexB">
+                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">2024-1-13</span>
+                                    </p>
+                                </div>
+                            </li>
+                            
+                            
                     </ul>
                 </div>
             </div>
-            <div></div>
         </div>
     )
 }
