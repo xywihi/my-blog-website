@@ -3,7 +3,7 @@ import styles from './style.module.less';
 import UpDown from "../../../animaIcons/upDown";
 const AudioPlayer = ({data,activeOther,handleRadomMusic},ref) => {
     let ownTimer=null;
-    const [audioData,setAudioData] = useState({currentTime:"--:--",totalDuration:"--:--"})
+    const [audioData,setAudioData] = useState(null)
     const [playAudio,setPlayAudio] = useState("stop")
     const ownRef = useRef()
     useEffect(()=>{
@@ -45,27 +45,33 @@ const AudioPlayer = ({data,activeOther,handleRadomMusic},ref) => {
         return issingleNum(Math.floor(time/60)) + ":"+is60(Math.ceil(time%60))
     }
     return (
-        <div className={[styles.audioPlayerBox]} style={{ gridTemplateColumns:data?"auto 1fr":"0 1fr"}}>
+        <div className={[styles.audioPlayerBox]} style={{ gridTemplateColumns:data?"auto 1fr":"0 1fr",height:"100%"}}>
             {
-                <audio ref={ownRef} className="widthFull opacity0" controls>
+                <audio ref={ownRef} className="widthFull displayNone" controls>
                     <source src={data ? data.resource : null} type="audio/mpeg" />
                     Your browser does not support the audio element.
                 </audio>
             }
             {
-                <div className={`${styles.audioPlayer} maR12 ${styles[`${data ?  'active' :  playAudio }Audio`]}`}>
-                    {/* <img className={(data ? data.pause : activeOther) ? 'running' : 'paused'} src='https://tse4-mm.cn.bing.net/th/id/OIF-C.a8xSz4omfgM1xB6n3UVwig?pid=ImgDet&rs=1' /> */}
-                </div>
-            }
-            <div className={styles.audioPlayerInfo}>
-                <div className='flexB maB16'>
-                    <div className='musicName font14 textSingeLine' style={{width:"100px"}}>{data ? data.name : "-"}</div>
-                    <div className='fontSmall gray'>
-                        {`${audioData.currentTime}/${audioData.totalDuration}`}
+                audioData && 
+
+                <>
+                    <div className={`${styles.audioPlayer} maR12 ${styles[`${data ?  'active' :  playAudio }Audio`]}`}>
+                        <img className={(data ? data.pause : activeOther) ? 'running' : 'paused'} src='https://tse4-mm.cn.bing.net/th/id/OIF-C.a8xSz4omfgM1xB6n3UVwig?pid=ImgDet&rs=1' />
                     </div>
-                </div>
-                {(data) && <UpDown active={data.pause} length={20}/>}
-            </div>
+                
+                    <div className={styles.audioPlayerInfo}>
+                        <div className='flexB'>
+                            <div className='musicName font14 textSingeLine' style={{width:"100px"}}>{data ? data.name : ""}</div>
+                            <div className='fontSmall gray'>
+                                {`${audioData.currentTime}/${audioData.totalDuration}`}
+                            </div>
+                        </div>
+                        {(data) && <UpDown active={data.pause} length={28}/>}
+                    </div>
+                </>
+            }
+            
         </div>
     );
 }

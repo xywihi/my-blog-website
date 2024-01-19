@@ -212,8 +212,37 @@ button {
 .maB24{
     margin-bottom: 24px;
 }
+.ma48{
+    margin: 48px;
+}
+.maL48{
+    margin-left: 48px;
+}
+.maH48{
+    margin-left: 48px;
+    margin-right: 48px;
+}
+.maV48{
+    margin-top: 48px;
+    margin-bottom: 48px;
+}
+.maR48{
+    margin-right: 48px;
+}
+.maT48{
+    margin-top: 48px;
+}
+.maB48{
+    margin-bottom: 48px;
+}
 .pa6{
     padding: 6px;
+}
+.paT6{
+    padding-top: 6px;
+}
+.paB6{
+    padding-bottom: 6px;
 }
 .paV6{
     padding-top: 6px;

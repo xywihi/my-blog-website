@@ -2,12 +2,15 @@
     position: relative;
     display: grid;
     img{
-        width:48px;
-        height:48px;
+        position: relative;
+        width:0;
+        height:0;
+        left:26px;
+        top:26px;
         border-radius: 50px;
-        animation: audioPlayer 2s linear;
-        animation-iteration-count: infinite;
-        
+        // animation: audioPlayer3 0.5s linear 0.5s, audioPlayer 2s linear 0s infinite;
+        animation: audioPlayer3 0.5s linear 0.5s, audioPlayer 2s linear 0s infinite;
+        animation-fill-mode: forwards;
     }
     audio{
         position: absolute;
@@ -17,11 +20,11 @@
         transition: all 0.5s ease-out;
     };
     .audioPlayerInfo{
-        width: 150px;
+        width: 200px;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        margin-bottom: 7px;
+        animation: audioPlayer2 0.5s linear;
     };
 }
 .stopAudio{
@@ -43,8 +46,32 @@
 @keyframes audioPlayer {
     0% {
         transform: rotateZ(0deg);
+
     }
     100% {
         transform: rotateZ(360deg);
+    }
+  }
+@keyframes audioPlayer3 {
+    0% {
+        width:0;
+        height:0;
+        left:-26px;
+        top:26px;
+    }
+    100% {
+        width:52px;
+        height:100%;
+        left:0;
+        top:0;
+    }
+  }
+@keyframes audioPlayer2 {
+    0% {
+        width: 0;
+
+    }
+    100% {
+        width:200px;
     }
   }

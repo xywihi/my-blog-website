@@ -41,9 +41,15 @@ const SmallMusicPlayer = ({music,playMusic}) => {
         return ()=>{
         }
     }, [])
+    useEffect(() => {
+        // handleRadomMusic(music)
+        music && changeAudio(music)
+    }, [music])
     const handleRadomMusic = function(play){
         const randomNum = Math.floor(Math.random() * r.length);
         let radomMusic = {name:"Unknown",resource:`https://tribeofnoisestorage.blob.core.windows.net/music/${r[randomNum]}.mp3`,pause:music ? !music.pause : true,id:randomNum+'unknown'}
+        // let radomMusic = {name:"Unknown",resource:`https://www.last.fm/api/auth/?api_key=db1b874a1dd9b55b0001ee551aa1608d`,pause:music ? !music.pause : true,id:randomNum+'unknown'}
+        // let radomMusic = {name:"Unknown",resource:`https://www.last.fm/api/auth/?api_key=7c0b9e13cef795789f7c4e02a620a455`,pause:music ? !music.pause : true,id:randomNum+'unknown'}
         setCurrentRadio(radomMusic);
         setActiveOther(true);
         // playMusic(radomMusic)
@@ -64,16 +70,21 @@ const SmallMusicPlayer = ({music,playMusic}) => {
     
     return (
         <div className={`${styles.item2_inner1}`} data-url='https://tse4-mm.cn.bing.net/th/id/OIF-C.a8xSz4omfgM1xB6n3UVwig?pid=ImgDet&rs=1'>
-            <div className={`${styles.playerBox} flexB maB12 relative`}>
+            
+            <div className={`${styles.playerBox} flexB relative`}>
                 <AudioPlayer data={currentRadio} activeOther={activeOther} ref={childTranslate} handleRadomMusic={handleRadomMusic}/>
-                <div className="maL24">
-                    <div className="icon_hover cursor" onClick={handleRadomMusic}>
-                        <IonIcon icon={shuffle} size="36px" ></IonIcon>
+                {
+                    currentRadio &&
+                    <div className="maL24 paT6">
+                        <div className="icon_hover cursor" onClick={handleRadomMusic}>
+                            <IonIcon icon={shuffle} size="36px" ></IonIcon>
+                        </div>
+                        <div className="icon_hover cursor" onClick={()=>changeAudio(currentRadio)}>
+                            {currentRadio && <IonIcon icon={ (currentRadio.pause) ? pause : play } size="36px" ></IonIcon>}
+                        </div>
                     </div>
-                    <div className="icon_hover cursor" onClick={()=>changeAudio(currentRadio)}>
-                        {currentRadio && <IonIcon icon={ (currentRadio.pause) ? pause : play } size="36px" ></IonIcon>}
-                    </div>
-                </div>
+                }
+                
             </div>
             
         </div>

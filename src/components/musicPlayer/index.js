@@ -46,14 +46,15 @@ const MusicPlayer = ({music,playMusic}) => {
         let radomMusic = {name:"Unknown",resource:`https://tribeofnoisestorage.blob.core.windows.net/music/${r[randomNum]}.mp3`,pause:music ? !music.pause : true,id:randomNum+'unknown'}
         setCurrentRadio(radomMusic);
         setActiveOther(true);
-        // playMusic(radomMusic)
-        !childTranslate.current ? play(radomMusic,true) : childTranslate.current.play(radomMusic,true);
+        playMusic(radomMusic)
+        // typeof(play)=="function" && (!childTranslate.current ? play(radomMusic,true) : childTranslate.current.play(radomMusic,true));
     }
     const changeAudio = (item)=>{
         let newItem = {...item,pause: !currentRadio ? true : item.id!=currentRadio.id ? true : !currentRadio.pause}
-        setCurrentRadio(newItem)
-        childTranslate.current.play(newItem,(!currentRadio || item.id!=currentRadio.id))
-        currentRadio && setActiveOther(item.id!=currentRadio.id)
+        // setCurrentRadio(newItem)
+        playMusic(newItem)
+        // childTranslate.current.play(newItem,(!currentRadio || item.id!=currentRadio.id))
+        // currentRadio && setActiveOther(item.id!=currentRadio.id)
     }
     const getMusics = async ()=>{
         // const require = new HttpRequire;
@@ -64,7 +65,7 @@ const MusicPlayer = ({music,playMusic}) => {
     
     return (
         <div className={`${styles.item2_inner1}`} data-url='https://tse4-mm.cn.bing.net/th/id/OIF-C.a8xSz4omfgM1xB6n3UVwig?pid=ImgDet&rs=1'>
-            <div className={`${styles.playerBox} flexB maB12 relative`}>
+            {/* <div className={`${styles.playerBox} flexB maB12 relative`}>
                 <AudioPlayer data={currentRadio} activeOther={activeOther} ref={childTranslate} handleRadomMusic={handleRadomMusic}/>
                 <div>
                     <div className="icon_hover cursor" onClick={handleRadomMusic}>
@@ -75,12 +76,13 @@ const MusicPlayer = ({music,playMusic}) => {
                     </div>
                 </div>
             </div>
-            {(currentRadio) && <UpDown active={currentRadio.pause} length={20}/>}
+            {(currentRadio) && <UpDown active={currentRadio.pause} length={20}/>} */}
             <ul>
                 {audios.map((item,index)=>
                     <li key={item.id} className="cursor" onClick={()=>changeAudio(item)}>
-                        <div className="paV12 flexB">
-                            <span className={`${(currentRadio && currentRadio.id===item.id) ? "text_active" : ""} textSingeLine font14`}>{item.name}</span>
+                        <div className={`paV12 ${styles.musicItemBox}`}>
+                            <span className={`${(music && music.id===item.id) ? "activeColor" : ""} textSingeLine font14`}>{item.name}</span>
+                            {(music && music.id===item.id) && <UpDown active={music.pause} length={3}/>}
                         </div>
                         {index!=(audios.length-1) && <hr className="opacity20"/>}
                     </li>)}

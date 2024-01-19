@@ -109,8 +109,8 @@
     grid-row-end: span calc(48 + 5);
     display: grid;
     grid-auto-rows: 5px;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 25px;
+    grid-template-columns: calc(50% - 12px) calc(50% - 12px);
+    column-gap: 24px;
     align-items: start;
     justify-content: space-between;
     background: none;
@@ -124,11 +124,11 @@
     }
 }
 .item4{
-    height:370px;
+    height:423px;
     grid-row-end: span calc(75 + 5);
 }
 .item5{
-    height:240px;
+    height:293px;
     grid-row-end: span calc(48 + 5);
 }
 
@@ -167,7 +167,7 @@
 //news--------------------------------------------------------------
 .newsBox{
     ul{
-        width: 16em;
+        // width: 19em;
     }
 }
 .newsItemBox{

@@ -3,19 +3,15 @@ html,body,#root,.project{
     transition: all 1s ease-out;
 }
 .light{
+    .activeColor{
+        color:#46a7a7;
+    }
     .textColor,a{
         color: #333
     };
-    .textColorWhite{
-        color:#ffffff;
-    }
     .textColorGgray{
         color:#5e5e5e;
     }
-    .textColorGgray2{
-        color:#bdbdbd;
-    }
-    
     .btnDefault{
         background-color: #46a7a7;
         color: #186d6d;
@@ -32,8 +28,14 @@ html,body,#root,.project{
     .bg3{
         background-color: #f3f3f3;
     }
-    .bg4{
-        background-color: #353535;
+    table{
+        background-color: #cccccc;
+    }
+    th{
+        background-color:#ececec;  
+    }
+    td{
+        background-color:#ffffff;
     }
     .icon_hover{
         
@@ -48,13 +50,9 @@ html,body,#root,.project{
         .title{
             font-weight: bold;
         }
-        /* transform: scale(1.03); */
         transition: all 0.5s ease-out;
         &:hover{
             box-shadow: #d2dde7 0px 4px 24px;
-            // transform: scale(1.03);
-            /* border: 2px solid #d2dde7; */
-            // background-color: #aadfdb;
             
         }
        
@@ -91,16 +89,16 @@ html,body,#root,.project{
     .activeNavOldNoB{
         background-color: rgb(243, 243, 243);
     }
-    .activeNav{
-        &:hover{
-            background-color: rgb(243, 243, 243);
-            &::before{
-                content: "";
-                background-color: aquamarine;
+    // .activeNav{
+    //     &:hover{
+    //         background-color: rgb(243, 243, 243);
+    //         &::before{
+    //             content: "";
+    //             background-color: aquamarine;
                 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
     .logout{
         &:hover{
             background-color: rgb(243, 243, 243);
@@ -108,18 +106,15 @@ html,body,#root,.project{
     }
 }
 .dark{
-    // display: none;
+    .activeColor{
+        color:#46a7a7;
+    }
     .textColor,a{
         color: #b9b9b9
     };
-    .textColorWhite{
-        color:#1b1b1b;
-    }
+    
     .textColorGgray{
         color:#c2c2c2;
-    }
-    .textColorGgray2{
-        color:#646464;
     }
     .btnDefault{
         background-color: #1a5050;
@@ -137,8 +132,18 @@ html,body,#root,.project{
     .bg3{
         background-color: #4c4c4c;
     }
-    .bg4{
-        background-color: #d1d1d1;
+    table{
+        background-color: #36383b;
+    }
+    th{
+        background-color:#36383b;  
+    }
+    td{
+        background-color:#1e1f21;
+    }
+    select{
+        background-color: #36383b;
+        color: #fff;
     }
     .icon_hover{
         &:hover{
@@ -149,14 +154,9 @@ html,body,#root,.project{
         .title{
             font-weight: bold;
         }
-        /* transform: scale(1.03); */
         transition: all 0.5s ease-out;
         &:hover{
             box-shadow: #1e1f20 0px 4px 24px;
-            // transform: scale(1.03);
-            /* border: 2px solid #d2dde7; */
-            // background-color: #1c2625;
-    
         }
        
     }
@@ -225,24 +225,24 @@ html,body,#root,.project{
         width: calc(100% - 12px);
         padding-left: 24px;
     }
-    .activeNav{
-        &:hover{
-            background-color: #1c2625;
-            transform: translateX(12px);
-            transition: all 0.5s ease-out;
-            width: calc(100% - 12px);
-            padding-left: 24px;
-            &::before{
-                content: "";
-                position: absolute;
-                left: 12px;
-                top: calc(50% - 6px);
-                width: 4px;
-                height: 12px;
-                border-radius: 12px;
-                background-color: #5c7c79;
+    // .activeNav{
+    //     &:hover{
+    //         background-color: #1c2625;
+    //         transform: translateX(12px);
+    //         transition: all 0.5s ease-out;
+    //         width: calc(100% - 12px);
+    //         padding-left: 24px;
+    //         &::before{
+    //             content: "";
+    //             position: absolute;
+    //             left: 12px;
+    //             top: calc(50% - 6px);
+    //             width: 4px;
+    //             height: 12px;
+    //             border-radius: 12px;
+    //             background-color: #5c7c79;
                 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 }

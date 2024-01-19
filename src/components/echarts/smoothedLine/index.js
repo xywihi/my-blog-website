@@ -97,7 +97,7 @@ const SmoothedLine = () => {
 
 function areEqual(prevProps, nextProps) {
   console.log("prevProps, nextProps",prevProps, nextProps)
-  return false;
+  return true;
   /*
   return true if passing nextProps to render would return
   the same result as passing prevProps to render,

@@ -54,11 +54,11 @@ const App = ({notices,handleHiddeNotices,music}) =>{
             <ErrorBoundary>
                 <div  className={theme}>
                     <div className="bg2_blue project textColor">
-                        <header className="flexB pa24 bg1">
+                        <header className="flexB pa12 bg1">
                             <span className="logo maH24">LOGO-{notices.length}</span>
                                 <div className="flexB">
                                     {/* <HeaderNav  theme={theme}/> */}
-                                    <div className={`flexB relative maR24`}>
+                                    <div className={`flexB relative maR48`}>
                                         <SmallMusicPlayer/>
                                         {/* <div>
                                             <div className="icon_hover cursor">
