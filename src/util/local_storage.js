@@ -1,4 +1,4 @@
-export default class LocalStorage {
+class LocalStorage {
     set = (key,value) => {
         return localStorage.setItem(key,value)
     }
@@ -21,3 +21,6 @@ export default class LocalStorage {
         return localStorage.value()
     }
 }
+
+
+export default LocalStorage

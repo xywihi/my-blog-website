@@ -6,7 +6,12 @@ const initialState = {
     length:0
   },
   stopUpdateNotice:false,
-  userInfo:undefined
+  userInfo:undefined,
+  statusBoxData:{
+    show:false,
+    message:undefined,
+    status:undefined
+  }
 };
 let text=(data)=>{
   return data ? data.token : undefined
@@ -18,8 +23,11 @@ const reducer = (state = initialState, action) => {
     case 'HIDDENOTICES':
       return { ...state, notices:{...state.notices,hidde:!state.notices.hidde}};
     case 'CONTROLLUPDATENOTICE':
-      console.log('/////',action)
       return { ...state, stopUpdateNotice:action.data};
+    case 'SHOWSTATUSBOX':
+      // debugger;
+      console.log('！！！！！！！！！！！！！！',action.data)
+      return { ...state, statusBoxData:action.data};
     default:
       return state;
   }

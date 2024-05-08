@@ -3,13 +3,12 @@ import styles from './styles.module.less'
 import {IonIcon} from "@ionic/react"
 import { play, pause, shuffle } from 'ionicons/icons';
 import {connect} from "react-redux"
-import {playMusic} from "@/pages/home/store/actions"
+import {playMusic,pauseMusic,handleShowArea} from "@/pages/home/store/actions"
 import musc from "@/assets/audio/shine.mp3"
 import news from "@/assets/audio/new.mp3"
 import starts from "@/assets/audio/starts.mp3"
 import AudioPlayer from "./components/audioPlayer"
-
-import HttpRequire from "@/http/require"
+import musicsData from '@/api/data/musics.json';
 const audios = [{name:"Shine",resource:musc,pause:false,id:0},{name:"New Normal",resource:news,pause:false,id:1},{name:"we'll be the starts",resource:starts,pause:false,id:2}]
 const r = [
     '0b368fe8fd8c4dd6b7d438dd52d46517', 
@@ -32,28 +31,27 @@ const r = [
     'cf3a18fb9b1634e0db7872258cd82bbb',
     'cf3a18fb9b1634e0db7872258cd82bbb',
 ]
-const SmallMusicPlayer = ({music,playMusic}) => {
+const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic,handleShowArea}) => {
     const [activeOther,setActiveOther] = useState(true)
-    const [currentRadio,setCurrentRadio] = useState(null)
     const childTranslate = createRef(null)
+      
     useEffect(() => {
+        //获取当前路由
+      console.log('-------+++++++++++++++++++++++',window.location.hash)
         getMusics()
         return ()=>{
         }
     }, [])
-    const handleRadomMusic = function(play){
-        const randomNum = Math.floor(Math.random() * r.length);
-        let radomMusic = {name:"Unknown",resource:`https://tribeofnoisestorage.blob.core.windows.net/music/${r[randomNum]}.mp3`,pause:music ? !music.pause : true,id:randomNum+'unknown'}
-        setCurrentRadio(radomMusic);
-        setActiveOther(true);
-        // playMusic(radomMusic)
-        !childTranslate.current ? play(radomMusic,true) : childTranslate.current.play(radomMusic,true);
+    const handleRadomMusic = function(){
+        const randomNum = Math.floor(Math.random() * musicsData.length);
+        let radomMusic = musicsData[randomNum]
+        playMusic({...radomMusic});
     }
     const changeAudio = (item)=>{
-        let newItem = {...item,pause: !currentRadio ? true : item.id!=currentRadio.id ? true : !currentRadio.pause}
-        setCurrentRadio(newItem)
-        childTranslate.current.play(newItem,(!currentRadio || item.id!=currentRadio.id))
-        currentRadio && setActiveOther(item.id!=currentRadio.id)
+        let newItem = {...item,pause: music.pause}
+        playMusic(newItem)
+        childTranslate.current.play(newItem,(!music || item.id!=music.id))
+        music && setActiveOther(item.id!=music.id)
     }
     const getMusics = async ()=>{
         // const require = new HttpRequire;
@@ -63,28 +61,25 @@ const SmallMusicPlayer = ({music,playMusic}) => {
     }
     
     return (
-        <div className={`${styles.item2_inner1}`} data-url='https://tse4-mm.cn.bing.net/th/id/OIF-C.a8xSz4omfgM1xB6n3UVwig?pid=ImgDet&rs=1'>
-            <div className={`${styles.playerBox} flexB maB12 relative`}>
-                <AudioPlayer data={currentRadio} activeOther={activeOther} ref={childTranslate} handleRadomMusic={handleRadomMusic}/>
-                <div className="maL24">
-                    <div className="icon_hover cursor" onClick={handleRadomMusic}>
-                        <IonIcon icon={shuffle} size="36px" ></IonIcon>
-                    </div>
-                    <div className="icon_hover cursor" onClick={()=>changeAudio(currentRadio)}>
-                        {currentRadio && <IonIcon icon={ (currentRadio.pause) ? pause : play } size="36px" ></IonIcon>}
-                    </div>
-                </div>
+        music &&
+        <div className={`smallMusicPlayer ${styles.item2_inner1}`} data-url='https://tse4-mm.cn.bing.net/th/id/OIF-C.yMIHLghWfARYn23xKJFeZgHaG1?pid=ImgDet&rs=1'>
+            <div className={`${styles.playerBox} flexB relative`}>
+                <AudioPlayer showArea={showArea} music={music} time={time} pauseCurrent={pauseCurrent} activeOther={activeOther} pauseMusic={pauseMusic} handleShowArea={handleShowArea} ref={childTranslate} handleRadomMusic={handleRadomMusic}/>
             </div>
-            
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
     music: state.home.music,
+    time: state.home.time,
+    pauseCurrent: state.home.pauseCurrent,
+    showArea: state.home.showArea,
   });
 const mapDispatchToProps = {
     playMusic,
+    pauseMusic,
+    handleShowArea
 };
 
 

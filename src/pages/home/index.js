@@ -8,43 +8,30 @@ import TimeWeather from "./components/timeWeather"
 import MusicPlayer from "../../components/musicPlayer"
 import Translate from "../../components/translate"
 import SmoothedLine from "../../components/echarts/smoothedLine"
+import {connect} from "react-redux"
 import ChatAi from "../../components/chatAi"
 import HttpRequire from "../../http/require";
-const banners = [
-    {
-        url:"https://images.unsplash.com/photo-1599272585578-03bfc70032b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE4fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-        title:"平淡人生，浮躁心态",
-        subtitle:"平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
-        time:"2023/09/01",
-        id:0
-    },
-    {
-        url:"https://images.unsplash.com/photo-1587113538625-8ab80f5ad01f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-        title:"没心没肺，快乐加倍",
-        subtitle:"事压不垮人，但是情绪会压垮人，所以不要被情绪所绑架，学会和自己和解，做一个只记得快乐的人，没心没肺快乐翻倍！",
-        time:"2023/09/03",
-        id:0
-    },
-    {
-        url:"https://images.unsplash.com/photo-1517462035531-76bc910a6903?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
-        title:"平淡人生，浮躁心态",
-        subtitle:"平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
-        time:"2023/09/10",
-        id:0
-    },
-]
-export default function Home(props){
+import { showStatusBox } from "@/store/actions";
+const Home = ({showStatusBox}) => {
     const [currentDate,setCurrentDate] = useState(new Date())
     const [selectedOption,setSelectedOption] = useState('zh')
-    const currentImage = useRef(null)
+    const [wallImage,setWallImage] = useState(null)
+    const [currentImageIndex,setCurrentImageIndex] = useState(0)
     const childTranslate = createRef(null)
     useEffect(() => {
         // throwError()
-        console.log('-----------',currentDate.getMinutes().toString().length)
+        
         let timer = setInterval(()=>{
             setCurrentDate(new Date())
-            
+            setCurrentImageIndex(Math.floor(Math.random()*7))
         },10000)
+        const require = new HttpRequire();
+        require.get('https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8&mkt=zh-CN').then(res=>{
+            setWallImage(res.images);
+            wallImage && setCurrentImageIndex(Math.floor(Math.random()*(wallImage.length-1)))
+        }).catch(err=>{
+            console.log(err)
+        })
         return ()=>{
             clearTimeout(timer)
         }
@@ -57,31 +44,42 @@ export default function Home(props){
     const handleTranslate = ()=>{
         childTranslate.current.handleTranslate()
     }
+    console.log('home_page')
     return (
         <div className="bg2_blue">
             <div id="waterfall-container">
                     <div className="waterfall-item borderR12 item1 bg1 cardBox" >
-                        <div>
-                            <img src={"https://loremflickr.com/473/370/mountain"}/>
-                        </div>
-                        <div className="pa24 flexBS column">
-                            <h1 className="font_wenyue fontB">
-                                {banners[0].title.split("，").map(item=> <p key={item}>{item}</p>)}
-                            </h1>
-                            <h5>
-                                <p className="maB12">{banners[0].subtitle}</p>
-                                <p className="gray">{banners[0].time}</p>
-                            </h5>
-                        </div>
+                        {
+                            wallImage && 
+                            <>
+                                <div>
+                                    <a target="_blank" hrefLang="en-US" href={wallImage[currentImageIndex].copyrightlink}>
+                                        <img src={`https://cn.bing.com${wallImage[currentImageIndex].url}`} alt="wallpaper"/>
+                                    </a>
+                                </div>
+                                <div className="pa24 flexBS column">
+                                    <h1 className="font_wenyue fontB">
+                                        {/* {banners[0].title.split("，").map(item=> <p key={item}>{item}</p>)}
+                                        */}
+                                        {wallImage[currentImageIndex].title}
+                                    </h1>
+                                    <h5>
+                                        <p className="maB12">{wallImage[currentImageIndex].copyright}</p>
+                                        <p className="gray">{wallImage[currentImageIndex].startdate}</p>
+                                    </h5>
+                                </div>
+                            </>
+                        }
+                        
                     </div>
                     
                     <div className="waterfall-item borderR12 screen_mid" >
                         <div className="waterfall-item borderR12 screen_mid_inner1 bg1 pa24 flexS cardBox" >
                             <img alt="Silhouette of a person's head" src="https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=195&h=180&c=7&r=0&o=5&pid=1.7" />
-                            <label className="maH12">
+                            <div className="maH12">
                                 <h4 className="fontB">Anln</h4>
                                 <span className="fontSmall">疯狂努力拼搏中...</span>
-                            </label>
+                            </div>
                         </div>
                         <div className="screen_mid_inner2">
                         <TimeWeather/>
@@ -91,17 +89,16 @@ export default function Home(props){
                         <div className="waterfall-item borderR12 item2_inner1 bg1 pa24 cardBox" >
                             <MusicPlayer/>
                         </div>
-                        <div className="waterfall-item borderR12 item2_inner2 bg1 pa24 cardBox" >
+                        <div className="waterfall-item  item2_inner2 cardBox" >
                             <ExamCountdown/>
-                            
                         </div>
                         <div className="waterfall-item borderR12 item2_inner3 screen_big" >
                             <div className="waterfall-item borderR12 item2_inner3_inner1 bg1 pa24 flexS cardBox" >
                                 <img alt="Silhouette of a person's head" src="https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=195&h=180&c=7&r=0&o=5&pid=1.7" />
-                                <label className="maH12">
+                                <div className="maH12">
                                     <h4 className="fontB">Anln</h4>
                                     <span className="fontSmall">疯狂努力拼搏中...</span>
-                                </label>
+                                </div>
                             </div>
                             <TimeWeather/>
                         </div>
@@ -142,7 +139,7 @@ export default function Home(props){
                                 <ul className="flexS">
                                     <li className="maR12 activeAvatar"><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=195&h=180&c=7&r=0&o=5&pid=1.7"/></li>
                                     <li className="maR12"><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.ofjm5a8hxRo_o7HYH3MxQgHaHX?w=202&h=200&c=7&r=0&o=5&pid=1.7"/></li>
-                                    <li className="maR12"><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.7GGt63j6XvfNNA9iFsjDXgHaFj?w=234&h=180&c=7&r=0&o=5&pid=1.7"/></li>
+                                    <li className="maR12"><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=234&h=180&c=7&r=0&o=5&pid=1.7"/></li>
                                     <li className="maR12"><img src="https://tse3-mm.cn.bing.net/th/id/OIP-C.dN6NLMe9_qgenDX1VRyOOQAAAA?w=158&h=180&c=7&r=0&o=5&pid=1.7"/></li>
                                     <li className="maR12"><img src="https://tse2-mm.cn.bing.net/th/id/OIP-C.yUorDiY6WO0l_0p-5aNtqQHaHa?w=200&h=200&c=7&r=0&o=5&pid=1.7"/></li>
                                 </ul>
@@ -158,12 +155,13 @@ export default function Home(props){
                         </div>
                        
                     </div>
-                    <div className="waterfall-item borderR12 item5 bg1 pa24 cardBox" >
+                    <div className="waterfall-item borderR12 item5 bg1 pa24 cardBox maR0" >
                         <div className="flexB maB24">
                             <h3 className="title">
                                 汉英翻译
                             </h3>
                             <div className="flexB">
+                                <div>
                                 <label>
                                     <input
                                         type="radio"
@@ -175,7 +173,7 @@ export default function Home(props){
                                         }}
                                         className="maR6"
                                     />
-                                    中译英
+                                    English
                                 </label>
                                 <label className="maL12">
                                     <input
@@ -185,17 +183,26 @@ export default function Home(props){
                                         onChange={(e)=>setSelectedOption(e.target.value)}
                                         className="maR6"
                                     />
-                                    英译中
+                                    中文
                                 </label>
+                                </div>
                                 <div className="maL16 paV6 paH12 borderR12 bg2_blue icon_hover cursor flexB" onClick={handleTranslate}>
                                     <IonIcon icon={language} size="36px"></IonIcon>
                                     <span className="maL12">翻译</span>
                                 </div>
                             </div>
                         </div>
-                        <Translate type={selectedOption} ref={childTranslate}/>
+                        <Translate type={selectedOption} ref={childTranslate} showStatusBox={showStatusBox}/>
                     </div>
                 </div>
         </div>
     )
 }
+
+
+const mapDispatchToProps = {
+    showStatusBox
+};
+
+
+export default connect(null,mapDispatchToProps)(Home)

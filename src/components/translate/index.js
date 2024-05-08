@@ -4,14 +4,13 @@ import HttpRequire from "@/http/require"
 import styles from './style.module.less'
 import {IonIcon} from "@ionic/react"
 import { arrowForward } from 'ionicons/icons';
-import {Loader} from "../animaIcons"
+import {Loader} from "../animaIcons";
 const URL = "https://fanyi-api.baidu.com/api/trans/vip/translate"
-const Translate =({type}, ref) => {
+const Translate =({type,showStatusBox}, ref) => {
     const [str,setStr] = useState('')
     const [translatedStr,setTranslatedStr] = useState([])
     const [loading,setLoading] = useState(false)
     useEffect(()=>{
-        
         return ()=>{
             // clearInterval(timer)
         }
@@ -42,9 +41,25 @@ const Translate =({type}, ref) => {
         require.get(NEW_URL).then(res=>{
             console.log("trans",res)
             setLoading(false)
-            setTranslatedStr(res.trans_result)
+            !res.error_code ? 
+            setTranslatedStr(res.trans_result) : 
+            showStatusBox({
+                show:true,
+                // message:"网络异常，请稍后再试",
+                message:"未填写任何内容，请输入需要翻译的内容",
+                status:"warning"
+            })
         }).catch(error=>{
-            console.log(error)
+            setLoading(old=>{
+                showStatusBox({
+                    show:true,
+                    // message:"网络异常，请稍后再试",
+                    message:error,
+                    status:"error"
+                })
+                return false;
+            })
+            
         })
         
     }
@@ -62,7 +77,7 @@ const Translate =({type}, ref) => {
                 {loading ? <Loader/> : <IonIcon  icon={arrowForward} size="18px"></IonIcon>}
             </div>
             <div className="pa12 borderR12 bg3">
-                {translatedStr.map(item=><p>{item.dst}</p>)}
+                {translatedStr.map((item,index)=><p key={item.dst+index}>{item.dst}</p>)}
             </div>
         </div>
     )

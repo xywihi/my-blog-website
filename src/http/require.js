@@ -1,34 +1,43 @@
-let xhr = new XMLHttpRequest();
+
 // 定义一个回调函数来处理 XMLHttpRequest 的状态变化
 
  class HttpRequire {
+    constructor(prop) {
+        this.type = prop;
+        this.xhr= new XMLHttpRequest();
+    }
     get(url,params){
         return new Promise((resolve,reject)=>{
-            xhr.open("get",url,true);
-            // xhr.setRequestHeader('content-type', 'application/json');
-            // xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-            // xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
-            xhr.send(JSON.stringify(params))
+            let that = this;
+            that.xhr.open("get",url,true);
+            that.xhr.setRequestHeader('content-type', 'application/json');
+            that.xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            that.xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
+            that.xhr.send()
+            that.xhr.onload = function() {
+                // console.log(JSON.parse(that.xhr.response));
+                resolve(JSON.parse(that.xhr.response))
+            }
             
-            xhr.onload = function() {
-                // console.log(JSON.parse(xhr.response));
-                resolve(JSON.parse(xhr.response))
+            that.xhr.onerror = function() {
+                reject("网络请求失败");
+                console.log("请求失败",that.xhr.statusText)
             }
         })
         
     }
     getImg(url,params){
       return new Promise((resolve,reject)=>{
-        
-        xhr.open("get",url,true);
-        xhr.send(JSON.stringify(params))
-        xhr.onload = function() {
+        let that = this;
+        that.xhr.open("get",url,true);
+        that.xhr.send(JSON.stringify(params))
+        that.xhr.onload = function() {
           
-          // var imageUrl = URL.createObjectURL(xhr.response);
+          // var imageUrl = URL.createObjectURL(that.xhr.response);
           // console.log("imageUrl",imageUrl)
             
             resolve({})
-          // xhr.response.blob().then(blobData => {
+          // that.xhr.response.blob().then(blobData => {
           //   // 在这里处理图片二进制数据
           //   // 例如，你可以创建一个 URL 对象来显示图像
             
@@ -43,21 +52,22 @@ let xhr = new XMLHttpRequest();
     post(url,params){
         
         return new Promise((resolve,reject)=>{
-            xhr.open('post', url, true);
-            xhr.setRequestHeader('content-type', 'application/json');
-            xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-            xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
-            xhr
-            // xhr.onreadystatechange = function() {
-            //     if (xhr.readyState === 4 && xhr.status === 200) {
-            //       var response = JSON.parse(xhr.responseText);
+            let that = this;
+            that.xhr.open('post', url, true);
+            that.xhr.setRequestHeader('content-type', 'application/json');
+            that.xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            that.xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
+            that.xhr
+            // that.xhr.onreadystatechange = function() {
+            //     if (that.xhr.readyState === 4 && that.xhr.status === 200) {
+            //       var response = JSON.parse(that.xhr.responseText);
             //       console.log(response);
             //     }
             //   };
-            xhr.send(JSON.stringify(params));
-            xhr.onload = function() {
-                // console.log(JSON.parse(xhr.response));
-                resolve(JSON.parse(xhr.response))
+            that.xhr.send(JSON.stringify(params));
+            that.xhr.onload = function() {
+                // console.log(JSON.parse(that.xhr.response));
+                resolve(JSON.parse(that.xhr.response))
             }
         })
     }

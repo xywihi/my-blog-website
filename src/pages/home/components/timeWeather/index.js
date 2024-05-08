@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect, useState, memo} from "react";
 import styles from './styles.module.less'
 import {IonIcon} from "@ionic/react"
 import HttpRequire from "@/http/require"
@@ -9,17 +9,20 @@ const TimeWeather = (props) => {
     const [currentDate,setCurrentDate] = useState(new Date())
     const [weather,setWeather] = useState(null)
     useEffect(() => {
-        const http = new HttpRequire
+        const http = new HttpRequire('weather')
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=zh_cn`;
         http.get(apiUrl).then(res=>{
             console.log("res------",res)
             if(res.cod===200){
                 setWeather(res.weather[0])
             }
+        }).catch(err=>{
+            // alert(err)
         })
         let timer = setInterval(()=>{
             setCurrentDate(new Date())
         },10000)
+        console.log('wallImage------------------')
         return ()=>{
             clearTimeout(timer)
         }
@@ -29,15 +32,18 @@ const TimeWeather = (props) => {
             <div className={`${styles.item2_inner3_inner2_inner1} flexS`}>{(currentDate.getHours().toString().length>1 ? '':'0')+currentDate.getHours()}<span className={styles.flicker}>:</span>{(currentDate.getMinutes().toString().length>1 ? '':'0')+currentDate.getMinutes()}</div>
             <div className={styles.item2_inner3_inner2_inner2}>{currentDate.getMonth()+1}月</div>
             <div className={`${styles.item2_inner3_inner2_inner3} gray`}>{currentDate.getFullYear()}/{currentDate.getMonth()+1}/{currentDate.getDate()}</div>
-            {weather ? 
+            {weather && 
                 <div className={`${styles.item2_inner3_inner2_inner3} gray flexS`}>
                     <span className="maR6">{weather.description.split('，')[0]}</span>
                     <img className={styles.weatherIcon} src={`https://openweathermap.org/img/w/${weather.icon}.png`}></img>
-                </div> : '-'
+                </div>
             }
         </div>
     )
 }
 
 
-export default TimeWeather;
+export default memo(TimeWeather,(prevProps,nextProps)=>{
+    console.log('prevProps------',prevProps)
+    return false
+});

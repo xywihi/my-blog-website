@@ -5,7 +5,237 @@
     right: 0;
     height: 40px;
     z-index: 10;
+    
 }
 .playerBox{
     height:52px
 }
+.smallMusicBox{
+    img{
+        width: 32px;
+        height: 32px;
+    }
+    .musicNameBox{
+        p:first-child{
+            font-size: 14px;
+        }
+        p:last-child{
+            display: none;
+        }
+    }
+    .audioPlayerBox{
+        font-size: 16px;
+    }
+}
+.showAreaBox{
+    color: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: #242424;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 12px auto;
+    transition: all .2s ease-in-out;
+    overflow: hidden;
+    .showArea_contentBox_backImg{
+        /* 应用模糊滤镜 */
+        filter: blur(12px);
+        /* 为了确保模糊效果不会影响其他元素，可以设置为相对定位 */
+        /* 确保背景图覆盖整个元素 */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: calc(100% + 40px);
+        height: calc(100% + 40px);
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        z-index: 0;
+        opacity: 0.8;
+    }
+    .showArea_contentBox{
+        padding: 48px 24px;
+        display: grid;
+        grid-template-columns: 48vw auto;
+        align-items: center;
+        .showArea_contentBox_rightBox{
+            .singer{
+                font-size: small;
+                color: #ffffffb9;
+            }
+            z-index: 100;
+            display: grid;
+            grid-template-rows: 64px calc(100vh - 382px) 142px;
+            row-gap: 38px;
+            text-align: center;
+        }
+    }
+
+    .lyrics{
+        overflow-y: auto;
+        text-align: center;
+        transition: all .5s ease-in-out;
+        position: relative;
+        //实现字体颜色渐变
+        // background: -webkit-linear-gradient(#ffffff00,#ffffff,#ffffff, #ffffff00);
+        // background-clip: text;
+        // background-position-y: 200px;
+        // -webkit-background-clip: text;
+        // -webkit-text-fill-color: transparent;
+        // display: inline-block;
+        &>ul{
+            margin: 250px 0;
+        }
+        li{
+            margin: 8px 0;
+        }
+        .text_active{
+            font-size: 18px;
+            font-weight: bold;
+            margin: 18px 0;
+            animation: zoom .2s ease-in-out;
+        }
+        .text_default{
+            color: #ffffffb9;
+            font-size: 14px;
+            font-weight:400;
+            margin: 8px 0;
+        }
+    }
+    .progressBar{
+        display: flex;
+        align-items: center;
+        
+    }
+    
+    .audioPlayerImg{
+        padding: 0 10%;
+        transition: all 0.5s ease-out;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        grid-template-rows: auto 20px;
+        grid-template-columns: 1fr;
+        row-gap: 64px;
+        &>div{
+            max-width: 220px;
+            margin: 0 auto;
+        }
+        img{
+            width:60%;
+            height:auto;
+            margin: 0 auto;
+            border-radius: 50%;
+            animation: audioPlayer 4s linear;
+            animation-iteration-count: infinite;
+            
+        }
+    };
+    .audioPlayer{
+        padding: 0 10%;
+        display: grid;
+        grid-template-rows: auto 60px;
+        row-gap: 18px;
+    }
+}
+
+.showArea{
+    visibility:visible;
+}
+.showAreaHide{
+    visibility: hidden;
+    top: calc(100%)!important;
+}
+.noLyric{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    color: #ffffffb9;
+    font-weight: bold;
+    margin: 0 auto;
+    border-radius: 12px;
+    padding: 48px 24px;
+}
+@keyframes zoom {
+    0% {
+        transform: scale(.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes audioPlayer {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    .showAreaBox{
+        .lyrics{
+            &>ul{
+                margin: 200px 0;
+            }
+        }
+    }
+    
+  }
+  @media screen and (max-width: 620px) {
+    .smallMusicBox{
+        img{
+            width: 64px;
+            height: 64px;
+        }
+        .musicNameBox{
+            p:first-child{
+                font-size: 18px;
+            }
+            p:last-child{
+                display: block;
+            }
+        }
+        .audioPlayerBox{
+            font-size: 26px;
+        }
+    }
+    .showAreaBox{
+        grid-template-rows: 1fr;
+        .showArea_contentBox{
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+            .showArea_contentBox_rightBox{
+                height: 100%;
+                display: grid;
+                grid-template-rows: 64px auto 142px;
+                row-gap: 38px;
+                text-align: center;
+                &>div:nth-child(2){
+                    max-height: 400px;
+                }
+            }
+        }
+        .lyrics{
+            &>ul{
+                margin: 180px 0;
+            }
+        }
+        .audioPlayerImg{
+            display: none;
+        }
+    }
+    .showArea{
+        top: 0!important;
+    }
+    .showAreaHide{
+        top: calc(100%)!important;
+    }
+  }

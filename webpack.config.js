@@ -21,13 +21,15 @@ module.exports = {
     devServer: {
         static: path.join(__dirname, 'public'),
         open:true, // 开启服务器时，自动打开页面
-        port: 3000,
+        port: 3008,
+            
     },
     mode: "development",
     resolve: {
         alias:{
             "@":path.resolve(__dirname,"src")
-          }
+          },
+        extensions: ['.js', '.jsx', '.ts', '.tsx'], // 自动解析确定的扩展
       },
     module: {
         rules: [
@@ -37,6 +39,11 @@ module.exports = {
                 use: {
                     loader: 'babel-loader'  //使用babel-loader转译JavaScript
                 }
+            },
+            {
+                test: /\.(ts|tsx)?$/, // 正则表达式，匹配.ts或.tsx文件
+                use: 'ts-loader', // 使用ts-loader处理这些文件
+                exclude: /node_modules/ // 排除node_modules目录
             },
             {
                 test: /\.(sc|c|le)ss$/,  //使用loader的文件类型

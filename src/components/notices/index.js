@@ -3,19 +3,19 @@ import NoticesItem from "./components/noticeItem";
 import styles from './style.module.less'
 import {IonIcon} from "@ionic/react";
 import { close,arrowForward } from 'ionicons/icons';
-import socket from "../../http/socke"
+// import socket from "../../http/socke"
 const NoticesBox =({manageNotices}) => {
     // const [stopUpdateNotice,setStopUpdateNotice]=useState(false)
     const [notices,setNotices]=useState([])
     const timerRef = useRef(null);
     const stopUpdateNotice = useRef(false);
     useEffect(()=>{
-        socket.on('message', (data) => {
-            console.log('接收到服务器消息:', data);
-            data && setNotices(pre=>{
-                return [...pre,data]
-            })
-        });
+        // socket.on('message', (data) => {
+        //     console.log('接收到服务器消息:', data);
+        //     data && setNotices(pre=>{
+        //         return [...pre,data]
+        //     })
+        // });
         return ()=>{
             clearInterval(timerRef.current)
         }

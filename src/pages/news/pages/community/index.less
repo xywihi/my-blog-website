@@ -1,7 +1,7 @@
 .community_box{
     height: 100%;
     display: grid;
-    grid-template-columns: 55% auto;
+    grid-template-columns: 65% auto;
     grid-template-rows: 100%;
     column-gap: 24px;
     .hotestNews_box{
@@ -31,7 +31,7 @@
                 }
                 .hotestNews_content_box_text,h2,hr{
                     // 解决滑动条影响内容宽度
-                    width: 492px;
+                    width: 100%;
                 }
             }
             
@@ -107,7 +107,7 @@
         }
         .newest_news_box_content_box{
             padding-right: 6px;
-            width: 672px;
+            // width: 672px;
             
             li{
                 margin-bottom: 15px;
@@ -134,4 +134,60 @@
             }
         }
     }
+
+   
+}
+
+@media screen and (max-width: 1400px) {
+    .community_box{
+        display: grid;
+        grid-template-columns: 1fr;
+        &>div{
+            margin-bottom: 24px;
+        }
+    }
+    .hotestNews_comment_area{
+        display: none;
+    }
+    .community_box .hotestNews_box {
+        display: grid;
+        grid-template-columns: 1fr;
+        .hotestNews .hotestNews_content_box {
+            padding-right: 0;
+        }
+        
+    }
+    .header_box{
+        div{
+        display: none;
+        }
+    }
+    
+}
+@media screen and (min-width: 200px) {
+    .community_box .newest_news_box .newest_news_box_content_box li {
+        width: calc(100vw - 48px);
+        &>div:first-child{
+            display: grid;
+            grid-template-columns: 80px calc(100vw - 128px);
+            column-gap: 12px;
+            &>div{
+                width: calc(100% - 36px);
+            }
+        }
+        h3{
+            white-space: nowrap; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+        };
+        .content{
+            height:50px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3; /* number of lines to show */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+    
 }

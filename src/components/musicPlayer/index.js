@@ -1,99 +1,208 @@
-import React,{useEffect, useState, createRef} from "react";
+import React,{useEffect, useState,createRef,useRef} from "react";
 import styles from './styles.module.less'
-import {IonIcon} from "@ionic/react"
-import { play, pause, shuffle } from 'ionicons/icons';
+
 import {connect} from "react-redux"
-import {playMusic} from "@/pages/home/store/actions"
-import musc from "@/assets/audio/shine.mp3"
-import news from "@/assets/audio/new.mp3"
-import starts from "@/assets/audio/starts.mp3"
+import {playMusic,setMusicTime,pauseMusic,handleShowArea} from "@/pages/home/store/actions"
 import AudioPlayer from "./components/audioPlayer"
+import {handleTime,handleTimeToNumber,enterFullScreen,exitFullScreen} from "@/util/tools.ts"
+import OwnSlider from "@/components/OwnSlider"
 import UpDown from "../animaIcons/upDown";
-import HttpRequire from "@/http/require"
-const audios = [{name:"Shine",resource:musc,pause:false,id:0},{name:"New Normal",resource:news,pause:false,id:1},{name:"we'll be the starts",resource:starts,pause:false,id:2}]
-const r = [
-    '0b368fe8fd8c4dd6b7d438dd52d46517', 
-    'c44fcb6d5b26c0ca959900bd44a28c0f', 
-    'd3cbfa9181638bfb3fce57ad465f6f34', 
-    'a4d8daef1e667c94cc0ba809ad431c85', 
-    '5a3eb430dfccaf6009ee71f639777b93',
-    '563030d1b8404cfdc47722a518e965ea', 
-    '024b3e2370264bb184a9a3de82f49efe', 
-    '2b44e0f601be6726a7dd30f52cb9b15f', 
-    '8b4d15db171121c3b42381be625338ca', 
-    'fd4e02f1434868f91c1ceefcfeb516d1',
-    '69a5b4760d157cf53a493ea0a5ae67c3',
-    'a46b97a67ec59c0f060e6387cfb1c244',
-    '83305e9e1a3591b3fb56b497456a6b18',
-    'a9e931e3e10ed43f0ca2a15b96453e86',
-    '9f02ab453797f2d13104ef8e2bbaac6d',
-    'acb5458baa3ca85aaf7dc75b1c8440ee',
-    'a4d8daef1e667c94cc0ba809ad431c85',
-    'cf3a18fb9b1634e0db7872258cd82bbb',
-    'cf3a18fb9b1634e0db7872258cd82bbb',
-]
-const MusicPlayer = ({music,playMusic}) => {
-    const [activeOther,setActiveOther] = useState(true)
-    const [currentRadio,setCurrentRadio] = useState(null)
-    const childTranslate = createRef(null)
+import {IonIcon} from "@ionic/react"
+import { play, pause,shuffle } from 'ionicons/icons';
+import musicsData from '@/api/data/musics.json'
+const childTranslate = createRef();
+const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pauseMusic,handleShowArea}) => {
+    const [startMove,setStartMove] = useState(0)
+    const [currentLyric,setCurrentLyric] = useState([])
+    const ownRef = useRef()
     useEffect(() => {
-        getMusics()
+        // getMusics();
+        document.addEventListener('fullscreenchange', function(event) {
+            if (!document.fullscreenElement) {
+              // 退出全屏操作
+              handleShowArea(false)
+            }
+          });
         return ()=>{
         }
     }, [])
-    const handleRadomMusic = function(play){
-        const randomNum = Math.floor(Math.random() * r.length);
-        let radomMusic = {name:"Unknown",resource:`https://tribeofnoisestorage.blob.core.windows.net/music/${r[randomNum]}.mp3`,pause:music ? !music.pause : true,id:randomNum+'unknown'}
-        setCurrentRadio(radomMusic);
-        setActiveOther(true);
-        // playMusic(radomMusic)
-        !childTranslate.current ? play(radomMusic,true) : childTranslate.current.play(radomMusic,true);
-    }
+    useEffect(() => {
+        let newStrArr = music?.lyric ? music.lyric.split("|").map((item,index)=>{
+            let newItem = item.split("-")
+            return ({
+                lineLyric:newItem[1],
+                time:handleTimeToNumber(newItem[0])})
+        }) : [];
+        setCurrentLyric(newStrArr)
+    }, [music])
+    useEffect(() => {
+        if(music) {
+            showArea && enterFullScreen()
+            document.body.style.overflow = showArea ? 'hidden' : 'auto';
+        }
+    }, [showArea])
+    useEffect(() => {
+        if(!music?.lyric) return;
+        currentLyric.some((item,index)=>{
+            let toMove = time.currentTime>=item.time&&time.currentTime<=(currentLyric[index+1]?currentLyric[index+1].time:time.duration);
+            if(toMove){
+                ownRef.current.scrollTo({
+                    top: index*27,
+                    left: 0,
+                    behavior: 'smooth'
+                })
+            };
+            return toMove;
+        })
+        if(time.currentTime===time.duration){
+            ownRef.current.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            })
+        }
+    }, [time])
+
     const changeAudio = (item)=>{
-        let newItem = {...item,pause: !currentRadio ? true : item.id!=currentRadio.id ? true : !currentRadio.pause}
-        setCurrentRadio(newItem)
-        childTranslate.current.play(newItem,(!currentRadio || item.id!=currentRadio.id))
-        currentRadio && setActiveOther(item.id!=currentRadio.id)
+        let newItem = {...item,pause: false}
+        playMusic(newItem)
+        // childTranslate.current.play(newItem,(false))
+        // childTranslate.current.play(newItem,(!music || item.id!=music.id))
+        // music && setActiveOther(item.id!=music.id)
     }
-    const getMusics = async ()=>{
-        // const require = new HttpRequire;
-        // let URL = "https://www.jango.com/music/The+Weeknd"
-        // const data = await require.get(URL)
-        // console.log(data)
+    // const getMusics = async ()=>{
+    //     // const require = new HttpRequire;
+    //     // let URL = "https://www.jango.com/music/The+Weeknd"
+    //     // const data = await require.get(URL)
+    //     // console.log(data)
+    // }
+    const handleShowMusicArea = (proportion)=>{
     }
-    
+    const handleChangeTime = (proportion)=>{
+        console.log('childTranslate',childTranslate.current)
+        if(childTranslate.current.el){
+            childTranslate.current.el.pause()
+            childTranslate.current.el.currentTime = time.duration*proportion;
+            childTranslate.current.el.play().catch(err=>{
+                console.log(err)
+            })
+        }
+
+    }
+    const handleCloseAreaStart = (e)=>{
+        setStartMove(e.touches[0].pageY)
+    }
+    const handleCloseArea = (e)=>{
+        let difference = e.touches[0].pageY-startMove;
+        if(difference>80){
+            handleShowArea(false)
+        }
+    }
+    const handleCloseAreaEnd = (e)=>{
+        setStartMove(0)
+    }
+    const handleRadomMusic = function(playType){
+        let newMusic=null;
+        console.log(playType)
+        if(playType==="radom"){
+            const randomNum = Math.floor(Math.random() * (musicsData.length-1));
+            newMusic = musicsData.filter(item=>item.id!==music?.id)[randomNum]
+        }else if(playType==="single"){
+            newMusic = music;
+        }else{
+            let index = musicsData.findIndex(item=>item.id===music?.id);
+            newMusic = musicsData[index+1]?musicsData[index+1]:musicsData[0];
+        }
+        
+        pauseMusic(false)
+        playMusic({...newMusic});
+    }
     return (
-        <div className={`${styles.item2_inner1}`} data-url='https://tse4-mm.cn.bing.net/th/id/OIF-C.a8xSz4omfgM1xB6n3UVwig?pid=ImgDet&rs=1'>
-            <div className={`${styles.playerBox} flexB maB12 relative`}>
-                <AudioPlayer data={currentRadio} activeOther={activeOther} ref={childTranslate} handleRadomMusic={handleRadomMusic}/>
-                <div>
-                    <div className="icon_hover cursor" onClick={handleRadomMusic}>
-                        <IonIcon icon={shuffle} size="36px" ></IonIcon>
-                    </div>
-                    <div className="icon_hover cursor" onClick={()=>changeAudio(currentRadio)}>
-                        {currentRadio && <IonIcon icon={ (currentRadio.pause) ? pause : play } size="36px" ></IonIcon>}
-                    </div>
-                </div>
-            </div>
-            {(currentRadio) && <UpDown active={currentRadio.pause} length={20}/>}
-            <ul>
-                {audios.map((item,index)=>
+        <div onTouchStart={handleCloseAreaStart} onTouchEnd={handleCloseAreaEnd} onTouchMove={handleCloseArea} className={`heightFull no-select`}>
+            <div className={`overflowY heightFull scrollbarBox ${styles.smallMusicBox}`}>
+                <ul>
+                    {musicsData.map((item,index)=>
                     <li key={item.id} className="cursor" onClick={()=>changeAudio(item)}>
                         <div className="paV12 flexB">
-                            <span className={`${(currentRadio && currentRadio.id===item.id) ? "text_active" : ""} textSingeLine font14`}>{item.name}</span>
+                            <div className="flexC">
+                                <img className="maR12 borderR6" src={item?.imgUrl} />
+                                {/* {(music) && <UpDown active={!pauseCurrent} length={20}/>} */}
+                                <div className={styles.musicNameBox}>
+                                    <p className={`${(music && music.id===item.id) ? "text_active" : ""}`}>{item.name}</p>
+                                    <p className={`font14 opacity20 maT6`}>{item.singer}</p>
+                                </div>
+                            </div>
+                            <div className={`maR12 font24 ${styles.audioPlayerBox}`}>
+                                <IonIcon icon={ (music?.id===item.id && !pauseCurrent) ? pause : play }></IonIcon>
+                            </div>
                         </div>
-                        {index!=(audios.length-1) && <hr className="opacity20"/>}
+                        {index!=(musicsData.length-1) && <hr className="opacity10"/>}
                     </li>)}
-            </ul>
+                </ul>
+            </div>
+            <div className={`${styles.showAreaBox} ${showArea ? styles.showArea : styles.showAreaHide}`}>
+                {music?.imgUrl && <div className={styles.showArea_contentBox_backImg} style={{backgroundImage: `url(${music?.imgUrl})`}}></div>}
+                <div className={styles.showArea_contentBox} >
+                    
+                    <div className={`${styles.audioPlayerImg} maR12 ${styles[`${music ?  'active' :  'stop' }Audio`]}`}>
+                        <img className={(!pauseCurrent && music)? 'running' : 'paused'} src={music?.imgUrl} />
+                        {(music) && <UpDown active={!pauseCurrent} length={20}/>}
+                    </div>
+                    <div className={styles.showArea_contentBox_rightBox}>
+                        <div>
+                            <h2 className="fontB">{music?.name}</h2>
+                            <p className={`${styles.singer} maT6`}>{music?.singer}</p>
+                        </div>
+                        <div ref={ownRef} className={`${styles.lyrics} scrollbarBox`}>
+                            {
+                                currentLyric.length===0 ? <div className={styles.noLyric}>暂无歌词</div> :
+                                <ul>
+                                    {currentLyric.map((item,index)=>
+                                    <li className={
+                                        (time.currentTime>=Number(item.time) && 
+                                        time.currentTime<=((currentLyric[index+1] ? Number(currentLyric[index+1].time):time.duration)) ? 
+                                        styles.text_active : styles.text_default)} 
+                                        key={index}
+                                    >
+                                            {item.lineLyric}
+                                    </li>)}
+                                </ul>
+                            }
+                        </div>
+                        <div className={styles.audioPlayer}>
+                            <div onClick={handleShowMusicArea} className={`${styles.playerBox} flexB maB12 relative`}>
+                                <AudioPlayer music={music} time={time} pauseCurrent={pauseCurrent} ref={childTranslate} playMusic={playMusic} setMusicTime={setMusicTime} pauseMusic={pauseMusic} handleRadomMusic={handleRadomMusic}/>
+                            </div>
+                            <div className={styles.progressBar}>
+                                <div className="widthFull">
+                                    <OwnSlider pauseMusic={pauseMusic} handleChangeTime={handleChangeTime} {...time}/>
+                                    <div className="flexB maT24">
+                                        <span className="font14">{handleTime (time.currentTime)}</span>
+                                        
+                                        <span className="font14">{handleTime (time.currentTime-time.duration)}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                                                              
+                </div>
+            </div>
+            
         </div>
     )
 }
 
 const mapStateToProps = (state) => ({
     music: state.home.music,
+    time: state.home.time,
+    pauseCurrent: state.home.pauseCurrent,
+    showArea: state.home.showArea,
   });
 const mapDispatchToProps = {
     playMusic,
+    setMusicTime,
+    pauseMusic,
+    handleShowArea
 };
 
 

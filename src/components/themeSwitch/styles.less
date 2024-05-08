@@ -3,12 +3,37 @@
 .testswitch {
     position: relative;
     float: left;
-    width: 90px;
+    // width: 90px;
     margin: 0;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    .moonsunBox{
+        width: 40px;
+        height: 40px;
+        border-radius: 50px;
+        background-color: #04080F;
+        position: relative;
+        display: block;
+        overflow: hidden;
+        img{
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            left: -20px;
+            top: -2px;
+            transition: all .5s ease-in-out;
+        }
+    }
+    .lightBg{
+        background-color: #F3FAFF;
+    }
+    .blackBg{
+        background-color: #04080F;
+    }
+    
 }
+
 
 .testswitch-checkbox {
     display: none;

@@ -1,8 +1,11 @@
-html,body,#root,.project{
-    height: 100%;
-    transition: all 1s ease-out;
-}
+// html,body,#root,.project{
+//     height: 100%;
+//     transition: all 1s ease-out;
+// }
 .light{
+    .svg-fill{
+        fill:#000000;
+    }
     .textColor,a{
         color: #333
     };
@@ -27,7 +30,7 @@ html,body,#root,.project{
         background-color: #fcfcfc;
     }
     .bg2_blue{
-        background-color: #e8eaeb;
+        background-color: #eceff0;
     }
     .bg3{
         background-color: #f3f3f3;
@@ -58,6 +61,21 @@ html,body,#root,.project{
             
         }
        
+    }
+    .cardBoxShadow{
+        z-index: 999;
+        box-shadow: #d2dde7 0px 4px 24px;
+        // 设置父级元素样式
+    }
+    .cardOutBox::after{
+        content: "";
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #c5e3ff54;
+        z-index: 0;
     }
     .navBtn{
         position: relative;
@@ -109,6 +127,9 @@ html,body,#root,.project{
 }
 .dark{
     // display: none;
+    .svg-fill{
+        fill:#fff;
+    }
     .textColor,a{
         color: #b9b9b9
     };
@@ -159,6 +180,19 @@ html,body,#root,.project{
     
         }
        
+    }
+    .cardBoxShadow{
+        box-shadow: #1e1f20 0px 4px 24px;
+    }
+    .cardOutBox::after{
+        content: "";
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #0f2e4b54;
+        z-index: 0;
     }
     .logout{
         position: relative;

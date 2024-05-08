@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Link, useNavigate } from 'react-router-dom'
-import util from '@/util'
+import {LocalStorage} from '@/util'
 import './styles.less'
 import {IonIcon} from "@ionic/react"
 import { exit,play,home,newspaper, person } from 'ionicons/icons';
@@ -9,7 +9,7 @@ const allRoutes = [
     {path:"/news",text:"新闻",icon:newspaper,children:[{path:"/news/community",text:"社区"},{path:"/news/person",text:"个人"},]},
     {path:"/user",text:"用户",icon:person},
 ]
-const newLocalStorage = new util.LocalStorage;
+const newLocalStorage = new LocalStorage;
 function HeaderNav({changeTheme, direction,routes}){
     const navigate = useNavigate();
     const [activeNavIndex,setActiveNavIndex]=useState(null)
@@ -32,7 +32,7 @@ function HeaderNav({changeTheme, direction,routes}){
                 {
                     allRoutes.map((item,index)=>(
                         <li key={item.path} onMouseEnter={()=>activeNav(index)} onMouseLeave={()=>activeNav(null)} 
-                        className={`navBtn pa12  borderR6 ${(!item.children) ? 'activeNav' : 'activeNavFartherBox'} ${((currentRoute.indexOf(item.path)!=-1 && item.path != '/' && !item.children) || item.path == currentRoute) ? 'activeNavOld' : (currentRoute.indexOf(item.path)!=-1 && item.children) ? 'activeNavOldNoB' : ''}`}>
+                        className={`navBtn pa12 maB6 borderR6 ${(!item.children) ? 'activeNav' : 'activeNavFartherBox'} ${((currentRoute.indexOf(item.path)!=-1 && item.path != '/' && !item.children) || item.path == currentRoute) ? 'activeNavOld' : (currentRoute.indexOf(item.path)!=-1 && item.children) ? 'activeNavOldNoB' : ''}`}>
                             {
                                 !item.children ? 
                                 <Link to={item.path} className="flexS" onClick={()=>setCurrentRoute(item.path)}>
@@ -44,7 +44,8 @@ function HeaderNav({changeTheme, direction,routes}){
                                         <IonIcon  icon={item.icon} size="36px"></IonIcon>
                                         <span className="maL12">{item.text}</span>
                                     </div>
-                                     {item.children &&<IonIcon className="moreIcon" icon={play} size="36px" onClick={logout}></IonIcon>}</div>
+                                     {item.children &&<IonIcon className="moreIcon" icon={play} size="36px" onClick={logout}></IonIcon>}
+                                </div>
                             }
                             {
                                 item.children && activeNavIndex==index && 

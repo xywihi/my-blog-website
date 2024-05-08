@@ -1,71 +1,90 @@
 import React, { useEffect, useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import styles from './style.module.less';
 import UpDown from "../../../animaIcons/upDown";
-const AudioPlayer = ({data,activeOther,handleRadomMusic},ref) => {
+import {IonIcon} from "@ionic/react"
+import { play, pause, shuffle } from 'ionicons/icons';
+import { handleTime, handleTimeToNumber } from '@/util/tools.ts';
+const AudioPlayer = ({time,pauseCurrent,pauseMusic,showArea,handleRadomMusic,handleShowArea,music},ref) => {
     let ownTimer=null;
-    const [audioData,setAudioData] = useState({currentTime:"--:--",totalDuration:"--:--"})
-    const [playAudio,setPlayAudio] = useState("stop")
     const ownRef = useRef()
+    const [currentLyric,setCurrentLyric] = useState([])
+    const [currentSingleLyric,setCurrentSingleLyric] = useState('')
     useEffect(()=>{
-        ownRef.current.addEventListener('ended',()=>handleRadomMusic(play));
         return ()=>{
             clearInterval(ownTimer)
         }
     },[])
+    useEffect(() => {
+        let newStrArr = music?.lyric ? music.lyric.split("|").map((item,index)=>{
+            let newItem = item.split("-")
+            return ({
+                lineLyric:newItem[1],
+                time:handleTimeToNumber(newItem[0])})
+        }) : [];
+        setCurrentLyric(newStrArr)
+    }, [music])
+
+    useEffect(() => {
+        if(!music?.lyric) return;
+        currentLyric.some((item,index)=>{
+            let toMove = time.currentTime>=item.time&&time.currentTime<=(currentLyric[index+1]?currentLyric[index+1].time:time.duration);
+            if(toMove){
+                setCurrentSingleLyric(currentLyric[index].lineLyric)
+            };
+            return toMove;
+        })
+    }, [time])
+    
     useImperativeHandle(
         ref,
         () => ({ play,ownRef })
       );
-    const play = (currentData,isOther) => {
+      const handlePlayMusic = (currentData,isOther) => {
         let audio = ownRef.current;
-        audio.pause();
         if(isOther){
-            
             audio.src = currentData.resource;
             audio.currentTime = 0;
             audio.play();
             
         }else{
-            if(currentData.pause) {
-                audio.play()
-            };
+            clearInterval(ownTimer)
+            pauseMusic(!pauseCurrent)
         }
-        ownTimer = setInterval(() => {
-            ownRef.current && setAudioData({currentTime:handleTime(ownRef.current.currentTime) ,totalDuration:handleTime(ownRef.current.duration)})
-        }, 1000);  
-    }
-    const handleTime=(time)=>{
-        if(!time) return "00:00"
-        let issingleNum = (num)=>{
-            return `${num.toString().length>1 ? num : '0'+num}`
-        }
-        let is60 = (num)=>{
-            return num==60 ? '00' : issingleNum(num)
-        }
-        return issingleNum(Math.floor(time/60)) + ":"+is60(Math.ceil(time%60))
     }
     return (
-        <div className={[styles.audioPlayerBox]} style={{ gridTemplateColumns:data?"auto 1fr":"0 1fr"}}>
+        <div className='flexB'>
+            <div className={[styles.audioPlayerBox]} style={{ gridTemplateColumns:music?"auto 1fr":"0 1fr"}}>
             {
-                <audio ref={ownRef} className="widthFull opacity0" controls>
-                    <source src={data ? data.resource : null} type="audio/mpeg" />
-                    Your browser does not support the audio element.
-                </audio>
-            }
-            {
-                <div className={`${styles.audioPlayer} maR12 ${styles[`${data ?  'active' :  playAudio }Audio`]}`}>
-                    {/* <img className={(data ? data.pause : activeOther) ? 'running' : 'paused'} src='https://tse4-mm.cn.bing.net/th/id/OIF-C.a8xSz4omfgM1xB6n3UVwig?pid=ImgDet&rs=1' /> */}
+                <div className={`${styles.imgBox} maR12 ${styles[`${music ?  'active' :  "stop" }Audio`]}`}>
+                    <img onClick={()=>handleShowArea(!showArea)} className={!pauseCurrent ? 'running' : 'paused'} src={music?.imgUrl} />
                 </div>
             }
             <div className={styles.audioPlayerInfo}>
-                <div className='flexB maB16'>
-                    <div className='musicName font14 textSingeLine' style={{width:"100px"}}>{data ? data.name : "-"}</div>
+                <div className='flexS'>
+                    <div className='musicName maR12 font14 fontB'>{music ? music.name : "-"}</div>
                     <div className='fontSmall gray'>
-                        {`${audioData.currentTime}/${audioData.totalDuration}`}
+                        {`${handleTime(time.currentTime)}/${handleTime (time.currentTime-time.duration)}`}
                     </div>
                 </div>
-                {(data) && <UpDown active={data.pause} length={20}/>}
+                <div className={styles.lyricBox}>
+                    {
+                        currentLyric.length===0 ? <div className={styles.noLyric}>暂无歌词</div> :
+                        <div>
+                            {currentSingleLyric}
+                        </div>
+                    }
+                </div>
             </div>
+        </div>
+
+        <div className='flexB'>
+            <div className="icon_hover cursor maR6" onClick={handleRadomMusic}>
+                <IonIcon icon={shuffle} size="36px" ></IonIcon>
+            </div>
+            <div className="icon_hover cursor" onClick={()=>handlePlayMusic(music,false)}>
+                {music && <IonIcon icon={ !pauseCurrent ? pause : play } size="36px" ></IonIcon>}
+            </div>
+        </div>
         </div>
     );
 }

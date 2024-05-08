@@ -12,11 +12,8 @@ header{
     position: sticky;
     top: 0;
     z-index: 99;
-}
-aside{
-    width:15vw;
-    min-width: 48px;
-    height: calc(100vh - 130px);
+    height: 62px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 /* 设置全局链接颜色 */
 a {
@@ -37,6 +34,45 @@ img{
 }
 
 
+.no-select {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* 标准语法 */
+  }
+   
+.text-select {
+  -webkit-user-select: text; /* Safari */
+  -moz-user-select: text;    /* Firefox */
+  -ms-user-select: text;     /* IE/Edge */
+  user-select: text;         /* 标准语法 */
+}
+
+
+.hidden{
+    visibility: hidden;
+}
+.visible{
+    visibility: visible;
+}
+.flex{
+    display: flex;
+}
+.flexC{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flexB{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flexBS{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
 .heightFull{
     height: 100%;
 }
@@ -100,6 +136,9 @@ button {
     display: grid;
     grid-template-columns: 150px 1fr 90px;
 }
+.maR0{
+    margin-bottom: 0!important;
+}
 .ma3{
     margin: 3px;
 }
@@ -137,6 +176,10 @@ button {
 .maV6{
     margin-top: 6px;
     margin-bottom: 6px;
+}
+.maH6{
+    margin-left: 6px;
+    margin-right: 6px;
 }
 .ma12{
     margin: 12px;
@@ -291,6 +334,9 @@ button {
 .font24{
     font-size: 24px;
 }
+.font36{
+    font-size: 36px;
+}
 /* border */
 .borderR6{
     border-radius: 6px;
@@ -311,6 +357,9 @@ button {
 .opacity0{
     opacity:0
 }
+.opacity10{
+    opacity:0.1
+}
 .opacity20{
     opacity:0.2
 }
@@ -325,6 +374,12 @@ button {
 }
 .displayNone{
     display: none;
+}
+
+/* 投影 */
+
+.boxShadow{
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 /* position */
@@ -345,6 +400,12 @@ button {
 .paused {
   animation-play-state: paused!important;
 }
+.overflowY{
+    overflow-y: auto;
+}
+.overflowX{
+    overflow-x: auto;
+}
 .textSingeLine{
     /* text-overflow: ellipsis;
     overflow: hidden;
@@ -360,9 +421,6 @@ button {
 
 /* 自定义滑动条样式 */
 .scrollbarBox{
-    li{
-        list-style: none;
-    }
   scrollbar-width: none; /* firefox */
   -ms-overflow-style: none; /* IE 10+ */
   overflow-x: hidden;

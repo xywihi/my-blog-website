@@ -1,25 +1,23 @@
 import * as echarts from 'echarts';
 import React,{useEffect, useRef} from 'react';
 import HttpRequire from "@/http/require"
-import echartData from "@/http/data/echart.json"
 const SmoothedLine = () => {
     const ref = useRef()
     var ROOT_PATH = 'https://echarts.apache.org/examples';
     var myChart
     useEffect(()=>{
-      console.log("cccccc")
         var chartDom = document.getElementById('smoothedLine');
         myChart = echarts.init(chartDom);
-        run()        
+        run() 
         return ()=>{
             myChart.dispose()
         }
     },[])
     async function run() {
-        const require = new HttpRequire
-        let _rawData = await require.get(ROOT_PATH + '/data/asset/data/life-expectancy-table.json')
-        // let _rawData = echartData
-        const options = {
+        const require = new HttpRequire();
+        try {
+          let _rawData = await require.get(ROOT_PATH + '/data/asset/data/life-expectancy-table.json');
+          const options = {
             dataset: [
               {
                 id: 'dataset_raw',
@@ -91,12 +89,16 @@ const SmoothedLine = () => {
             ]
           };
         myChart.setOption(options);
+        } catch (error) {
+          console.log('echarts error:',error)
+        }
+        
       }
     return (<div ref={ref} id="smoothedLine"  style={{ width: '100%', height: '100%' }}></div>)
 }
 
 function areEqual(prevProps, nextProps) {
-  console.log("prevProps, nextProps",prevProps, nextProps)
+  console.log('echarts update:',prevProps)
   return false;
   /*
   return true if passing nextProps to render would return
