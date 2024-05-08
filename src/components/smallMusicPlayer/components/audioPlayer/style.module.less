@@ -1,0 +1,100 @@
+.audioPlayerBox{
+    position: relative;
+    display: grid;
+    margin-right: 12px;
+    .imgBox{
+        img{
+            width:48px;
+            height:48px;
+            border-radius: 50px;
+            margin-top: 4px;
+            animation: audioPlayer 3.5s linear;
+            animation-iteration-count: infinite;
+            position: relative;
+            border: 1px solid #272727;
+            box-shadow: 0px 0px 4px #747474;
+        }
+        &::after{
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50px;
+            background-color: #c4c7c7;
+            z-index: 1;
+            top: calc(50% - 5px);
+            left: calc(50% - 5px);
+            outline: 4px solid #00000065;
+        }
+    }
+    
+    audio{
+        position: absolute;
+
+    }
+    .audioPlayer{
+        transition: all 0.5s ease-out;
+        img{
+            width: 42px;
+            height: 42px
+        }
+    };
+    .audioPlayerInfo{
+        display: grid;
+        grid-template-rows: 1fr 20px;
+        grid-template-areas: "name" "lyric";
+    };
+}
+.stopAudio{
+    transform: scale(0);
+    width: 0;
+}
+.activeAudio{
+    transform: scale(1);
+    width: auto;
+}
+.pauseAudio{
+    img{
+        animation: none;
+    }
+}
+.musicName{
+    min-width: 100px;
+    margin-right: 12px;
+}
+.lyricBox{
+    font-size: 12px;
+    opacity: .6;
+}
+@keyframes audioPlayer {
+    0% {
+        transform: rotateZ(0deg);
+
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+  }
+@keyframes audioPlayer3 {
+    0% {
+        width:0;
+        height:0;
+        left:-26px;
+        top:26px;
+    }
+    100% {
+        width:52px;
+        height:100%;
+        left:0;
+        top:0;
+    }
+  }
+@keyframes audioPlayer2 {
+    0% {
+        width: 0;
+
+    }
+    100% {
+        width:200px;
+    }
+  }

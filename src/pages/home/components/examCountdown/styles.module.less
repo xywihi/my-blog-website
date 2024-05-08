@@ -1,0 +1,73 @@
+.cardOutBox{
+    &::after{
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 0;
+    }
+}
+
+.item2_inner2{
+    height:100%;
+    display: grid;
+    grid-template-rows: 1fr 45px;
+    align-items: center;
+    position: relative;
+    transition: all 1s ease-in-out;
+    .item2_inner2_inner1{
+        font-size: 58px;
+        text-align: center;
+        pointer-events: none;
+    }
+    .editIcon{
+        position: absolute;
+        top:0;
+        right:0;
+    }
+    .dateInput{
+        line-height:40px;
+        height: 40px;
+    }
+    .editBox{
+        line-height:40px;
+        height: 40px;
+        input{
+            padding-right: 10px;
+        }
+        input,.dateIcon{
+            position: absolute;
+            right: 0;
+            height: 40px;
+        }
+    }
+    .examsBox{
+        display: grid;
+        row-gap: 8px;
+        grid-template-rows: 1fr 1fr;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+
+
+@media screen and (min-width: 420px) {
+    .item2_inner2{
+        height:100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+    }
+}
+@media screen and (min-width: 1400px) {
+    .item2_inner2{
+        height:100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 45px;
+    }
+}

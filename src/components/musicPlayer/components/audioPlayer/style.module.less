@@ -1,0 +1,60 @@
+.audioPlayerBox{
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img{
+        width:48px;
+        height:48px;
+        border-radius: 50px;
+        animation: audioPlayer 2s linear;
+        animation-iteration-count: infinite;
+        
+    }
+    audio{
+        position: absolute;
+
+    }
+    .audioPlayer{
+        transition: all 0.5s ease-out;
+    };
+    .audioPlayerInfo{
+        width: 100px;
+    };
+}
+.stopAudio{
+    transform: scale(0);
+    width: 0;
+}
+.activeAudio{
+    transform: scale(1);
+    width: auto;
+}
+.pauseAudio{
+    img{
+        animation: none;
+    }
+}
+.audioPlayerControl{
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    &>div{
+        margin: 0 12px;
+        font-size: 28px;
+        &:nth-child(2){
+            font-size: 36px;
+        }
+    }
+
+}
+@keyframes audioPlayer {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
+  }

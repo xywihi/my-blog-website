@@ -1,0 +1,115 @@
+.logo {
+    width: 32px;
+}
+
+header {
+}
+.activeNavOld{
+    transform: translateX(12px);
+    transition: all 0.5s ease-out;
+    width: calc(100% - 12px);
+    &::before{
+        content: "";
+        position: absolute;
+        left: 12px;
+        top: calc(50% - 6px);
+        width: 4px;
+        height: 12px;
+        border-radius: 12px;
+        
+    }
+    .ionicon{
+        color:aqua;
+    }
+}
+.activeNavOldNoB{
+    transform: translateX(12px);
+    transition: all 0.5s ease-out;
+    width: calc(100% - 12px);
+    padding-left: 24px;
+}
+.activeNav{
+    &:hover{
+        transform: translateX(12px);
+        transition: all 0.5s ease-out;
+        width: calc(100% - 12px);
+        padding-left: 24px;
+        a{
+            color: #46a7a7;
+        }
+        &::before{
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: calc(50% - 6px);
+            width: 4px;
+            height: 12px;
+            border-radius: 12px;
+            
+        }
+    }
+}
+@media screen and (max-width: 1400px) {
+    .activeNavFartherBox{
+        .moreIcon{
+            transition: all 0.3s ease-out;
+            transform: rotateZ(180deg);
+        }
+        &:hover{
+        background: none!important;
+        transform: translateX(0)!important;
+        padding-left: 0!important;
+        // .moreIcon{
+        //     transform: rotateZ(90deg);
+        // }
+        }
+    }
+    .activeNav{
+        padding: 0;
+        &:hover{
+            transform: translateX(0);
+            transition: all 0.5s ease-out;
+            width: calc(100%);
+            padding-left: 0;
+        }
+    }
+    .navBox{
+        span{
+            display: none;
+        }
+        
+        &:hover{
+            span{
+                display: block;
+            }
+        }
+        .navBtn{
+            padding: 12px 0;
+            &::before{
+                display: none;
+            }
+        }
+        .activeNavOld{
+            transform: translateX(0)!important;
+            background: none!important; 
+            transform: none; 
+            transition: none; 
+            width: auto; 
+            padding-left: 0!important;
+        }
+        .navBtn{
+            // pointer-events: none;
+    
+        }
+        li, li div,.logout{
+            margin: 0 auto;
+        }
+        li a{
+            justify-content: center;
+        }
+        .moreIcon{
+            display: none;
+        }
+        
+    }
+}

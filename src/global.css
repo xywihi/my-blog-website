@@ -1,0 +1,473 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+body {
+  font-family: 'Source Han Sans SC', sans-serif;
+}
+
+header{
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    height: 62px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+/* 设置全局链接颜色 */
+a {
+  /* color: #333; */
+  text-decoration: none;
+}
+  
+ul, ol, li {
+  list-style: none;
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+img{
+    object-fit: cover;
+}
+
+
+.no-select {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* 标准语法 */
+  }
+   
+.text-select {
+  -webkit-user-select: text; /* Safari */
+  -moz-user-select: text;    /* Firefox */
+  -ms-user-select: text;     /* IE/Edge */
+  user-select: text;         /* 标准语法 */
+}
+
+
+.hidden{
+    visibility: hidden;
+}
+.visible{
+    visibility: visible;
+}
+.flex{
+    display: flex;
+}
+.flexC{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flexB{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flexBS{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+.heightFull{
+    height: 100%;
+}
+.widthFull{
+    width: 100%;
+}
+.opacityHalf{
+    opacity: 20%;
+}
+button {
+  background-color: #007acc;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.flexC{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flexB{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flexBS{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+.flexS{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.flexSS{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+}
+.flexSC{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+}
+.row{
+    flex-direction: row;
+}
+.column{
+    flex-direction:column;
+}
+.flexFull{
+    flex: 1;
+}
+.grid{
+    display: grid;
+    grid-template-columns: 150px 1fr 90px;
+}
+.maR0{
+    margin-bottom: 0!important;
+}
+.ma3{
+    margin: 3px;
+}
+.maT3{
+    margin-top: 3px;
+}
+.maB3{
+    margin-bottom: 3px;
+}
+.maR3{
+    margin-right: 3px;
+}
+.maL3{
+    margin-left: 3px;
+}
+.maV3{
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.ma6{
+    margin: 6px;
+}
+.maT6{
+    margin-top: 6px;
+}
+.maB6{
+    margin-bottom: 6px;
+}
+.maR6{
+    margin-right: 6px;
+}
+.maL6{
+    margin-left: 6px;
+}
+.maV6{
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+.maH6{
+    margin-left: 6px;
+    margin-right: 6px;
+}
+.ma12{
+    margin: 12px;
+}
+.maL12{
+    margin-left: 12px;
+}
+.maR12{
+    margin-right: 12px;
+}
+.maT12{
+    margin-top: 12px;
+}
+.maB12{
+    margin-bottom: 12px;
+}
+
+.maH12{
+    margin-left: 12px;
+    margin-right: 12px;
+}
+
+.maV12{
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.ma16{
+    margin: 16px;
+}
+.maL16{
+    margin-left: 16px;
+}
+.maR16{
+    margin-right: 16px;
+}
+.maT16{
+    margin-top: 16px;
+}
+.maB16{
+    margin-bottom: 16px;
+}
+
+.maH16{
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+.maV16{
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.ma24{
+    margin: 24px;
+}
+.maL24{
+    margin-left: 24px;
+}
+.maH24{
+    margin-left: 24px;
+    margin-right: 24px;
+}
+.maV24{
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+.maR24{
+    margin-right: 24px;
+}
+.maT24{
+    margin-top: 24px;
+}
+.maB24{
+    margin-bottom: 24px;
+}
+.ma48{
+    margin: 48px;
+}
+.maL48{
+    margin-left: 48px;
+}
+.maH48{
+    margin-left: 48px;
+    margin-right: 48px;
+}
+.maV48{
+    margin-top: 48px;
+    margin-bottom: 48px;
+}
+.maR48{
+    margin-right: 48px;
+}
+.maT48{
+    margin-top: 48px;
+}
+.maB48{
+    margin-bottom: 48px;
+}
+.pa6{
+    padding: 6px;
+}
+.paT6{
+    padding-top: 6px;
+}
+.paB6{
+    padding-bottom: 6px;
+}
+.paV6{
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+.pa6{
+    padding: 6px;
+}
+.paH6{
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.paV6{
+    padding-top: 6px;
+    padding-bottom: 6px;
+}
+.pa12{
+    padding: 12px;
+}
+.paL12{
+    padding-left: 12px;
+}
+.paR12{
+    padding-right: 12px;
+}
+.pa24{
+    padding: 24px;
+}
+.paH12{
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.paH24{
+    padding-left: 24px;
+    padding-right: 24px;
+}
+.paL24{
+    padding-left: 24px;
+}
+.paR24{
+    padding-right: 24px;
+}
+.paV12{
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+.paV24{
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+/* color */
+.gray{
+    color: #969696;
+}
+/* font */
+.font_wenyue{
+    font-family: 'huxiao', sans-serif;
+}
+
+.fontB{
+    font-weight: bold;
+}
+.font10{
+    font-size: 10px;
+}
+.fontSmall{
+    font-size: 12px;
+}
+.font14{
+    font-size: 14px;
+}
+.font18{
+    font-size: 18px;
+}
+.font24{
+    font-size: 24px;
+}
+.font36{
+    font-size: 36px;
+}
+/* border */
+.borderR6{
+    border-radius: 6px;
+}
+.borderR12{
+    border-radius: 12px;
+}
+.borderR50{
+    border-radius: 50px;
+}
+.center{
+    height: calc(100vh - 160px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* display */
+.opacity0{
+    opacity:0
+}
+.opacity10{
+    opacity:0.1
+}
+.opacity20{
+    opacity:0.2
+}
+.opacity50{
+    opacity:0.5
+}
+.opacity100{
+    opacity:1
+}
+.hidden{
+    visibility:hidden;
+}
+.displayNone{
+    display: none;
+}
+
+/* 投影 */
+
+.boxShadow{
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+/* position */
+.relative{
+    position: relative;
+}
+.absolute{
+    position: absolute;
+}
+
+/* animation动画 */
+.running {
+    animation-play-state: running!important;
+  }
+
+
+/* 当需要暂停动画时，添加一个类并设置animation-play-state为paused */
+.paused {
+  animation-play-state: paused!important;
+}
+.overflowY{
+    overflow-y: auto;
+}
+.overflowX{
+    overflow-x: auto;
+}
+.textSingeLine{
+    /* text-overflow: ellipsis;
+    overflow: hidden;
+    word-break: break-all;
+    white-space: nowrap; */
+        /*溢出部分隐藏*/
+        overflow: hidden;
+        /*禁止换行*/
+        white-space: nowrap;
+        /*显示省略号*/
+        text-overflow: ellipsis;
+}
+
+/* 自定义滑动条样式 */
+.scrollbarBox{
+  scrollbar-width: none; /* firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior:smooth;
+}
+.scrollbarBox::-webkit-scrollbar{
+    display:none; 
+    width: 6px;  
+}
+.scrollbarBox::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 5px rgba(138, 138, 138, 0.2);
+  background: nb-theme(background-basic-color-4);;
+}
+
+.scrollbarBox::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 5px rgba(138, 138, 138, 0.2);
+  border-radius: 10px;
+  background: nb-theme(background-basic-color-2);;
+}

@@ -1,0 +1,14 @@
+[
+    {"name": "Shine","resource":"./assets/audio/shine.mp3","pause": false,"id": 0
+    },
+    {"name": "New Normal","resource":"./assets/audio/new.mp3","pause": false,"id": 1
+    },
+    {"name": "we'll be the starts","resource":"./assets/audio/starts.mp3","pause": false,"id": 2
+    },
+    {"name": "Crazy Glue","singer": "Josh Woodward","resource": "https://tribeofnoisestorage.blob.core.windows.net/music/c44fcb6d5b26c0ca959900bd44a28c0f.mp3","pause": false,"lyric": "15-There's no gravity that sucked me in your orbit|18-There's no magnet that was in your heart|22-The one restriction was the friction that was keeping us|25-A little too far apart|29-Why fight it, I was secretly delighted|33-I gave chase but then I let you win|36.5-You felt lovely when you loved me like a fool|39-But now I can't let go of your skin|42-You know that|43.5-I never knew|47-That you, are, crazy glue, my darling|51.5-And I'm stuck to you|54.5-I am cozy and I don't gonna wiggle loose|58-You're honey like a finger in the beehive|62-The bees are buzzing in a tizzy fit|65-They're stinging but I'm singing like a fool|68-Cuz you're as sweet as a banana split|72-You're sticky like a hippie in the summer|76-You're like syrup in the slushie tray|80-One touch of you and I will never leave|84-Cuz I believe that I can't get away|87-You know that|87.8-I never knew|90.5-That you, are, crazy glue, my darling|94.5-And I'm stuck to you|96.5-but I am cozy and I don't gonna wiggle loose|101-I don't gonna wiggle loose|105-Hold onto me|108.5-And hand in hand we'll follow|112-Hold onto me|115-As if you had a choice|120-~~~whistle~~~|129-~~~whistle~~~|138-I never knew|141-That you, are, crazy glue, my darling|145-And I'm stuck to you|146.5-but I am cozy and I don't gonna wiggle loose|151.5-I don't gonna wiggle loose","id": 3
+    },
+    {"name": "宁愿","singer": "隔壁老樊","resource":"./assets/audio/niongyuan.mp3","pause": false,"lyric":"0-宁愿|1.44-作词：计眸|1.68-作曲：计眸|3.15-制作人：关天天|3.60-编曲：关天天|4.02-吉他：关天天|4.41-贝斯：关天天|4.80-口琴：张晓松|12.21-和声：俞建明|12.51-混音：丁晨泽|16.65-母带：全相彦|18.81-风带着风筝向北飞|26.67-我望着它满脸疲惫|32.91-乌云遮盖了蓝天|35.76-我已经不想去追|41.67-它飞向哪里早就无所谓|50.67-我的梦慢慢消失|53.70-我想依偎|58.83-偏偏一个人没人陪|66.60-这世界被夸赞的多么美|70.35-孤独显得如此狼狈|73.89-别人的情意显得多虚伪|80.88-我宁愿一个人孤独|85.38-我宁愿一个人赶路|89.13-我宁愿一个人就算变荒芜|96.36-我知道未来的旅途|100.38-好像怎么说都是苦|104.37-我的话全都哽住|112.41-我宁愿一个人孤独|116.37-也宁愿一个人赶路|120.36-我宁愿一个人就算变荒芜|128.34-我知道未来的旅途|132.36-好像怎么说都是苦|136.35-我的话全都哽住|141.81-全都哽住|143.73-算了|145.35-我忘了|162.69-我的梦慢慢消失|165.69-我想依偎|170.85-偏偏一个人没人陪|178.62-这世界被夸赞的多么美|182.37-孤独显得如此狼狈|185.88-别人的情意显得多虚伪|192.96-我宁愿一个人孤独|197.40-我宁愿一个人赶路|201.12-我宁愿一个人就算变荒芜|208.38-我知道未来的旅途|212.37-好像怎么说都是苦|216.39-我的话全都哽住|224.43-我宁愿一个人孤独|228.42-也宁愿一个人赶路|232.35-我宁愿一个人就算变荒芜|240.42-我知道未来的旅途|244.41-好像怎么说都是苦|248.40-我的话全都哽住|253.86-全都哽住|255.78-算了|258.45-我忘了","id": 4
+    },
+    {"name": "红莓花儿开","singer": "毛不易","resource":"./assets/audio/hongmeihuaerkai.mp3","pause": false,"id": 5
+    }
+]
