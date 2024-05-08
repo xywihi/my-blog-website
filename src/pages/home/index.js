@@ -108,7 +108,7 @@ const Home = ({showStatusBox}) => {
                             <h3 className="title maB12 flexB">
                                 <span>最新动态</span> <div className="cursor icon_hover"><IonIcon icon={menu} size="36px"></IonIcon></div>
                             </h3>
-                            <ul>
+                            <ul className="widthFull">
                                 <li className="newsItemBox flexB maB6 paV6">
                                     <span className="textSingeLine maR12 font14">人间有神兽，来自九重天</span>
                                     <span className="fontSmall gray">2023/09/05</span>
@@ -136,7 +136,7 @@ const Home = ({showStatusBox}) => {
                                     <div className="font14">6月生日冠名争夺战结束,恭喜粉丝为@时代少年团-贺峻霖解锁惊喜福利</div>
                                     <div className="flexB gray widthFull fontSmall"><span>8/23</span><span>四川</span></div>
                                 </div>
-                                <ul className="flexS">
+                                <ul className="flexS widthFull">
                                     <li className="maR12 activeAvatar"><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=195&h=180&c=7&r=0&o=5&pid=1.7"/></li>
                                     <li className="maR12"><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.ofjm5a8hxRo_o7HYH3MxQgHaHX?w=202&h=200&c=7&r=0&o=5&pid=1.7"/></li>
                                     <li className="maR12"><img src="https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=234&h=180&c=7&r=0&o=5&pid=1.7"/></li>
