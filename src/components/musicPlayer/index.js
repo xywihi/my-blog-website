@@ -74,12 +74,11 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
     //     // const require = new HttpRequire;
     //     // let URL = "https://www.jango.com/music/The+Weeknd"
     //     // const data = await require.get(URL)
-    //     // // console.log(data)
+    //     // console.log(data)
     // }
     const handleShowMusicArea = (proportion)=>{
     }
     const handleChangeTime = (proportion)=>{
-        // console.log('childTranslate',childTranslate.current)
         if(childTranslate.current.el){
             childTranslate.current.el.pause()
             childTranslate.current.el.currentTime = time.duration*proportion;
@@ -93,6 +92,11 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
         setStartMove(e.touches[0].pageY)
     }
     const handleCloseArea = (e)=>{
+        if(!e.touches?.[0]){
+            handleShowArea(false)
+            exitFullScreen();
+            return
+        }
         let difference = e.touches[0].pageY-startMove;
         if(difference>80){
             handleShowArea(false)
@@ -118,7 +122,7 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
         playMusic({...newMusic});
     }
     return (
-        <div onTouchStart={handleCloseAreaStart} onTouchEnd={handleCloseAreaEnd} onTouchMove={handleCloseArea} className={`heightFull no-select`}>
+        <div onTouchStart={handleCloseAreaStart} onTouchEnd={handleCloseAreaEnd} onTouchMove={handleCloseArea} onDoubleClick={handleCloseArea} className={`heightFull no-select`}>
             <div className={`overflowY heightFull scrollbarBox ${styles.smallMusicBox}`}>
                 <ul>
                     {musicsData.map((item,index)=>
@@ -140,7 +144,7 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
                     </li>)}
                 </ul>
             </div>
-            <div className={`${styles.showAreaBox} ${showArea ? styles.showArea : styles.showAreaHide}`}>
+            <div className={`${styles.showAreaBox} ${showArea ? styles.showArea : styles.showAreaHide}`} >
                 {music?.imgUrl && <div className={styles.showArea_contentBox_backImg} style={{backgroundImage: `url(${music?.imgUrl})`}}></div>}
                 <div className={styles.showArea_contentBox} >
                     

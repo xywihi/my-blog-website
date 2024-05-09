@@ -70,25 +70,26 @@ function enterFullScreen() {
  
 // 函数用于退出全屏
 function exitFullScreen() {
+    debugger;
     var element:any = document.documentElement; //若要全屏页面中div，var element= document.getElementById("divID");   
         //IE ActiveXObject  
-        // if (window.ActiveXObject) {
+        // if (window['ActiveXObject']) {
         //     var WsShell = new ActiveXObject('WScript.Shell')
         //     WsShell.SendKeys('{F11}');
         // }
         // //HTML5 W3C 提议  
-        // else 
-        if (element.requestFullScreen) {
+        // else
+         if (element.requestFullScreen) {
             document.exitFullscreen();
         }
-        // //IE 11  
-        // else if (element.msRequestFullscreen) {
-        //     document.msExitFullscreen();
-        // }
-        // // Webkit (works in Safari5.1 and Chrome 15)  
-        // else if (element.webkitRequestFullScreen) {
-        //     document.webkitCancelFullScreen();
-        // }
+        //IE 11  
+        else if (element.msRequestFullscreen) {
+            document?.['msExitFullscreen']();
+        }
+        // Webkit (works in Safari5.1 and Chrome 15)  
+        else if (element.webkitRequestFullScreen) {
+            document?.['webkitCancelFullScreen']();
+        }
 }
 
 // 开关卡片
@@ -112,7 +113,6 @@ function openBox(e:Element & Event,boxElement:any,close:boolean,num=2){
             boxElement.style.width = `${parentWidth}px`;
             boxElement.style.height = `${parentHeight}px`;
             boxElement.style.zIndex = `0`;
-            // console.log('parentHeight',parentHeight)
             //删除添加的className
             let classNameStr = boxElement.className || '';
             let classNameStrArr = classNameStr.split(' ');
@@ -146,7 +146,6 @@ function openBox(e:Element & Event,boxElement:any,close:boolean,num=2){
                 let distance = boxElement.getBoundingClientRect().top - 74
                 let listenScroll =  new ListenScroll(document.documentElement)
                 listenScroll.handleScrollByDistance(distance,'ver','bottom')
-                // console.log('boxElement.getBoundingClientRect()',boxElement.getBoundingClientRect())
                 ;
 
                 // 判断是否超出屏幕

@@ -49,7 +49,7 @@ const ExamCountdown = (props) => {
                 <div className={`${styles.editIcon} flexB widthFull pa24`}>
                     {edit ? <span>{ '编辑内容'}</span> :
                     <div style={{width:'16px',height:'16px'}} onClick={e=>openBox(e,boxRef.current)}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon class="svg-fill" points="68 10 90 10 90 27 100 27 100 0 68 0 68 10"/><polygon class="svg-fill" points="10 27 10 10 32 10 32 0 0 0 0 27 10 27"/><polygon class="svg-fill" points="90 63 90 90 68 90 68 100 100 100 100 63 90 63"/><polygon class="svg-fill" points="32 90 10 90 10 63 0 63 0 100 32 100 32 90"/><rect class="svg-fill" x="26" y="26" width="48" height="48"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon className="svg-fill" points="68 10 90 10 90 27 100 27 100 0 68 0 68 10"/><polygon className="svg-fill" points="10 27 10 10 32 10 32 0 0 0 0 27 10 27"/><polygon className="svg-fill" points="90 63 90 90 68 90 68 100 100 100 100 63 90 63"/><polygon className="svg-fill" points="32 90 10 90 10 63 0 63 0 100 32 100 32 90"/><rect className="svg-fill" x="26" y="26" width="48" height="48"/></svg>
                     </div>
                     }
                     <IonIcon icon={edit ? checkmarkCircle : colorWand} size="36px" onClick={handleEdit}></IonIcon>
