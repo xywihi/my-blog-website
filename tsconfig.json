@@ -4,7 +4,7 @@
     "module":"CommonJS",                     /* 指定使用何种模块：'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 或 'esnext' */
     "lib": ["es6", "dom"],                     /* 指定要包含在编译中的库文件 */
     "sourceMap": true,                        /* 生成相应的 '.map' 文件 */
-    "outDir": "./dist",                       /* 指定输出文件目录 */
+    "outDir": "./build",                       /* 指定输出文件目录 */
     "strict": false,                           /* 启用所有严格类型检查选项 */
     "noUnusedLocals": true,                   /*  Report errors on unused locals. */
     "noUnusedParameters": true,               /*  Report errors on unused parameters. */
@@ -16,6 +16,6 @@
     "src/**/*"                                /* 编译项目中的所有TypeScript文件 */
   ],
   "exclude": [
-    "node_modules", "dist", "**/*.spec.ts"    /* 排除不需要编译的文件 */
+    "node_modules", "build", "**/*.spec.ts"    /* 排除不需要编译的文件 */
   ]
 }
