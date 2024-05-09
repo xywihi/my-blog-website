@@ -16,7 +16,7 @@ function HeaderNav({changeTheme, direction,routes}){
     const [activeNavIndex,setActiveNavIndex]=useState(null)
     const [currentRoute,setCurrentRoute]=useState('/')
     useEffect(()=>{
-        console.log("location.hash",location.hash.replace("#/",""))
+        // console.log("location.hash",location.hash.replace("#/",""))
         setCurrentRoute(location.hash.replace("#",""))
     },[])
     const logout = () => {

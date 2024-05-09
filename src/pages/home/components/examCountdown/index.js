@@ -18,7 +18,7 @@ const ExamCountdown = (props) => {
         let parentWidth = boxParentElement.offsetWidth;
         let parentHeight = boxParentElement.offsetHeight;
         newLocalStorage.get('exam_date') && setDate(newLocalStorage.get('exam_date'))
-        console.log('exam_page')
+        // console.log('exam_page')
         boxElement.style.position = 'absolute';
         boxElement.style.width = `${parentWidth}px`;
         boxElement.style.height = `${parentHeight}px`;

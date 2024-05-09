@@ -37,7 +37,7 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
       
     useEffect(() => {
         //获取当前路由
-      console.log('-------+++++++++++++++++++++++',window.location.hash)
+      // console.log('-------+++++++++++++++++++++++',window.location.hash)
         getMusics()
         return ()=>{
         }
@@ -57,7 +57,7 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
         // const require = new HttpRequire;
         // let URL = "https://www.jango.com/music/The+Weeknd"
         // const data = await require.get(URL)
-        // console.log(data)
+        // // console.log(data)
     }
     
     return (

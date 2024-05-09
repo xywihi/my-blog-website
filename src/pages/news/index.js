@@ -6,7 +6,7 @@ const Community = React.lazy(() => import('./pages/community'))
 function News(){
     useEffect(() => {
         return () => {
-            console.log('我被销毁了')
+            // console.log('我被销毁了')
         }
     }, [])
     return (

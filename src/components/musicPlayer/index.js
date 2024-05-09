@@ -74,17 +74,17 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
     //     // const require = new HttpRequire;
     //     // let URL = "https://www.jango.com/music/The+Weeknd"
     //     // const data = await require.get(URL)
-    //     // console.log(data)
+    //     // // console.log(data)
     // }
     const handleShowMusicArea = (proportion)=>{
     }
     const handleChangeTime = (proportion)=>{
-        console.log('childTranslate',childTranslate.current)
+        // console.log('childTranslate',childTranslate.current)
         if(childTranslate.current.el){
             childTranslate.current.el.pause()
             childTranslate.current.el.currentTime = time.duration*proportion;
             childTranslate.current.el.play().catch(err=>{
-                console.log(err)
+                // console.log(err)
             })
         }
 
@@ -103,7 +103,7 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
     }
     const handleRadomMusic = function(playType){
         let newMusic=null;
-        console.log(playType)
+        // console.log(playType)
         if(playType==="radom"){
             const randomNum = Math.floor(Math.random() * (musicsData.length-1));
             newMusic = musicsData.filter(item=>item.id!==music?.id)[randomNum]

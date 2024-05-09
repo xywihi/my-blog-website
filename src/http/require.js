@@ -10,18 +10,18 @@
         return new Promise((resolve,reject)=>{
             let that = this;
             that.xhr.open("get",url,true);
-            that.xhr.setRequestHeader('content-type', 'application/json');
-            that.xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-            that.xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
+            // that.xhr.setRequestHeader('content-type', 'application/json');
+            // that.xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            // that.xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
             that.xhr.send()
             that.xhr.onload = function() {
-                // console.log(JSON.parse(that.xhr.response));
+                // // console.log(JSON.parse(that.xhr.response));
                 resolve(JSON.parse(that.xhr.response))
             }
             
             that.xhr.onerror = function() {
                 reject("网络请求失败");
-                console.log("请求失败",that.xhr.statusText)
+                // console.log("请求失败",that.xhr.statusText)
             }
         })
         
@@ -34,7 +34,7 @@
         that.xhr.onload = function() {
           
           // var imageUrl = URL.createObjectURL(that.xhr.response);
-          // console.log("imageUrl",imageUrl)
+          // // console.log("imageUrl",imageUrl)
             
             resolve({})
           // that.xhr.response.blob().then(blobData => {
@@ -54,19 +54,19 @@
         return new Promise((resolve,reject)=>{
             let that = this;
             that.xhr.open('post', url, true);
-            that.xhr.setRequestHeader('content-type', 'application/json');
-            that.xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-            that.xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
+            // that.xhr.setRequestHeader('content-type', 'application/json');
+            // that.xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+            // that.xhr.setRequestHeader("Access-Control-Allow-Credentials", "true");
             that.xhr
             // that.xhr.onreadystatechange = function() {
             //     if (that.xhr.readyState === 4 && that.xhr.status === 200) {
             //       var response = JSON.parse(that.xhr.responseText);
-            //       console.log(response);
+            //       // console.log(response);
             //     }
             //   };
             that.xhr.send(JSON.stringify(params));
             that.xhr.onload = function() {
-                // console.log(JSON.parse(that.xhr.response));
+                // // console.log(JSON.parse(that.xhr.response));
                 resolve(JSON.parse(that.xhr.response))
             }
         })
@@ -79,7 +79,7 @@
     //         dataType: "json",
     //         data: params,
     //         success: function(data) {
-    //             console.log(data)
+    //             // console.log(data)
     //           // 请求成功后的处理逻辑
     //         },
     //         error: function() {

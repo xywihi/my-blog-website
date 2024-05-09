@@ -20,12 +20,12 @@ import {debounce} from '@/util/tools.ts'
         const sliderPosition = sliderRef.current.getBoundingClientRect();
         // 获取滑块的被点击的位置
         const clickPosition = e.clientX - sliderPosition.left;
-        console.log(sliderPosition);
+        // console.log(sliderPosition);
         if(circleRef.current){
             circleRef.current.style.left = (clickPosition-10)+'px';
              // 计算滑块的百分比
             const percentage = clickPosition / sliderPosition.width;
-            console.log(percentage)
+            // console.log(percentage)
             debounce(handleChangeTime(percentage),10000)
         }
     }
@@ -37,17 +37,17 @@ import {debounce} from '@/util/tools.ts'
         // // 获取滑块的被点击的位置
         
         const clickPosition = e.clientX - sliderDragPosition.left;
-        // console.log(clickPosition);
+        // // console.log(clickPosition);
         // 查看是否向左拖动
         if(e.clientX>=sliderDragPosition.left && e.clientX<=(sliderDragPosition.right-circleDragPosition.width/2)){
-            // console.log('clickPosition',circleRef.current.style.left,e.clientX ,sliderDragPosition.right);
+            // // console.log('clickPosition',circleRef.current.style.left,e.clientX ,sliderDragPosition.right);
             // let difference = e.clientX-circleDragPosition.left
             circleDragRef.current.style.left = (clickPosition-10)+'px';
         }
         
         // 计算滑块的百分比
         const percentage = (circleDragPosition.left - sliderDragPosition.left) / (sliderDragPosition.right - sliderDragPosition.left);
-        console.log(percentage)
+        // console.log(percentage)
         // debounce(handleChangeTime(percentage),10000)
     }
 
@@ -63,7 +63,7 @@ import {debounce} from '@/util/tools.ts'
             //     circleRef.current.style.left = (clickPosition-10)+'px';
             //      // 计算滑块的百分比
             //     const percentage = clickPosition / sliderPosition.width;
-            //     console.log(percentage)
+            //     // console.log(percentage)
             //     debounce(handleChangeTime(percentage),10000)
             // }
         }
@@ -73,7 +73,7 @@ import {debounce} from '@/util/tools.ts'
     //     const circleDragPosition = circleDragRef.current?.getBoundingClientRect();
     //     const sliderDragPosition = sliderDragRef.current?.getBoundingClientRect();
     //     if((e.touches[0].pageX+20)>=sliderDragPosition.left && e.touches[0].pageX<=(sliderDragPosition.right-circleDragPosition.width/2)){
-    //         // console.log('clickPosition',circleRef.current.style.left,e.clientX ,sliderDragPosition.right);
+    //         // // console.log('clickPosition',circleRef.current.style.left,e.clientX ,sliderDragPosition.right);
     //         // let difference = e.clientX-circleDragPosition.left
     //         circleDragRef.current.style.left = (e.touches[0].pageX-60)+'px';
     //     }

@@ -52,8 +52,8 @@ type ScrollState = {
       const clientHeight = element.clientHeight;
       let isToBottom = false;
       let isToTop = true;
-      // console.log("scrollLeft",element);
-      console.log(scrollLeft,isToTop)
+      // // console.log("scrollLeft",element);
+      // console.log(scrollLeft,isToTop)
       switch (direction) {
         case "hor":
           //查看横向滚动条是否滚动到底部
@@ -71,7 +71,7 @@ type ScrollState = {
         default:
           break;
       }
-      // console.log("scrollLeft", { isToBottom, isToTop });
+      // // console.log("scrollLeft", { isToBottom, isToTop });
       this.horIsScrollState = { isToBottom, isToTop };
       func && func(this.horIsScrollState);
     }
@@ -87,7 +87,7 @@ type ScrollState = {
       })
       .reduce((a, b) => a + Number(b), 0);
       const totalDis = distance + otherDis;
-      console.log('elChildWidth',otherDis,distance,totalDis);
+      // console.log('elChildWidth',otherDis,distance,totalDis);
       
       const timer = setInterval(() => {
         if((addNum.allCount+addNum.count)>totalDis){
@@ -105,12 +105,12 @@ type ScrollState = {
             default:
               break;
           }
-          console.log(totalDis,addNum.allCount,newDisNum,addNum.allCount+newDisNum,distance + otherDis);
+          // console.log(totalDis,addNum.allCount,newDisNum,addNum.allCount+newDisNum,distance + otherDis);
           addNum.reset();
           clearInterval(timer)
           return;
         }
-        console.log(addNum.allCount+addNum.count,totalDis);
+        // console.log(addNum.allCount+addNum.count,totalDis);
         const distanceNum = toTOPBottom === 'top' ? -Number(addNum.count) : Number(addNum.count)
         switch (direction) {
           case "hor":

@@ -32,9 +32,9 @@ const App = ({ notices, statusBoxData, handleHiddeNotices,showStatusBox }) => {
   const [noticesNum, setNoticesNum] = useState(0);
   useEffect(() => {
     newLocalStorage.set("token", "Ber sddjjkwjfhiheh87687212ihr2khfjk");
-    console.log("app_page");
+    // console.log("app_page");
     return () => {
-      console.log("销毁当前项目");
+      // console.log("销毁当前项目");
     };
   }, []);
 

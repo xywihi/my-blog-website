@@ -20,7 +20,7 @@ const Translate =({type,showStatusBox}, ref) => {
         () => ({ handleTranslate })
       );
     const handleTranslate = () => {
-        console.log("str",str)
+        // console.log("str",str)
         setLoading(true)
         const require = new HttpRequire;
         // 要散列的字符串
@@ -34,12 +34,12 @@ const Translate =({type,showStatusBox}, ref) => {
         let api = 20230907001808710
         let api_key = "Pw93lz2oNgd95rJzMOns"
         let random = 1435660288
-        console.log(md5HashHex);
+        // console.log(md5HashHex);
 
         let MD5 = CryptoJS.MD5(api+str+random+api_key);
         let NEW_URL = URL + `?q=${encodeURIComponent(str)}&from=${type}&to=${type=='zh' ? 'en' : 'zh'}&appid=${api}&salt=${random}&sign=${MD5}`
         require.get(NEW_URL).then(res=>{
-            console.log("trans",res)
+            // console.log("trans",res)
             setLoading(false)
             !res.error_code ? 
             setTranslatedStr(res.trans_result) : 

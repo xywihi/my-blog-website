@@ -30,21 +30,21 @@ const Home = ({showStatusBox}) => {
             setWallImage(res.images);
             wallImage && setCurrentImageIndex(Math.floor(Math.random()*(wallImage.length-1)))
         }).catch(err=>{
-            console.log(err)
+            // console.log(err)
         })
         return ()=>{
             clearTimeout(timer)
         }
     }, [])
     // const throwError = () => {
-    //     console.log('--------------------', 1/0)
+    //     // console.log('--------------------', 1/0)
     //     return 1/0
     //     // throw new Error('This is a simulated error.');
     // };
     const handleTranslate = ()=>{
         childTranslate.current.handleTranslate()
     }
-    console.log('home_page')
+    // console.log('home_page')
     return (
         <div className="bg2_blue">
             <div id="waterfall-container">
@@ -168,7 +168,7 @@ const Home = ({showStatusBox}) => {
                                         value="zh"
                                         checked={selectedOption === 'zh'}
                                         onChange={(e)=>{
-                                            console.log(e.target.value)
+                                            // console.log(e.target.value)
                                             setSelectedOption(e.target.value)
                                         }}
                                         className="maR6"

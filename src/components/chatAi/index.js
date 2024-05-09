@@ -15,7 +15,7 @@ async function example() {
   // })
  
   // const res = await api.sendMessage('Hello World!')
-  console.log(res.text)
+  // console.log(res.text)
 }
     return (<div style={{ width: '100%', height: '100%' }}></div>)
 }

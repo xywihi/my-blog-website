@@ -1,7 +1,7 @@
 const userConfig = {
     theme:"light",
     set:function (value){
-        console.log('111111111',this)
+        // console.log('111111111',this)
         this.theme=value
     }
 }

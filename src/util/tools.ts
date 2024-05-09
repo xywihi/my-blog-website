@@ -112,7 +112,7 @@ function openBox(e:Element & Event,boxElement:any,close:boolean,num=2){
             boxElement.style.width = `${parentWidth}px`;
             boxElement.style.height = `${parentHeight}px`;
             boxElement.style.zIndex = `0`;
-            console.log('parentHeight',parentHeight)
+            // console.log('parentHeight',parentHeight)
             //删除添加的className
             let classNameStr = boxElement.className || '';
             let classNameStrArr = classNameStr.split(' ');
@@ -146,7 +146,7 @@ function openBox(e:Element & Event,boxElement:any,close:boolean,num=2){
                 let distance = boxElement.getBoundingClientRect().top - 74
                 let listenScroll =  new ListenScroll(document.documentElement)
                 listenScroll.handleScrollByDistance(distance,'ver','bottom')
-                console.log('boxElement.getBoundingClientRect()',boxElement.getBoundingClientRect())
+                // console.log('boxElement.getBoundingClientRect()',boxElement.getBoundingClientRect())
                 ;
 
                 // 判断是否超出屏幕

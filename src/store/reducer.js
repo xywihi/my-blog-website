@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, stopUpdateNotice:action.data};
     case 'SHOWSTATUSBOX':
       // debugger;
-      console.log('！！！！！！！！！！！！！！',action.data)
+      // console.log('！！！！！！！！！！！！！！',action.data)
       return { ...state, statusBoxData:action.data};
     default:
       return state;

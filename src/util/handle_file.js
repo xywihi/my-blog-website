@@ -22,7 +22,7 @@ export default class HandleFile {
     
         reader.onload = function (e) {
           const fileContent = e.target.result;
-          console.log('File content:', fileContent);
+          // console.log('File content:', fileContent);
         };
     
         reader.readAsText(file);

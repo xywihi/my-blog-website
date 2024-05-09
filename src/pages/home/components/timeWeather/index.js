@@ -12,7 +12,7 @@ const TimeWeather = (props) => {
         const http = new HttpRequire('weather')
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=zh_cn`;
         http.get(apiUrl).then(res=>{
-            console.log("res------",res)
+            // console.log("res------",res)
             if(res.cod===200){
                 setWeather(res.weather[0])
             }
@@ -22,7 +22,7 @@ const TimeWeather = (props) => {
         let timer = setInterval(()=>{
             setCurrentDate(new Date())
         },10000)
-        console.log('wallImage------------------')
+        // console.log('wallImage------------------')
         return ()=>{
             clearTimeout(timer)
         }
@@ -44,6 +44,6 @@ const TimeWeather = (props) => {
 
 
 export default memo(TimeWeather,(prevProps,nextProps)=>{
-    console.log('prevProps------',prevProps)
+    // console.log('prevProps------',prevProps)
     return false
 });

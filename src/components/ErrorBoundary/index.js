@@ -13,8 +13,8 @@ class ErrorBoundary extends Component {
 
     componentDidCatch(error, errorInfo) {
         // 当产生错误时调用，可以用于记录错误信息或发送错误报告
-        console.error('Error:', error);
-        console.error('Error Info:', errorInfo);
+        // console.error('Error:', error);
+        // console.error('Error Info:', errorInfo);
     }
 
     render() {

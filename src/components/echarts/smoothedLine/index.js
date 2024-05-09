@@ -90,7 +90,7 @@ const SmoothedLine = () => {
           };
         myChart.setOption(options);
         } catch (error) {
-          console.log('echarts error:',error)
+          // console.log('echarts error:',error)
         }
         
       }
@@ -98,7 +98,7 @@ const SmoothedLine = () => {
 }
 
 function areEqual(prevProps, nextProps) {
-  console.log('echarts update:',prevProps)
+  // console.log('echarts update:',prevProps)
   return false;
   /*
   return true if passing nextProps to render would return

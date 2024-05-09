@@ -11,7 +11,7 @@ const NoticesBox =({manageNotices}) => {
     const stopUpdateNotice = useRef(false);
     useEffect(()=>{
         // socket.on('message', (data) => {
-        //     console.log('接收到服务器消息:', data);
+        //     // console.log('接收到服务器消息:', data);
         //     data && setNotices(pre=>{
         //         return [...pre,data]
         //     })
@@ -40,7 +40,7 @@ const NoticesBox =({manageNotices}) => {
             handleUpdateNotice(item)
         }
         else{
-            console.log("timerRef.current",timerRef.current)
+            // console.log("timerRef.current",timerRef.current)
             clearInterval(timerRef.current)
         }
         

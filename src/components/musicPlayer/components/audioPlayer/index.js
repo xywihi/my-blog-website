@@ -63,7 +63,7 @@ const AudioPlayer = ({music,time,pauseCurrent,playMusic,pauseMusic,setMusicTime,
         audio.src = currentData.resource;
         audio.currentTime = 0;
         audio.play().catch(error=>{
-            console.log('error',error)
+            // console.log('error',error)
         });
     }
     const getTime = (e)=>{

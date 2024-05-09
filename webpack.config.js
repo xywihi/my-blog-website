@@ -5,12 +5,28 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const webpack = require('webpack')
 const devMode = process.env.NODE_ENV !== 'production'
-let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const lessToJs = require('less-vars-to-js');
 const fs = require('fs');
 const themeVariables = lessToJs(
     fs.readFileSync(path.resolve(__dirname, 'src/styles/variables.less'), 'utf8')
   );
+
+
+const { exec } = require('child_process');
+const command = 'start cmd /k node server.js';
+
+exec(command, (error, stdout, stderr) => {
+  if (error) {
+    // console.error(`exec error: ${error}`);
+    return;
+  }
+  // console.log(`stdout: ${stdout}`);
+  // console.error(`stderr: ${stderr}`);
+});
+
+
+
 module.exports = {
     entry: './src/index.js', //入口文件
     output: {
