@@ -12,6 +12,29 @@ import {connect} from "react-redux"
 import ChatAi from "../../components/chatAi"
 import HttpRequire from "../../http/require";
 import { showStatusBox } from "@/store/actions";
+const banners = [
+    {
+        url:"https://images.unsplash.com/photo-1599272585578-03bfc70032b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE4fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
+        title:"平淡人生，浮躁心态",
+        subtitle:"平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
+        time:"2023/09/01",
+        id:0
+    },
+    {
+        url:"https://images.unsplash.com/photo-1587113538625-8ab80f5ad01f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+        title:"没心没肺，快乐加倍",
+        subtitle:"事压不垮人，但是情绪会压垮人，所以不要被情绪所绑架，学会和自己和解，做一个只记得快乐的人，没心没肺快乐翻倍！",
+        time:"2023/09/03",
+        id:0
+    },
+    {
+        url:"https://images.unsplash.com/photo-1517462035531-76bc910a6903?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+        title:"平淡人生，浮躁心态",
+        subtitle:"平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
+        time:"2023/09/10",
+        id:0
+    },
+]
 const Home = ({showStatusBox}) => {
     const [currentDate,setCurrentDate] = useState(new Date())
     const [selectedOption,setSelectedOption] = useState('zh')
@@ -26,31 +49,31 @@ const Home = ({showStatusBox}) => {
             setCurrentImageIndex(Math.floor(Math.random()*7))
         },10000)
         const require = new HttpRequire();
-        require.get('http://localhost:3000/api/bing_img').then(res=>{
+        require.get('https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8&mkt=zh-CN').then(res=>{
             setWallImage(res.images);
             wallImage && setCurrentImageIndex(Math.floor(Math.random()*(wallImage.length-1)))
         }).catch(err=>{
-            // console.log(err)
+            console.log(err)
         })
         return ()=>{
             clearTimeout(timer)
         }
     }, [])
     // const throwError = () => {
-    //     // console.log('--------------------', 1/0)
+    //     console.log('--------------------', 1/0)
     //     return 1/0
     //     // throw new Error('This is a simulated error.');
     // };
     const handleTranslate = ()=>{
         childTranslate.current.handleTranslate()
     }
-    // console.log('home_page')
+    console.log('home_page')
     return (
         <div className="bg2_blue">
             <div id="waterfall-container">
                     <div className="waterfall-item borderR12 item1 bg1 cardBox" >
                         {
-                            wallImage && 
+                            wallImage ?
                             <>
                                 <div>
                                     <a target="_blank" hrefLang="en-US" href={wallImage[currentImageIndex].copyrightlink}>
@@ -66,6 +89,20 @@ const Home = ({showStatusBox}) => {
                                     <h5>
                                         <p className="maB12">{wallImage[currentImageIndex].copyright}</p>
                                         <p className="gray">{wallImage[currentImageIndex].startdate}</p>
+                                    </h5>
+                                </div>
+                            </> :
+                            <>
+                                <div>
+                                    <img src={"https://loremflickr.com/473/370/mountain"}/>
+                                </div>
+                                <div className="pa24 flexBS column">
+                                    <h1 className="font_wenyue fontB">
+                                        {banners[0].title.split("，").map(item=> <p key={item}>{item}</p>)}
+                                    </h1>
+                                    <h5>
+                                        <p className="maB12">{banners[0].subtitle}</p>
+                                        <p className="gray">{banners[0].time}</p>
                                     </h5>
                                 </div>
                             </>
@@ -168,7 +205,7 @@ const Home = ({showStatusBox}) => {
                                         value="zh"
                                         checked={selectedOption === 'zh'}
                                         onChange={(e)=>{
-                                            // console.log(e.target.value)
+                                            console.log(e.target.value)
                                             setSelectedOption(e.target.value)
                                         }}
                                         className="maR6"
