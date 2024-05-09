@@ -16,7 +16,7 @@ const SmoothedLine = () => {
     async function run() {
         const require = new HttpRequire();
         try {
-          let _rawData = await require.get('http://127.0.0.1:3000/api/echarts');
+          let _rawData = await require.get('http://localhost:3000/api/echarts');
           const options = {
             dataset: [
               {

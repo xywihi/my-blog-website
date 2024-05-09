@@ -13,17 +13,17 @@ const themeVariables = lessToJs(
   );
 
 
-const { exec } = require('child_process');
-const command = 'start cmd /k node server.js';
+// const { exec } = require('child_process');
+// const command = 'start cmd /k node server.js';
 
-exec(command, (error, stdout, stderr) => {
-  if (error) {
-    // console.error(`exec error: ${error}`);
-    return;
-  }
-  // console.log(`stdout: ${stdout}`);
-  // console.error(`stderr: ${stderr}`);
-});
+// exec(command, (error, stdout, stderr) => {
+//   if (error) {
+//     // console.error(`exec error: ${error}`);
+//     return;
+//   }
+//   // console.log(`stdout: ${stdout}`);
+//   // console.error(`stderr: ${stderr}`);
+// });
 
 
 

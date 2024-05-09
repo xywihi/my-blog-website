@@ -5,14 +5,7 @@ const app = express();
  
 // 设置CORS头部
 app.use(cors({
-  origin: [
-    'https://your-domain.vercel.app', // 允许来自Vercel域的请求
-    'http://localhost:3000', // 允许来自本地开发环境的请求
-    'https://api.openweathermap.org',
-    'https://echarts.apache.org',
-    'https://cn.bing.com',
-
-  ], // 只允许来自Vercel的请求
+  origin: '*', // 只允许来自Vercel的请求
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true // 允许cookies等认证信息
