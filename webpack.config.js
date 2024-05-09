@@ -52,7 +52,7 @@ const themeVariables = lessToJs(
 module.exports = {
     entry: './src/index.js', //入口文件
     output: {
-        path: path.resolve(__dirname,'dist'), //输出文件夹
+        path: path.resolve(__dirname,'build'), //输出文件夹
         filename: '[name].js',
         chunkFilename: '[name].[hash].js',
     },
