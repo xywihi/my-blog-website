@@ -16,6 +16,11 @@ import { notifications, shuffle, pause, play } from "ionicons/icons";
 // import socket from "./http/socke"
 import SmallMusicPlayer from "./components/smallMusicPlayer";
 import StatusBox from "./components/statusBox";
+
+import "@/assets/fonts/huxiao.otf";
+import "@/assets/fonts/siyuan.ttf";
+import "@/assets/fonts/wenyue.otf";
+import "@/assets/fonts/SourceHanSansCN-Bold.otf";
 // import Notices from "./components/notices"
 const Notices = React.lazy(() => import("./components/notices"));
 const Home = React.lazy(() => import("./pages/home"));
@@ -91,7 +96,7 @@ const App = ({ notices, statusBoxData, handleHiddeNotices,showStatusBox }) => {
                 {/* <svg data-name="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 86.6"><polygon points="72.79 66.96 76.19 72.86 23.81 72.86 50 27.49 65.92 55.06 77.82 48.19 50 0 0 86.6 100 86.6 84.69 60.09 72.79 66.96"/><circle cx="50" cy="59.11" r="6.87"/></svg> */}
                 
                 <svg data-name="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 86.6">
-                    <polygon class="svg-fill" points="72.79 66.96 76.19 72.86 23.81 72.86 50 27.49 65.92 55.06 77.82 48.19 50 0 0 86.6 100 86.6 84.69 60.09 72.79 66.96"/><circle class="svg-fill" cx="50" cy="59.11" r="6.87"/></svg>
+                    <polygon className="svg-fill" points="72.79 66.96 76.19 72.86 23.81 72.86 50 27.49 65.92 55.06 77.82 48.19 50 0 0 86.6 100 86.6 84.69 60.09 72.79 66.96"/><circle className="svg-fill" cx="50" cy="59.11" r="6.87"/></svg>
               </div>
               <div className="flexB">
                 {/* <HeaderNav  theme={theme}/> */}

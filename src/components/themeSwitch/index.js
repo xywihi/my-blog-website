@@ -2,8 +2,7 @@ import React, {useEffect, useRef} from "react";
 import { Link, useNavigate } from 'react-router-dom'
 import LocalStorage from '@/util/local_storage'
 import './styles.less'
-import {IonIcon} from "@ionic/react"
-import { exit } from 'ionicons/icons';
+import moonsun from '@/assets/images/moonsun.png'
 const routes = [
     {path:"/",text:"Home"},
     {path:"/news",text:"News"},
@@ -23,7 +22,7 @@ function ThemeSwitch({changeTheme,theme}){
                 <span className="testswitch-switch"></span>
             </label> */}
             <label onClick={()=>changeTheme(theme=='light' ? 'dark' : 'light')} className={`moonsunBox ${theme==='light' ? "lightBg" : "blackBg"}`} >
-                <img ref={ref} src="./moonsun.png" alt='' />
+                <img ref={ref} src={moonsun} alt='' />
             </label>
             
         </div>

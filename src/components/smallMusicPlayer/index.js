@@ -7,9 +7,12 @@ import {playMusic,pauseMusic,handleShowArea} from "@/pages/home/store/actions"
 import musc from "@/assets/audio/shine.mp3"
 import news from "@/assets/audio/new.mp3"
 import starts from "@/assets/audio/starts.mp3"
+import haojiubujian from "@/assets/audio/haojiubujian.mp3"
+import hongmeihuaerkai from "@/assets/audio/hongmeihuaerkai.mp3"
+import ningyuan from "@/assets/audio/ningyuan.mp3"
 import AudioPlayer from "./components/audioPlayer"
 import musicsData from '@/api/data/musics.json';
-const audios = [{name:"Shine",resource:musc,pause:false,id:0},{name:"New Normal",resource:news,pause:false,id:1},{name:"we'll be the starts",resource:starts,pause:false,id:2}]
+// const audios = [{name:"Shine",resource:musc,pause:false,id:0},{name:"New Normal",resource:news,pause:false,id:1},{name:"we'll be the starts",resource:starts,pause:false,id:2}]
 const r = [
     '0b368fe8fd8c4dd6b7d438dd52d46517', 
     'c44fcb6d5b26c0ca959900bd44a28c0f', 
