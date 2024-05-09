@@ -156,7 +156,7 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
         <div className={theme}>
           <div className="bg2_blue project textColor">
             <header className="flexB pa16 bg1" onClick={()=>scrollToTop(3.5)}>
-              <div className="logo maH24 textColorWhite flexS" onClick={handleOpenMobileNav}>
+              <div className="logo textColorWhite flexS" onClick={handleOpenMobileNav}>
                 {/* <svg data-name="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 86.6"><polygon points="72.79 66.96 76.19 72.86 23.81 72.86 50 27.49 65.92 55.06 77.82 48.19 50 0 0 86.6 100 86.6 84.69 60.09 72.79 66.96"/><circle cx="50" cy="59.11" r="6.87"/></svg> */}
                 <svg data-name="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 86.6">
                     <polygon className="svg-fill" points="72.79 66.96 76.19 72.86 23.81 72.86 50 27.49 65.92 55.06 77.82 48.19 50 0 0 86.6 100 86.6 84.69 60.09 72.79 66.96"/><circle className="svg-fill" cx="50" cy="59.11" r="6.87"/></svg>
@@ -168,7 +168,7 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
                 </div>
                 <ThemeSwitch changeTheme={changeTheme} theme={theme}/>
                 <div
-                  className="noticeBtn_after paH6 maH12 borderR50 bg3"
+                  className="noticeBtn_after paH6 maL24 borderR50 bg3"
                   onClick={handleOpenNoticeBox}
                 >
                   <IonIcon
