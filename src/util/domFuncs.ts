@@ -8,14 +8,14 @@ type ScrollState = {
     num: 0,
     allCount: 0,
     a:1,
-    handleAddCount: function (totalDis:number) {
+    handleAddCount: function (totalDis:number,power:number=2.5) {
       const degreesToRadians = (degrees: number) => degrees * (Math.PI / 180);
       const calculateSine = (degrees: number) => {
         const radians = degreesToRadians(degrees);
         return Math.cos(radians);
       };
       const sine30 = calculateSine(this.num);
-      this.count = Math.floor(Math.pow(sine30+1.74 , 2.5));
+      this.count = Math.floor(Math.pow(sine30+1.74 , power));
       if((this.allCount+this.count)<=totalDis)this.allCount += this.count;
       this.a++;
       if(this.num<=90){
@@ -30,6 +30,7 @@ type ScrollState = {
     }
   };
   
+  // 滚动动画
   export class ListenScroll {
     constructor(el: any) {
       this.currentElement = el;
@@ -42,7 +43,6 @@ type ScrollState = {
     currentElement: any | null = null;
     horIsScrollState: ScrollState;
     VerIsScrollToState: boolean;
-  
     getIsToBottom(element: any, direction: "hor" | "ver", func?: Function) {
       const scrollLeft = element.scrollLeft;
       const scrollWidth = element.scrollWidth;
@@ -75,7 +75,8 @@ type ScrollState = {
       this.horIsScrollState = { isToBottom, isToTop };
       func && func(this.horIsScrollState);
     }
-    handleScrollByDistance(distance: number, direction: "hor" | "ver", toTOPBottom:"top" | "bottom") {
+    
+    handleScrollByDistance(distance: number, direction: "hor" | "ver", toTOPBottom:"top" | "bottom",power:number=2.5) {
       const elChildWidth = this.currentElement?.children[0].children[1];
       const elMargin = window.getComputedStyle(elChildWidth).margin.split('px').slice(0,4)
       const otherDis = elMargin.filter((_,index)=>{
@@ -124,10 +125,18 @@ type ScrollState = {
           default:
             break;
         }
-        addNum.handleAddCount(totalDis);
+        addNum.handleAddCount(totalDis,power);
       }, 10);
       
       
     }
   }
   
+
+  // 滚动到屏幕顶部
+  export function scrollToTop(power:number=2.5) {
+    let listenScroll =  new ListenScroll(document.documentElement)
+    // 当前页面滚动的距离
+    let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    listenScroll.handleScrollByDistance(scrollTop,'ver','top',power)
+  }

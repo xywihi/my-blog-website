@@ -17,8 +17,15 @@ header{
 }
 /* 设置全局链接颜色 */
 a {
-  /* color: #333; */
-  text-decoration: none;
+    color: inherit;      /* 文字颜色继承父元素 */
+    text-decoration: none; /* 去除下划线 */
+    pointer-events: auto;  /* 启用点击事件 */
+    cursor: pointer;      /* 将鼠标指针变为指针形状 */
+}
+ 
+a:hover, a:active, a:visited, a:link {
+    color: inherit;      /* 去除hover、active等状态下的默认样式 */
+    text-decoration: none;
 }
   
 ul, ol, li {
@@ -78,6 +85,12 @@ img{
 }
 .widthFull{
     width: 100%;
+}
+.height0{
+    height: 0;
+}
+.width0{
+    width: 0;
 }
 .opacityHalf{
     opacity: 20%;
@@ -310,6 +323,15 @@ button {
 }
 .paR12{
     padding-right: 12px;
+}
+.pa16{
+    padding: 16px;
+}
+.paL16{
+    padding-left: 16px;
+}
+.paR16{
+    padding-right: 16px;
 }
 .pa24{
     padding: 24px;

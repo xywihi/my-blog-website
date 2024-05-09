@@ -5,6 +5,7 @@ const initialState = {
     hidde:true,
     length:0
   },
+  noticeList:[],
   stopUpdateNotice:false,
   userInfo:undefined,
   statusBoxData:{
@@ -21,7 +22,8 @@ const reducer = (state = initialState, action) => {
     case 'UPDATENOTICENUM':
       return { ...state, notices:{...state.notices,length:action.data}};
     case 'HIDDENOTICES':
-      return { ...state, notices:{...state.notices,hidde:!state.notices.hidde}};
+      // return { ...state, notices:{...state.notices,hidde:!state.notices.hidde}};
+      return { ...state, noticeList:action.data};
     case 'CONTROLLUPDATENOTICE':
       return { ...state, stopUpdateNotice:action.data};
     case 'SHOWSTATUSBOX':

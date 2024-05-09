@@ -1,5 +1,6 @@
 .logo {
     width: 32px;
+    
 }
 
 header {
@@ -29,6 +30,7 @@ header {
     padding-left: 24px;
 }
 .activeNav{
+    
     &:hover{
         transform: translateX(12px);
         transition: all 0.5s ease-out;
@@ -49,7 +51,18 @@ header {
         }
     }
 }
-@media screen and (max-width: 1400px) {
+.logout{
+    opacity: .5;
+    display: flex;
+    align-items: center;
+    span{
+        display: inline-block;
+        font-size: smaller;
+        margin-right: 12px;
+    }
+}
+
+@media screen and (max-width: 1400px) and (min-width:640px) {
     .activeNavFartherBox{
         .moreIcon{
             transition: all 0.3s ease-out;
@@ -101,6 +114,7 @@ header {
             // pointer-events: none;
     
         }
+        
         li, li div,.logout{
             margin: 0 auto;
         }
@@ -109,6 +123,124 @@ header {
         }
         .moreIcon{
             display: none;
+        }
+        
+    }
+}
+@media screen and (max-width:640px) {
+    .activeNavFartherBox{
+        background:none!important;
+        &:hover{
+            background:none;
+        }
+        .moreIcon{
+            transition: all 0.3s ease-out;
+            transform: rotateZ(180deg);
+        }
+    }
+    .activeNav{
+        padding: 0;
+        &::after{
+            content: "";
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: #ececec
+        }
+        &:last-child::after{
+            display: none;;
+        }
+        &:hover{
+            
+            a{
+                color: initial;
+            }
+        }
+        a{
+            color: initial;
+        }
+    }
+    .navBox{
+        .logout{
+            margin-top: 42px;
+            span{
+                margin-right: 12px;
+            }
+            ion-icon{
+                display: block;
+            }
+        }
+        ion-icon{
+            display: none;
+        }
+        span{
+            margin: 0;
+        }
+        .navBtn{
+            padding: 12px 0;
+            margin: 12px 0;
+            position: relative;
+            &:first-child{
+                padding-top: 0;
+            }
+            &::before{
+                display: none;
+            }
+            &::after{
+                content: "";
+                position: absolute;
+                top: calc(100% + 12px);;
+                width: 100%;
+                height: 1px;
+                background: #ececec
+                
+            }
+        }
+        .activeNavOld{
+            width: 100%!important;
+            transform: translateX(0)!important;
+            background: none!important; 
+            transform: none; 
+            transition: none; 
+            width: auto; 
+            padding-left: 0!important;
+            font-size: 1.3em;
+            font-weight: bold;
+            ion-icon{
+                display: block;
+                margin-right: 12px;
+            }
+        }
+        .navBtn{
+            // pointer-events: none;
+    
+        }
+        li::before{
+            display: none;
+        }
+        li, li div,.logout{
+            // margin: 0 auto;
+        }
+        li a{
+            // justify-content: center;
+        }
+        .moreIcon{
+            display: none;
+        }
+        
+    }
+    .activeNavFartherBox{
+        
+    }
+    .activeNavOldNoB{
+        ion-icon{
+            display: block;
+            margin-right: 12px;
+        }
+        font-weight: bold;
+        &:hover{
+            font-weight: normal;
         }
         
     }

@@ -97,15 +97,15 @@ function openBox(e:Element & Event,boxElement:any,close:boolean,num=2){
     e.stopPropagation();
     e.preventDefault();
     // let boxElement = boxRef.current;
-    if(e.target instanceof Element && e.target?.getBoundingClientRect().x!= boxElement.getBoundingClientRect().x){
-        let boxParentElement = boxElement.parentElement;
-        let boxHeight = boxElement.offsetHeight;
-        let boxWidth = boxElement.offsetWidth;
+    if(e.target instanceof Element && e.target?.getBoundingClientRect().x!= boxElement?.getBoundingClientRect().x){
+        let boxParentElement = boxElement?.parentElement;
+        let boxHeight = boxElement?.offsetHeight;
+        let boxWidth = boxElement?.offsetWidth;
         // let boxTop = boxElement.getBoundingClientRect().top;
         // let boxLeft = boxElement.getBoundingClientRect().left;
 
-        let parentWidth = boxParentElement.offsetWidth;
-        let parentHeight = boxParentElement.offsetHeight;
+        let parentWidth = boxParentElement?.offsetWidth;
+        let parentHeight = boxParentElement?.offsetHeight;
         let screenWidth = document.body.clientWidth;
         
         const closeBox = () => {
@@ -143,14 +143,14 @@ function openBox(e:Element & Event,boxElement:any,close:boolean,num=2){
                 boxElement.className += ` cardBoxShadow`;
                 boxParentElement.className += ` cardOutBox`;
                 // 页面滚动到顶部
-                let distance = boxElement.getBoundingClientRect().top - 74
+                let distance = boxElement?.getBoundingClientRect().top - 74
                 let listenScroll =  new ListenScroll(document.documentElement)
                 listenScroll.handleScrollByDistance(distance,'ver','bottom')
                 ;
 
                 // 判断是否超出屏幕
                 
-                if(boxElement.getBoundingClientRect().x + boxWidth*num > screenWidth){
+                if(boxElement?.getBoundingClientRect().x + boxWidth*num > screenWidth){
                     if(boxWidth*3 < screenWidth){
                         boxElement.style.transform = `translateX(${-(boxWidth*3)}px)`;
                     }else{

@@ -3,6 +3,15 @@
 //     transition: all 1s ease-out;
 // }
 .light{
+    .colorRed{
+        color: rgb(224, 44, 44);
+    }
+    .colorBlue{
+        color: rgb(33, 145, 219);
+    }
+    .colorOrange{
+        color: rgb(224, 125, 31);
+    }
     .svg-fill{
         fill:#000000;
     }
@@ -83,6 +92,9 @@
             transform: rotateZ(180deg);
         }
         &:hover{
+        &>div:first-child{
+            margin-bottom: 12px;
+        }
         background-color: rgb(243, 243, 243);
         transform: translateX(12px);
         width: calc(100% - 12px);
@@ -122,6 +134,15 @@
 }
 .dark{
     // display: none;
+    .colorRed{
+        color: rgb(124, 49, 49);
+    }
+    .colorBlue{
+        color: rgb(35, 81, 112);
+    }
+    .colorOrange{
+        color: rgb(126, 79, 34);
+    }
     .svg-fill{
         fill:#fff;
     }
@@ -218,6 +239,9 @@
         .moreIcon{
             transition: all 0.3s ease-out;
             transform: rotateZ(180deg);
+        }
+        &>div:first-child{
+            margin-bottom: 12px;
         }
         &:hover{
         background-color: #1c2625;

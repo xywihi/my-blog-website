@@ -64,7 +64,7 @@ function HeaderNav({changeTheme, direction,routes}){
                 }
                 
             </ul>
-            <div className={direction=="vertical" ? "logout borderR6" : "logout borderR6 maV12"} title="退出"><IonIcon icon={exit} size="36px" onClick={logout}></IonIcon></div>
+            <div className={direction=="vertical" ? "logout borderR6" : "logout borderR6 maV12"} title="退出"><span>退出</span><IonIcon icon={exit} size="36px" onClick={logout}></IonIcon></div>
         </nav>
     )
 }
