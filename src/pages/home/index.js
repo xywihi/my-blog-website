@@ -26,7 +26,7 @@ const Home = ({showStatusBox}) => {
             setCurrentImageIndex(Math.floor(Math.random()*7))
         },10000)
         const require = new HttpRequire();
-        require.get('https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8&mkt=zh-CN').then(res=>{
+        require.get('http://127.0.0.1:3000/api/bing_img').then(res=>{
             setWallImage(res.images);
             wallImage && setCurrentImageIndex(Math.floor(Math.random()*(wallImage.length-1)))
         }).catch(err=>{

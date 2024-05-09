@@ -3,7 +3,7 @@ import React,{useEffect, useRef} from 'react';
 import HttpRequire from "@/http/require"
 const SmoothedLine = () => {
     const ref = useRef()
-    var ROOT_PATH = 'https://echarts.apache.org/examples';
+    // var ROOT_PATH = 'https://echarts.apache.org/examples';
     var myChart
     useEffect(()=>{
         var chartDom = document.getElementById('smoothedLine');
@@ -16,7 +16,7 @@ const SmoothedLine = () => {
     async function run() {
         const require = new HttpRequire();
         try {
-          let _rawData = await require.get(ROOT_PATH + '/data/asset/data/life-expectancy-table.json');
+          let _rawData = await require.get('http://127.0.0.1:3000/api/echarts');
           const options = {
             dataset: [
               {
