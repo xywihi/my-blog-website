@@ -22,7 +22,7 @@ function ThemeSwitch({changeTheme,theme}){
                 <span className="testswitch-switch"></span>
             </label> */}
             <label onClick={()=>changeTheme(theme=='light' ? 'dark' : 'light')} className={`moonsunBox ${theme==='light' ? "lightBg" : "blackBg"}`} >
-                <img ref={ref} src='./iamges/moonsun.png' alt='' />
+                <img ref={ref} src={moonsun} alt='' />
             </label>
             
         </div>
