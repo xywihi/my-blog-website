@@ -55,7 +55,12 @@ img{
   user-select: text;         /* 标准语法 */
 }
 
-
+.pointerEventNone{
+    pointer-events: none;
+}
+.pointerEventAll{
+    pointer-events: all;
+}
 .hidden{
     visibility: hidden;
 }

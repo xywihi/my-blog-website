@@ -138,5 +138,5 @@ type ScrollState = {
     let listenScroll =  new ListenScroll(document.documentElement)
     // 当前页面滚动的距离
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-    listenScroll.handleScrollByDistance(scrollTop,'ver','top',power)
+    listenScroll.handleScrollByDistance(scrollTop+12,'ver','top',power)
   }

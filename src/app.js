@@ -190,7 +190,7 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
               </div>
               <div className="flexB">
                 {/* <HeaderNav  theme={theme}/> */}
-                <div className={`flexB relative maR24`}>
+                <div className={`flexB relative maR24 pointerEventNone`}>
                   <SmallMusicPlayer />
                 </div>
                 <ThemeSwitch changeTheme={changeTheme} theme={theme}/>
