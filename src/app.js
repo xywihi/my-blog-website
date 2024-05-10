@@ -53,10 +53,21 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
     });
   };
 
-  const handleOpenMobileNav = () => {
+  const handleOpenMobileNav = e => {
+    e.stopPropagation();
+    // 获取html
+    document.querySelector("html").style.overflow = "hidden";
     const nav = document.querySelector(".mobile_Nav_out_box");
     const navChild = document.querySelector(".mobile_Nav_out_box>div");
-    
+    setShowNotice(old=>{
+      document.querySelector("html").style.overflow = !old?"hidden":"auto";
+      // handleOpenNoticeBox()
+      const notice = document.querySelector(".notice_out_box");
+      if(Array.from(notice.classList).includes("notice_out_box_open")){
+        notice.classList.toggle("notice_out_box_open");
+      }
+      return !old
+    })
     // //设置nav高度
     // 获取nav计算后的高度
     const navHeight = nav.offsetHeight;
@@ -66,9 +77,22 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
     console.log(navHeight);
   }
 
-  const handleOpenNoticeBox = () => {
+  const handleOpenNoticeBox = e => {
+    e.stopPropagation();
+    // e.preventDefault();
+    // 获取html
+    
     const notice = document.querySelector(".notice_out_box");
     notice.classList.toggle("notice_out_box_open");
+    setShowNotice(old=>{
+      document.querySelector("html").style.overflow = !old?"hidden":"auto";
+      // handleOpenMobileNav()
+      const nav = document.querySelector(".mobile_Nav_out_box");
+      if(Array.from(nav.classList).includes("mobile_Nav_out_box_open")){
+        nav.classList.toggle("mobile_Nav_out_box_open");
+      }
+      return !old
+    })
     handleHiddeNotices([...noticeList,{
       type:'计划',
       content:getRandomSentence(),
@@ -113,9 +137,9 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
     let newNoticeList = [...noticeList];
     newNoticeList.splice(index, 1);
     handleHiddeNotices(newNoticeList);
-    if(newNoticeList.length === 0){
-      handleOpenNoticeBox()
-    }
+    // if(newNoticeList.length === 0){
+    //   handleOpenNoticeBox()
+    // }
   }
   const mainContent = useMemo(
     () => (
@@ -149,14 +173,17 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
     ),
     []
   );
-  
+  const handleScrollToTop = e => {
+    // e.stopPropagation();
+    scrollToTop(3.5)
+  }
   return (
     <HashRouter basename="/">
       <ErrorBoundary>
         <div className={theme}>
           <div className="bg2_blue project textColor">
-            <header className="flexB pa16 bg1" onClick={()=>scrollToTop(3.5)}>
-              <div className="logo maH12 textColorWhite flexS" onClick={handleOpenMobileNav}>
+            <header className="flexB pa16 bg1" onClick={handleScrollToTop}>
+              <div className="logo textColorWhite flexS" onClick={handleOpenMobileNav}>
                 {/* <svg data-name="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 86.6"><polygon points="72.79 66.96 76.19 72.86 23.81 72.86 50 27.49 65.92 55.06 77.82 48.19 50 0 0 86.6 100 86.6 84.69 60.09 72.79 66.96"/><circle cx="50" cy="59.11" r="6.87"/></svg> */}
                 <svg data-name="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 86.6">
                     <polygon className="svg-fill" points="72.79 66.96 76.19 72.86 23.81 72.86 50 27.49 65.92 55.06 77.82 48.19 50 0 0 86.6 100 86.6 84.69 60.09 72.79 66.96"/><circle className="svg-fill" cx="50" cy="59.11" r="6.87"/></svg>
@@ -177,8 +204,10 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
                   ></IonIcon>
                 </div>
               </div>
-              {/* 移动端导航栏 */}
-              <div className="mobile_Nav_out_box">
+              
+            </header>
+            {/* 移动端导航栏 */}
+            <div className="mobile_Nav_out_box">
                 <div className="mobile_Nav_box bg1">
                   <HeaderNav
                     changeTheme={changeTheme}
@@ -189,28 +218,32 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
               </div>
               {/* 通知信息框 */}
               <div className="notice_out_box">
-                <div className="notice_box height0 width0 bg1 scrollbarBox">
-                  <ul className="pa24">
-                    {noticeList.map((item, index) => (
-                      <li className="pa24" key={item.id}>
-                        <div className="flexB">
-                          <h4 className={`"maB6 fontB" ${item.urgent===1 ? "colorRed" : item.urgent===2 ?"colorOrange" : "colorBlue"}`}>{item.type}</h4>
-                          <IonIcon onClick={()=>handleDeleteNotice(item.id,index)} icon={trashOutline} className="font16"/>
-                        </div>
-                        <p className="paV12">{item.content}</p>
-                        <p className="flexB mrT12">
-                          <span>{item.date}</span>
-                          <span>{item.origin}</span>
-                        </p>
-                      </li>
-                    ))
-                    }
-                  </ul>
+                <div className="notice_box height0 width0 bg1" >
+                  <div className="scrollbarBox">
+                    <ul>
+                      {noticeList.map((item, index) => (
+                        <li className="pa24" key={item.id}>
+                          <div className="flexB">
+                            <h4 className={`"maB6 fontB" ${item.urgent===1 ? "colorRed" : item.urgent===2 ?"colorOrange" : "colorBlue"}`}>{item.type}</h4>
+                            <IonIcon onClick={()=>handleDeleteNotice(item.id,index)} icon={trashOutline} className="font16"/>
+                          </div>
+                          <p className="paV12">{item.content}</p>
+                          <p className="flexB mrT12">
+                            <span>{item.date}</span>
+                            <span>{item.origin}</span>
+                          </p>
+                        </li>
+                      ))
+                      }
+                      {
+                        noticeList.length===0 && <li className="pa24">暂无通知</li>
+                      }
+                    </ul>
+                  </div>
                   
                   
                 </div>
               </div>
-            </header>
             {mainContent}
           </div>
         </div>
