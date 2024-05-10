@@ -196,7 +196,7 @@ function Community(){
         <div >
             <div>
                 <div className={`flexB mobile_search ${selectItem ? 'pa0 maB12' : 'pa12 paT12 maT12 maB36'}`}>
-                    <input className=" textColor" placeholder="通过关键词搜索..." onChange={handleSearch} value={searchText}/>
+                    <input className="font18 textColor" placeholder="通过关键词搜索..." onChange={handleSearch} value={searchText}/>
 
                     {
                         searchText &&
@@ -242,7 +242,7 @@ function Community(){
                     </div> :
                     searchText!='' &&
                     (searchedList.length>0 ) ?
-                    <ul className="searchList maT24">
+                    <ul className="searchList maT24 newest_news_box_content_box">
                             {
                             searchedList.map((item,index)=>{
                                 return(
@@ -250,7 +250,7 @@ function Community(){
                                         <div className="flexS borderR12 bg2 pa12">
                                             <img src={item.imgUrl}/>
                                             <div>
-                                                <h3 className="maB6">{item.title}</h3>
+                                                <h3 className="maB6 textSingeLine">{item.title}</h3>
                                                 <p className="content ellipsis-multiline">{item.content}</p>
                                             </div>
                                         </div>
@@ -356,7 +356,7 @@ function Community(){
                                                 <div className="flexS borderR12 bg2 pa12">
                                                     <img src={item.imgUrl}/>
                                                     <div>
-                                                        <h3 className="maB6">{item.title}</h3>
+                                                        <h3 className="maB6 textSingeLine">{item.title}</h3>
                                                         <p className="content ellipsis-multiline">{item.content}</p>
                                                     </div>
                                                 </div>
