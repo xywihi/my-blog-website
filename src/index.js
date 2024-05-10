@@ -5,11 +5,13 @@ import { Provider } from 'react-redux';
 import store from './store'
 import favicon from './assets/favicon.ico';
 import { SpeedInsights } from "@vercel/speed-insights/react"
+import { Analytics } from "@vercel/analytics/react"
 // const nodeServer = require('./server');
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <App />
       <SpeedInsights />
+      <Analytics/>
     </Provider>
   );
