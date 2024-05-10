@@ -65,7 +65,7 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
     
     return (
         music &&
-        <div className={`smallMusicPlayer ${styles.item2_inner1}`} data-url='https://tse4-mm.cn.bing.net/th/id/OIF-C.yMIHLghWfARYn23xKJFeZgHaG1?pid=ImgDet&rs=1'>
+        <div className={`bg_gray smallMusicPlayer ${styles.item2_inner1}`} data-url='https://tse4-mm.cn.bing.net/th/id/OIF-C.yMIHLghWfARYn23xKJFeZgHaG1?pid=ImgDet&rs=1'>
             <div className={`${styles.playerBox} flexB relative`}>
                 <AudioPlayer showArea={showArea} music={music} time={time} pauseCurrent={pauseCurrent} activeOther={activeOther} pauseMusic={pauseMusic} handleShowArea={handleShowArea} ref={childTranslate} handleRadomMusic={handleRadomMusic}/>
             </div>

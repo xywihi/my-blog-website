@@ -1,8 +1,8 @@
 .logo {
-    width: 32px;
+    width: 28px;
     margin: 0 12px;
     svg{
-        width: 100%;
+        width: 28px;
     }
 }
 
@@ -146,13 +146,16 @@ header {
     }
     .activeNav{
         padding: 0;
+        li{
+            position: relative;
+        }
         &::after{
             content: "";
             position: absolute;
             bottom: 0;
             width: 100%;
             height: 1px;
-            background: #ececec
+            background: #89898938
         }
         &:last-child::after{
             display: none;;
@@ -199,7 +202,7 @@ header {
                 top: calc(100% + 12px);;
                 width: 100%;
                 height: 1px;
-                background: #ececec
+                background: #89898938
                 
             }
         }
