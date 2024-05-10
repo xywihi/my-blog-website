@@ -36,6 +36,7 @@
   "dependencies": {
     "@ionic/react": "^7.3.2",
     "@reduxjs/toolkit": "^1.9.5",
+    "@vercel/speed-insights": "^1.0.10",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "echarts": "^5.4.3",
