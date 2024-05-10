@@ -45,7 +45,7 @@ const ExamCountdown = (props) => {
       }
     return (
         <div style={{position:'relative',width:'100%',height:'100%'}} >
-            <div ref={boxRef} className={ `cardBox bg1 pa24 borderR12 ${styles.item2_inner2}`} onMouseEnter={()=>setShowExams(true)} onMouseLeave={()=>setShowExams(false)} onTouchStart={()=>setShowExams(true)} onTouchEnd={()=>setShowExams(false)}>
+            <div ref={boxRef} className={ `cardBox bg1 pa24 borderR12 ${styles.item2_inner2}`} >
                 <div className={`${styles.editIcon} flexB widthFull pa24`}>
                     {edit ? <span>{ '编辑内容'}</span> :
                     <div style={{width:'16px',height:'16px'}} onClick={e=>openBox(e,boxRef.current)}>

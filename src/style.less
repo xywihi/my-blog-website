@@ -1,6 +1,9 @@
 main{
     padding:24px
 }
+.appOutBox{
+    min-height: 100vh;
+}
 .noticeBtn{
     width: 34px;
     height: 34px;
@@ -50,7 +53,7 @@ aside{
     overflow: hidden;
     height: 0;
     z-index: 99;
-    transition: height .4s ease-in-out;
+    // transition: height .4s ease-in-out;
     &::before{
         pointer-events:none;
         content: "";
@@ -125,7 +128,7 @@ aside{
         }
         li{
             overflow-x: hidden;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #89898938;
             padding: 24px 0;
             h4{
                 font-size: medium;
@@ -158,17 +161,17 @@ aside{
         
     }
 }
-@media screen and (max-width: 1400px) {
-    aside{
-        width: 48px;
-        position: sticky;
-        top: 106px;
-        &:hover{
-            width: calc(100px + 100px);
-        }
-    }
-}
-@media screen and (max-width: 640px) {
+// @media screen and (max-width: 1400px) {
+//     aside{
+//         width: 48px;
+//         position: sticky;
+//         top: 106px;
+//         &:hover{
+//             width: calc(100px + 100px);
+//         }
+//     }
+// }
+@media screen and (max-width: 1020px) {
     main{
         padding:12px
     };
@@ -206,7 +209,7 @@ aside{
     }
     .mobile_Nav_out_box_open{
         height: calc(100vh - 62px);
-        transition: height .4s ease-in-out;
+        // transition: height .4s ease-in-out;
         &::before{
             opacity: 1;
             transition: opacity .4s ease-in-out;

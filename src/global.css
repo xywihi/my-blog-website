@@ -40,7 +40,13 @@ img{
     object-fit: cover;
 }
 
-
+input {
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    /* 其他样式 */
+  }
 .no-select {
     -webkit-user-select: none; /* Safari */
     -moz-user-select: none;    /* Firefox */
@@ -90,6 +96,12 @@ img{
 }
 .widthFull{
     width: 100%;
+}
+.heightFullScreen{
+    height: 100vh;
+}
+.widthFullScreen{
+    width: 100vw;
 }
 .height0{
     height: 0;
@@ -273,6 +285,9 @@ button {
 .maB24{
     margin-bottom: 24px;
 }
+.maB36{
+    margin-bottom: 36px;
+}
 .ma48{
     margin: 48px;
 }
@@ -322,6 +337,9 @@ button {
 }
 .pa12{
     padding: 12px;
+}
+.paT12{
+    padding-top: 12px;
 }
 .paL12{
     padding-left: 12px;
@@ -386,6 +404,9 @@ button {
 }
 .font18{
     font-size: 18px;
+}
+.font20{
+    font-size: 20px;
 }
 .font24{
     font-size: 24px;
@@ -474,6 +495,14 @@ button {
         /*显示省略号*/
         text-overflow: ellipsis;
 }
+/* 三行省略 */
+.ellipsis-multiline {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
 /* 自定义滑动条样式 */
 .scrollbarBox{

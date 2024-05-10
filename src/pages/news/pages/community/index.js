@@ -1,8 +1,22 @@
-import React, {useEffect} from "react";
-import { eyeOutline, calendarOutline,flameOutline,heartOutline,heart } from 'ionicons/icons';
+import React, {useEffect, useState} from "react";
+import { eyeOutline, calendarOutline,flameOutline,heartOutline,heart, search, closeCircle } from 'ionicons/icons';
 import {IonIcon} from "@ionic/react"
 import "./index.less";
+import {scrollToTop, debounce } from "@/util";
 
+
+
+
+const newDebounce = debounce(function (fn){
+    fn&&fn()
+},500)
+const newsList = [
+    {id:0,title:'推动中国金融高质量发展',content:"1月16日，国家主席习近平在中央党校发表重要讲话。习近平强调：要坚定不移走中国特色金融发展之路，推动我国金融高质量发展。",imgUrl:"https://loremflickr.com/473/370/science",likeNum:80,seeNum:320,date:"2024-01-24"},
+    {id:1,title:'2023年中国GDP超126万亿 增长5.2%',content:"17日，国家统计局发布数据初步核算2023年中国国内生产总值（GDP）超126万亿元，比上年增长5.2%。",imgUrl:"https://loremflickr.com/473/370/people",likeNum:80,seeNum:320,date:"2024-01-24"},
+    {id:2,title:'清华毕业生80%都出国了?校方辟谣',content:"近日，清华就业工作会召，清华大学针对网传的“清华毕业生80%都出国”，作出回应。",imgUrl:"https://loremflickr.com/473/370/school",likeNum:80,seeNum:320,date:"2024-01-24"},
+    {id:3,title:'和平统一可能性已丧失?国台办回应',content:"17日，国台办发言人陈斌华就近期两岸热点问题答记者问：我们反对“台独”分裂图谋的行动坚决有力，解决台湾问题的",imgUrl:"https://loremflickr.com/473/370/nation",likeNum:80,seeNum:320,date:"2024-01-24"},
+    {id:4,title:'2023年中国出生人口902万人',content:"1月17日，国家统计局发布数据显示，年末全国人口140967万人，比上年末减少208万人，全年出生人口902万人。",imgUrl:"https://loremflickr.com/473/370/china",likeNum:80,seeNum:320,date:"2024-1-13"},
+]
 function Community(){
     const commentsArr=[
         {
@@ -102,12 +116,20 @@ function Community(){
             imgUrl:"https://tse2-mm.cn.bing.net/th/id/OIP-C.yUorDiY6WO0l_0p-5aNtqQHaHa?w=200&h=200&c=7&r=0&o=5&pid=1.7",
         },
     ]
+    const [searchedList,setSearchedList] = useState([]);
+    const [searchText,setSearchText] = useState('');
+    const [selectItem,setSelectItem] = useState(null);
     useEffect(() => {
-        
-        return () => {
-            
+        if(searchText==''){
+            setSearchedList(old=>{
+                setSelectItem(old=>{
+                    return null;
+                });
+                return []
+            })
         }
-    }, [])
+        
+    }, [searchText])
     const getTimeText=(timeNum)=>{
         let timestamp = new Date().getTime();
         let second = Math.ceil((timestamp-timeNum)/1000);
@@ -134,199 +156,229 @@ function Community(){
         }
         return second+"秒前";
     }
+    
+    const handleSearch=function(e){
+        
+        let eventValue=e.target.value;
+        
+        newDebounce(function (){
+            if(eventValue=='')return;
+            let list = newsList.filter((item,index)=>{
+                return item.title.indexOf(eventValue)!=-1
+            })
+            setSearchedList(oldList=>{
+                setSelectItem(null)
+                return list
+            });
+            // console.log('list');
+        })
+        setSearchText(old=>{
+            if(eventValue!=''){
+                
+                return eventValue
+            }
+            return eventValue
+        
+        })
+        
+    }
+
+    const handleSelectItem = (item)=>{
+        scrollToTop(3.5);
+        setSelectItem(old=>{
+            setSearchText(item.title)
+            return item
+        });
+    }
+    
+    
     return (
-        <div className="community_box">
+        <div >
             <div>
-            <h2 className="maB12">最新动态</h2>
-            <div className="hotestNews_box bg1 borderR12">
-                <div className="hotestNews pa24">
-                    <div className="maB12">
-                        <img className="borderR6"  src={"https://loremflickr.com/473/370/mountain"}/>
-                        <div></div>
-                    </div>
-                    <div className="hotestNews_content_box scrollbarBox">
-                        <h2 className="maB6 fontB">科技前沿 | 《流浪地球2》的这项“黑科技”,获工信部支持</h2>
-                        <hr className="maV12 opacity20"/>
-                        <div className="hotestNews_content_box_text">
-                            <section className="maB12">
-                            2023年电影春节档，《流浪地球2》《满江红》上映数日即以逾10亿元票房一路“领跑”。其中，科幻背景的《流浪地球2》不仅取得了票房的成功，也带火了包括浸没液冷计算机、外骨骼等“黑科技”。
-                            </section>
-                            <section className="maB12">实际上，《流浪地球2》中多次出现的“外骨骼”近年来正逐步开启商业化。</section>
-                            <section className="maB12">
-                            据《中国基金报》刊文介绍，随着感知计算技术和传感系统发展日益成熟，机器人研发方向从人机协作逐步迈向人机融合，逐渐成为人类身体的一部分。
-                            </section>
-                            <section className="maB12">
-                            从流程上看，外骨骼即从依赖硬件传感器收集人体生物电信号，发展成为将硬件客观数据与人体主观信息相结合的新型信息输入方式。
-                            </section>
-                            <section className="maB12">
-                            信息接收后，机器的计算能力与人体的思维能力进行信息处理，再通过机器的算法能力与人体的决策能力互相协调、优化判断后进行智能输出，将人体智能与机器智能相融合，从单向输出转为双向互动，从而形成更高效的人机一体化智能科学系统。
-                            </section>
-                            <section className="maB12">
-                            值得注意的是，就在《流浪地球2》上映前不久，今年1月18日，工业和信息化部等十七部门印发了关于“机器人+”应用行动实施方案的通知。其中也明确提到了对发展外骨骼机器人的支持。
-                            </section>
-                            <section className="maB12">与电影中稍有不同的是，工信部此番实施方案将外骨骼机器人的发展放在养老服务方面。</section>
-                            
+                <div className={`flexB mobile_search ${selectItem ? 'pa0 maB12' : 'pa12 paT12 maT12 maB36'}`}>
+                    <input className=" textColor" placeholder="通过关键词搜索..." onChange={handleSearch} value={searchText}/>
+
+                    {
+                        searchText &&
+                        <div className="search_btn font24 bg4 widthFull paH12 textColorGgray" onClick={()=>setSearchText('')}>
+                            <IonIcon icon={closeCircle} size="36px"></IonIcon>
                         </div>
-                    </div>
+                    }
                 </div>
-                <div className="hotestNews_comment_area bg3 pa24">
-                    <div className="hotestNews_comment_header_box flexB">
-                        <h3 className="maB6 fontB">评论区</h3>
-                        <p>总共120条</p>
-                    </div>
-                    <hr className="maV12 opacity20"/>
-                    <div className="borderR6 hotestNews_comment_area_box scrollbarBox">
-                    <ul className="borderR6 hotestNews_comment_area_box_text">
-                        {commentsArr.map((item,index)=>(
-                            <li key={item.id}>
-                                <img src={item.imgUrl}/>
-                                <div className="widthFull">
-                                    <div className="flexB">
-                                        <div>
-                                            <p className="name textColorGgray2">{item.user}</p>
-                                            <p className="content flexB">{item.content}</p>
+                {
+                    !searchedList.length && searchText && !selectItem && <p className="maB24">没有匹配的资源...</p>
+                }
+                {
+                    selectItem ?
+                    <div className="hotestNews pa24">
+                        <div className="maB12">
+                            <img className="borderR6"  src={selectItem?.imgUrl}/>
+                            <div></div>
+                        </div>
+                        <div className="hotestNews_content_box scrollbarBox">
+                            <h2 className="maB6 fontB">{selectItem?.title}</h2>
+                            <hr className="maV12 opacity20"/>
+                            <div className="hotestNews_content_box_text">
+                                <section className="maB12">
+                                2023年电影春节档，《流浪地球2》《满江红》上映数日即以逾10亿元票房一路“领跑”。其中，科幻背景的《流浪地球2》不仅取得了票房的成功，也带火了包括浸没液冷计算机、外骨骼等“黑科技”。
+                                </section>
+                                <section className="maB12">实际上，《流浪地球2》中多次出现的“外骨骼”近年来正逐步开启商业化。</section>
+                                <section className="maB12">
+                                据《中国基金报》刊文介绍，随着感知计算技术和传感系统发展日益成熟，机器人研发方向从人机协作逐步迈向人机融合，逐渐成为人类身体的一部分。
+                                </section>
+                                <section className="maB12">
+                                从流程上看，外骨骼即从依赖硬件传感器收集人体生物电信号，发展成为将硬件客观数据与人体主观信息相结合的新型信息输入方式。
+                                </section>
+                                <section className="maB12">
+                                信息接收后，机器的计算能力与人体的思维能力进行信息处理，再通过机器的算法能力与人体的决策能力互相协调、优化判断后进行智能输出，将人体智能与机器智能相融合，从单向输出转为双向互动，从而形成更高效的人机一体化智能科学系统。
+                                </section>
+                                <section className="maB12">
+                                值得注意的是，就在《流浪地球2》上映前不久，今年1月18日，工业和信息化部等十七部门印发了关于“机器人+”应用行动实施方案的通知。其中也明确提到了对发展外骨骼机器人的支持。
+                                </section>
+                                <section className="maB12">与电影中稍有不同的是，工信部此番实施方案将外骨骼机器人的发展放在养老服务方面。</section>
+                                
+                            </div>
+                        </div>
+                    </div> :
+                    searchText!='' &&
+                    (searchedList.length>0 ) ?
+                    <ul className="searchList maT24">
+                            {
+                            searchedList.map((item,index)=>{
+                                return(
+                                    <li key={item.id} className="borderR12 bg3" onClick={()=>handleSelectItem(item)}>
+                                        <div className="flexS borderR12 bg2 pa12">
+                                            <img src={item.imgUrl}/>
+                                            <div>
+                                                <h3 className="maB6">{item.title}</h3>
+                                                <p className="content ellipsis-multiline">{item.content}</p>
+                                            </div>
                                         </div>
-                                        <div className="flexB maL12"><span className="maR3 fontSmall">{item.likes ? item.likes : "" }</span><IonIcon icon={item.likes>0?heart:heartOutline} color={"#fff"} size="36px"></IonIcon></div>
-                                    </div>
-                                    <p className="font10 maT3 textColorGgray">{getTimeText(item.time)}</p>
+                                        <div className="bottomContent_box flexB pa12">
+                                            <div className="flexB">
+                                                <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">{item.seeNum}</span></p>
+                                                <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">{item.likeNum}</span></p>
+                                            </div>
+                                            <p className="flexB">
+                                                <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">{item.date}</span>
+                                            </p>
+                                        </div>
+                                    </li>
+                                )   
+                            })
+                            }
+                    </ul> :null
+                    
+
+                }
+            </div>
+            {
+                !searchedList.length && !selectItem &&
+                <div className="community_box">
+                    <div>
+                    <h2 className="maB12">最新动态</h2>
+                    <div className="hotestNews_box bg1 borderR12">
+                        <div className="hotestNews pa24">
+                            <div className="maB12">
+                                <img className="borderR6"  src={"https://loremflickr.com/473/370/mountain"}/>
+                                <div></div>
+                            </div>
+                            <div className="hotestNews_content_box scrollbarBox">
+                                <h2 className="maB6 fontB">科技前沿 | 《流浪地球2》的这项“黑科技”,获工信部支持</h2>
+                                <hr className="maV12 opacity20"/>
+                                <div className="hotestNews_content_box_text">
+                                    <section className="maB12">
+                                    2023年电影春节档，《流浪地球2》《满江红》上映数日即以逾10亿元票房一路“领跑”。其中，科幻背景的《流浪地球2》不仅取得了票房的成功，也带火了包括浸没液冷计算机、外骨骼等“黑科技”。
+                                    </section>
+                                    <section className="maB12">实际上，《流浪地球2》中多次出现的“外骨骼”近年来正逐步开启商业化。</section>
+                                    <section className="maB12">
+                                    据《中国基金报》刊文介绍，随着感知计算技术和传感系统发展日益成熟，机器人研发方向从人机协作逐步迈向人机融合，逐渐成为人类身体的一部分。
+                                    </section>
+                                    <section className="maB12">
+                                    从流程上看，外骨骼即从依赖硬件传感器收集人体生物电信号，发展成为将硬件客观数据与人体主观信息相结合的新型信息输入方式。
+                                    </section>
+                                    <section className="maB12">
+                                    信息接收后，机器的计算能力与人体的思维能力进行信息处理，再通过机器的算法能力与人体的决策能力互相协调、优化判断后进行智能输出，将人体智能与机器智能相融合，从单向输出转为双向互动，从而形成更高效的人机一体化智能科学系统。
+                                    </section>
+                                    <section className="maB12">
+                                    值得注意的是，就在《流浪地球2》上映前不久，今年1月18日，工业和信息化部等十七部门印发了关于“机器人+”应用行动实施方案的通知。其中也明确提到了对发展外骨骼机器人的支持。
+                                    </section>
+                                    <section className="maB12">与电影中稍有不同的是，工信部此番实施方案将外骨骼机器人的发展放在养老服务方面。</section>
+                                    
                                 </div>
-                            </li>
-                        ))}
-                        
-                        
-                    </ul>
+                            </div>
+                        </div>
+                        <div className="hotestNews_comment_area bg3 pa24">
+                            <div className="hotestNews_comment_header_box flexB">
+                                <h3 className="maB6 fontB">评论区</h3>
+                                <p>总共120条</p>
+                            </div>
+                            <hr className="maV12 opacity20"/>
+                            <div className="borderR6 hotestNews_comment_area_box scrollbarBox">
+                            <ul className="borderR6 hotestNews_comment_area_box_text">
+                                {commentsArr.map((item,index)=>(
+                                    <li key={item.id}>
+                                        <img src={item.imgUrl}/>
+                                        <div className="widthFull">
+                                            <div className="flexB">
+                                                <div>
+                                                    <p className="name textColorGgray2">{item.user}</p>
+                                                    <p className="content flexB">{item.content}</p>
+                                                </div>
+                                                <div className="flexB maL12"><span className="maR3 fontSmall">{item.likes ? item.likes : "" }</span><IonIcon icon={item.likes>0?heart:heartOutline} color={"#fff"} size="36px"></IonIcon></div>
+                                            </div>
+                                            <p className="font10 maT3 textColorGgray">{getTimeText(item.time)}</p>
+                                        </div>
+                                    </li>
+                                ))}
+                                
+                                
+                            </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            </div>
-            <div className="newest_news_box">
-                <div className="header_box flexBS maB12">
-                    <h2>社区动态</h2>
-                    <div className="flexB">
-                        <input className="pa12" placeholder="通过关键词搜索..."/>
-                        <div className="search_btn bg4 widthFull paH12 textColorWhite">
-                            搜索
+                    </div>
+                    <div className="newest_news_box">
+                        <div className="header_box flexBS maB12">
+                            <h2>社区动态</h2>
+                            <div className="flexB">
+                                <input className="pa12" placeholder="通过关键词搜索..."/>
+                                <div className="search_btn bg4 widthFull paH12 textColorWhite">
+                                    搜索
+                                </div>
+                            </div>
+                        </div>
+                        <div className="borderR12 newest_news_box_content_outbox scrollbarBox">
+                            <ul className="borderR6 newest_news_box_content_box">
+                                    {
+                                        newsList.map((item,index)=>(
+                                            <li key={item.id} className="borderR12 bg3" onClick={()=>handleSelectItem(item)}>
+                                                <div className="flexS borderR12 bg2 pa12">
+                                                    <img src={item.imgUrl}/>
+                                                    <div>
+                                                        <h3 className="maB6">{item.title}</h3>
+                                                        <p className="content ellipsis-multiline">{item.content}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="bottomContent_box flexB pa12">
+                                                    <div className="flexB">
+                                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">{item.seeNum}</span></p>
+                                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">{item.likeNum}</span></p>
+                                                    </div>
+                                                    <p className="flexB">
+                                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">{item.date}</span>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        ))
+                                    }
+                                    
+                                    
+                            </ul>
                         </div>
                     </div>
                 </div>
-                <div className="borderR12 newest_news_box_content_outbox scrollbarBox">
-                    <ul className="borderR6 newest_news_box_content_box">
-                            <li className="borderR12 bg3">
-                                <div className="flexS borderR12 bg2 pa12">
-                                    <img src={"https://loremflickr.com/473/370/science"}/>
-                                    <div>
-                                        <h3 className="maB6">推动中国金融高质量发展</h3>
-                                        <p className="content">1月16日，国家主席习近平在中央党校发表重要讲话。习近平强调：要坚定不移走中国特色金融发展之路，推动我国金融高质量发展。</p>
-                                    </div>
-                                </div>
-                                <div className="bottomContent_box flexB pa12">
-                                    <div className="flexB">
-                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">320</span></p>
-                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">102</span></p>
-                                    </div>
-                                    <p className="flexB">
-                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">2024-1-13</span>
-                                    </p>
-                                </div>
-                            </li>
-                            <li className="borderR12 bg3">
-                                <div className="flexS borderR12 bg2 pa12">
-                                    <img src={"https://loremflickr.com/473/370/people"}/>
-                                    <div>
-                                        <h3 className="maB6">2023年中国GDP超126万亿 增长5.2%</h3>
-                                        <p className="content">17日，国家统计局发布数据初步核算2023年中国国内生产总值（GDP）超126万亿元，比上年增长5.2%。</p>
-                                    </div>
-                                </div>
-                                <div className="bottomContent_box flexB pa12">
-                                    <div className="flexB">
-                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">320</span></p>
-                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">102</span></p>
-                                    </div>
-                                    <p className="flexB">
-                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">2024-1-13</span>
-                                    </p>
-                                </div>
-                            </li>
-                            <li className="borderR12 bg3">
-                                
-                                <div className="flexS borderR12 bg2 pa12">
-                                    <img src={"https://loremflickr.com/473/370/school"}/>
-                                    <div>
-                                        <h3 className="maB6">清华毕业生80%都出国了?校方辟谣</h3>
-                                        <p className="content">近日，清华就业工作会召，清华大学针对网传的“清华毕业生80%都出国”，作出回应。</p>
-                                    </div>
-                                </div>
-                                <div className="bottomContent_box flexB pa12">
-                                    <div className="flexB">
-                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">320</span></p>
-                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">102</span></p>
-                                    </div>
-                                    <p className="flexB">
-                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">2024-1-13</span>
-                                    </p>
-                                </div>
-                            </li>
-                            <li className="borderR12 bg3">
-                                
-                                <div className="flexS borderR12 bg2 pa12">
-                                    <img src={"https://loremflickr.com/473/370/nation"}/>
-                                    <div>
-                                        <h3 className="maB6">和平统一可能性已丧失?国台办回应</h3>
-                                        <p className="content">17日，国台办发言人陈斌华就近期两岸热点问题答记者问：我们反对“台独”分裂图谋的行动坚决有力，解决台湾问题的</p>
-                                    </div>
-                                </div>
-                                <div className="bottomContent_box flexB pa12">
-                                    <div className="flexB">
-                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">320</span></p>
-                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">102</span></p>
-                                    </div>
-                                    <p className="flexB">
-                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">2024-1-13</span>
-                                    </p>
-                                </div>
-                            </li>
-                            <li className="borderR12 bg3">
-                                
-                                <div className="flexS borderR12 bg2 pa12">
-                                <img src={"https://loremflickr.com/473/370/china"}/>
-                                <div>
-                                    <h3 className="maB6">2023年中国出生人口902万人</h3>
-                                    <p className="content">1月17日，国家统计局发布数据显示，年末全国人口140967万人，比上年末减少208万人，全年出生人口902万人。</p>
-                                </div>
-                                </div>
-                                <div className="bottomContent_box flexB pa12">
-                                    <div className="flexB">
-                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">320</span></p>
-                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">102</span></p>
-                                    </div>
-                                    <p className="flexB">
-                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">2024-1-13</span>
-                                    </p>
-                                </div>
-                            </li>
-                            <li className="borderR12 bg3">
-                                <div className="flexS borderR12 bg2 pa12">
-                                <img src={"https://loremflickr.com/473/370/china"}/>
-                                <div>
-                                    <h3 className="maB6">2023年中国出生人口902万人</h3>
-                                    <p className="content">1月17日，国家统计局发布数据显示，年末全国人口140967万人，比上年末减少208万人，全年出生人口902万人。</p>
-                                </div>
-                                </div>
-                                <div className="bottomContent_box flexB pa12">
-                                    <div className="flexB">
-                                        <p className="maR12 flexB"><IonIcon icon={eyeOutline} size="36px"></IonIcon><span className="maL6">320</span></p>
-                                        <p className="flexB"><IonIcon icon={flameOutline} size="36px"></IonIcon><span className="maL6">102</span></p>
-                                    </div>
-                                    <p className="flexB">
-                                        <IonIcon icon={calendarOutline} size="36px"></IonIcon><span className="maL6">2024-1-13</span>
-                                    </p>
-                                </div>
-                            </li>
-                            
-                            
-                    </ul>
-                </div>
-            </div>
+            }
         </div>
     )
 }

@@ -2,15 +2,19 @@ import {ListenScroll} from './domFuncs'
 
 
 // 防抖函数
-function debounce(this: any, fn:Function,delay:number) {
-    var timer:NodeJS.Timeout;
-    return () =>{
+function debounce( fn:Function,delay:number) {
+    let timer:NodeJS.Timeout=null;
+    return (fnn) =>{
         //清除上一次的延时器
-        clearTimeout(timer);
+        if(timer){
+            clearTimeout(timer);
+            // return;
+        }
         //重新设置新的延时器
         timer = setTimeout(() => {
             //修改this指向问题
-            fn.apply(this)
+            // fn.apply(this,value)
+            fn(fnn)
         }, delay);
     }
 }
@@ -94,7 +98,7 @@ function exitFullScreen() {
 // 开关卡片
 function openBox(e:Element & Event,boxElement:any,close:boolean,num=2){
     e.stopPropagation();
-    e.preventDefault();
+    // e.preventDefault();
     // let boxElement = boxRef.current;
     if(e.target instanceof Element && e.target?.getBoundingClientRect().x!= boxElement?.getBoundingClientRect().x){
         let boxParentElement = boxElement?.parentElement;

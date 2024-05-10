@@ -151,6 +151,7 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
             theme={theme}
           />
         </aside>
+        
         <div className="contentBox flexFull scrollbarBox">
           <Notices manageNotices={notices.hidde} />
           <Suspense fallback={<div>Loading...</div>}>
@@ -180,7 +181,7 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
     <HashRouter basename="/">
       <ErrorBoundary>
         <div className={theme}>
-          <div className="bg2_blue project textColor">
+          <div className="bg2_blue project textColor appOutBox">
             <header className="flexB pa16 bg1" >
               <div className="logo textColorWhite flexS" onClick={handleOpenMobileNav}>
                 {/* <svg data-name="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 86.6"><polygon points="72.79 66.96 76.19 72.86 23.81 72.86 50 27.49 65.92 55.06 77.82 48.19 50 0 0 86.6 100 86.6 84.69 60.09 72.79 66.96"/><circle cx="50" cy="59.11" r="6.87"/></svg> */}
