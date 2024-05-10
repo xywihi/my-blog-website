@@ -38,7 +38,9 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
     useEffect(() => {
         if(music) {
             showArea && enterFullScreen()
-            document.body.style.overflow = showArea ? 'hidden' : 'auto';
+            // document.body.style.overflow = showArea ? 'hidden' : 'auto';
+            document.querySelector("html").style.overflow = showArea?"hidden":"auto";
+            //禁止页面滚动
         }
     }, [showArea])
     useEffect(() => {
@@ -99,7 +101,8 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
         }
         let difference = e.touches[0].pageY-startMove;
         if(difference>80){
-            handleShowArea(false)
+            handleShowArea(false);
+            exitFullScreen();
         }
     }
     const handleCloseAreaEnd = (e)=>{

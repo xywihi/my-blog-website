@@ -70,7 +70,6 @@ function enterFullScreen() {
  
 // 函数用于退出全屏
 function exitFullScreen() {
-    debugger;
     var element:any = document.documentElement; //若要全屏页面中div，var element= document.getElementById("divID");   
         //IE ActiveXObject  
         // if (window['ActiveXObject']) {
