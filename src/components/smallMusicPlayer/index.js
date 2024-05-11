@@ -8,6 +8,13 @@ import {playMusic,setMusicTime,pauseMusic,handleShowArea} from "@/pages/home/sto
 import AudioPlayerOne from "./components/AudioPlayerOne";
 import AudioPlayerTwo from "./components/AudioPlayerTwo";
 import musicsData from '@/api/data/musics.json';
+// 打包需要提前引入
+import musc from "@/assets/audio/shine.mp3"
+import news from "@/assets/audio/new.mp3"
+import starts from "@/assets/audio/starts.mp3"
+import haojiubujian from "@/assets/audio/haojiubujian.mp3"
+import hongmeihuaerkai from "@/assets/audio/hongmeihuaerkai.mp3"
+import ningyuan from "@/assets/audio/ningyuan.mp3"
 const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic,handleShowArea,setMusicTime}) => {
     const [startMove,setStartMove] = useState(0)
     const [activeOther,] = useState(true)
@@ -109,16 +116,16 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
                     <AudioPlayerOne showArea={showArea} music={music} time={time} pauseCurrent={pauseCurrent} activeOther={activeOther} pauseMusic={pauseMusic} handleShowArea={handleShowArea} ref={childTranslate} handleRadomMusic={handleRadomMusic}/>
                 </div>
             </div>}
-            <div >
+            <div onTouchStart={handleCloseAreaStart} onTouchEnd={handleCloseAreaEnd} onTouchMove={handleCloseArea} onDoubleClick={handleCloseArea}  className={`${styles.showAreaBox} ${showArea ? styles.showArea : styles.showAreaHide}`} >
                 {music?.imgUrl && <div className={styles.showArea_contentBox_backImg} style={{backgroundImage: `url(${music?.imgUrl})`}}></div>}
                 <div className={styles.showArea_contentBox} >
                     
-                    {/* <div className={`${styles.audioPlayerImg} maR12 ${styles[`${music ?  'active' :  'stop' }Audio`]}`}>
+                    <div className={`${styles.audioPlayerImg} maR12 ${styles[`${music ?  'active' :  'stop' }Audio`]}`}>
                         <img className={(!pauseCurrent && music)? 'running' : 'paused'} src={music?.imgUrl} />
                         {(music) && <UpDown active={!pauseCurrent} length={20}/>}
-                    </div> */}
+                    </div>
                     <div className={styles.showArea_contentBox_rightBox}>
-                        {/* <div>
+                        <div>
                             <h2 className="fontB">{music?.name}</h2>
                             <p className={`${styles.singer} maT6`}>{music?.singer}</p>
                         </div>
@@ -137,7 +144,7 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
                                     </li>)}
                                 </ul>
                             }
-                        </div> */}
+                        </div>
                         <div className={styles.audioPlayer}>
                             <div className={`${styles.playerBox} flexB maB12 relative`}>
                                 <AudioPlayerTwo music={music} time={time} pauseCurrent={pauseCurrent} ref={childTranslate} playMusic={playMusic} setMusicTime={setMusicTime} pauseMusic={pauseMusic} handleRadomMusic={handleRadomMusic}/>
