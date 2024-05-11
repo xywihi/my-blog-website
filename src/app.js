@@ -168,7 +168,7 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
     []
   );
   const handleScrollToTop = e => {
-    scrollToTop(3.5)
+    scrollToTop(0)
   }
   return (
     <HashRouter basename="/">

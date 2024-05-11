@@ -1,4 +1,4 @@
-import {ListenScroll} from './domFuncs'
+import {scrollToTop} from './domFuncs'
 
 
 // 防抖函数
@@ -146,11 +146,10 @@ function openBox(e:Element & Event,boxElement:any,close:boolean,num=2){
                 boxElement.className += ` cardBoxShadow`;
                 boxParentElement.className += ` cardOutBox`;
                 // 页面滚动到顶部
-                let distance = boxElement?.getBoundingClientRect().top - 74
-                let listenScroll =  new ListenScroll(document.documentElement)
-                listenScroll.handleScrollByDistance(distance,'ver','bottom')
-                ;
-
+                // let distance = boxElement?.getBoundingClientRect().top - 74
+                // let listenScroll =  new ListenScroll(document.documentElement)
+                // listenScroll.handleScrollByDistance(distance,'ver','bottom')
+                scrollToTop(1125)
                 // 判断是否超出屏幕
                 
                 if(boxElement?.getBoundingClientRect().x + boxWidth*num > screenWidth){

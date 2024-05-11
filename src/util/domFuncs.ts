@@ -134,9 +134,11 @@ type ScrollState = {
   
 
   // 滚动到屏幕顶部
-  export function scrollToTop(power:number=2.5) {
-    let listenScroll =  new ListenScroll(document.documentElement)
-    // 当前页面滚动的距离
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-    listenScroll.handleScrollByDistance(scrollTop+12,'ver','top',power)
+  export function scrollToTop(distance:number=2.5) {
+    
+    // let listenScroll =  new ListenScroll(document.documentElement)
+    // // 当前页面滚动的距离
+    // let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+    // listenScroll.handleScrollByDistance(scrollTop+12,'ver','top',power)
+    window.scrollTo(0, distance);
   }
