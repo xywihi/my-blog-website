@@ -26,7 +26,7 @@ import MaskElement from "@/components/MaskElement";
 // import Notices from "./components/notices"
 const Notices = React.lazy(() => import("./components/notices"));
 const Home = React.lazy(() => import("./pages/home"));
-const News = React.lazy(() => import("./pages/news"));
+const News = React.lazy(() => import("./pages/news?:id"));
 const User = React.lazy(() => import("./pages/user"));
 const Works = React.lazy(() => import("./pages/works"));
 const ErrorBoundary = React.lazy(() => import("./components/ErrorBoundary"));

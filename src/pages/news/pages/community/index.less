@@ -16,7 +16,7 @@
     }
     .hotestNews_content_box{
         height: calc(100% - 220px);
-        overflow-y: auto;
+        overflow-y: hidden;
         padding-right: 12px;
         
         &:hover{
@@ -243,7 +243,11 @@
     }
     .hotestNews {
         padding: 12px;
+        .hotestNews_content_box{
+            padding-right: 0;
+        }
     }
+    
     .community_box{
         .header_box{
             margin-bottom: 24px;
@@ -252,6 +256,7 @@
     .community_box .hotestNews_box{
         grid-template-columns: 1fr;
     }
+    
     .hotestNews_comment_area{
         display: none;
     }

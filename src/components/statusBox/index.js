@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from "react"
 import styles from './style.module.less'
 import OwnError from "./components/OwnError";
 import OwnWarning from "./components/OwnWarning";
+import OwnSucceed from "./components/OwnSucceed";
 const StatusBox =({statusBoxData,devastateEl}) => {
     const ref= useRef(null);
     let timer=null;
@@ -19,7 +20,7 @@ const StatusBox =({statusBoxData,devastateEl}) => {
     
     return (
         <div ref={ref} className={`${styles.statusBoxBox}`}>
-            {statusBoxData.status==='error' ? <OwnError {...statusBoxData}/>:<OwnWarning {...statusBoxData}/>}
+            {statusBoxData.status==='error' ? <OwnError {...statusBoxData}/>:statusBoxData.status==='warning'?<OwnWarning {...statusBoxData}/>:<OwnSucceed {...statusBoxData}/>}
         </div>
     )
 }

@@ -168,6 +168,34 @@ function openBox(e:Element & Event,boxElement:any,close:boolean,num=2){
     }
 }
 
+// 获取格式化时间
+
+const getTimeText=(timeNum)=>{
+    let timestamp = new Date().getTime();
+    let second = Math.ceil((timestamp-timeNum)/1000);
+    if(second>59){
+        let minutes = Math.ceil(second/60);
+        if(minutes>60){
+            let hours = Math.ceil(minutes/60);
+            if(hours>24){
+                let days = Math.ceil(hours/24);
+                if(days>3){
+                    let date=(new Date(timeNum).getMonth()+1)+"/"+new Date(timeNum).getDate();
+                    if(new Date().getFullYear()!=new Date(timeNum).getFullYear()){
+                        let date=(new Date(timeNum).getFullYear())+"/"+(new Date(timeNum).getMonth()+1)+"/"+new Date(timeNum).getDate();
+                        return date;
+                    }
+                    return date;
+                    
+                }
+                return days+"天前";
+            }
+            return hours+"小时前";
+        }
+        return minutes+"分钟前";
+    }
+    return second+"秒前";
+}
 
 //导出函数
 export {
@@ -177,4 +205,5 @@ export {
     enterFullScreen,
     exitFullScreen,
     openBox,
+    getTimeText
 }
