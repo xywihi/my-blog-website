@@ -208,7 +208,19 @@ function Community(){
         });
     }
     
-    
+    const handleShareNews = ()=>{
+        
+        if (navigator.share) {
+            navigator.share(selectItem).then(() => {
+                console.log('Successful share');
+            }).catch(error => {
+                console.log('Error sharing:', error);
+            });
+        } else {
+            // 如果不支持Web Share API，可以考虑使用其他转发方案，例如通过微信等应用的JavaScript SDK
+            // 这通常需要额外的集成工作，并且可能涉及到OAuth等安全措施
+        }
+    }
     return (
         <div className={`community_out_box ${selectItem ? 'paT48' : 'paT64'}`}>
             <div>
@@ -302,7 +314,7 @@ function Community(){
                         <p className="maT6">{selectItem.seeNum}</p>
                     </div>
                     <div>
-                        <div><IonIcon icon={arrowRedo} className=""></IonIcon></div>
+                        <div><IonIcon icon={arrowRedo} className="" onClick={handleShareNews}></IonIcon></div>
                         <p className="maT6">{selectItem.seeNum}</p>
                     </div>
                 </div>

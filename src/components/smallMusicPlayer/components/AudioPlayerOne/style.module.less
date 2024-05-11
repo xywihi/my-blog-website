@@ -4,8 +4,8 @@
     margin-right: 12px;
     .imgBox{
         img{
-            width:48px;
-            height:48px;
+            width:42px;
+            height:42px;
             border-radius: 50px;
             margin-top: 4px;
             animation: audioPlayer 3.5s linear;
@@ -44,6 +44,11 @@
         grid-template-rows: 1fr 20px;
         grid-template-areas: "name" "lyric";
     };
+    
+    .musicName{
+        margin-right: 12px;
+        text-wrap: nowrap;
+    }
 }
 .stopAudio{
     transform: scale(0);
@@ -58,13 +63,10 @@
         animation: none;
     }
 }
-.musicName{
-    min-width: 100px;
-    margin-right: 12px;
-}
 .lyricBox{
     font-size: 12px;
     opacity: .6;
+    text-wrap: nowrap;
 }
 @keyframes audioPlayer {
     0% {

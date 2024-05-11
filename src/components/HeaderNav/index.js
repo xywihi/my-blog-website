@@ -18,7 +18,16 @@ function HeaderNav({changeTheme, direction,routes}){
     useEffect(()=>{
         // console.log("location.hash",location.hash.replace("#/",""))
         setCurrentRoute(location.hash.replace("#",""))
+        // console.log("location.hash------------",location.hash)
     },[])
+
+    useEffect(()=>{
+        console.log("location.hash",location.hash)
+        // let newStr= location.hash
+        // setCurrentRoute(newStr.replace("#",""))
+    },[location.hash])
+
+
     const logout = () => {
         newLocalStorage.delete("token")
         navigate(location.hash)

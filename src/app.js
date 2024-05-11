@@ -28,6 +28,7 @@ const Notices = React.lazy(() => import("./components/notices"));
 const Home = React.lazy(() => import("./pages/home"));
 const News = React.lazy(() => import("./pages/news"));
 const User = React.lazy(() => import("./pages/user"));
+const Works = React.lazy(() => import("./pages/works"));
 const ErrorBoundary = React.lazy(() => import("./components/ErrorBoundary"));
 const newLocalStorage = new LocalStorage();
 const test_notices = [
@@ -159,6 +160,7 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
                 Component={() => RouteGuard(<News key="news" />)}
               ></Route>
               <Route path="/user" Component={() => <User key="user" />}></Route>
+              <Route path="/works" Component={() => <Works key="works" />}></Route>
               <Route path="/*" Component={() => <Navigate to="/" />}></Route>
             </Routes>
           </Suspense>

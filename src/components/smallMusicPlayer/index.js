@@ -1,50 +1,71 @@
-import React,{useEffect, useState, createRef} from "react";
+import React,{useEffect, useState, createRef,useRef} from "react";
 import styles from './styles.module.less'
+import OwnSlider from "@/components/OwnSlider"
+import UpDown from "../animaIcons/upDown";
 import {IonIcon} from "@ionic/react"
 import { play, pause, shuffle } from 'ionicons/icons';
 import {connect} from "react-redux"
-import {playMusic,pauseMusic,handleShowArea} from "@/pages/home/store/actions"
-import musc from "@/assets/audio/shine.mp3"
-import news from "@/assets/audio/new.mp3"
-import starts from "@/assets/audio/starts.mp3"
-import haojiubujian from "@/assets/audio/haojiubujian.mp3"
-import hongmeihuaerkai from "@/assets/audio/hongmeihuaerkai.mp3"
-import ningyuan from "@/assets/audio/ningyuan.mp3"
-import AudioPlayer from "./components/audioPlayer"
+import {handleTime,handleTimeToNumber,enterFullScreen,exitFullScreen} from "@/util/tools.ts"
+import {playMusic,setMusicTime,pauseMusic,handleShowArea} from "@/pages/home/store/actions"
+import AudioPlayerOne from "./components/AudioPlayerOne";
+import AudioPlayerTwo from "./components/AudioPlayerTwo";
 import musicsData from '@/api/data/musics.json';
-// const audios = [{name:"Shine",resource:musc,pause:false,id:0},{name:"New Normal",resource:news,pause:false,id:1},{name:"we'll be the starts",resource:starts,pause:false,id:2}]
-const r = [
-    '0b368fe8fd8c4dd6b7d438dd52d46517', 
-    'c44fcb6d5b26c0ca959900bd44a28c0f', 
-    'd3cbfa9181638bfb3fce57ad465f6f34', 
-    'a4d8daef1e667c94cc0ba809ad431c85', 
-    '5a3eb430dfccaf6009ee71f639777b93',
-    '563030d1b8404cfdc47722a518e965ea', 
-    '024b3e2370264bb184a9a3de82f49efe', 
-    '2b44e0f601be6726a7dd30f52cb9b15f', 
-    '8b4d15db171121c3b42381be625338ca', 
-    'fd4e02f1434868f91c1ceefcfeb516d1',
-    '69a5b4760d157cf53a493ea0a5ae67c3',
-    'a46b97a67ec59c0f060e6387cfb1c244',
-    '83305e9e1a3591b3fb56b497456a6b18',
-    'a9e931e3e10ed43f0ca2a15b96453e86',
-    '9f02ab453797f2d13104ef8e2bbaac6d',
-    'acb5458baa3ca85aaf7dc75b1c8440ee',
-    'a4d8daef1e667c94cc0ba809ad431c85',
-    'cf3a18fb9b1634e0db7872258cd82bbb',
-    'cf3a18fb9b1634e0db7872258cd82bbb',
-]
-const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic,handleShowArea}) => {
+const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic,handleShowArea,setMusicTime}) => {
+    const [startMove,setStartMove] = useState(0)
     const [activeOther,setActiveOther] = useState(true)
+    const [currentLyric,setCurrentLyric] = useState([])
     const childTranslate = createRef(null)
-      
+    const ownRef = useRef()
     useEffect(() => {
         //获取当前路由
       // console.log('-------+++++++++++++++++++++++',window.location.hash)
-        getMusics()
+        document.addEventListener('fullscreenchange', function(event) {
+            if (!document.fullscreenElement) {
+            // 退出全屏操作
+            handleShowArea(false)
+            }
+        });
         return ()=>{
         }
     }, [])
+    useEffect(() => {
+        let newStrArr = music?.lyric ? music.lyric.split("|").map((item,index)=>{
+            let newItem = item.split("-")
+            return ({
+                lineLyric:newItem[1],
+                time:handleTimeToNumber(newItem[0])})
+        }) : [];
+        setCurrentLyric(newStrArr)
+    }, [music])
+    useEffect(() => {
+        if(music) {
+            showArea && enterFullScreen()
+            // document.body.style.overflow = showArea ? 'hidden' : 'auto';
+            document.querySelector("html").style.overflow = showArea?"hidden":"auto";
+            //禁止页面滚动
+        }
+    }, [showArea])
+    useEffect(() => {
+        if(!music?.lyric) return;
+        currentLyric.some((item,index)=>{
+            let toMove = time.currentTime>=item.time&&time.currentTime<=(currentLyric[index+1]?currentLyric[index+1].time:time.duration);
+            if(toMove){
+                ownRef.current?.scrollTo({
+                    top: index*27,
+                    left: 0,
+                    behavior: 'smooth'
+                })
+            };
+            return toMove;
+        })
+        if(time.currentTime===time.duration){
+            ownRef.current?.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            })
+        }
+    }, [time])
     const handleRadomMusic = function(){
         const randomNum = Math.floor(Math.random() * musicsData.length);
         let radomMusic = musicsData[randomNum]
@@ -62,14 +83,95 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
         // const data = await require.get(URL)
         // // console.log(data)
     }
-    
+    const handleChangeTime = (proportion)=>{
+        if(childTranslate.current.el){
+            childTranslate.current.el.pause()
+            childTranslate.current.el.currentTime = time.duration*proportion;
+            childTranslate.current.el.play().then(res=>{
+                console.log("播放成功")
+                pauseMusic(false)
+            }).catch(err=>{
+                // console.log(err)
+            })
+        }
+
+    }
+    const handleCloseAreaStart = (e)=>{
+        setStartMove(e.touches[0].pageY)
+    }
+    const handleCloseArea = (e)=>{
+        if(!e.touches?.[0]){
+            handleShowArea(false)
+            exitFullScreen();
+            return
+        }
+        let difference = e.touches[0].pageY-startMove;
+        if(difference>80){
+            handleShowArea(false);
+            exitFullScreen();
+        }
+    }
+    const handleCloseAreaEnd = (e)=>{
+        setStartMove(0)
+    }
     return (
-        music &&
-        <div className={`bg_gray smallMusicPlayer ${styles.item2_inner1}`} data-url='https://tse4-mm.cn.bing.net/th/id/OIF-C.yMIHLghWfARYn23xKJFeZgHaG1?pid=ImgDet&rs=1'>
-            <div className={`${styles.playerBox} flexB relative`}>
-                <AudioPlayer showArea={showArea} music={music} time={time} pauseCurrent={pauseCurrent} activeOther={activeOther} pauseMusic={pauseMusic} handleShowArea={handleShowArea} ref={childTranslate} handleRadomMusic={handleRadomMusic}/>
+        <>
+            {music &&
+            <div className={`bg_gray smallMusicPlayer`} data-url='https://tse4-mm.cn.bing.net/th/id/OIF-C.yMIHLghWfARYn23xKJFeZgHaG1?pid=ImgDet&rs=1'>
+                <div className={`${styles.playerBox} flexB relative`}>
+                    <AudioPlayerOne showArea={showArea} music={music} time={time} pauseCurrent={pauseCurrent} activeOther={activeOther} pauseMusic={pauseMusic} handleShowArea={handleShowArea} ref={childTranslate} handleRadomMusic={handleRadomMusic}/>
+                </div>
+                
+            </div>}
+            <div onTouchStart={handleCloseAreaStart} onTouchEnd={handleCloseAreaEnd} onTouchMove={handleCloseArea} onDoubleClick={handleCloseArea}  className={`${styles.showAreaBox} ${showArea ? styles.showArea : styles.showAreaHide}`} >
+                {music?.imgUrl && <div className={styles.showArea_contentBox_backImg} style={{backgroundImage: `url(${music?.imgUrl})`}}></div>}
+                <div className={styles.showArea_contentBox} >
+                    
+                    <div className={`${styles.audioPlayerImg} maR12 ${styles[`${music ?  'active' :  'stop' }Audio`]}`}>
+                        <img className={(!pauseCurrent && music)? 'running' : 'paused'} src={music?.imgUrl} />
+                        {(music) && <UpDown active={!pauseCurrent} length={20}/>}
+                    </div>
+                    <div className={styles.showArea_contentBox_rightBox}>
+                        <div>
+                            <h2 className="fontB">{music?.name}</h2>
+                            <p className={`${styles.singer} maT6`}>{music?.singer}</p>
+                        </div>
+                        <div ref={ownRef} className={`${styles.lyrics} scrollbarBox`}>
+                            {
+                                currentLyric.length===0 ? <div className={styles.noLyric}>暂无歌词</div> :
+                                <ul>
+                                    {currentLyric.map((item,index)=>
+                                    <li className={
+                                        (time.currentTime>=Number(item.time) && 
+                                        time.currentTime<=((currentLyric[index+1] ? Number(currentLyric[index+1].time):time.duration)) ? 
+                                        styles.text_active : styles.text_default)} 
+                                        key={index}
+                                    >
+                                            {item.lineLyric}
+                                    </li>)}
+                                </ul>
+                            }
+                        </div>
+                        <div className={styles.audioPlayer}>
+                            <div className={`${styles.playerBox} flexB maB12 relative`}>
+                                <AudioPlayerTwo music={music} time={time} pauseCurrent={pauseCurrent} ref={childTranslate} playMusic={playMusic} setMusicTime={setMusicTime} pauseMusic={pauseMusic} handleRadomMusic={handleRadomMusic}/>
+                            </div>
+                            <div className={styles.progressBar}>
+                                <div className="widthFull">
+                                    <OwnSlider pauseMusic={pauseMusic} handleChangeTime={handleChangeTime} {...time}/>
+                                    <div className="flexB maT24">
+                                        <span className="font14">{handleTime (time.currentTime)}</span>
+                                        
+                                        <span className="font14">{handleTime (time.currentTime-time.duration)}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                                                              
+                </div>
             </div>
-        </div>
+        </>
+        
     )
 }
 
@@ -82,7 +184,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
     playMusic,
     pauseMusic,
-    handleShowArea
+    handleShowArea,
+    setMusicTime
 };
 
 

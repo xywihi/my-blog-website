@@ -48,7 +48,7 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
         currentLyric.some((item,index)=>{
             let toMove = time.currentTime>=item.time&&time.currentTime<=(currentLyric[index+1]?currentLyric[index+1].time:time.duration);
             if(toMove){
-                ownRef.current.scrollTo({
+                ownRef.current?.scrollTo({
                     top: index*27,
                     left: 0,
                     behavior: 'smooth'
@@ -57,7 +57,7 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
             return toMove;
         })
         if(time.currentTime===time.duration){
-            ownRef.current.scrollTo({
+            ownRef.current?.scrollTo({
                 top: 0,
                 left: 0,
                 behavior: 'smooth'
@@ -68,16 +68,7 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
     const changeAudio = (item)=>{
         let newItem = {...item,pause: false}
         playMusic(newItem)
-        // childTranslate.current.play(newItem,(false))
-        // childTranslate.current.play(newItem,(!music || item.id!=music.id))
-        // music && setActiveOther(item.id!=music.id)
     }
-    // const getMusics = async ()=>{
-    //     // const require = new HttpRequire;
-    //     // let URL = "https://www.jango.com/music/The+Weeknd"
-    //     // const data = await require.get(URL)
-    //     // console.log(data)
-    // }
     const handleShowMusicArea = (proportion)=>{
     }
     const handleChangeTime = (proportion)=>{
@@ -147,7 +138,7 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
                     </li>)}
                 </ul>
             </div>
-            <div className={`${styles.showAreaBox} ${showArea ? styles.showArea : styles.showAreaHide}`} >
+            {/* <div className={`${styles.showAreaBox} ${showArea ? styles.showArea : styles.showAreaHide}`} >
                 {music?.imgUrl && <div className={styles.showArea_contentBox_backImg} style={{backgroundImage: `url(${music?.imgUrl})`}}></div>}
                 <div className={styles.showArea_contentBox} >
                     
@@ -193,7 +184,7 @@ const MusicPlayer = ({music,time,pauseCurrent,showArea,playMusic,setMusicTime,pa
                         </div>
                     </div>                                                                              
                 </div>
-            </div>
+            </div> */}
             
         </div>
     )

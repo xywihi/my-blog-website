@@ -4,7 +4,7 @@ import UpDown from "../../../animaIcons/upDown";
 import {IonIcon} from "@ionic/react"
 import { play, pause, shuffle } from 'ionicons/icons';
 import { handleTime, handleTimeToNumber } from '@/util/tools.ts';
-const AudioPlayer = ({time,pauseCurrent,pauseMusic,showArea,handleRadomMusic,handleShowArea,music},ref) => {
+const AudioPlayerOne = ({time,pauseCurrent,pauseMusic,showArea,handleRadomMusic,handleShowArea,music},ref) => {
     let ownTimer=null;
     const ownRef = useRef()
     const [currentLyric,setCurrentLyric] = useState([])
@@ -61,10 +61,10 @@ const AudioPlayer = ({time,pauseCurrent,pauseMusic,showArea,handleRadomMusic,han
             }
             <div className={styles.audioPlayerInfo}>
                 <div className='flexS'>
-                    <div className='musicName maR12 font14 fontB'>{music ? music.name : "-"}</div>
-                    <div className='fontSmall gray'>
+                    <span className={`${styles.musicName} maR12 font14 fontB`}>{music ? music.name : "-"}</span>
+                    <span className='fontSmall gray'>
                         {`${handleTime(time.currentTime)}/${handleTime (time.currentTime-time.duration)}`}
-                    </div>
+                    </span>
                 </div>
                 <div className={styles.lyricBox}>
                     {
@@ -91,4 +91,4 @@ const AudioPlayer = ({time,pauseCurrent,pauseMusic,showArea,handleRadomMusic,han
 
 
 
-export default forwardRef(AudioPlayer);
+export default forwardRef(AudioPlayerOne);

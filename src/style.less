@@ -1,6 +1,8 @@
 main{
     padding:24px
 }
+
+
 .appOutBox{
     min-height: 100vh;
 }
@@ -139,16 +141,7 @@ aside{
     }
 }
 
-// @media screen and (max-width: 1400px) {
-//     aside{
-//         width: 48px;
-//         position: sticky;
-//         top: 106px;
-//         &:hover{
-//             width: calc(100px + 100px);
-//         }
-//     }
-// }
+
 @media screen and (max-width: 1020px) {
     main{
         padding:12px
@@ -163,25 +156,7 @@ aside{
     aside{
         display: none;
     }
-    .smallMusicPlayer{
-        position: fixed;
-        bottom: 5px;
-        left: 10px;
-        width: calc(100vw - 20px);
-        height: 68px;
-        padding: 12px;
-        box-sizing: border-box;
-        z-index: 100;
-        border-radius: 12px;
-        &>div{
-            width: 100%;
-            &>div{
-                width: 100%;
-                display: grid;
-                grid-template-columns: auto 46px;
-            }
-        }
-    }
+    
     .mobile_Nav_out_box{
         display: block;
     }
@@ -227,3 +202,29 @@ aside{
     // }
 }
 
+@media screen and (min-width: 640px) {
+    .smallMusicPlayer{
+        background:none!important;
+    }
+}
+@media screen and (max-width: 640px) {
+    .smallMusicPlayer{
+        position: fixed;
+        bottom: 5px;
+        left: 10px;
+        width: calc(100vw - 20px);
+        height: 68px;
+        padding: 12px;
+        box-sizing: border-box;
+        z-index: 100;
+        border-radius: 12px;
+        &>div{
+            width: 100%;
+            &>div{
+                width: 100%;
+                display: grid;
+                grid-template-columns: auto 46px;
+            }
+        }
+    }
+}

@@ -3,18 +3,19 @@ import styles from './style.module.less';
 import {IonIcon} from "@ionic/react";
 import { play, pause,shuffle, playBack, playForward, repeatOutline, returnDownBackOutline, volumeHighOutline, volumeMuteOutline } from 'ionicons/icons';
 import musicsData from '@/api/data/musics.json';
-const AudioPlayer = ({music,time,pauseCurrent,playMusic,pauseMusic,setMusicTime,handleRadomMusic},ref) => {
+const AudioPlayerTwo = ({music,time,pauseCurrent,playMusic,pauseMusic,setMusicTime,handleRadomMusic},ref) => {
     const ownRef = useRef();
     const [playType,setPlayType] = useState('normal')
     const [volume,setVolume] = useState(true)
     useEffect(()=>{
-        ownRef.current && ownRef.current?.addEventListener('pause',()=>{
-            pauseMusic(true)
-        });
-        ownRef.current && ownRef.current?.addEventListener('play',()=>{
-            console.log('play')
-            pauseMusic(false)
-        });
+        // ownRef.current && ownRef.current?.addEventListener('pause',()=>{
+        //     console.log('pause')
+        //     pauseMusic(true)
+        // });
+        // ownRef.current && ownRef.current?.addEventListener('play',()=>{
+        //     console.log('play')
+        //     pauseCurrent && pauseMusic(false)
+        // });
     },[])
     useEffect(()=>{
         if(time.duration>0 && time.currentTime===time.duration){
@@ -129,4 +130,4 @@ const AudioPlayer = ({music,time,pauseCurrent,playMusic,pauseMusic,setMusicTime,
 }
 
 
-export default forwardRef(AudioPlayer);
+export default forwardRef(AudioPlayerTwo);
