@@ -29,6 +29,7 @@ const Home = React.lazy(() => import("./pages/home"));
 const News = React.lazy(() => import("./pages/news?:id"));
 const User = React.lazy(() => import("./pages/user"));
 const Works = React.lazy(() => import("./pages/works"));
+const Cards = React.lazy(() => import("./pages/cards"));
 const ErrorBoundary = React.lazy(() => import("./components/ErrorBoundary"));
 const newLocalStorage = new LocalStorage();
 const test_notices = [
@@ -161,6 +162,7 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
               ></Route>
               <Route path="/user" Component={() => <User key="user" />}></Route>
               <Route path="/works" Component={() => <Works key="works" />}></Route>
+              <Route path="/cards" Component={() => <Cards key="cards" />}></Route>
               <Route path="/*" Component={() => <Navigate to="/" />}></Route>
             </Routes>
           </Suspense>

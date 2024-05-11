@@ -33,6 +33,7 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
                 lineLyric:newItem[1],
                 time:handleTimeToNumber(newItem[0])})
         }) : [];
+        console.log('music-------+++++++++++++++++++++++',music)
         setCurrentLyric(newStrArr)
     }, [music])
     useEffect(() => {
@@ -107,9 +108,8 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
                 <div className={`${styles.playerBox} flexB relative`}>
                     <AudioPlayerOne showArea={showArea} music={music} time={time} pauseCurrent={pauseCurrent} activeOther={activeOther} pauseMusic={pauseMusic} handleShowArea={handleShowArea} ref={childTranslate} handleRadomMusic={handleRadomMusic}/>
                 </div>
-                
             </div>}
-            <div onTouchStart={handleCloseAreaStart} onTouchEnd={handleCloseAreaEnd} onTouchMove={handleCloseArea} onDoubleClick={handleCloseArea}  className={`${styles.showAreaBox} ${showArea ? styles.showArea : styles.showAreaHide}`} >
+            {/* <div onTouchStart={handleCloseAreaStart} onTouchEnd={handleCloseAreaEnd} onTouchMove={handleCloseArea} onDoubleClick={handleCloseArea}  className={`${styles.showAreaBox} ${showArea ? styles.showArea : styles.showAreaHide}`} >
                 {music?.imgUrl && <div className={styles.showArea_contentBox_backImg} style={{backgroundImage: `url(${music?.imgUrl})`}}></div>}
                 <div className={styles.showArea_contentBox} >
                     
@@ -155,7 +155,7 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
                         </div>
                     </div>                                                                              
                 </div>
-            </div>
+            </div> */}
         </>
         
     )

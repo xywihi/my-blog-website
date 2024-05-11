@@ -3,11 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import {LocalStorage} from '@/util'
 import './styles.less'
 import {IonIcon} from "@ionic/react"
-import { exit,play,home,newspaper, person, diamond } from 'ionicons/icons';
+import { exit,play,home,newspaper, person, diamond, albums } from 'ionicons/icons';
 const allRoutes = [
     {path:"/",text:"主页",icon:home},
     {path:"/news",text:"新闻",icon:newspaper,children:[{path:"/news/community",text:"社区"},{path:"/news/person",text:"个人"},]},
     {path:"/works",text:"我的作品",icon:diamond},
+    {path:"/cards",text:"卡片中心",icon:albums},
     {path:"/user",text:"个人中心",icon:person},
 ]
 const newLocalStorage = new LocalStorage;
