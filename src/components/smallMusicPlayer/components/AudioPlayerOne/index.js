@@ -4,13 +4,10 @@ import {IonIcon} from "@ionic/react"
 import { play, pause, shuffle } from 'ionicons/icons';
 import { handleTime, handleTimeToNumber } from '@/util/tools.ts';
 const AudioPlayerOne = ({time,pauseCurrent,pauseMusic,showArea,handleRadomMusic,handleShowArea,music},ref) => {
-    let ownTimer=null;
-    const ownRef = useRef()
     const [currentLyric,setCurrentLyric] = useState([])
     const [currentSingleLyric,setCurrentSingleLyric] = useState('')
     useEffect(()=>{
         return ()=>{
-            clearInterval(ownTimer)
         }
     },[])
     useEffect(() => {
@@ -33,22 +30,8 @@ const AudioPlayerOne = ({time,pauseCurrent,pauseMusic,showArea,handleRadomMusic,
             return toMove;
         })
     }, [time])
-    
-    useImperativeHandle(
-        ref,
-        () => ({ play,ownRef })
-      );
-      const handlePlayMusic = (currentData,isOther) => {
-        let audio = ownRef.current;
-        if(isOther){
-            audio.src = currentData.resource;
-            audio.currentTime = 0;
-            audio.play();
-            
-        }else{
-            clearInterval(ownTimer)
-            pauseMusic(!pauseCurrent)
-        }
+    const handlePlayMusic = () => {
+        pauseMusic(!pauseCurrent)
     }
     return (
         <div className='flexB'>
@@ -80,7 +63,7 @@ const AudioPlayerOne = ({time,pauseCurrent,pauseMusic,showArea,handleRadomMusic,
             <div className="icon_hover cursor maR6" onClick={handleRadomMusic}>
                 <IonIcon icon={shuffle} size="36px" ></IonIcon>
             </div>
-            <div className="icon_hover cursor" onClick={()=>handlePlayMusic(music,false)}>
+            <div className="icon_hover cursor" onClick={()=>handlePlayMusic()}>
                 {music && <IonIcon icon={ !pauseCurrent ? pause : play } size="36px" ></IonIcon>}
             </div>
         </div>

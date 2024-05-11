@@ -16,6 +16,7 @@ const AudioPlayerTwo = ({music,time,pauseCurrent,playMusic,pauseMusic,setMusicTi
         //     console.log('play')
         //     pauseCurrent && pauseMusic(false)
         // });
+        debugger;
     },[])
     useEffect(()=>{
         if(time.duration>0 && time.currentTime===time.duration){

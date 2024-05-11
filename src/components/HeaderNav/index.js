@@ -12,7 +12,7 @@ const allRoutes = [
     {path:"/user",text:"个人中心",icon:person},
 ]
 const newLocalStorage = new LocalStorage;
-function HeaderNav({changeTheme, direction,routes}){
+function HeaderNav({direction,routes}){
     const navigate = useNavigate();
     const [activeNavIndex,setActiveNavIndex]=useState(null)
     const [currentRoute,setCurrentRoute]=useState('/')
