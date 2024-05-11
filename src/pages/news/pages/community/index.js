@@ -11,11 +11,11 @@ const newDebounce = debounce(function (fn){
     fn&&fn()
 },500)
 const newsList = [
-    {id:0,title:'推动中国金融高质量发展',content:"1月16日，国家主席习近平在中央党校发表重要讲话。习近平强调：要坚定不移走中国特色金融发展之路，推动我国金融高质量发展。",imgUrl:"https://loremflickr.com/473/370/science",likeNum:80,seeNum:320,date:"2024-01-24"},
-    {id:1,title:'2023年中国GDP超126万亿 增长5.2%',content:"17日，国家统计局发布数据初步核算2023年中国国内生产总值（GDP）超126万亿元，比上年增长5.2%。",imgUrl:"https://loremflickr.com/473/370/people",likeNum:80,seeNum:320,date:"2024-01-24"},
-    {id:2,title:'清华毕业生80%都出国了?校方辟谣',content:"近日，清华就业工作会召，清华大学针对网传的“清华毕业生80%都出国”，作出回应。",imgUrl:"https://loremflickr.com/473/370/school",likeNum:80,seeNum:320,date:"2024-01-24"},
-    {id:3,title:'和平统一可能性已丧失?国台办回应',content:"17日，国台办发言人陈斌华就近期两岸热点问题答记者问：我们反对“台独”分裂图谋的行动坚决有力，解决台湾问题的",imgUrl:"https://loremflickr.com/473/370/nation",likeNum:80,seeNum:320,date:"2024-01-24"},
-    {id:4,title:'2023年中国出生人口902万人',content:"1月17日，国家统计局发布数据显示，年末全国人口140967万人，比上年末减少208万人，全年出生人口902万人。",imgUrl:"https://loremflickr.com/473/370/china",likeNum:80,seeNum:320,date:"2024-1-13"},
+    {id:0,title:'推动中国金融高质量发展',text:"1月16日，国家主席习近平在中央党校发表重要讲话。习近平强调：要坚定不移走中国特色金融发展之路，推动我国金融高质量发展。",imgUrl:"https://loremflickr.com/473/370/science",likeNum:80,seeNum:320,date:"2024-01-24"},
+    {id:1,title:'2023年中国GDP超126万亿 增长5.2%',text:"17日，国家统计局发布数据初步核算2023年中国国内生产总值（GDP）超126万亿元，比上年增长5.2%。",imgUrl:"https://loremflickr.com/473/370/people",likeNum:80,seeNum:320,date:"2024-01-24"},
+    {id:2,title:'清华毕业生80%都出国了?校方辟谣',text:"近日，清华就业工作会召，清华大学针对网传的“清华毕业生80%都出国”，作出回应。",imgUrl:"https://loremflickr.com/473/370/school",likeNum:80,seeNum:320,date:"2024-01-24"},
+    {id:3,title:'和平统一可能性已丧失?国台办回应',text:"17日，国台办发言人陈斌华就近期两岸热点问题答记者问：我们反对“台独”分裂图谋的行动坚决有力，解决台湾问题的",imgUrl:"https://loremflickr.com/473/370/nation",likeNum:80,seeNum:320,date:"2024-01-24"},
+    {id:4,title:'2023年中国出生人口902万人',text:"1月17日，国家统计局发布数据显示，年末全国人口140967万人，比上年末减少208万人，全年出生人口902万人。",imgUrl:"https://loremflickr.com/473/370/china",likeNum:80,seeNum:320,date:"2024-1-13"},
 ]
 function Community(){
     const commentsArr=[
@@ -211,7 +211,7 @@ function Community(){
     const handleShareNews = ()=>{
         
         if (navigator.share) {
-            navigator.share(selectItem).then(() => {
+            navigator.share({...selectItem,url:"https://my-blog-website-six.vercel.app/#/news/community"}).then(() => {
                 console.log('Successful share');
             }).catch(error => {
                 console.log('Error sharing:', error);
@@ -440,7 +440,7 @@ function Community(){
                                                     <img src={item.imgUrl}/>
                                                     <div>
                                                         <h3 className="maB6 textSingeLine">{item.title}</h3>
-                                                        <p className="content ellipsis-multiline">{item.content}</p>
+                                                        <p className="content ellipsis-multiline">{item.text}</p>
                                                     </div>
                                                 </div>
                                                 <div className="bottomContent_box flexB pa12">
