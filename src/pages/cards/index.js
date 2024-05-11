@@ -73,9 +73,9 @@ const Cards = ({ showStatusBox }) => {
             />
           </div>
           <div className="pa24 flexBS column">
-            <h1 className="font_wenyue fontB">
+            <h1 className="font_wenyue fontB maB12">
               {banners[0].title.split("，").map((item) => (
-                <p key={item}>{item}</p>
+                <span className="maR12" key={item}>{item}</span>
               ))}
             </h1>
             <h5>
