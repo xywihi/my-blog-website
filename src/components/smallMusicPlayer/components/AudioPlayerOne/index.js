@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef, forwardRef, useImperativeHandle } from 'react';
 import styles from './style.module.less';
-import UpDown from "../../../animaIcons/upDown";
 import {IonIcon} from "@ionic/react"
 import { play, pause, shuffle } from 'ionicons/icons';
 import { handleTime, handleTimeToNumber } from '@/util/tools.ts';

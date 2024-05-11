@@ -2,8 +2,6 @@ import React,{useEffect, useState, createRef,useRef} from "react";
 import styles from './styles.module.less'
 import OwnSlider from "@/components/OwnSlider"
 import UpDown from "../animaIcons/upDown";
-import {IonIcon} from "@ionic/react"
-import { play, pause, shuffle } from 'ionicons/icons';
 import {connect} from "react-redux"
 import {handleTime,handleTimeToNumber,enterFullScreen,exitFullScreen} from "@/util/tools.ts"
 import {playMusic,setMusicTime,pauseMusic,handleShowArea} from "@/pages/home/store/actions"
@@ -12,7 +10,7 @@ import AudioPlayerTwo from "./components/AudioPlayerTwo";
 import musicsData from '@/api/data/musics.json';
 const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic,handleShowArea,setMusicTime}) => {
     const [startMove,setStartMove] = useState(0)
-    const [activeOther,setActiveOther] = useState(true)
+    const [activeOther,] = useState(true)
     const [currentLyric,setCurrentLyric] = useState([])
     const childTranslate = createRef(null)
     const ownRef = useRef()
@@ -70,18 +68,6 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
         const randomNum = Math.floor(Math.random() * musicsData.length);
         let radomMusic = musicsData[randomNum]
         playMusic({...radomMusic});
-    }
-    const changeAudio = (item)=>{
-        let newItem = {...item,pause: music.pause}
-        playMusic(newItem)
-        childTranslate.current.play(newItem,(!music || item.id!=music.id))
-        music && setActiveOther(item.id!=music.id)
-    }
-    const getMusics = async ()=>{
-        // const require = new HttpRequire;
-        // let URL = "https://www.jango.com/music/The+Weeknd"
-        // const data = await require.get(URL)
-        // // console.log(data)
     }
     const handleChangeTime = (proportion)=>{
         if(childTranslate.current.el){
