@@ -76,6 +76,9 @@ input {
 .flex{
     display: flex;
 }
+.flexWrap{
+    flex-wrap: wrap;
+}
 .flexC{
     display: flex;
     justify-content: center;
