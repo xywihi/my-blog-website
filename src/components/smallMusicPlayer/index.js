@@ -109,16 +109,16 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
                     <AudioPlayerOne showArea={showArea} music={music} time={time} pauseCurrent={pauseCurrent} activeOther={activeOther} pauseMusic={pauseMusic} handleShowArea={handleShowArea} ref={childTranslate} handleRadomMusic={handleRadomMusic}/>
                 </div>
             </div>}
-            <div onTouchStart={handleCloseAreaStart} onTouchEnd={handleCloseAreaEnd} onTouchMove={handleCloseArea} onDoubleClick={handleCloseArea}  className={`${styles.showAreaBox} ${showArea ? styles.showArea : styles.showAreaHide}`} >
+            <div >
                 {music?.imgUrl && <div className={styles.showArea_contentBox_backImg} style={{backgroundImage: `url(${music?.imgUrl})`}}></div>}
                 <div className={styles.showArea_contentBox} >
                     
-                    <div className={`${styles.audioPlayerImg} maR12 ${styles[`${music ?  'active' :  'stop' }Audio`]}`}>
+                    {/* <div className={`${styles.audioPlayerImg} maR12 ${styles[`${music ?  'active' :  'stop' }Audio`]}`}>
                         <img className={(!pauseCurrent && music)? 'running' : 'paused'} src={music?.imgUrl} />
                         {(music) && <UpDown active={!pauseCurrent} length={20}/>}
-                    </div>
+                    </div> */}
                     <div className={styles.showArea_contentBox_rightBox}>
-                        <div>
+                        {/* <div>
                             <h2 className="fontB">{music?.name}</h2>
                             <p className={`${styles.singer} maT6`}>{music?.singer}</p>
                         </div>
@@ -137,7 +137,7 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
                                     </li>)}
                                 </ul>
                             }
-                        </div>
+                        </div> */}
                         <div className={styles.audioPlayer}>
                             <div className={`${styles.playerBox} flexB maB12 relative`}>
                                 <AudioPlayerTwo music={music} time={time} pauseCurrent={pauseCurrent} ref={childTranslate} playMusic={playMusic} setMusicTime={setMusicTime} pauseMusic={pauseMusic} handleRadomMusic={handleRadomMusic}/>
