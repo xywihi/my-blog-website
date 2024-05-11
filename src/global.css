@@ -311,6 +311,16 @@ button {
 .maB48{
     margin-bottom: 48px;
 }
+.paV4{
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+.paT0{
+    padding-top: 0;
+}
+.paB0{
+    padding-bottom: 0;
+}
 .pa6{
     padding: 6px;
 }
@@ -381,6 +391,12 @@ button {
     padding-top: 24px;
     padding-bottom: 24px;
 }
+.paT48{
+    padding-top: 48px;
+}
+.paT64{
+    padding-top: 64px;
+}
 /* color */
 .gray{
     color: #969696;
@@ -414,12 +430,19 @@ button {
 .font36{
     font-size: 36px;
 }
+.font46{
+    font-size: 46px;
+}
 /* border */
 .borderR6{
     border-radius: 6px;
 }
 .borderR12{
     border-radius: 12px;
+}
+.borderTR12{
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 .borderR50{
     border-radius: 50px;
@@ -505,7 +528,7 @@ button {
   }
 
 /* 自定义滑动条样式 */
-.scrollbarBox{
+html,.scrollbarBox{
   scrollbar-width: none; /* firefox */
   -ms-overflow-style: none; /* IE 10+ */
   overflow-x: hidden;

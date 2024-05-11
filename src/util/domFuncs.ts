@@ -111,7 +111,7 @@ type ScrollState = {
           clearInterval(timer)
           return;
         }
-        // console.log(addNum.allCount+addNum.count,totalDis);
+        console.log(addNum.allCount+addNum.count,totalDis);
         const distanceNum = toTOPBottom === 'top' ? -Number(addNum.count) : Number(addNum.count)
         switch (direction) {
           case "hor":

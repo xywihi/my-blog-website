@@ -21,6 +21,8 @@ import "@/assets/fonts/huxiao.otf";
 import "@/assets/fonts/siyuan.ttf";
 import "@/assets/fonts/wenyue.otf";
 import "@/assets/fonts/SourceHanSansCN-Bold.otf";
+
+import MaskElement from "@/components/MaskElement";
 // import Notices from "./components/notices"
 const Notices = React.lazy(() => import("./components/notices"));
 const Home = React.lazy(() => import("./pages/home"));
@@ -55,12 +57,8 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
 
   const handleOpenMobileNav = e => {
     e.stopPropagation();
-    // 获取html
-    document.querySelector("html").style.overflow = "hidden";
     const nav = document.querySelector(".mobile_Nav_out_box");
-    const navChild = document.querySelector(".mobile_Nav_out_box>div");
     setShowNotice(old=>{
-      document.querySelector("html").style.overflow = !old?"hidden":"auto";
       // handleOpenNoticeBox()
       const notice = document.querySelector(".notice_out_box");
       if(Array.from(notice.classList).includes("notice_out_box_open")){
@@ -71,10 +69,7 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
     // //设置nav高度
     // 获取nav计算后的高度
     const navHeight = nav.offsetHeight;
-    
-
     nav.classList.toggle("mobile_Nav_out_box_open");
-    console.log(navHeight);
   }
 
   const handleOpenNoticeBox = e => {
@@ -85,8 +80,6 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
     const notice = document.querySelector(".notice_out_box");
     notice.classList.toggle("notice_out_box_open");
     setShowNotice(old=>{
-      document.querySelector("html").style.overflow = !old?"hidden":"auto";
-      // handleOpenMobileNav()
       const nav = document.querySelector(".mobile_Nav_out_box");
       if(Array.from(nav.classList).includes("mobile_Nav_out_box_open")){
         nav.classList.toggle("mobile_Nav_out_box_open");
@@ -209,6 +202,8 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
             </header>
             {/* 移动端导航栏 */}
             <div className="mobile_Nav_out_box">
+              
+            {showNotice && <MaskElement pointerEvents={true}/>}
                 <div className="mobile_Nav_box bg1">
                   <HeaderNav
                     changeTheme={changeTheme}
@@ -219,6 +214,8 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
               </div>
               {/* 通知信息框 */}
               <div className="notice_out_box">
+                {showNotice && <MaskElement pointerEvents={true} />}
+                
                 <div className="notice_box height0 width0 bg1" >
                   <div className="scrollbarBox">
                     <ul>

@@ -25,7 +25,7 @@
                 
             }
         }
-        .hotestNews_content_box_text,h2,hr{
+        .hotestNews_content_box_text,.news_content_box_text,h2,hr{
             // 解决滑动条影响内容宽度
             width: 100%;
         }
@@ -219,23 +219,27 @@
 }
 @media screen and (max-width: 640px) {
     .mobile_search{
-        display: block;
         display: grid;
         grid-template-columns: 1fr auto;
-        position: relative;
-
+        // position: relative;
+        position: fixed;
+        top: 74px;
+        width: calc(100% - 24px);
+        border-radius: 6px;
+        // padding: 4px 12px;
+        z-index: 50;
         input{
             border: none;
             background: none;
             
         }
-        &::after{
-            content:"";
-            width: 100%;
-            border: 1px solid #b3b3b3;
-            position: absolute;
-            bottom: -8px;
-        }
+        // &::after{
+        //     content:"";
+        //     width: 100%;
+        //     border: 1px solid #b3b3b3;
+        //     position: absolute;
+        //     bottom: -8px;
+        // }
     }
     .hotestNews {
         padding: 12px;
@@ -287,6 +291,17 @@
             font-size: 1.1em;
             line-height: 2em;
         }
+    }
+    .hotestNews_content_box_text{
+        section{
+            display: none;
+        }
+        section:first-child{
+            display: block;
+        }
+    }
+    .community_box .hotestNews_box {
+        grid-template-rows: auto;
     }
 }
 // @media screen and (min-width: 200px) {

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import { eyeOutline, calendarOutline,flameOutline,heartOutline,heart, search, closeCircle } from 'ionicons/icons';
+import { eyeOutline, calendarOutline,flameOutline,heartOutline,heart, heartCircle, closeCircle, chatboxEllipses, arrowRedo } from 'ionicons/icons';
 import {IonIcon} from "@ionic/react"
 import "./index.less";
 import {scrollToTop, debounce } from "@/util";
-
-
+import styles from "./styles.module.less";
+import MaskElement from "@/components/MaskElement";
 
 
 const newDebounce = debounce(function (fn){
@@ -119,6 +119,23 @@ function Community(){
     const [searchedList,setSearchedList] = useState([]);
     const [searchText,setSearchText] = useState('');
     const [selectItem,setSelectItem] = useState(null);
+    const [pageScroll,setPageScroll] = useState(false);
+    const [showComment,setShowComment] = useState(false);
+    useEffect(()=>{
+        // 监听页面滚动开始事件
+        window.addEventListener('scroll',()=>{
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            let clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+            let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+            if(scrollTop + clientHeight >= scrollHeight){
+                setPageScroll(true);
+            }else{
+                setPageScroll(false);
+            }
+        })
+
+        
+    },[])
     useEffect(() => {
         if(searchText==''){
             setSearchedList(old=>{
@@ -184,7 +201,7 @@ function Community(){
     }
 
     const handleSelectItem = (item)=>{
-        scrollToTop(3.5);
+        scrollToTop(2.5);
         setSelectItem(old=>{
             setSearchText(item.title)
             return item
@@ -193,14 +210,14 @@ function Community(){
     
     
     return (
-        <div >
+        <div className={`community_out_box ${selectItem ? 'paT48' : 'paT64'}`}>
             <div>
-                <div className={`flexB mobile_search ${selectItem ? 'pa0 maB12' : 'pa12 paT12 maT12 maB36'}`}>
-                    <input className="font18 textColor" placeholder="通过关键词搜索..." onChange={handleSearch} value={searchText}/>
+                <div className={`flexB mobile_search bg4 ${selectItem ? 'paV4 paH12' : 'pa12'}`}>
+                    <input className="font18 textColorGgray" placeholder="通过关键词搜索..." onChange={handleSearch} value={searchText}/>
 
                     {
                         searchText &&
-                        <div className="search_btn font24 bg4 widthFull paH12 textColorGgray" onClick={()=>setSearchText('')}>
+                        <div className="search_btn font24 bg4 widthFull textColorGgray" onClick={()=>setSearchText('')}>
                             <IonIcon icon={closeCircle} size="36px"></IonIcon>
                         </div>
                     }
@@ -218,7 +235,7 @@ function Community(){
                         <div className="hotestNews_content_box scrollbarBox">
                             <h2 className="maB6 fontB">{selectItem?.title}</h2>
                             <hr className="maV12 opacity20"/>
-                            <div className="hotestNews_content_box_text">
+                            <div className="news_content_box_text">
                                 <section className="maB12">
                                 2023年电影春节档，《流浪地球2》《满江红》上映数日即以逾10亿元票房一路“领跑”。其中，科幻背景的《流浪地球2》不仅取得了票房的成功，也带火了包括浸没液冷计算机、外骨骼等“黑科技”。
                                 </section>
@@ -272,6 +289,60 @@ function Community(){
 
                 }
             </div>
+            {/* 详情按钮 */}
+            {
+                selectItem &&
+                <div className={`${styles.btns_box} ${pageScroll ? "opacity0" : "opacity100"}`}>
+                    <div>
+                        <div className="colorRed"><IonIcon icon={heart} className=""></IonIcon></div>
+                        <p className="maT6">{selectItem.likeNum}</p>
+                    </div>
+                    <div>
+                        <div><IonIcon icon={chatboxEllipses} className="" onClick={()=>{setShowComment(true)}}></IonIcon></div>
+                        <p className="maT6">{selectItem.seeNum}</p>
+                    </div>
+                    <div>
+                        <div><IonIcon icon={arrowRedo} className=""></IonIcon></div>
+                        <p className="maT6">{selectItem.seeNum}</p>
+                    </div>
+                </div>
+            }
+            {/* 详情评论区 */}
+            {
+                showComment && 
+                <div className={`${styles.comment_box} scrollbarBox borderTR12`}>
+                    <MaskElement click={()=>{setShowComment(false)}}/>
+                    <div className={`${styles.comment_header_out_box} bg1 pa24`}>
+                        <div className={`${styles.comment_header_box} flexB`}>
+                            <h3 className="maB6 fontB">评论区</h3>
+                            <p className="font14">总共120条</p>
+                        </div>
+                        <hr className="opacity20"/>
+                    </div>
+                    <div className={`${styles.comment_area_box} bg1 pa24`}>
+                            
+                            <div className="borderR6 hotestNews_comment_area_box scrollbarBox">
+                                <ul className="borderR6 hotestNews_comment_area_box_text">
+                                    {commentsArr.map((item,index)=>(
+                                        <li key={item.id}>
+                                            <img src={item.imgUrl}/>
+                                            <div className="widthFull">
+                                                <div className="flexB  maB6">
+                                                    <div>
+                                                        <p className="name font14textColorGgray">{item.user}</p>
+                                                        <p className="content flexB">{item.content}</p>
+                                                    </div>
+                                                    <div className="flexB maL12"><IonIcon icon={item.likes>0?heart:heartOutline} color={"#fff"} size="36px"></IonIcon><span className="maL3 fontSmall">{item.likes ? item.likes : "" }</span></div>
+                                                </div>
+                                                <p className="font10 maT3 textColorGgray">{getTimeText(item.time)}</p>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                </div>
+            }
             {
                 !searchedList.length && !selectItem &&
                 <div className="community_box">
