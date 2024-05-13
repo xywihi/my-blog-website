@@ -1,52 +1,71 @@
 import React, { useEffect, useState, createRef, Children } from "react";
 import "./styles.less";
-import styles from "./index.module.less";
-import { IonIcon } from "@ionic/react";
-import { menu, language } from "ionicons/icons";
-
 import ExamCountdown from "./components/examCountdown";
 import TimeWeather from "./components/timeWeather";
 import MusicPlayer from "../../components/musicPlayer";
-import Translate from "../../components/translate";
+import TranslateBox from "./components/TranslateBox";
 import SmoothedLine from "../../components/echarts/smoothedLine";
 import { connect } from "react-redux";
-import ChatAi from "../../components/chatAi";
-import HttpRequire from "../../http/require";
 import { showStatusBox } from "@/store/actions";
 import Banner from "./components/Banner";
-
+import PersonalAvatar from "./components/PersonalAvatar";
+import CardCreator from "./components/CardCreator";
+import NewsBox from "./components/NewsBox";
+import FansMessagesBox from "./components/FansMessagesBox";
+import MemorandumBox from "./components/MemorandumBox"
 import { computeOrder, computeCardsOrder } from "./tool";
-const banners = [
-  {
-    url: "https://images.unsplash.com/photo-1599272585578-03bfc70032b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE4fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-    title: "平淡人生，浮躁心态",
-    subtitle: "平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
-    time: "2023/09/01",
-    id: 0,
-  },
-];
+import Clocker from "./components/Clocker";
+
 const windowW = window.innerWidth - 352;
-let gridsArr = [];
-const cardsArr = [
-  {
-    id: 0,
-    attributes: {
-      xyArr: [
-        [0, 0],
-        [1, 0],
-      ],
-      symbol: Symbol("card1"),
-    },
-    styles: {
-      width: `${(windowW / 20) * 6}px`,
-      height: `${(windowW / 20) * 4}px`,
-      left: `0px`,
-      top: `0px`,
-    },
-    component: <Banner wNum={6} hNum={4} unitWidth={windowW / 20} />,
-  },
+const nnnn = windowW > 1400 ? 20 : windowW > 640 ? 10 : 1;
+const existCardsArr = [
+  <Banner wNum={6} hNum={4} unitWidth={windowW / nnnn} />,
+
+  <CardCreator wNum={2} hNum={2} unitWidth={windowW / nnnn}>
+    <PersonalAvatar cardSize="small" />
+  </CardCreator>,
+  <CardCreator wNum={4} hNum={2} unitWidth={windowW / nnnn}>
+    <PersonalAvatar cardSize="middle" />
+  </CardCreator>,
+  <CardCreator wNum={2} hNum={1} unitWidth={windowW / nnnn}>
+    <TimeWeather cardSize="small" />
+  </CardCreator>,
+  <CardCreator wNum={4} hNum={2} unitWidth={windowW / nnnn}>
+    <TimeWeather cardSize="big" />
+  </CardCreator>,
+  <CardCreator
+    wNum={4}
+    hNum={6}
+    minWNum={3}
+    minHNum={3}
+    unitWidth={windowW / nnnn}
+  >
+    <ExamCountdown />
+  </CardCreator>,
+  <CardCreator wNum={3} hNum={4} padding={24} unitWidth={windowW / nnnn}>
+    <MusicPlayer />
+  </CardCreator>,
+  <CardCreator wNum={6} hNum={3} unitWidth={windowW / nnnn}>
+    <TranslateBox />
+  </CardCreator>,
+  <CardCreator wNum={6} hNum={4} unitWidth={windowW / nnnn}>
+    <SmoothedLine />
+  </CardCreator>,
+  <CardCreator wNum={2} hNum={2} unitWidth={windowW / nnnn}>
+    <Clocker />
+  </CardCreator>,
+  <CardCreator wNum={4} hNum={2} padding={24} unitWidth={windowW / nnnn}>
+    <NewsBox cardSize="small" />
+  </CardCreator>,
+  <CardCreator wNum={4} hNum={3} padding={24} unitWidth={windowW / nnnn}>
+    <FansMessagesBox cardSize="small" />
+  </CardCreator>,
+  <CardCreator wNum={4} hNum={6} padding={24} unitWidth={windowW / nnnn}>
+    <MemorandumBox cardSize="small" />
+  </CardCreator>,
 ];
-const createGrids = (xCount, yCount) => {
+
+const createGrids = (xCount, yCount, cardsArr) => {
   // console.log("createGrids", cardsArr);
   let newGrids = Array.from({ length: xCount * yCount }, (_, index) => ({
     x: (index % xCount) * (windowW / xCount),
@@ -61,54 +80,59 @@ const createGrids = (xCount, yCount) => {
     cardsArr.forEach((card, cardIndex) => {
       card.attributes.xyArr.forEach((xy, xyIndex) => {
         if (
-          (xy[0] * windowW) / xCount === item.x &&
-          (xy[1] * windowW) / xCount === item.y
+          xy[0] * (windowW / xCount) === item.x &&
+          xy[1] * (windowW / xCount) === item.y
         ) {
           item.symbol = card.attributes.symbol;
           item.position = [item.x, item.y];
           item.used = true;
+          item.height = Number(card.styles.height.split("px")[0]);
+          item.width = Number(card.styles.width.split("px")[0]);
         }
       });
     });
     return item;
   });
   // console.log("grids", compNewGrids);
-  gridsArr = compNewGrids;
+  // gridsArr = compNewGrids;
   return compNewGrids;
 };
 const Cards = ({ showStatusBox }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedOption, setSelectedOption] = useState("zh");
   const [wallImage, setWallImage] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [_, setGridsArr] = useState([]);
+  const [gridsArr, setGridsArr] = useState([]);
   const [cardsArrTest, setCardsArr] = useState([]);
 
   // console.log("windowW", windowW);
   const childTranslate = createRef(null);
-  let vvvvvv = [];
+  let finalComputedCard = [];
   useEffect(() => {
-    const arr = [
-      [2, 2],
-      [6, 4],
-      [3, 3],
-      [2, 1],
-      [8, 6],
-      [4, 6],
-      [4, 4],
-    ];
-    // computeOrder(arr)
-    vvvvvv = computeCardsOrder(arr, windowW, 20, 10).map((item, index) => {
-      item.component = <div><div></div></div>;
-      item.styles.left = `${
-        ((item.attributes.xyArr?.[0]?.[0] || 0) * windowW) / 20 }px`;
-      item.styles.top = `${
-        ((item.attributes.xyArr?.[0]?.[1] || 0) * windowW) / 20 }px`;
-      
-      return item;
-    });
-    setCardsArr(vvvvvv);
-    setGridsArr(createGrids(20, 10));
+    const arr = computeOrder(existCardsArr, 1);
+    finalComputedCard = computeCardsOrder(arr, windowW, nnnn, 10).map(
+      (item, index) => {
+        item.component = (
+          <div>
+            <div></div>
+          </div>
+        );
+        item.styles.left = `${
+          ((item.attributes.xyArr?.[0]?.[0] || 0) * windowW) / nnnn
+        }px`;
+        item.styles.top = `${
+          ((item.attributes.xyArr?.[0]?.[1] || 0) * windowW) / nnnn
+        }px`;
+        item.attributes.position = [
+          ((item.attributes.xyArr?.[0]?.[0] || 0) * windowW) / nnnn,
+          ((item.attributes.xyArr?.[0]?.[1] || 0) * windowW) / nnnn,
+        ];
+        item.component = existCardsArr[index];
+        return item;
+      }
+    );
+
+    setCardsArr(finalComputedCard);
+    setGridsArr(createGrids(nnnn, 10, finalComputedCard));
   }, []);
 
   // 获取随机颜色
@@ -123,10 +147,11 @@ const Cards = ({ showStatusBox }) => {
   //   console.log("cards_page");
 
   const handleStartDrag = (e, attributes) => {
+    // debugger
     // 获取元素带有的属性
     e.dataTransfer.setDragImage(new Image(), 0, 0);
     // console.log("handleStartDrag", typeof e.target.getAttribute("attributes"));
-    let position = [0, 0];
+    let position = attributes.position;
     // 获取父级元素
     const parent = e.target.parentNode;
     const currentEleStyle = e.target.getBoundingClientRect();
@@ -157,11 +182,13 @@ const Cards = ({ showStatusBox }) => {
 
     // // 将克隆元素添加到body中
     // document.body.appendChild(clone);
+    card.style.animation = "upMove .15s ease-in-out infinite";
     const clone = card.cloneNode(true);
     clone.style.position = "absolute";
     clone.style.backgroundColor = `#cccccc80`;
     clone.style.transition = `none`;
     clone.style.opacity = `.2`;
+    clone.style.animation = "none";
     document.getElementById("cardsArea").appendChild(clone);
     // 监听鼠标移动事件
     document.addEventListener("mousemove", handleDrag);
@@ -172,30 +199,43 @@ const Cards = ({ showStatusBox }) => {
       // 计算拖拽元素的新位置
       const newX = e.clientX - initialX + position[0];
       const newY = e.clientY - initialY + position[1];
+      // console.log("newX", e.clientX , initialX , position[0]);
+      // 更新拖拽元素的位置
       compLeft =
         newX < 0 ? 0 : newX > windowW - cardWidth ? windowW - cardWidth : newX;
 
       compTop =
         newY < 0
           ? 0
-          : newY > (windowW / 20) * 10 - cardHeight
-          ? (windowW / 20) * 10 - cardHeight
+          : newY > (windowW / nnnn) * 10 - cardHeight
+          ? (windowW / nnnn) * 10 - cardHeight
           : newY;
       // console.log("compLeft", compLeft);
-      card.style.left = `${compLeft}px`;
-      card.style.top = `${compTop}px`;
-
+      // debugger;
+      // console.log("compTop", e.clientY , initialY,position[1],'--------',e.clientY - initialY,newY,newY < 0);
+      // card.style.left = `${compLeft}px`;
+      // card.style.top = `${compTop}px`;
+      // card.style.zIndex = 99;
       //克隆card
 
       const newLeft =
-        Math.floor((compLeft + cardWidth / 2) / cardWidth) * cardWidth;
-      const newTop =
-        Math.floor((compTop + cardWidth / 2) / cardWidth) * cardWidth;
-
+        Math.floor(compLeft / (windowW / nnnn)) * (windowW / nnnn);
+      const newTop = Math.floor(compTop / (windowW / nnnn)) * (windowW / nnnn);
+      // console.log("compTop", compLeft, compTop, newLeft, newTop);
       clone.style.width = `${cardWidth + 20}px`;
       clone.style.height = `${cardHeight + 20}px`;
       clone.style.left = `${newLeft - 10}px`;
       clone.style.top = `${newTop - 10}px`;
+      clone.style.zIndex = 99;
+      console.log(
+        "e.clientY - initialY",
+        e.clientY,
+        initialY,
+        "newLeft,newTop",
+        newLeft,
+        newTop
+      );
+      // debugger;
       // 将克隆元素添加到body中
     }
 
@@ -208,11 +248,11 @@ const Cards = ({ showStatusBox }) => {
       // 恢复拖拽元素的样式
       // card.style.zIndex = "";
       const newLeft =
-        Math.floor((compLeft + cardWidth / 2) / cardWidth) * cardWidth;
-      const newTop =
-        Math.floor((compTop + cardWidth / 2) / cardWidth) * cardWidth;
+        Math.floor(compLeft / (windowW / nnnn)) * (windowW / nnnn);
+      const newTop = Math.floor(compTop / (windowW / nnnn)) * (windowW / nnnn);
       card.style.left = newLeft + "px";
       card.style.top = newTop + "px";
+      card.style.animation = "fallDown 1s ease-in-out";
       // card.style.width = "";
       // card.style.height = "";
       handleMoveToNewSite(
@@ -234,7 +274,11 @@ const Cards = ({ showStatusBox }) => {
     newLeft,
     newTop,
     currentEleOldStyle,
-    parentEleStyle
+    parentEleStyle,
+    card,
+    attributes,
+    cardWidth,
+    cardHeight
   ) => {
     // console.log("handleCheckOver", currentEleOldStyle, parentEleStyle);
     if (
@@ -249,25 +293,120 @@ const Cards = ({ showStatusBox }) => {
         let firstArea = usedArea.some((area) => {
           return area.symbol === grid.symbol;
         });
-        if (firstArea) return;
+        if (firstArea) {
+          // debugger
+          return;
+        }
         usedArea.push({
           TLRBLR: [grid.x, grid.y, grid.x + grid.width, grid.y + grid.height],
           symbol: grid.symbol,
         });
+        // debugger;
       }
     });
+    let fourPoints = [];
+    let moreTHeight = 0;
+    let moreBHeight = 0;
+
+    let moreWidth = 0;
+    let moreRWidth = 0;
     // console.log("usedArea", gridsArr, usedArea);
-    // debugger;
-    return usedArea.some((area) => {
-      if (
-        newLeft >= area.TLRBLR[0] &&
-        newLeft <= area.TLRBLR[2] &&
-        newTop >= area.TLRBLR[1] &&
-        newTop <= area.TLRBLR[3]
-      ) {
-        return true;
+    let trueNum = 0;
+    let isOVerCards = usedArea.some((area) => {
+      let checkCenterPoint =
+        newLeft + cardWidth / 2 >= area.TLRBLR[0] + 1 &&
+        newLeft + cardWidth / 2 <= area.TLRBLR[2] - 1 &&
+        newTop + cardHeight / 2 >= area.TLRBLR[1] + 1 &&
+        newTop + cardHeight / 2 <= area.TLRBLR[3] - 1;
+      let checkLeftTop =
+        newLeft >= area.TLRBLR[0] + 1 &&
+        newLeft <= area.TLRBLR[2] - 1 &&
+        newTop >= area.TLRBLR[1] + 1 &&
+        newTop <= area.TLRBLR[3] - 1;
+      let checkRightTop =
+        newLeft + cardWidth > area.TLRBLR[0] + 1 &&
+        newLeft + cardWidth < area.TLRBLR[2] - 1 &&
+        newTop > area.TLRBLR[1] + 1 &&
+        newTop < area.TLRBLR[3] - 1;
+      let checkLeftBottom =
+        newLeft > area.TLRBLR[0] + 1 &&
+        newLeft < area.TLRBLR[2] - 1 &&
+        newTop + cardHeight > area.TLRBLR[1] + 1 &&
+        newTop + cardHeight < area.TLRBLR[3] - 1;
+      let checkRightBottom =
+        newLeft + cardWidth >= area.TLRBLR[0] + 1 &&
+        newLeft + cardWidth <= area.TLRBLR[2] - 1 &&
+        newTop + cardHeight >= area.TLRBLR[1] + 1 &&
+        newTop + cardHeight <= area.TLRBLR[3] - 1;
+      // debugger;
+      trueNum = fourPoints.filter((item) => item).length;
+      if (!checkCenterPoint || trueNum === 1) {
+        if (
+          checkLeftTop ||
+          checkLeftBottom ||
+          checkRightTop ||
+          checkRightBottom
+        ) {
+          fourPoints.push(true);
+          moreTHeight = cardHeight - (area.TLRBLR[3] - newTop);
+          moreBHeight = area.TLRBLR[1] - newTop;
+
+          moreWidth = cardWidth - (area.TLRBLR[2] - newLeft);
+          moreRWidth = area.TLRBLR[0];
+          // if(moreWidth > 0){
+          //   cardWidth = moreWidth + 'px'
+          // }
+
+          // debugger;
+        }
       }
+
+      return checkCenterPoint || fourPoints.filter((item) => item).length > 1;
+      // 防覆盖功能
+      // return (
+      //   (checkCenterPoint ||
+      //   checkLeftTop ||
+      //   checkRightTop ||
+      //   checkLeftBottom ||
+      //   checkRightBottom ) &&
+      //   area.symbol != attributes.symbol
+      // );
+
+      // debugger
     });
+    // if(trueNum===1){
+    //   if (moreTHeight > 0) {
+    //     cardHeight = moreTHeight + "px";
+    //     card.style.height = moreTHeight + "px";
+    //     card.style.top = newTop + cardHeight + "px";
+    //     attributes.position = [newTop + cardHeight, newLeft + cardWidth];
+    //     // debugger
+    //   }
+    //   if (moreBHeight > 0) {
+    //     cardHeight = moreBHeight + "px";
+    //     card.style.height = moreBHeight + "px";
+    //     card.style.top = newTop + cardHeight + "px";
+    //     attributes.position = [newTop + cardHeight, newLeft + cardWidth];
+    //     // debugger;
+    //   }
+    //   // if (checkRightBottom || checkRightTop) {
+    //   //   if (moreWidth > 0) {
+    //   //     card.style.width = moreWidth + "px";
+    //   //   }
+    //   //   if (moreRWidth > 0) {
+    //   //     card.style.width = moreWidth + "px";
+    //   //   }
+    //   //   // debugger;
+    //   // }
+
+    //   if (moreWidth > 0) {
+    //     card.style.width = moreWidth + "px";
+    //   }
+    //   if (moreRWidth > 0) {
+    //     card.style.width = moreWidth + "px";
+    //   }
+    // }
+    return isOVerCards;
   };
   const handleMoveToNewSite = (
     newLeft,
@@ -280,7 +419,19 @@ const Cards = ({ showStatusBox }) => {
     attributes
   ) => {
     // 检查是否碰撞到其他卡片
-    if (handleCheckOver(newLeft, newTop, currentEleOldStyle, parentEleStyle)) {
+
+    if (
+      handleCheckOver(
+        newLeft,
+        newTop,
+        currentEleOldStyle,
+        parentEleStyle,
+        card,
+        attributes,
+        cardWidth,
+        cardHeight
+      )
+    ) {
       card.style.left = currentEleOldStyle.left - parentEleStyle.left + "px";
       card.style.top = currentEleOldStyle.top - parentEleStyle.top + "px";
       // card.style.transition='all .5s ease-in-out'
@@ -306,6 +457,7 @@ const Cards = ({ showStatusBox }) => {
         grid.x < newLeft + cardWidth &&
         grid.y >= newTop &&
         grid.y < newTop + cardHeight;
+      console.log("newLeft, newTop", newLeft, newTop);
       return {
         ...grid,
         used: overed
@@ -332,9 +484,11 @@ const Cards = ({ showStatusBox }) => {
         height: grid.used ? grid.height : overed ? cardHeight : 0,
       };
     });
+    // debugger;
     // console.log("grids", grids);
     // setGridsArr(grids);
-    gridsArr = grids;
+    // gridsArr = grids;
+    setGridsArr(grids);
   };
 
   return (
@@ -346,8 +500,8 @@ const Cards = ({ showStatusBox }) => {
             className="card_item"
             style={{
               // backgroundColor: randomColor()
-              width: `${windowW / 20}px`,
-              height: `${windowW / 20}px`,
+              width: `${windowW / nnnn}px`,
+              height: `${windowW / nnnn}px`,
             }}
           >
             {/* {index} */}
@@ -365,6 +519,34 @@ const Cards = ({ showStatusBox }) => {
           {/* [<div>cxccc</div>] */}
         </CardItem>
       ))}
+      <div className="treasureChest_box">
+        <div className="treasureChest">
+          <div className="btnDefaultDeep"></div>
+          <div className="btnDefault">
+            <div
+              className="logoTest textColorWhite flexS"
+            >
+              <svg
+                data-name="logo"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 86.6"
+              >
+                <polygon
+                  className="svg-fill"
+                  points="72.79 66.96 76.19 72.86 23.81 72.86 50 27.49 65.92 55.06 77.82 48.19 50 0 0 86.6 100 86.6 84.69 60.09 72.79 66.96"
+                />
+                <circle className="svg-fill" cx="50" cy="59.11" r="6.87" />
+              </svg>
+            </div>
+          </div>
+          <div className="triangle btnDefault"></div>
+          <div className="smallCards">
+            <div className="btnDefault borderR12"></div>
+            <div className="btnDefaultDeep borderR12"></div>
+            <div className="btnDefault borderR12"></div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -376,6 +558,10 @@ const mapDispatchToProps = {
 export default connect(null, mapDispatchToProps)(Cards);
 
 const CardItem = ({ attributes, styles, handleStartDrag, children }) => {
+  useEffect(() => {
+    console.log("attributes", attributes);
+    // console.log("styles", styles);
+  }, [attributes]);
   return (
     <div
       key="dragEle2"

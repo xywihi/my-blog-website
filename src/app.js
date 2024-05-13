@@ -147,7 +147,7 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
           />
         </aside>
         
-        <div className="contentBox flexFull scrollbarBox">
+        <div className="contentBox flexFull scrollbarBox relative">
           <Notices manageNotices={notices.hidde} />
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>

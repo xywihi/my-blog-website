@@ -12,7 +12,7 @@ const banners = [
   },
 ];
 
-export default function Banner({ wNum, hNum, unitWidth }) {
+export default function EmailBox({ wNum, hNum, unitWidth }) {
   useEffect(() => {
     console.log("wNum, hNum, unitWidth", wNum, hNum, unitWidth);
   }, []);

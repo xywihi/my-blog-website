@@ -1,4 +1,4 @@
-.flexWrap{
+.flexWrap {
     display: grid;
     grid-template-columns: repeat(20, 1fr);
     position: relative;
@@ -7,21 +7,226 @@
     //     transition: all 0.5s ease;
     // }
 }
-.testCard{
+
+.testCard {
     position: absolute;
     top: 0;
     left: 0;
     // background-color: black;
     // padding: 8px;
-    border: 6px solid transparent;;
-    &>div{
+    border: 6px solid transparent;
+    transition: all .5s ease-in-out, width .5s ease-in-out .3s, height .5s ease-in-out .3s;
+
+    &>div {
         height: 100%;
+
         // margin: 6px;
         // overflow: auto; 
-        &>div{
-            background-color: black;
-            
+        &>div {
+            // background-color: black;
+
             height: 100%;
         }
+    }
+}
+.treasureChest_box,.treasureChest,.treasureChest>div:first-child,.triangle{
+    transition: all .3s ease-in-out;
+}
+
+.treasureChest_box {
+    position: fixed;
+    bottom: -60px;
+    // left: calc(50% - 100px);
+    right: 30px;
+    width: 200px;
+    height: 200px;
+    
+    &:hover {
+        bottom: 0px;
+    }
+}
+
+.treasureChest {
+    transform: scale(.5);
+    opacity: .5;
+    .smallCards {
+        transform: scale(0.2);
+        opacity: 0;
+        top: 40px;
+        transition: all .3s ease-in-out .3s;
+    }
+    
+
+    &>div:first-child {
+        width: 192.5px;
+        height: 66px;
+        transform: perspective(200px) rotateX(45deg) scale(0.7, 0.7);
+        transform-origin: top center;
+        margin-left: -16.5px;
+        position: relative;
+        top: 90px;
+        z-index: 1;
+
+    }
+
+    &>div:nth-child(2) {
+        width: 160px;
+        height: 105px;
+        margin-top: -32px;
+        position: absolute;
+        z-index: 10;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+
+        .logoTest {
+            width: 40%;
+            margin: 0 auto;
+            margin-top: calc(50% - 55px);
+
+            polygon,
+            circle {
+                fill: #093838;
+            }
+        }
+
+        &:hover {
+            .logoTest {
+
+                polygon,
+                circle {
+                    fill: #ffffff;
+                }
+            }
+        }
+    }
+
+    .triangle {
+        width: 0;
+        height: 0;
+        border-left: 69px solid #297070;
+        border-right: 69px solid #297070;
+        border-top: 90px solid #0a75375e;
+        position: absolute;
+        top: 30px;
+        left: calc(50% - 89px);
+        z-index: 1;
+    }
+    &:hover {
+        transform: scale(.8);
+        opacity: 1;
+        &>div:first-child,.triangle {
+            top: 0;
+        }
+        .triangle {
+            border-top: 138.6px solid #0a75375e;
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 160px;
+            height: 160px;
+            filter: blur(10px);
+            background: linear-gradient(to right, #24f3fa, #f82699);
+            // 背景色为渐变色
+            border-radius: 50%;
+            margin-left: 0;
+            margin-top: -12px;
+        }
+
+        .smallCards {
+            position: absolute;
+            left: 54px;
+            top: -60px;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: grid;
+            grid-template-columns: 50px 50px 50px;
+            column-gap: 12px;
+            align-items: center;
+            justify-content: center;
+            transform: scale(1);
+            opacity: 1;
+            &>div{
+                height: 50px;
+            }
+            &>div:first-child,&>div:last-child{
+                width: 32px;
+                height: 32px;
+                margin: 0 auto;
+            }
+            &>div{
+                animation: smallCardZoom 1s ease-in-out infinite;
+            }
+        }
+        
+    }
+
+}
+
+@keyframes fallDown {
+    0% {
+        transform: scale(.5);
+    }
+
+    20% {
+        transform: scale(1.2);
+    }
+
+    35% {
+        transform: scale(.6);
+    }
+
+    55% {
+        transform: scale(1.1);
+    }
+
+    68% {
+        transform: scale(.8);
+    }
+
+    75% {
+        transform: scale(1);
+    }
+
+    84% {
+        transform: scale(.9);
+    }
+
+    94% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes upMove {
+    0% {
+        transform: rotate(5deg);
+    }
+
+    50% {
+        transform: rotate(-5deg);
+    }
+
+    100% {
+        transform: rotate(5deg);
+    }
+}
+@keyframes smallCardZoom {
+    0% {
+        transform: scale(.5);
+    }
+
+    50% {
+        transform:  scale(1);
+    }
+
+    100% {
+        transform:  scale(.5);
     }
 }

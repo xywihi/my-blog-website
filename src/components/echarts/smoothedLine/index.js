@@ -96,7 +96,7 @@ const SmoothedLine = () => {
         };
         myChart.setOption(options);
       }
-    return (<div ref={ref} id="smoothedLine"  style={{ width: '100%', height: '100%' }}></div>)
+    return (<div ref={ref} id="smoothedLine" className='pa24' style={{ width: '100%', height: '100%' }}></div>)
 }
 
 function areEqual(prevProps, nextProps) {
