@@ -25,7 +25,7 @@ const MusicPlayer = ({music,pauseCurrent,playMusic,handleShowArea}) => {
     }
     return (
         <div className={`heightFull no-select`}>
-            <div className={`overflowY heightFull scrollbarBox ${styles.smallMusicBox}`}>
+            <div className={`overflowY heightFull scrollbarBox scrollbarBox_hidden ${styles.smallMusicBox}`}>
                 <ul>
                     {musicsData.map((item,index)=>
                     <li key={item.id} className="cursor" onClick={()=>changeAudio(item)}>

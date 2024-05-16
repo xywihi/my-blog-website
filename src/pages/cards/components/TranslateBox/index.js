@@ -15,7 +15,7 @@ function TranslateBox({ wNum, hNum, unitWidth }) {
     childTranslate.current.handleTranslate();
   };
   return (
-    <div className="borderR12 maB12 item5 mobileCard bg1 pa24 cardBox">
+    <>
       <div className="flexB maB24">
         <h3 className="title">汉英翻译</h3>
         <div className="flexB">
@@ -58,7 +58,7 @@ function TranslateBox({ wNum, hNum, unitWidth }) {
         ref={childTranslate}
         showStatusBox={showStatusBox}
       />
-    </div>
+    </>
   );
 }
 const mapDispatchToProps = {

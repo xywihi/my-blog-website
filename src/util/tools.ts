@@ -197,6 +197,27 @@ const getTimeText=(timeNum)=>{
     return second+"秒前";
 }
 
+
+// 文字转语音
+const speak = (info:string, voiceNum:number) => {
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();;
+      const msg = new SpeechSynthesisUtterance(info);
+      let voices = window.speechSynthesis;
+    setTimeout(() => {
+      let zh_voices = voices.getVoices().filter((item) => {
+        return item.lang == "zh-CN";
+      });
+      if (zh_voices.length > 0) {
+        msg.volume = 5; //音量
+        msg.rate = 1.2; //语速
+        msg.voice = zh_voices[voiceNum]; // 设置语音
+        // msg.text = input.value //文字
+        window.speechSynthesis.speak(msg); //播放语音
+      }
+    }, 10);
+    }
+  };
 //导出函数
 export {
     debounce,
@@ -205,5 +226,6 @@ export {
     enterFullScreen,
     exitFullScreen,
     openBox,
-    getTimeText
+    getTimeText,
+    speak
 }

@@ -1,69 +1,20 @@
 import React, { useEffect, useState, createRef, Children } from "react";
 import "./styles.less";
-import ExamCountdown from "./components/examCountdown";
-import TimeWeather from "./components/timeWeather";
-import MusicPlayer from "../../components/musicPlayer";
-import TranslateBox from "./components/TranslateBox";
-import SmoothedLine from "../../components/echarts/smoothedLine";
+import styles from './index.module.less'
+import { menu } from "ionicons/icons";
+import { cardsData } from "./cards_data";
+
 import { connect } from "react-redux";
 import { showStatusBox } from "@/store/actions";
-import Banner from "./components/Banner";
-import PersonalAvatar from "./components/PersonalAvatar";
-import CardCreator from "./components/CardCreator";
-import NewsBox from "./components/NewsBox";
-import FansMessagesBox from "./components/FansMessagesBox";
-import MemorandumBox from "./components/MemorandumBox"
 import { computeOrder, computeCardsOrder } from "./tool";
-import Clocker from "./components/Clocker";
-
+import CardCreator from "./components/CardCreator";
+import withNewProp from '@/util/HOC'
+import { debug } from "openai/core.mjs";
 const windowW = window.innerWidth - 352;
-const nnnn = windowW > 1400 ? 20 : windowW > 640 ? 10 : 1;
-const existCardsArr = [
-  <Banner wNum={6} hNum={4} unitWidth={windowW / nnnn} />,
+const areaHNum = windowW > 1400 ? 20 : windowW > 640 ? 10 : 1;
+const areaVNum = windowW > 1400 ? 20 : windowW > 640 ? 40 : 1;
 
-  <CardCreator wNum={2} hNum={2} unitWidth={windowW / nnnn}>
-    <PersonalAvatar cardSize="small" />
-  </CardCreator>,
-  <CardCreator wNum={4} hNum={2} unitWidth={windowW / nnnn}>
-    <PersonalAvatar cardSize="middle" />
-  </CardCreator>,
-  <CardCreator wNum={2} hNum={1} unitWidth={windowW / nnnn}>
-    <TimeWeather cardSize="small" />
-  </CardCreator>,
-  <CardCreator wNum={4} hNum={2} unitWidth={windowW / nnnn}>
-    <TimeWeather cardSize="big" />
-  </CardCreator>,
-  <CardCreator
-    wNum={4}
-    hNum={6}
-    minWNum={3}
-    minHNum={3}
-    unitWidth={windowW / nnnn}
-  >
-    <ExamCountdown />
-  </CardCreator>,
-  <CardCreator wNum={3} hNum={4} padding={24} unitWidth={windowW / nnnn}>
-    <MusicPlayer />
-  </CardCreator>,
-  <CardCreator wNum={6} hNum={3} unitWidth={windowW / nnnn}>
-    <TranslateBox />
-  </CardCreator>,
-  <CardCreator wNum={6} hNum={4} unitWidth={windowW / nnnn}>
-    <SmoothedLine />
-  </CardCreator>,
-  <CardCreator wNum={2} hNum={2} unitWidth={windowW / nnnn}>
-    <Clocker />
-  </CardCreator>,
-  <CardCreator wNum={4} hNum={2} padding={24} unitWidth={windowW / nnnn}>
-    <NewsBox cardSize="small" />
-  </CardCreator>,
-  <CardCreator wNum={4} hNum={3} padding={24} unitWidth={windowW / nnnn}>
-    <FansMessagesBox cardSize="small" />
-  </CardCreator>,
-  <CardCreator wNum={4} hNum={6} padding={24} unitWidth={windowW / nnnn}>
-    <MemorandumBox cardSize="small" />
-  </CardCreator>,
-];
+let existCardsArr = [];
 
 const createGrids = (xCount, yCount, cardsArr) => {
   // console.log("createGrids", cardsArr);
@@ -78,7 +29,7 @@ const createGrids = (xCount, yCount, cardsArr) => {
   }));
   let compNewGrids = newGrids.map((item, index) => {
     cardsArr.forEach((card, cardIndex) => {
-      card.attributes.xyArr.forEach((xy, xyIndex) => {
+      card.attributes.xyArr?.forEach((xy, xyIndex) => {
         if (
           xy[0] * (windowW / xCount) === item.x &&
           xy[1] * (windowW / xCount) === item.y
@@ -102,37 +53,39 @@ const Cards = ({ showStatusBox }) => {
   const [wallImage, setWallImage] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [gridsArr, setGridsArr] = useState([]);
-  const [cardsArrTest, setCardsArr] = useState([]);
+  const [cardsArrFinal, setCardsArrFinal] = useState([]);
 
   // console.log("windowW", windowW);
   const childTranslate = createRef(null);
   let finalComputedCard = [];
   useEffect(() => {
+    existCardsArr = cardsData.map((item, index) => <CardCreator key={item.name} dragStart={handleStartDrag} changHeight={handleChangeHeight} {...item.props}>{item.component}</CardCreator>);
     const arr = computeOrder(existCardsArr, 1);
-    finalComputedCard = computeCardsOrder(arr, windowW, nnnn, 10).map(
+    finalComputedCard = computeCardsOrder(arr, windowW, areaHNum, areaVNum).map(
       (item, index) => {
-        item.component = (
-          <div>
-            <div></div>
-          </div>
-        );
+        // item.component = (
+        //   <div>
+        //     <div></div>
+        //   </div>
+        // );
         item.styles.left = `${
-          ((item.attributes.xyArr?.[0]?.[0] || 0) * windowW) / nnnn
+          ((item.attributes.xyArr?.[0]?.[0] || 0) * windowW) / areaHNum
         }px`;
         item.styles.top = `${
-          ((item.attributes.xyArr?.[0]?.[1] || 0) * windowW) / nnnn
+          ((item.attributes.xyArr?.[0]?.[1] || 0) * windowW) / areaHNum
         }px`;
         item.attributes.position = [
-          ((item.attributes.xyArr?.[0]?.[0] || 0) * windowW) / nnnn,
-          ((item.attributes.xyArr?.[0]?.[1] || 0) * windowW) / nnnn,
+          ((item.attributes.xyArr?.[0]?.[0] || 0) * windowW) / areaHNum,
+          ((item.attributes.xyArr?.[0]?.[1] || 0) * windowW) / areaHNum,
         ];
         item.component = existCardsArr[index];
         return item;
       }
     );
+    setCardsArrFinal(finalComputedCard);
+    
+    setGridsArr(createGrids(areaHNum, 20, finalComputedCard));
 
-    setCardsArr(finalComputedCard);
-    setGridsArr(createGrids(nnnn, 10, finalComputedCard));
   }, []);
 
   // 获取随机颜色
@@ -145,12 +98,113 @@ const Cards = ({ showStatusBox }) => {
     return color;
   };
   //   console.log("cards_page");
+  const handleChangeHeight = (e, wNum, hNum,attributes,gridsArr,cardsArrFinal) => {
+    // 设置拖拽元素的初始位置
+    const initialX = e.clientX;
+    const initialY = e.clientY;
+    const line = e.target;
+    const lineRect = line.getBoundingClientRect();
+    const lineWidth = lineRect.width;
+    const lineHeight = lineRect.height;
+    let compLeft = 0;
+    let compTop = 0;
+    document.addEventListener("mousemove", handleDrag);
+    // 监听鼠标松开事件
+    document.addEventListener("mouseup", handleDrop);
+    function handleDrag(e) {
+      // 计算拖拽元素的新位置
+      const newX = e.clientX - initialX + attributes.position[0];
+      const newY = e.clientY - initialY + attributes.position[1];
+      // console.log("newX", e.clientX , initialX , attributes.position[0]);
+      // console.log("newXvvvvvvvvvv", newX,newY,attributes);
+      // 更新拖拽元素的位置
+      // compLeft =
+      //   newX < 0 ? 0 : newX > windowW - lineWidth ? windowW - lineWidth : newX;
 
-  const handleStartDrag = (e, attributes) => {
+      compTop =
+        newY < 0
+          ? 0
+          : newY > (windowW / areaHNum) * areaVNum - lineHeight
+          ? (windowW / areaHNum) * areaVNum - lineHeight
+          : newY;
+      // console.log("compLeft", compLeft);
+      // debugger;
+      // console.log("compTop", e.clientY , initialY,position[1],'--------',e.clientY - initialY,newY,newY < 0);
+      // card.style.left = `${compLeft}px`;
+      // card.style.top = `${compTop}px`;
+      // card.style.zIndex = 99;
+      //克隆card
+
+      // const newLeft =
+      //   Math.floor(compLeft / (windowW / areaHNum));
+      const newTop =
+        Math.floor((compTop- hNum*(windowW / areaHNum)) / (windowW / areaHNum));
+      const clone = line.cloneNode(true);
+      clone.style.position = "absolute";
+      clone.style.width = `${lineWidth}px`;
+      clone.style.height = `${lineHeight}px`;
+      // clone.style.left = `${newLeft - 10}px`;
+      clone.style.bottom = `${-compTop + 10}px`;
+      clone.style.zIndex = 99;
+      clone.style.backgroundColor="red";
+      console.log('-------------',newTop)
+      let newCardsArrFinal = cardsArrFinal.map((card) => {
+        
+        if (card.attributes.symbol === attributes.symbol) {
+
+          return {
+            ...card,
+            component:{
+              ...card.component,
+              props:{
+                ...card.component.props,
+                hNum:newTop ,
+              }
+            },
+          };
+        }
+        return card;
+      });
+      setCardsArrFinal(newCardsArrFinal);
+    }
+    function handleDrop() {
+      
+      // 移除克隆元素
+      // clone.remove();
+      // 移除事件监听器
+      document.removeEventListener("mousemove", handleDrag);
+      document.removeEventListener("mouseup", handleDrop);
+      // 恢复拖拽元素的样式
+      // card.style.zIndex = "";
+      // const newLeft =
+      //   Math.floor(compLeft / (windowW / areaHNum)) * (windowW / areaHNum);
+      
+      
+      // card.style.left = newLeft + "px";
+      // card.style.top = newTop + "px";
+
+      // card.style.animation = "fallDown 1s ease-in-out";
+
+      
+      // card.style.width = "";
+      // card.style.height = "";
+      // handleMoveToNewSite(
+      //   newLeft,
+      //   newTop,
+      //   cardWidth,
+      //   cardHeight,
+      //   currentEleStyle,
+      //   parentEleStyle,
+      //   card,
+      //   attributes,
+      //   gridsArr
+      // );
+    }
+  }
+  const handleStartDrag = (e, attributes,gridsArr,cardsArrFinal) => {
     // debugger
     // 获取元素带有的属性
     e.dataTransfer.setDragImage(new Image(), 0, 0);
-    // console.log("handleStartDrag", typeof e.target.getAttribute("attributes"));
     let position = attributes.position;
     // 获取父级元素
     const parent = e.target.parentNode;
@@ -160,16 +214,16 @@ const Cards = ({ showStatusBox }) => {
     //   currentEleStyle.left - parentEleStyle.left,
     //   currentEleStyle.top - parentEleStyle.top
     // );
-    gridsArr.some((item, index) => {
-      let isOwn =
-        item.symbol &&
-        currentEleStyle.left - parentEleStyle.left === item.position[0] &&
-        currentEleStyle.top - parentEleStyle.top === item.position[1];
-      if (isOwn) {
-        position = item.position;
-      }
-      return isOwn;
-    });
+    // gridsArr.some((item, index) => {
+    //   let isOwn =
+    //     item.symbol &&
+    //     currentEleStyle.left - parentEleStyle.left === item.position[0] &&
+    //     currentEleStyle.top - parentEleStyle.top === item.position[1];
+    //   if (isOwn) {
+    //     position = item.position;
+    //   }
+    //   return isOwn;
+    // });
     // 设置拖拽元素的初始位置
     const initialX = e.clientX;
     const initialY = e.clientY;
@@ -197,9 +251,10 @@ const Cards = ({ showStatusBox }) => {
 
     function handleDrag(e) {
       // 计算拖拽元素的新位置
-      const newX = e.clientX - initialX + position[0];
-      const newY = e.clientY - initialY + position[1];
-      // console.log("newX", e.clientX , initialX , position[0]);
+      const newX = e.clientX - initialX + attributes.position[0];
+      const newY = e.clientY - initialY + attributes.position[1];
+      // console.log("newX", e.clientX , initialX , attributes.position[0]);
+      // console.log("newXvvvvvvvvvv", newX,newY,attributes);
       // 更新拖拽元素的位置
       compLeft =
         newX < 0 ? 0 : newX > windowW - cardWidth ? windowW - cardWidth : newX;
@@ -207,8 +262,8 @@ const Cards = ({ showStatusBox }) => {
       compTop =
         newY < 0
           ? 0
-          : newY > (windowW / nnnn) * 10 - cardHeight
-          ? (windowW / nnnn) * 10 - cardHeight
+          : newY > (windowW / areaHNum) * areaVNum - cardHeight
+          ? (windowW / areaHNum) * areaVNum - cardHeight
           : newY;
       // console.log("compLeft", compLeft);
       // debugger;
@@ -219,22 +274,23 @@ const Cards = ({ showStatusBox }) => {
       //克隆card
 
       const newLeft =
-        Math.floor(compLeft / (windowW / nnnn)) * (windowW / nnnn);
-      const newTop = Math.floor(compTop / (windowW / nnnn)) * (windowW / nnnn);
-      // console.log("compTop", compLeft, compTop, newLeft, newTop);
+        Math.floor(compLeft / (windowW / areaHNum)) * (windowW / areaHNum);
+      const newTop =
+        Math.floor(compTop / (windowW / areaHNum)) * (windowW / areaHNum);
+        
       clone.style.width = `${cardWidth + 20}px`;
       clone.style.height = `${cardHeight + 20}px`;
       clone.style.left = `${newLeft - 10}px`;
       clone.style.top = `${newTop - 10}px`;
       clone.style.zIndex = 99;
-      console.log(
-        "e.clientY - initialY",
-        e.clientY,
-        initialY,
-        "newLeft,newTop",
-        newLeft,
-        newTop
-      );
+      // console.log(
+      //   "e.clientY - initialY",
+      //   e.clientY,
+      //   initialY,
+      //   "newLeft,newTop",
+      //   newLeft,
+      //   newTop
+      // );
       // debugger;
       // 将克隆元素添加到body中
     }
@@ -248,11 +304,33 @@ const Cards = ({ showStatusBox }) => {
       // 恢复拖拽元素的样式
       // card.style.zIndex = "";
       const newLeft =
-        Math.floor(compLeft / (windowW / nnnn)) * (windowW / nnnn);
-      const newTop = Math.floor(compTop / (windowW / nnnn)) * (windowW / nnnn);
-      card.style.left = newLeft + "px";
-      card.style.top = newTop + "px";
+        Math.floor(compLeft / (windowW / areaHNum)) * (windowW / areaHNum);
+      const newTop =
+        Math.floor(compTop / (windowW / areaHNum)) * (windowW / areaHNum);
+      // card.style.left = newLeft + "px";
+      // card.style.top = newTop + "px";
+
       card.style.animation = "fallDown 1s ease-in-out";
+
+      let newCardsArrFinal = cardsArrFinal.map((card) => {
+        
+        if (card.attributes.symbol === attributes.symbol) {
+          return {
+            ...card,
+            styles: {
+              ...card.styles,
+              left: newLeft + "px",
+              top: newTop + "px",
+            },
+            attributes: {
+              ...card.attributes,
+              position: [newLeft, newTop],
+            }
+          };
+        }
+        return card;
+      });
+      setCardsArrFinal(newCardsArrFinal);
       // card.style.width = "";
       // card.style.height = "";
       handleMoveToNewSite(
@@ -263,7 +341,8 @@ const Cards = ({ showStatusBox }) => {
         currentEleStyle,
         parentEleStyle,
         card,
-        attributes
+        attributes,
+        gridsArr
       );
       //   移除克隆元素
       clone.remove();
@@ -278,7 +357,8 @@ const Cards = ({ showStatusBox }) => {
     card,
     attributes,
     cardWidth,
-    cardHeight
+    cardHeight,
+    gridsArr
   ) => {
     // console.log("handleCheckOver", currentEleOldStyle, parentEleStyle);
     if (
@@ -416,7 +496,8 @@ const Cards = ({ showStatusBox }) => {
     currentEleOldStyle,
     parentEleStyle,
     card,
-    attributes
+    attributes,
+    gridsArr
   ) => {
     // 检查是否碰撞到其他卡片
 
@@ -429,7 +510,8 @@ const Cards = ({ showStatusBox }) => {
         card,
         attributes,
         cardWidth,
-        cardHeight
+        cardHeight,
+        gridsArr
       )
     ) {
       card.style.left = currentEleOldStyle.left - parentEleStyle.left + "px";
@@ -443,21 +525,14 @@ const Cards = ({ showStatusBox }) => {
       });
       return;
     }
-    const symbol = Symbol();
-    const topLeftPoint = [newLeft, newTop];
-    const topRightPoint = [newLeft + cardWidth, newTop];
-    const bottomLeftPoint = [newTop + cardHeight, newLeft];
-    const bottomRightPoint = [newTop + cardHeight, newLeft + cardWidth];
-    // debugger;
-    // console.log(card.style.left, card.style.top);
-    // console.log("card,card", cardsArr[0].attributes.symbol==attributes.symbol,attributes.symbol==gridsArr[0].symbol);
+    
+
     const grids = gridsArr.map((grid) => {
       let overed =
         grid.x >= newLeft &&
         grid.x < newLeft + cardWidth &&
         grid.y >= newTop &&
         grid.y < newTop + cardHeight;
-      console.log("newLeft, newTop", newLeft, newTop);
       return {
         ...grid,
         used: overed
@@ -484,15 +559,20 @@ const Cards = ({ showStatusBox }) => {
         height: grid.used ? grid.height : overed ? cardHeight : 0,
       };
     });
+    
     // debugger;
     // console.log("grids", grids);
     // setGridsArr(grids);
     // gridsArr = grids;
+    console.log("grids-----------", grids);
     setGridsArr(grids);
+    
+
   };
 
   return (
-    <div style={{ position: "relative" }}>
+    windowW + 352 >1400 ? (
+    <div className={styles.topAreaNox} style={{ position: "relative" }}>
       <div className="bg2_blue flexS flexWrap" id="cardsArea">
         {gridsArr.map((item, index) => (
           <div
@@ -500,32 +580,34 @@ const Cards = ({ showStatusBox }) => {
             className="card_item"
             style={{
               // backgroundColor: randomColor()
-              width: `${windowW / nnnn}px`,
-              height: `${windowW / nnnn}px`,
+              width: `${windowW / areaHNum}px`,
+              height: `${windowW / areaHNum}px`,
             }}
           >
             {/* {index} */}
           </div>
         ))}
       </div>
-      {cardsArrTest.map((item, index) => (
-        <CardItem
-          key={item.id}
-          attributes={item.attributes}
-          styles={item.styles}
-          handleStartDrag={handleStartDrag}
-        >
-          {item.component}
-          {/* [<div>cxccc</div>] */}
-        </CardItem>
-      ))}
+      {cardsArrFinal.map((item, index) => {
+        return <CardItem
+        key={item.id}
+        attributes={item.attributes}
+        styles={item.styles}
+        handleStartDrag={handleStartDrag}
+        // children={item.component}
+      >
+        <div>{
+        React.cloneElement(item.component , {change:item.component.props.change,gridsArr,cardsArrFinal,attributes:item.attributes})}</div>
+        
+        {/* {React.cloneElement(item.children, {})} */}
+        
+      </CardItem>
+      })}
       <div className="treasureChest_box">
         <div className="treasureChest">
           <div className="btnDefaultDeep"></div>
           <div className="btnDefault">
-            <div
-              className="logoTest textColorWhite flexS"
-            >
+            <div className="logoTest textColorWhite flexS">
               <svg
                 data-name="logo"
                 xmlns="http://www.w3.org/2000/svg"
@@ -548,8 +630,8 @@ const Cards = ({ showStatusBox }) => {
         </div>
       </div>
     </div>
-  );
-};
+  ):<p>移动端不支持此页面</p>)
+}
 
 const mapDispatchToProps = {
   showStatusBox,
@@ -559,7 +641,6 @@ export default connect(null, mapDispatchToProps)(Cards);
 
 const CardItem = ({ attributes, styles, handleStartDrag, children }) => {
   useEffect(() => {
-    console.log("attributes", attributes);
     // console.log("styles", styles);
   }, [attributes]);
   return (
@@ -568,8 +649,7 @@ const CardItem = ({ attributes, styles, handleStartDrag, children }) => {
       className="testCard"
       style={styles}
       attributes={attributes}
-      draggable={true}
-      onDragStart={(e) => handleStartDrag(e, attributes)}
+      // draggable={true}
     >
       {children}
     </div>

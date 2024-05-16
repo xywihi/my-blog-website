@@ -1,0 +1,174 @@
+// html,body,#root,.project{
+//     height: 100%;
+//     transition: all 1s ease-out;
+// }
+// less中设置随机颜色变量
+@import './colors.less';
+
+.light{
+    .colorWhite{
+        color: rgb(255, 255, 255);
+    }
+    .colorBlack{
+        color: rgb(0, 0, 0);
+    }
+    .colorRed{
+        color: rgb(224, 44, 44);
+    }
+    .colorBlue{
+        color: rgb(33, 145, 219);
+    }
+    .colorOrange{
+        color: rgb(224, 125, 31);
+    }
+    .svg-fill{
+        fill:#000000;
+    }
+    .textColor,a{
+        color: #333
+    };
+    .colorGray{
+        color:#a5a5a5;
+    }
+    .btnDefault{
+        background-color: #46a7a7;
+        color: #186d6d;
+    }
+    .btnDefaultDeep{
+        background-color: #297070;
+        color: #186d6d;
+    }
+    .bg1{
+        background-color: #fff;
+    }
+    .bg2{
+        background-color: #fcfcfc;
+    }
+    .bg2_blue{
+        background-color: #eceff0;
+    }
+    .bg3{
+        background-color: #f3f3f3;
+    }
+    .bg4{
+        background-color: #d7d7d7f5;
+    }
+    .bg_gray{
+        background-color: @gray;
+    }
+    .bg_black{
+        background-color: #2b2b2b;
+    }
+    .bg_blue{
+        background-color: @blue;
+    }
+    .bg_orange{
+        background-color: @orange;
+    }
+    .bg_red{
+        background-color: @red;
+    }
+    table{
+        background-color: #cccccc;
+    }
+    th{
+        background-color:#ececec;  
+    }
+    td{
+        background-color:#ffffff;
+    }
+    .border_white{
+        border-color: #d1d1d1;
+    }
+    .border_black{
+        border-color: #353535;
+    }
+    .border_gray{
+        border-color: @gray-light;
+    }
+    .icon_hover{
+        
+        &:hover{
+            color:#46a7a7
+        }
+    }
+    .cursor{
+        cursor: pointer;
+    }
+    .cardBox{
+        .title{
+            font-weight: bold;
+        }
+        transition: all 0.5s ease-out;
+        &:hover{
+            box-shadow: #d2dde7 0px 4px 24px;
+            
+        }
+       
+    }
+    .cardBoxShadow{
+        z-index: 999;
+        box-shadow: #d2dde7 0px 4px 24px;
+        // 设置父级元素样式
+    }
+    .cardOutBox::after{
+        content: "";
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #c5e3ff54;
+        z-index: 0;
+    }
+    .navBtn{
+        position: relative;
+        transition: all 0.5s ease-out;
+        
+    }
+    .activeNavFartherBox{
+        .moreIcon{
+            transition: all 0.3s ease-out;
+            transform: rotateZ(180deg);
+        }
+        &:hover{
+        &>div:first-child{
+            margin-bottom: 12px;
+        }
+        background-color: rgb(243, 243, 243);
+        transform: translateX(12px);
+        width: calc(100% - 12px);
+        padding-left: 24px;
+        .moreIcon{
+            transform: rotateZ(90deg);
+        }
+        }
+    }
+    .activeNavOld{
+        padding-left: 24px;
+        background-color: rgb(243, 243, 243);
+        &::before{
+            content: "";
+            background-color: aquamarine;
+            
+        }
+    }
+    .activeNavOldNoB{
+        background-color: rgb(243, 243, 243);
+    }
+    // .activeNav{
+    //     &:hover{
+    //         background-color: rgb(243, 243, 243);
+    //         &::before{
+    //             content: "";
+    //             background-color: aquamarine;
+                
+    //         }
+    //     }
+    // }
+    .logout{
+        &:hover{
+            background-color: rgb(243, 243, 243);
+        }
+    }
+}

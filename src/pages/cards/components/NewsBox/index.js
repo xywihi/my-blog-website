@@ -16,7 +16,7 @@ const banners = [
 export default function NewsBox({ cardSize }) {
   useEffect(() => {}, []);
   return (
-    <div className="borderR12 maB12 bg1 cardBox">
+    <div className="borderR12 maB12">
       {cardSize === "large" ? (
         <div></div>
       ) : (

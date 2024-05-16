@@ -67,7 +67,7 @@ const NoticesBox =({manageNotices}) => {
                     <IonIcon className={styles.clear_btn+' '+"bg1 pa6 borderR50 maR12"} icon={close} size="18px" onClick={handleClearNotices}></IonIcon>
                     <IonIcon className={styles.clear_btn+' '+"bg1 pa6 borderR50"} icon={arrowForward} size="18px" onClick={()=>handleHiddeNotices(!hiddeNotices)}></IonIcon>
                 </div>
-                <div className="scrollbarBox paV12 paL24 heightFull">
+                <div className="scrollbarBox scrollbarBox_hidden paV12 paL24 heightFull">
                     {notices.map((item,index)=><NoticesItem key={item.id} index={index} stopUpdateNotice={stopUpdateNotice} notices={notices} handleControllUpdate={handleControllUpdate} data={item}/>)}
                 </div>
             </div>

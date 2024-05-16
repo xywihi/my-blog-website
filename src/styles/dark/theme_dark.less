@@ -1,0 +1,246 @@
+// html,body,#root,.project{
+//     height: 100%;
+//     transition: all 1s ease-out;
+// }
+// less中设置随机颜色变量
+@import './colors.less';
+
+
+.dark {
+
+    // display: none;
+    .opacity60_black {
+        opacity: 0.6;
+    }
+
+    .colorWhite {
+        color: rgb(0, 0, 0);
+    }
+
+    .colorBlack {
+        color: rgb(255, 255, 255);
+    }
+
+    .colorRed {
+        color: rgb(124, 49, 49);
+    }
+
+    .colorBlue {
+        color: rgb(35, 81, 112);
+    }
+
+    .colorOrange {
+        color: rgb(126, 79, 34);
+    }
+
+    .svg-fill {
+        fill: #fff;
+    }
+
+    .textColor,
+    a {
+        color: #b9b9b9
+    }
+
+    ;
+
+    .colorGray {
+        color: #717171;
+    }
+
+    .btnDefault {
+        background-color: #269494;
+        color: #51a1a1;
+    }
+
+    .btnDefaultDeep {
+        background-color: #227070;
+        color: #186d6d;
+    }
+
+    .bg1 {
+        background-color: #1e1f21;
+    }
+
+    .bg2 {
+        background-color: #616161;
+    }
+
+    .bg2_blue {
+        background-color: #2d3133;
+    }
+
+    .bg3 {
+        background-color: #4c4c4c;
+    }
+
+    .bg4 {
+        background-color: #2e2e2ef5;
+    }
+
+    .bg_gray {
+        background-color: #444444;
+    }
+
+    .bg_black {
+        background-color: #ffffff;
+    }
+
+    table {
+        background-color: #36383b;
+    }
+
+    th {
+        background-color: #36383b;
+    }
+
+    td {
+        background-color: #1e1f21;
+    }
+
+    select {
+        background-color: #36383b;
+        color: #fff;
+    }
+
+    .border_black {
+        border-color: #d1d1d1;
+    }
+
+    .border_white {
+        border-color: #353535;
+    }
+
+    .icon_hover {
+        &:hover {
+            color: #1a5050
+        }
+    }
+
+    .cardBox {
+        .title {
+            font-weight: bold;
+        }
+
+        transition: all 0.5s ease-out;
+
+        &:hover {
+            box-shadow: #1e1f20 0px 4px 24px;
+        }
+
+    }
+
+    .cardBoxShadow {
+        box-shadow: #1e1f20 0px 4px 24px;
+    }
+
+    .cardOutBox::after {
+        content: "";
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #0f2e4b54;
+        z-index: 0;
+    }
+
+    .logout {
+        position: relative;
+        transition: all 0.5s ease-out;
+        width: 100%;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #1c2625;
+            transform: translateX(12px);
+            width: calc(100% - 12px);
+
+            &::before {
+                content: "退出";
+                position: absolute;
+                right: 12px;
+                font-size: small;
+            }
+        }
+    }
+
+
+
+    .navBtn {
+        position: relative;
+        transition: all 0.5s ease-out;
+
+    }
+
+    .activeNavFartherBox {
+        .moreIcon {
+            transition: all 0.3s ease-out;
+            transform: rotateZ(180deg);
+        }
+
+        &>div:first-child {
+            margin-bottom: 12px;
+        }
+
+        &:hover {
+            background-color: #1c2625;
+            transform: translateX(12px);
+            width: calc(100% - 12px);
+            padding-left: 24px;
+
+            .moreIcon {
+                transform: rotateZ(90deg);
+            }
+        }
+    }
+
+    .activeNavOld {
+        background-color: #1c2625;
+        transform: translateX(12px);
+        transition: all 0.5s ease-out;
+        width: calc(100% - 12px);
+        padding-left: 24px;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: calc(50% - 6px);
+            width: 4px;
+            height: 12px;
+            border-radius: 12px;
+            background-color: #5c7c79;
+
+        }
+    }
+
+    .activeNavOldNoB {
+        background-color: #1c2625;
+        transform: translateX(12px);
+        transition: all 0.5s ease-out;
+        width: calc(100% - 12px);
+        padding-left: 24px;
+    }
+
+    // .activeNav{
+    //     &:hover{
+    //         background-color: #1c2625;
+    //         transform: translateX(12px);
+    //         transition: all 0.5s ease-out;
+    //         width: calc(100% - 12px);
+    //         padding-left: 24px;
+    //         &::before{
+    //             content: "";
+    //             position: absolute;
+    //             left: 12px;
+    //             top: calc(50% - 6px);
+    //             width: 4px;
+    //             height: 12px;
+    //             border-radius: 12px;
+    //             background-color: #5c7c79;
+
+    //         }
+    //     }
+    // }
+}

@@ -2,7 +2,7 @@ import * as echarts from 'echarts';
 import React,{useEffect, useRef} from 'react';
 import HttpRequire from "@/http/require";
 import echartsData from '@/assets/data/echart.json'
-const SmoothedLine = () => {
+const SmoothedLine = ({height=0,width=0}) => {
     const ref = useRef()
     // var ROOT_PATH = 'https://echarts.apache.org/examples';
     var myChart
@@ -96,7 +96,7 @@ const SmoothedLine = () => {
         };
         myChart.setOption(options);
       }
-    return (<div ref={ref} id="smoothedLine" className='pa24' style={{ width: '100%', height: '100%' }}></div>)
+    return (<div ref={ref} id="smoothedLine" className='pa24' style={{ width: height+'px', height: width+'px' }}></div>)
 }
 
 function areEqual(prevProps, nextProps) {

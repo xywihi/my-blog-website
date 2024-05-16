@@ -7,7 +7,6 @@ export const computeOrder = (arr: any[], bigToSmall : (0 | 1 | 2)) => {
       ? a.props.wNum * a.props.wNum - b.props.hNum * b.props.hNum
       : b.props.hNum * b.props.hNum - a.props.wNum * a.props.wNum
   );
-  console.log("newArr", newArr);
   return newArr;
 };
 export const computeCardCoordinate = (
@@ -65,7 +64,6 @@ export const computeCardsOrder = (
       return [Math.floor(index / unitHNum), index % unitHNum];
     });
   let getUsedAreaArr = test();
-  console.log("chessboard", chessboard);
   let hTotal = 0;
   let vTotal = 0;
   let cardsOrderArr = orderArr.map((item: any, index) => {
@@ -105,7 +103,6 @@ export const computeCardsOrder = (
       //   })
     };
   });
-  console.log("cardsOrderArr", cardsOrderArr);
   return cardsOrderArr;
 };
 // <Banner wNum={6} hNum={4} unitWidth={windowW / 20} />,

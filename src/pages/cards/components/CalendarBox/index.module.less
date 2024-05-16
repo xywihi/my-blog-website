@@ -1,0 +1,82 @@
+.calendarBox_large {
+    // user-select: none;
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .weekDayBox {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        column-gap: 12px;
+        text-align: center;
+    }
+
+    .daysBox {
+        height: calc(100% - 78px);
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        column-gap: 12px;
+        row-gap: 12px;
+
+        .dayBox {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            span:first-child {
+                position: absolute;
+                z-index: 1;
+                margin-right: 2px;
+                margin-bottom: 2px;
+            }
+
+            .dayCircle {
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                display: inline-block;
+                animation: zoom 1s infinite;
+            }
+
+            .exitPlan {
+                position: absolute;
+                bottom: -4px;
+                left: 5px;
+                width: 12px;
+                height: 4px;
+                border-radius: 50px;
+                display: inline-block;
+                z-index: 10;
+            }
+        }
+    }
+
+    .currentMouth {
+        position: absolute;
+        bottom: 0;
+    }
+
+    .bottomIcons {
+        margin-top: 8px;
+    }
+}
+
+@keyframes zoom {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

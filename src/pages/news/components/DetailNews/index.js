@@ -194,11 +194,11 @@ function DetailNews({ selectItem, showStatusBox }) {
       <div className="hotestNews paH24">
         <div className="maB12 ">
           <h2 className="maB6 fontB">{selectItem?.title}</h2>
-          <p className="textColorGray fontSmall">{selectItem?.date}</p>
+          <p className="colorGray fontSmall">{selectItem?.date}</p>
           <hr className="maV12 opacity20" />
           <div></div>
         </div>
-        <div className="hotestNews_content_box scrollbarBox">
+        <div className="hotestNews_content_box scrollbarBox scrollbarBox_hidden">
           <img className="borderR6 maV12" src={selectItem?.imgUrl} />
 
           <div className="news_content_box_text">
@@ -264,7 +264,7 @@ function DetailNews({ selectItem, showStatusBox }) {
       </div>
       {/* 详情评论区 */}
       {showComment && (
-        <div className={`${styles.comment_box} scrollbarBox borderTR12`}>
+        <div className={`${styles.comment_box} scrollbarBox scrollbarBox_hidden borderTR12`}>
           <MaskElement
             click={() => {
               setShowComment(false);
@@ -278,7 +278,7 @@ function DetailNews({ selectItem, showStatusBox }) {
             <hr className="opacity20" />
           </div>
           <div className={`${styles.comment_area_box} bg1 pa24`}>
-            <div className="borderR6 hotestNews_comment_area_box scrollbarBox">
+            <div className="borderR6 hotestNews_comment_area_box scrollbarBox scrollbarBox_hidden">
               <ul className="borderR6 hotestNews_comment_area_box_text">
                 {commentsArr.map((item, index) => (
                   <li key={item.id}>
@@ -286,7 +286,7 @@ function DetailNews({ selectItem, showStatusBox }) {
                     <div className="widthFull">
                       <div className="flexB  maB6">
                         <div>
-                          <p className="name font14 textColorGray">
+                          <p className="name font14 colorGray">
                             {item.user}
                           </p>
                           <p className="content flexB">{item.content}</p>
@@ -302,7 +302,7 @@ function DetailNews({ selectItem, showStatusBox }) {
                           </span>
                         </div>
                       </div>
-                      <p className="font10 maT3 textColorGray">
+                      <p className="font10 maT3 colorGray">
                         {getTimeText(item.time)}
                       </p>
                     </div>

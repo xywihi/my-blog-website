@@ -14,7 +14,8 @@ const TimeWeather = ({ cardSize }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [weather, setWeather] = useState(null);
   useEffect(() => {
-    const http = new HttpRequire("weather");
+    if(cardSize!='small'){
+      const http = new HttpRequire("weather");
     // const apiUrl = `http://localhost:3000/api/weather`;
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=zh_cn`;
     http
@@ -28,6 +29,7 @@ const TimeWeather = ({ cardSize }) => {
       .catch((err) => {
         // alert(err)
       });
+    }
     let timer = setInterval(() => {
       setCurrentDate(new Date());
     }, 10000);
@@ -38,11 +40,9 @@ const TimeWeather = ({ cardSize }) => {
   }, []);
   
   return (
-    <div
-      className={`waterfall-item borderR12  paH24 paV12 cardBox`}
-    >
+    <>
       {cardSize === "small" ? (
-        <div className={`${styles.item2_inner3_inner2_inner1_small} flexS`}>
+        <div className={styles.item2_inner3_inner2_inner1_small}>
           {(currentDate.getHours().toString().length > 1 ? "" : "0") +
             currentDate.getHours()}
           <span className={styles.flicker}>:</span>
@@ -76,11 +76,8 @@ const TimeWeather = ({ cardSize }) => {
           )}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
-export default memo(TimeWeather, (prevProps, nextProps) => {
-  // console.log('prevProps------',prevProps)
-  return false;
-});
+export default TimeWeather;

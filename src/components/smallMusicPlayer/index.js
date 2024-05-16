@@ -129,7 +129,7 @@ const SmallMusicPlayer = ({music,time,showArea,pauseCurrent,playMusic,pauseMusic
                             <h2 className="fontB">{music?.name}</h2>
                             <p className={`${styles.singer} maT6`}>{music?.singer}</p>
                         </div>
-                        <div ref={ownRef} className={`${styles.lyrics} scrollbarBox`}>
+                        <div ref={ownRef} className={`${styles.lyrics} scrollbarBox scrollbarBox_hidden`}>
                             {
                                 currentLyric.length===0 ? <div className={styles.noLyric}>暂无歌词</div> :
                                 <ul>

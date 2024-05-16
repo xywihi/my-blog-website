@@ -17,11 +17,7 @@ export default function PersonalAvatar({ cardSize }) {
     
   }, []);
   return cardSize === "big" ? (
-    <div className="borderR12 bg1 cardBox">
-      {/* 个人头像卡片 */}
-      <div
-        className={`borderR12 mobileCard screen_mid_inner1 bg1 pa24 flexS cardBox heightFull ${styles.personalAvatar_big_box}`}
-      >
+    <div className={styles.personalAvatar_big_box}>
         <img
           alt="Silhouette of a person's head"
           src="https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=195&h=180&c=7&r=0&o=5&pid=1.7"
@@ -31,14 +27,9 @@ export default function PersonalAvatar({ cardSize }) {
           <span className="fontSmall">疯狂努力拼搏中...</span>
         </div>
       </div>
-    </div>
   ) : cardSize === "middle" ? (
-    <div className="borderR12 bg1 cardBox">
-      {/* 个人头像卡片 */}
-      <div
-        className={`borderR12 mobileCard bg1 pa24 flexS cardBox heightFull ${styles.personalAvatar_middle_box}`}
-      >
-        <img
+    <div className={`${styles.personalAvatar_middle_box} flexB`}>
+      <img
           alt="Silhouette of a person's head"
           src="https://tse1-mm.cn.bing.net/th/id/OIP-C.yMIHLghWfARYn23xKJFeZgHaG1?w=195&h=180&c=7&r=0&o=5&pid=1.7"
         />
@@ -46,13 +37,10 @@ export default function PersonalAvatar({ cardSize }) {
           <h4 className="fontB">Anln</h4>
           <span className="fontSmall">疯狂努力拼搏中...</span>
         </div>
-      </div>
     </div>
   ) : (
-    <div className="borderR12 bg1 cardBox">
-      {/* 个人头像卡片 */}
-      <div
-        className={`borderR12 mobileCard bg1 pa24 cardBox heightFull ${styles.personalAvatar_small_box}`}
+    <div
+        className={`${styles.personalAvatar_small_box}`}
       >
         <img
           alt="Silhouette of a person's head"
@@ -62,6 +50,5 @@ export default function PersonalAvatar({ cardSize }) {
           <h4 className="fontB">Anln</h4>
         </div> */}
       </div>
-    </div>
   );
 }

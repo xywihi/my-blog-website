@@ -14,7 +14,6 @@ const banners = [
 
 export default function EmailBox({ wNum, hNum, unitWidth }) {
   useEffect(() => {
-    console.log("wNum, hNum, unitWidth", wNum, hNum, unitWidth);
   }, []);
   return (
     <div

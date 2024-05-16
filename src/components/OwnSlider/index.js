@@ -31,6 +31,8 @@ import {debounce} from '@/util/tools.ts'
     }
 
     const handleMoveCircle = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         // // 获取滑块的当前位置
         const circleDragPosition = circleDragRef.current?.getBoundingClientRect();
         const sliderDragPosition = sliderDragRef.current?.getBoundingClientRect();

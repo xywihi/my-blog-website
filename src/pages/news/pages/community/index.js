@@ -253,7 +253,7 @@ function Community() {
           }`}
         >
           <input
-            className="font18 textColorGray"
+            className="font18 colorGray"
             placeholder="通过关键词搜索..."
             onChange={handleSearch}
             value={searchText}
@@ -261,7 +261,7 @@ function Community() {
 
           {searchText && (
             <div
-              className="search_btn font24 bg4 widthFull textColorGray"
+              className="search_btn font24 bg4 widthFull colorGray"
               onClick={()=>(handleSelectItem())}
             >
               <IonIcon icon={closeCircle} size="36px"></IonIcon>
@@ -322,7 +322,7 @@ function Community() {
                   <p>总共120条</p>
                 </div>
                 <hr className="maV12 opacity20" />
-                <div className="borderR6 hotestNews_comment_area_box scrollbarBox">
+                <div className="borderR6 hotestNews_comment_area_box scrollbarBox scrollbarBox_hidden">
                   <ul className="borderR6 hotestNews_comment_area_box_text">
                     {commentsArr.map((item, index) => (
                       <li key={item.id}>
@@ -346,7 +346,7 @@ function Community() {
                               ></IonIcon>
                             </div>
                           </div>
-                          <p className="font10 maT3 textColorGray">
+                          <p className="font10 maT3 colorGray">
                             {getTimeText(item.time)}
                           </p>
                         </div>
@@ -367,7 +367,7 @@ function Community() {
                 </div>
               </div>
             </div>
-            <div className="borderR12 newest_news_box_content_outbox scrollbarBox">
+            <div className="borderR12 newest_news_box_content_outbox scrollbarBox scrollbarBox_hidden">
               <ul className="borderR6 newest_news_box_content_box">
                 {newsList.map((item, index) => (
                   <li

@@ -1,11 +1,11 @@
 import React, { Suspense, useMemo, useEffect, useState } from "react";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
-import {LocalStorage, scrollToTop} from "./util";
+import {LocalStorage, scrollToTop,speak} from "./util";
 import RouteGuard from "./util/route_guard";
 import HeaderNav from "./components/HeaderNav";
 import "./global.css";
 import "./style.less";
-import themestyle from "./styles/theme.less";
+
 // import "./styles/ioniccss.css"
 import ThemeSwitch from "./components/themeSwitch";
 import config from "./config";
@@ -42,6 +42,14 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
   useEffect(() => {
     newLocalStorage.set("token", "Ber sddjjkwjfhiheh87687212ihr2khfjk");
     // console.log("app_page");
+    
+    if(!newLocalStorage.get('firstCome')){
+      newLocalStorage.set('firstCome',true)
+      speak('你好，欢迎来到我的网站！您在这里可以听歌，查看社区动态。有一个有趣的页面，里面有很多不能功能的小卡片，您可以试试拖动它们，或者点击它们。里面有一个AI小男孩，可以找他聊天，还可以让他帮你解决问题。Hello, welcome to my website! You can listen to music and view community updates here. There is an interesting page with many small cards that are not functional. You can try dragging them or clicking on them. There is an AI little boy inside, you can chat with him and ask him to help you solve problems.',3)
+    }else{
+      
+      speak('哎哟，你回来了啊！最近有什么新鲜事吗？',7)
+    }
     return () => {
       // console.log("销毁当前项目");
     };
@@ -51,8 +59,10 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
   //     setShowNotice(notices.every(it=>it.unmont))
   // }, [notices])
   const changeTheme = (value) => {
+    // require("./styles/theme.less");
     setTheme(() => {
       config.set(value);
+      
       return value;
     });
   };
@@ -143,11 +153,10 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
           <HeaderNav
             changeTheme={changeTheme}
             direction="vertical"
-            theme={theme}
           />
         </aside>
         
-        <div className="contentBox flexFull scrollbarBox relative">
+        <div className="contentBox flexFull scrollbarBox scrollbarBox_hidden relative">
           <Notices manageNotices={notices.hidde} />
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
@@ -212,7 +221,6 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
                   <HeaderNav
                     changeTheme={changeTheme}
                     direction="vertical"
-                    theme={theme}
                   />
                 </div>
               </div>

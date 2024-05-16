@@ -1,7 +1,56 @@
-.personalAvatar_box{
+.cardCreator{
+    position: relative;
     img{
-        height: 5em;
-        width: 5em;
-        border-radius: 50px;
+        // border-radius: 12px;
+    }
+    .rightTopBox{
+        display: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        border-bottom-left-radius: 50px;
+        height: 26px;
+        width: 26px;
+        &>div{
+            text-align: center;
+            line-height: 26px;
+        }
+    }
+    &:hover{
+        .rightTopBox{
+            display: block;
+        }
+    }
+    .changeWHBox{
+        .changeHeight,.changeWidth{
+
+        }
+        .changeHeight{
+            width: calc(100% - 42px);
+            height: 4px;
+            position: absolute;
+            bottom: 6px;
+            left: 21px;
+            cursor:ns-resize;
+        }
+        .changeWidth{
+            width: 4px;
+            height: calc(100% - 52px);
+            position: absolute;
+            top:32px;
+            right: 6px;
+            cursor: ew-resize;
+        }
+        .changeHeight,.changeWidth{
+            border-radius: 50px;
+            opacity: 0;
+            &:hover{
+                opacity: 1;
+            }
+            &:active{
+                opacity: 1;
+            }
+            
+        }
     }
 }
