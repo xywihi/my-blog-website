@@ -108,4 +108,4 @@ function areEqual(prevProps, nextProps) {
   otherwise return false
   */
 }
-export default React.memo(SmoothedLine, areEqual);
+export default SmoothedLine;

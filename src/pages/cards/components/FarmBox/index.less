@@ -1,0 +1,471 @@
+// import styled from 'styled-components';
+
+.farmBox_4 {
+  background: #2ea1f1;
+  height: 100%;
+  width: 100%;
+
+  .main {
+    height: 100%;
+    margin: 0 auto;
+    background-size: contain;
+    position: relative;
+    overflow: hidden;
+  }
+  .bg2_img{
+    
+    
+    &>div{
+      bottom: 0;
+    position: absolute;
+    }
+  }
+  .clouds {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    top: 0;
+  }
+
+  .tree {
+    position: absolute;
+    bottom: 155px;
+    z-index: 1;
+  }
+
+  .click_tree {
+    animation-name: clickTree;
+    animation-duration: 0.2s;
+    animation-iteration-count: 2;
+    animation-fill-mode: backwards;
+    animation-direction: alternate;
+    animation-timing-function: ease-out;
+  }
+
+  .pengshui {
+    width: 200px;
+    height: 200px;
+    pointer-events: none;
+    position: absolute;
+    bottom: 80px;
+    left: calc(50% + 40px);
+    z-index: 2;
+    transform: translate(-60%, 0);
+  }
+
+  .fei {
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    bottom: 38%;
+    transform: translate(-70%, 0);
+  }
+
+  .btns {
+    display: flex;
+    position: absolute;
+    bottom: 16px;
+    justify-content: space-evenly;
+    width: 100%;
+    z-index: 10;
+    align-items: end;
+  }
+
+  .btn {
+    // margin: 15px 24px;
+  }
+
+  .hu {
+    position: absolute;
+    left: 50%;
+    bottom: 42%;
+    z-index: 3;
+    opacity: 0;
+  }
+
+  .feiliao {
+    position: absolute;
+    left: 15%;
+    bottom: 42%;
+    z-index: 3;
+    opacity: 0;
+  }
+
+  .feiliao-move {
+    animation: move_feiliao 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+  }
+
+  .shuihu {
+    animation: move_shuihu 1s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in-out;
+  }
+
+  .shake-shuihu {
+    animation-name: shake_shuihu;
+    animation-duration: 1s;
+    animation-iteration-count: 2;
+    animation-fill-mode: backwards;
+    animation-direction: alternate;
+    animation-timing-function: ease-out;
+    /* animation-delay: 2s; */
+  }
+
+  .shake-feiliao {
+
+    /* animation: shake_feiliao 1s normal 0 2 alternate backwards; */
+
+    animation-name: shake_feiliao;
+    animation-duration: 1s;
+    animation-iteration-count: 2;
+    animation-fill-mode: backwards;
+    animation-direction: alternate;
+    animation-timing-function: ease-out;
+  }
+
+  .show-water {
+    animation-name: show_water;
+    animation-duration: 1s;
+    animation-iteration-count: 2;
+    opacity: 0;
+  }
+
+  .show-fei {
+    animation-name: show_fei;
+    animation-duration: 1s;
+    animation-iteration-count: 2;
+    opacity: 0;
+  }
+
+  /* 移动水壶 */
+  @keyframes move_shuihu {
+    from {
+      transform: translate(150px, -100px);
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* 摇晃水壶 */
+  @keyframes shake_shuihu {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      transform: rotate(-20deg);
+      opacity: 1;
+    }
+  }
+
+  /* 显示喷水 */
+  @keyframes show_water {
+    to {
+      opacity: 1;
+      /* transform: scale(1); */
+    }
+  }
+
+  /* 移动肥料 */
+  @keyframes move_feiliao {
+    from {
+      transform: translate(-150px, -100px);
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes shake_feiliao {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      transform: rotate(60deg);
+      opacity: 1;
+    }
+  }
+
+  /* 显示肥 */
+  @keyframes show_fei {
+    to {
+      opacity: 1;
+      /* transform: scale(1); */
+    }
+  }
+
+  /* 点击树 */
+  @keyframes clickTree {
+    0% {
+      transform: scale(1) translate(-50%, 0);
+    }
+
+    100% {
+      transform: scale(1.05) translate(-48%, 0);
+    }
+  }
+}
+
+.radiuBox {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  left: calc(50% - 30px);
+  top: 40%;
+  z-index: 999;
+
+  .waters {
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
+    background: #9adabb7a;
+    box-shadow: inset 0px -4px 10px #91D6A3, inset -1px 1px 1px #ffffff80, 0px 4px 10px #0e8c6140;
+    -moz-box-shadow: inset 0px -4px 10px #91D6A3, inset -1px 1px 1px #ffffff80, 0px 4px 10px #0e8c6140;
+    -webkit-box-shadow: inset 0px -4px 10px #91D6A3, inset -1px 1px 1px #ffffff80, 0px 4px 10px #0e8c6140;
+
+    border-radius:50%;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    &:after {
+      content:'${props=>(props.count || '0')}';
+      position: absolute;
+      text-align: center;
+      color: #0E8C40;
+      font-weight: bold;
+      font-size: 22px;
+    }
+  }
+
+  .grassesImg {
+    position: absolute;
+    top: 2px;
+    z-index: 999;
+    left: calc(50% - 20px);
+  }
+}
+
+
+
+
+// 适配屏幕
+
+
+.farmBox_1 {
+  background: #2ea1f1;
+  height: 100%;
+  width: 100%;
+
+  .main {
+    height: 100%;
+    margin: 0 auto;
+    background-size: contain;
+    position: relative;
+    overflow: hidden;
+  }
+  .bg2_img{
+    
+    &>div{
+      height: 560px !important;
+      bottom: -131px;
+      position: absolute;
+    }
+  }
+  .clouds {display: none;
+  }
+
+  .tree {
+    position: absolute;
+    bottom: 76px;
+    z-index: 1;
+  }
+
+  .click_tree {display: none;
+  }
+
+  .pengshui {
+    display: none;
+  }
+
+  .fei {
+    display: none;
+  }
+
+  .btns {
+    display: flex;
+    position: absolute;
+    bottom: 9px;
+    justify-content: space-evenly;
+    width: 100%;
+    z-index: 10;
+    align-items: end;
+  }
+
+  .hu {
+    display: none;
+  }
+
+  .feiliao {
+    display: none;
+  }
+
+  .shuihu {
+    display: none;
+  }
+
+}
+
+.farmBox_2 {
+  background: #2ea1f1;
+  height: 100%;
+  width: 100%;
+
+  .main {
+    height: 100%;
+    margin: 0 auto;
+    background-size: contain;
+    position: relative;
+    overflow: hidden;
+  }
+  .bg2_img{
+    
+    &>div{
+      height: 560px !important;
+      bottom: -131px;
+      position: absolute;
+    }
+  }
+  .clouds {display: none;
+  }
+
+  .tree {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    &>div{
+      height: 585px!important;
+      position: absolute;
+      bottom: -174px;
+      left: -89px;
+      width: 356px;
+      transform: scale(0.5);
+    }
+  }
+
+  .click_tree {display: none;
+  }
+
+  .pengshui {
+    display: none;
+  }
+
+  .fei {
+    display: none;
+  }
+
+  .btns {
+    display: flex;
+    position: absolute;
+    bottom: 16px;
+    justify-content: space-evenly;
+    width: 100%;
+    z-index: 10;
+    align-items: end;
+  }
+
+  .hu {
+    display: none;
+  }
+
+  .feiliao {
+    display: none;
+  }
+
+  .shuihu {
+    display: none;
+  }
+
+}
+
+
+
+
+
+.farmBox_3 {
+  background: #2ea1f1;
+  height: 100%;
+  width: 100%;
+
+  .main {
+    height: 100%;
+    margin: 0 auto;
+    background-size: contain;
+    position: relative;
+    overflow: hidden;
+  }
+  .bg2_img{
+    
+    &>div{
+      height: 560px !important;
+      bottom: -100px;
+      position: absolute;
+    }
+  }
+  .clouds {display: none;
+  }
+
+  .tree {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    &>div{
+      height: 913px !important;
+      position: absolute;
+      bottom: -266px;
+      left: -139px;
+      width: 558px;
+      transform: scale(0.5);
+    }
+  }
+
+  .click_tree {display: none;
+  }
+
+  .pengshui {
+    display: none;
+  }
+
+  .fei {
+    display: none;
+  }
+
+  .btns {
+    display: flex;
+    position: absolute;
+    bottom: 16px;
+    justify-content: space-evenly;
+    width: 100%;
+    z-index: 10;
+    align-items: end;
+  }
+
+  .hu {
+    display: none;
+  }
+
+  .feiliao {
+    display: none;
+  }
+
+  .shuihu {
+    display: none;
+  }
+
+}

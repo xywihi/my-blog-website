@@ -26,24 +26,24 @@ const Cards = ({ showStatusBox }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedOption, setSelectedOption] = useState("zh");
   const [wallImage, setWallImage] = useState(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  // const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const childTranslate = createRef(null);
   useEffect(() => {
     // throwError()
 
     let timer = setInterval(() => {
       setCurrentDate(new Date());
-      setCurrentImageIndex(Math.floor(Math.random() * 7));
+      // setCurrentImageIndex(Math.floor(Math.random() * 7));
     }, 10000);
     const require = new HttpRequire();
     require
       .get("http://127.0.0.1:3000/api/bing_img")
       .then((res) => {
         setWallImage(res.images);
-        wallImage &&
-          setCurrentImageIndex(
-            Math.floor(Math.random() * (wallImage.length - 1))
-          );
+        // wallImage &&
+        //   setCurrentImageIndex(
+        //     Math.floor(Math.random() * (wallImage.length - 1))
+        //   );
       })
       .catch((err) => {
         console.log(err);

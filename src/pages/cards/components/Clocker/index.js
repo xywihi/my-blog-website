@@ -9,6 +9,7 @@ export default function Clocker({ wNum, hNum, unitWidth }) {
   useEffect(() => {
     animate();
     return () => {
+      debugger;
     };
   }, []);
 

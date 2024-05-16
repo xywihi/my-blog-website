@@ -8,7 +8,7 @@ type ScrollState = {
     num: 0,
     allCount: 0,
     a:1,
-    handleAddCount: function (totalDis:number,power:number=2.5) {
+    handleAddCount: function (totalDis:number,power:number=2.5,limitNum=90) {
       const degreesToRadians = (degrees: number) => degrees * (Math.PI / 180);
       const calculateSine = (degrees: number) => {
         const radians = degreesToRadians(degrees);
@@ -18,7 +18,7 @@ type ScrollState = {
       this.count = Math.floor(Math.pow(sine30+1.74 , power));
       if((this.allCount+this.count)<=totalDis)this.allCount += this.count;
       this.a++;
-      if(this.num<=90){
+      if(this.num<=limitNum){
         this.num += .4;
       }
       

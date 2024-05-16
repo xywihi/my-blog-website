@@ -47,10 +47,14 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
       newLocalStorage.set('firstCome',new Date().getTime())
       speak('你好，欢迎来到我的网站！您在这里可以听歌，查看社区动态。有一个有趣的页面，里面有很多不能功能的小卡片，您可以试试拖动它们，或者点击它们。里面有一个AI小男孩，可以找他聊天，还可以让他帮你解决问题。Hello, welcome to my website! You can listen to music and view community updates here. There is an interesting page with many small cards that are not functional. You can try dragging them or clicking on them. There is an AI little boy inside, you can chat with him and ask him to help you solve problems.',3)
     }else{
-      
-      let times = new Date().getTime() - newLocalStorage.get('firstCome')
+      let nowTime = new Date().getTime();
+      let times = nowTime - newLocalStorage.get('firstCome')
       console.log('newLocalStorage.get)',times)
-      speak(`哎哟，你回来了啊！与你上次相见有${times>60000?Math.ceil(times/60000)+'分钟':times>(60000 * 30)?'超过半个小时':times>(60000 * 60) && times<(60000 * 60 * 7)?"好几个小时":times>(60000 * 60*12) && times<(60000 * 60 * 36)?"接近一天":"几天"}了， 最近有什么新鲜事吗？`,7)
+      if(times>60000){
+        speak(`哎哟，你回来了啊！与你上次相见有${(times>60000 && times<60000 * 30)?Math.ceil(times/60000)+'分钟':(times>(60000 * 30) && times<(60000 * 60))?'超过半个小时':(times>(60000 * 60) && times<(60000 * 60 * 7))?"好几个小时":(times>(60000 * 60*12) && times<(60000 * 60 * 36))?"接近一天":Math.ceil(times/(60000 * 60 * 24))+"天多"}了， 最近有什么新鲜事吗？`,7)
+      }
+      
+      newLocalStorage.set('firstCome',nowTime)
     }
     return () => {
       // console.log("销毁当前项目");

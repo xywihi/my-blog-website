@@ -1,15 +1,14 @@
-import React, { useEffect, useState, createRef, Children } from "react";
+import React, { useEffect, useState, createRef } from "react";
 import "./styles.less";
 import styles from './index.module.less'
-import { menu } from "ionicons/icons";
 import { cardsData } from "./cards_data";
 
 import { connect } from "react-redux";
 import { showStatusBox } from "@/store/actions";
 import { computeOrder, computeCardsOrder } from "./tool";
 import CardCreator from "./components/CardCreator";
-import withNewProp from '@/util/HOC'
-import { debug } from "openai/core.mjs";
+import LayoutBtnBox from "./components/LayoutBtnBox";
+// const LayoutBtnBox = React.lazy(() => import("./components/LayoutBtnBox"));
 const windowW = window.innerWidth - 352;
 const areaHNum = windowW > 1400 ? 20 : windowW > 640 ? 10 : 1;
 const areaVNum = windowW > 1400 ? 20 : windowW > 640 ? 40 : 1;
@@ -48,10 +47,7 @@ const createGrids = (xCount, yCount, cardsArr) => {
   // gridsArr = compNewGrids;
   return compNewGrids;
 };
-const Cards = ({ showStatusBox }) => {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [wallImage, setWallImage] = useState(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+const Cards = ({ showStatusBox,layoutNum }) => {
   const [gridsArr, setGridsArr] = useState([]);
   const [cardsArrFinal, setCardsArrFinal] = useState([]);
 
@@ -60,14 +56,9 @@ const Cards = ({ showStatusBox }) => {
   let finalComputedCard = [];
   useEffect(() => {
     existCardsArr = cardsData.map((item, index) => <CardCreator key={item.name} dragStart={handleStartDrag} changHeight={handleChangeHeight} {...item.props}>{item.component}</CardCreator>);
-    const arr = computeOrder(existCardsArr, 1);
+    const arr = computeOrder(existCardsArr, layoutNum);
     finalComputedCard = computeCardsOrder(arr, windowW, areaHNum, areaVNum).map(
       (item, index) => {
-        // item.component = (
-        //   <div>
-        //     <div></div>
-        //   </div>
-        // );
         item.styles.left = `${
           ((item.attributes.xyArr?.[0]?.[0] || 0) * windowW) / areaHNum
         }px`;
@@ -86,7 +77,7 @@ const Cards = ({ showStatusBox }) => {
     
     setGridsArr(createGrids(areaHNum, 20, finalComputedCard));
 
-  }, []);
+  }, [layoutNum]);
 
   // 获取随机颜色
   const randomColor = () => {
@@ -145,7 +136,7 @@ const Cards = ({ showStatusBox }) => {
       clone.style.height = `${lineHeight}px`;
       // clone.style.left = `${newLeft - 10}px`;
       clone.style.bottom = `${-compTop + 10}px`;
-      clone.style.zIndex = 99;
+      clone.style.zIndex = 20;
       clone.style.backgroundColor="red";
       console.log('-------------',newTop)
       let newCardsArrFinal = cardsArrFinal.map((card) => {
@@ -282,7 +273,7 @@ const Cards = ({ showStatusBox }) => {
       clone.style.height = `${cardHeight + 20}px`;
       clone.style.left = `${newLeft - 10}px`;
       clone.style.top = `${newTop - 10}px`;
-      clone.style.zIndex = 99;
+      clone.style.zIndex = 20;
       // console.log(
       //   "e.clientY - initialY",
       //   e.clientY,
@@ -572,7 +563,7 @@ const Cards = ({ showStatusBox }) => {
 
   return (
     windowW + 352 >1400 ? (
-    <div className={styles.topAreaNox} style={{ position: "relative" }}>
+    <div ref={childTranslate} className={styles.topAreaNox} style={{ position: "relative" }}>
       <div className="bg2_blue flexS flexWrap" id="cardsArea">
         {gridsArr.map((item, index) => (
           <div
@@ -603,7 +594,7 @@ const Cards = ({ showStatusBox }) => {
         
       </CardItem>
       })}
-      <div className="treasureChest_box">
+      {/* <div className="treasureChest_box">
         <div className="treasureChest">
           <div className="btnDefaultDeep"></div>
           <div className="btnDefault">
@@ -628,16 +619,25 @@ const Cards = ({ showStatusBox }) => {
             <div className="btnDefault borderR12"></div>
           </div>
         </div>
+      </div> */}
+      <div className="treasureChest_box">
+        <CardCreator wNum={1} hNum={1} unitWidth= {windowW / areaHNum} background={false} children={LayoutBtnBox}>
+        </CardCreator>
       </div>
     </div>
   ):<p>移动端不支持此页面</p>)
 }
 
+
+const mapStateToProps = (state) => ({
+  layoutNum: state.cards.layoutNum,
+});
+
 const mapDispatchToProps = {
   showStatusBox,
 };
 
-export default connect(null, mapDispatchToProps)(Cards);
+export default connect(mapStateToProps, mapDispatchToProps)(Cards);
 
 const CardItem = ({ attributes, styles, handleStartDrag, children }) => {
   useEffect(() => {

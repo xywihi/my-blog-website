@@ -1,4 +1,5 @@
 import homeReducer from '../pages/home/store/reducer';
+import cardsReducer from '../pages/cards/store/reducer';
 import { combineReducers } from 'redux';
 const initialState = {
   notices: {
@@ -69,6 +70,7 @@ const reducer = (state = initialState, action) => {
 const reducers = combineReducers({
   reducer,
   home: homeReducer,
+  cards: cardsReducer,
 });
 
 export default reducers;

@@ -4,8 +4,8 @@ export const computeOrder = (arr: any[], bigToSmall : (0 | 1 | 2)) => {
   if(bigToSmall==2) return arr;
   let newArr = arr.sort((a, b) =>
     !bigToSmall
-      ? a.props.wNum * a.props.wNum - b.props.hNum * b.props.hNum
-      : b.props.hNum * b.props.hNum - a.props.wNum * a.props.wNum
+      ? a.props.wNum * a.props.hNum - b.props.wNum * b.props.hNum
+      : b.props.wNum * b.props.hNum - a.props.wNum * a.props.hNum
   );
   return newArr;
 };

@@ -10,7 +10,7 @@ import {
     getTimeText,
     speak
 } from './tools';
-import {ListenScroll,scrollToTop} from './domFuncs';
+import {ListenScroll,scrollToTop,addNum} from './domFuncs';
 // module.exports = {LocalStorage,RouteGuard,debounce,handleTime}
 // export default {LocalStorage,RouteGuard,debounce,handleTime}
 export {
@@ -23,6 +23,7 @@ export {
     exitFullScreen,
     openBox,
     scrollToTop,
+    addNum,
     getTimeText,
     ListenScroll,
     speak

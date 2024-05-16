@@ -107,7 +107,7 @@ function CalendarBox({ cardSize, plans,...props }) {
                 <li key={index + 1} className={styles.dayBox}>
                   <span
                     className={
-                      currentDate.getDate() === index - currentDate.getDay()+1 &&
+                      currentDate.getDate() === index-getMonthDays(currentDate, "week") + 1 &&
                       currentWeekDay
                         ? "black font16 fontB"
                         : "gray fontSmall"
@@ -117,7 +117,7 @@ function CalendarBox({ cardSize, plans,...props }) {
                       ? index - getMonthDays(currentDate, "week") + 1
                       : ""}
                   </span>
-                  {currentDate.getDate() === index - currentDate.getDay()+1 &&
+                  {currentDate.getDate() === index-getMonthDays(currentDate, "week") + 1 &&
                     currentWeekDay && (
                       <span className={`${styles.dayCircle} bg3`}></span>
                     )}

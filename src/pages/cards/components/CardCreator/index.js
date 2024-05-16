@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./index.module.less";
 import { IonIcon } from "@ionic/react";
@@ -24,9 +24,8 @@ export default function CardCreator({
   cardsArrFinal,
   ...props
 }) {
+  const [activeChange, setActiveChange] = useState(false);
   useEffect(() => {
-    // console.log(change)
-    // debugger
     // children.props.draggable=false
     // debugger
     // if(props.name=='calendarBox'){
@@ -43,7 +42,7 @@ export default function CardCreator({
   };
   return (
     <div
-      // draggable={!change}
+      draggable={dragStart && !activeChange}
       onDragStart={(e) => {
         // e.preventDefault();
         // e.stopPropagation();
@@ -77,7 +76,7 @@ export default function CardCreator({
         </div>
       )}
       {change && (
-        <div className={`${styles.rightTopBox} bg3`}>
+        <div className={`${styles.rightTopBox} bg3`} onClick={()=>setActiveChange(!activeChange)}>
           <div className="cursor icon_hover icon">
             <IonIcon icon={colorWand} size="36px"></IonIcon>
           </div>
@@ -86,8 +85,8 @@ export default function CardCreator({
 
       {typeof children === "function"
         ? children({ wNum, hNum, unitWidth, ...props })
-        : React.createElement(children, { ...props })}
-      {change && (
+        : React.createElement(children, {wNum, hNum, ...props })}
+      {activeChange && (
         <div className={`${styles.changeWHBox} bg3`}>
           <div
             className={`${styles.changeHeight} bg_gray`}

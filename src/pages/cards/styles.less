@@ -16,7 +16,12 @@
     // padding: 8px;
     border: 6px solid transparent;
     transition: all .5s ease-in-out, width .5s ease-in-out .3s, height .5s ease-in-out .3s;
-
+    z-index: 0;
+    &:hover{
+        z-index: 20;
+        // display:none;
+        pointer-events: all;
+    }
     &>div {
         height: 100%;
 
@@ -29,21 +34,18 @@
         // }
     }
 }
-.treasureChest_box,.treasureChest,.treasureChest>div:first-child,.triangle{
-    transition: all .3s ease-in-out;
-}
+// .treasureChest_box,.treasureChest,.treasureChest>div:first-child,.triangle{
+//     transition: all .3s ease-in-out;
+// }
 
 .treasureChest_box {
     position: fixed;
-    bottom: -60px;
+    bottom: 12px;
     // left: calc(50% - 100px);
     right: 30px;
-    width: 200px;
-    height: 200px;
+    // width: 200px;
+    // height: 200px;
     z-index: 999;
-    &:hover {
-        bottom: 0px;
-    }
 }
 
 .treasureChest {

@@ -1,28 +1,54 @@
 import React from "react";
-import Clocker from "./components/Clocker";
-import CalculatorBox from "./components/CalculatorBox";
-import CalendarBox from "./components/CalendarBox";
-import PhotosBox from "./components/PhotosBox";
-import VideoBox from "./components/VideoBox";
-import TimerBox from "./components/TimerBox";
-import OpenAiBox from "./components/OpenAiBox";
-import Banner from "./components/Banner";
-import PersonalAvatar from "./components/PersonalAvatar";
 
-import NewsBox from "./components/NewsBox";
-import FansMessagesBox from "./components/FansMessagesBox";
-// import MemorandumBox from "./components/MemorandumBox";
-import ExamCountdown from "./components/examCountdown";
-import TimeWeather from "./components/timeWeather";
-import MusicPlayer from "../../components/musicPlayer";
-import TranslateBox from "./components/TranslateBox";
-import SmoothedLine from "../../components/echarts/smoothedLine";
+const Clocker = React.lazy(() => import("./components/Clocker"));
+const CalculatorBox = React.lazy(() => import("./components/CalculatorBox"));
+const CalendarBox = React.lazy(() => import("./components/CalendarBox"));
+const PhotosBox = React.lazy(() => import("./components/PhotosBox"));
+const VideoBox = React.lazy(() => import("./components/VideoBox"));
+const TimerBox = React.lazy(() => import("./components/TimerBox"));
+const OpenAiBox = React.lazy(() => import("./components/OpenAiBox"));
+const Banner = React.lazy(() => import("./components/Banner"));
+const PersonalAvatar = React.lazy(() => import("./components/PersonalAvatar"));
+const NewsBox = React.lazy(() => import("./components/NewsBox"));
+const FansMessagesBox = React.lazy(() => import("./components/FansMessagesBox"));
+const ExamCountdown = React.lazy(() => import("./components/examCountdown"));
+const TimeWeather = React.lazy(() => import("./components/timeWeather"));
+const MusicPlayer = React.lazy(() => import("../../components/musicPlayer"));
+const TranslateBox = React.lazy(() => import("./components/TranslateBox"));
+const SmoothedLine = React.lazy(() => import("../../components/echarts/smoothedLine"));
+const FarmBox = React.lazy(() => import("./components/FarmBox"));
+
+const TurntableBox = React.lazy(() => import("./components/game/TurntableBox"));
+
+
+
+
+
+
+
+
+
+
+
+
 
 const windowW = window.innerWidth - 352;
 const areaHNum = windowW > 1400 ? 20 : windowW > 640 ? 10 : 1;
 const areaVNum = windowW > 1400 ? 20 : windowW > 640 ? 40 : 1;
 
 export const cardsData = [
+    // {
+    //   name: "layout_btn",
+    //   label: "布局按钮",
+    //   icon: "ios-layout",
+    //   component: LayoutBtnBox,
+    //   props: {
+    //     wNum: 1,
+    //     hNum: 1,
+    //     unitWidth: windowW / areaHNum,
+    //     background:false,
+    //   },
+    // },
     {
       name: "banner",
       label: "轮播图",
@@ -100,9 +126,9 @@ export const cardsData = [
       icon: "ios-person",
       component: PersonalAvatar,
       props: {
-        wNum: 2,
-        hNum: 2,
-        padding: 24,
+        wNum: 1,
+        hNum: 1,
+        padding: 6,
         unitWidth: windowW / areaHNum,
       },
     },
@@ -221,4 +247,46 @@ export const cardsData = [
         cardSize:'large',
       },
     },
+    {
+      name: "farmBox2",
+      label: "农场",
+      icon: "ios-calendar",
+      component: FarmBox,
+      props: {
+        name: "farmBox",
+        wNum: 4,
+        hNum: 2,
+        cardSize:'large',
+      },
+    },
+    {
+      name: "turntable",
+      label: "转盘",
+      icon: "ios-calendar",
+      component: TurntableBox,
+      props: {
+        name: "turntable",
+        wNum: 2,
+        hNum: 2,
+        kinds:[
+          {
+            icon:'fat',
+            name:'你胖了'
+          },
+          {
+            icon:'add',
+            name:'中午加餐'
+          },
+          {
+            icon:'fang',
+            name:'方便面来一桶'
+          },
+          {
+            icon:'movie',
+            name:'周末看电影'
+          },
+        ]
+      },
+    },
+    
   ];
