@@ -44,11 +44,13 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
     // console.log("app_page");
     
     if(!newLocalStorage.get('firstCome')){
-      newLocalStorage.set('firstCome',true)
+      newLocalStorage.set('firstCome',new Date().getTime())
       speak('你好，欢迎来到我的网站！您在这里可以听歌，查看社区动态。有一个有趣的页面，里面有很多不能功能的小卡片，您可以试试拖动它们，或者点击它们。里面有一个AI小男孩，可以找他聊天，还可以让他帮你解决问题。Hello, welcome to my website! You can listen to music and view community updates here. There is an interesting page with many small cards that are not functional. You can try dragging them or clicking on them. There is an AI little boy inside, you can chat with him and ask him to help you solve problems.',3)
     }else{
       
-      speak('哎哟，你回来了啊！最近有什么新鲜事吗？',7)
+      let times = new Date().getTime() - newLocalStorage.get('firstCome')
+      console.log('newLocalStorage.get)',times)
+      speak(`哎哟，你回来了啊！与你上次相见有${times>60000?Math.ceil(times/60000)+'分钟':times>(60000 * 30)?'超过半个小时':times>(60000 * 60) && times<(60000 * 60 * 7)?"好几个小时":times>(60000 * 60*12) && times<(60000 * 60 * 36)?"接近一天":"几天"}了， 最近有什么新鲜事吗？`,7)
     }
     return () => {
       // console.log("销毁当前项目");
