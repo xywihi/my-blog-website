@@ -6,7 +6,7 @@ import styles from "./index.module.less";
 import { showStatusBox } from "@/store/actions";
 import { connect } from "react-redux";
 
-function TranslateBox() {
+function TranslateBox({showStatusBox}) {
   const [selectedOption, setSelectedOption] = useState("zh");
   const childTranslate = createRef(null);
   useEffect(() => {

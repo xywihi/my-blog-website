@@ -11,6 +11,7 @@ app.use(cors({
 //     'https://api.openweathermap.org',
 //     'https://echarts.apache.org',
 //     'https://cn.bing.com',
+//     'https://fanyi-api.baidu.com/' ,
 
 //   ], // 只允许来自Vercel的请求
   origin: '*', // 只允许来自Vercel的请求
@@ -26,10 +27,11 @@ app.use(function (req, res, next) {
 // 处理前端请求
 app.get('/api/weather', (req, res) => {
     // 获取请求参数
-    const city = req.query.city;
-    const apiKey = 'YOUR_API_KEY';
+    const lat = req.query.lat;
+    const lon = req.query.lon;
+    const appid = req.query.appid;
     //获取网络接口数据
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=zh_cn`).then(response => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${appid}&lang=zh_cn`).then(response => {
         return response.json();
     }).then(data => {
         res.json(data);
@@ -41,6 +43,7 @@ app.get('/api/weather', (req, res) => {
     console.log('Received a request')
     // res.json({ message: 'Hello from the server!' });
 })
+
 app.get('/api/echarts', (req, res) => {
     // let header = req.headers;
     // console.log(header);
@@ -64,6 +67,24 @@ app.get('/api/bing_img', (req, res) => {
     }).catch(error => {
         console.log(error);
     })
+    // 返回数据给前端
+    console.log('Received a request')
+    // res.json({ message: 'Hello from the server!' });
+})
+
+app.post('/api/translate', (req, res) => {
+    // 获取请求参数
+    const {q,from,to,appid,sign} = req.query;
+    //获取网络接口数据
+    fetch(`https://fanyi-api.baidu.com/api/trans/vip/translate?q=${q}&from=${from}&to=${to}&appid=${appid}&sign=${sign}`).then(response => {
+        return response.json();
+    }).then(data => {
+        console.log('-----------',data);
+        res.json(data);
+    }).catch(error => {
+        console.log(error);
+    })
+
     // 返回数据给前端
     console.log('Received a request')
     // res.json({ message: 'Hello from the server!' });

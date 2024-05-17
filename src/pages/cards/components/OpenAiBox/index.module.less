@@ -20,12 +20,46 @@
     .aiAnswerBox{
         line-height: 24px;
         font-size: 15px;
-        height: calc(100% - 122px);
+        overflow-y: auto;
+        .copyBtnBox{
+            visibility: hidden;
+        }
+        hr{
+            margin:12px 0;
+        }
+        &:last-child{
+            margin-bottom: 0;
+        }
+        &:hover{
+            .copyBtnBox{
+                visibility: visible;
+            }
+        }
     }
     .robotBox{
         position: absolute;
         bottom: 0;
-        left: calc(50% - 16px);
-        line-height: 46px;
+        height: calc(100% - 45px);
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        &>div:first-child{
+            max-height: calc(100% - 70px);
+        }
     }
+    .aiRobotBox{
+        line-height: 37px;
+        width: max-content;
+    }
+    .questionsBox{
+        li{
+            width: max-content;
+            opacity: .5;
+            cursor: pointer;
+            &:hover{
+                opacity: 1;
+            }
+        }
+    }
+    
 }

@@ -9,14 +9,14 @@ import "./style.less";
 // import "./styles/ioniccss.css"
 import ThemeSwitch from "./components/themeSwitch";
 import config from "./config";
-import { handleHiddeNotices, showStatusBox } from "./store/actions";
+import { handleChangeWeather, handleHiddeNotices, showStatusBox } from "./store/actions";
 import { connect } from "react-redux";
 import { IonIcon } from "@ionic/react";
 import { notifications, trashOutline } from "ionicons/icons";
 // import socket from "./http/socke"
 import SmallMusicPlayer from "./components/smallMusicPlayer";
 import StatusBox from "./components/statusBox";
-
+import HttpRequire from "@/http/require";
 import "@/assets/fonts/huxiao.otf";
 import "@/assets/fonts/siyuan.ttf";
 import "@/assets/fonts/wenyue.otf";
@@ -32,16 +32,17 @@ const Works = React.lazy(() => import("./pages/works"));
 const Cards = React.lazy(() => import("./pages/cards"));
 const ErrorBoundary = React.lazy(() => import("./components/ErrorBoundary"));
 const newLocalStorage = new LocalStorage();
-const test_notices = [
-  // {text:'郑爽和吴亦凡的百度百科都已修改，郑爽介绍内容中却还有作品名单',id:1,unmont:false}
-];
-const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusBox }) => {
+const apiKey = "beac683c911d3facd1e6f802ddd7b972"; // 替换成你的OpenWeatherMap API密钥
+const city = "仁寿"; // 替换成你想要查询的城市
+const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusBox,handleChangeWeather }) => {
   const [theme, setTheme] = useState("light");
   const [showNotice, setShowNotice] = useState(false);
   const [noticesNum, setNoticesNum] = useState(0);
   useEffect(() => {
+    
     newLocalStorage.set("token", "Ber sddjjkwjfhiheh87687212ihr2khfjk");
     // console.log("app_page");
+    getLocation()
     
     if(!newLocalStorage.get('firstCome')){
       newLocalStorage.set('firstCome',new Date().getTime())
@@ -64,6 +65,28 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
   // useEffect(() => {
   //     setShowNotice(notices.every(it=>it.unmont))
   // }, [notices])
+
+  // 获取当前位置信息
+  const getLocation = async () => {
+    const location = await new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          resolve(position.coords);
+        },
+        (error) => {
+          
+    })})
+    console.log("location-----",location)
+    const http = new HttpRequire("weather");
+    // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${apiKey}&lang=zh_cn`;
+    const apiUrl = `http://localhost:3000/api/weather`;
+    const weather = await http.get(apiUrl,{
+      lat:location.latitude,
+      lon:location.longitude,
+      appid:apiKey
+    })
+    handleChangeWeather(weather)
+  }
   const changeTheme = (value) => {
     // require("./styles/theme.less");
     setTheme(() => {
@@ -276,7 +299,8 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = {
   handleHiddeNotices,
-  showStatusBox
+  showStatusBox,
+  handleChangeWeather
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -19,6 +19,7 @@ const SmoothedLine = React.lazy(() => import("../../components/echarts/smoothedL
 const FarmBox = React.lazy(() => import("./components/FarmBox"));
 
 const TurntableBox = React.lazy(() => import("./components/game/TurntableBox"));
+const MemorandumBox = React.lazy(() => import("./components/MemorandumBox"));
 
 
 
@@ -37,18 +38,6 @@ const areaHNum = windowW > 1400 ? 20 : windowW > 640 ? 10 : 1;
 const areaVNum = windowW > 1400 ? 20 : windowW > 640 ? 40 : 1;
 
 export const cardsData = [
-    // {
-    //   name: "layout_btn",
-    //   label: "布局按钮",
-    //   icon: "ios-layout",
-    //   component: LayoutBtnBox,
-    //   props: {
-    //     wNum: 1,
-    //     hNum: 1,
-    //     unitWidth: windowW / areaHNum,
-    //     background:false,
-    //   },
-    // },
     {
       name: "banner",
       label: "轮播图",
@@ -158,11 +147,18 @@ export const cardsData = [
         unitWidth: windowW / areaHNum,
       },
     },
-    // // {
-    // //   name: "memorandumBox",
-    // //   label: "备忘录",
-    // //   icon: "ios-bookmarks",
-    // // },
+    {
+      name: "memorandumBox",
+      label: "备忘录",
+      icon: "ios-bookmarks",
+      component: MemorandumBox,
+      props: {
+        wNum: 3,
+        hNum: 4,
+        padding: 24,
+        unitWidth: windowW / areaHNum,
+      },
+    },
     {
       name: "clocker",
       label: "时钟",
@@ -187,17 +183,17 @@ export const cardsData = [
       },
     },
     
-    {
-      name: "photosBox",
-      label: "照片",
-      icon: "ios-image",
-      component: PhotosBox,
-      props: {
-        wNum: 4,
-        hNum: 2,
-        unitWidth: windowW / areaHNum,
-      },
-    },
+    // {
+    //   name: "photosBox",
+    //   label: "照片",
+    //   icon: "ios-image",
+    //   component: PhotosBox,
+    //   props: {
+    //     wNum: 4,
+    //     hNum: 2,
+    //     unitWidth: windowW / areaHNum,
+    //   },
+    // },
     {
       name: "videoBox",
       label: "视频",
@@ -229,7 +225,7 @@ export const cardsData = [
       icon: "ios-chatbubbles",
       component: OpenAiBox,
       props: {
-        wNum: 3,
+        wNum: 4,
         hNum: 5,
         padding:24,
         unitWidth: windowW / areaHNum,

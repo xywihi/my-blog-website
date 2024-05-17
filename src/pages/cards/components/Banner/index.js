@@ -67,8 +67,8 @@ export default function Banner() {
               </span>
             ))}
           </h1>
-          <h5>
-            <p className="maB12 textSingeLine widthFull">{banners[0].subtitle}</p>
+          <h5 className=" widthFull">
+            <p className="maB12 textSingeLine">{banners[0].subtitle}</p>
             <p className="gray">{banners[0].time}</p>
           </h5>
         </div>

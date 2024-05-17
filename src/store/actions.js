@@ -14,5 +14,9 @@ export const showStatusBox = (data) => ({
   type: 'SHOWSTATUSBOX',
   data
 });
+export const handleChangeWeather = (data) => ({
+  type: 'HANDLECHANGEWEATHER',
+  data
+});
   
   

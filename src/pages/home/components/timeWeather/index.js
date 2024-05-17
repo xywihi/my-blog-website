@@ -11,8 +11,8 @@ const TimeWeather = (props) => {
     useEffect(() => {
         const http = new HttpRequire('weather')
         // const apiUrl = `http://localhost:3000/api/weather`;
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=zh_cn`;
-        http.get(apiUrl).then(res=>{
+        // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=zh_cn`;
+        http.get(apiUrl,{city,apiKey}).then(res=>{
             // console.log("res------",res)
             if(res.cod===200){
                 setWeather(res.weather[0])

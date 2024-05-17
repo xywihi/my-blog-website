@@ -4,6 +4,7 @@ import styles from "./index.module.less";
 import { IonIcon } from "@ionic/react";
 import { colorWand } from "ionicons/icons";
 export default function CardCreator({
+  key,
   wNum,
   hNum,
   minWNum,

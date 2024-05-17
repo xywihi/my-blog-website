@@ -197,6 +197,19 @@ const getTimeText=(timeNum)=>{
     return second+"秒前";
 }
 
+const getTimeText2=(timeNum)=>{
+    // 将时间转换成YYYY-MM-DD HH:mm:ss格式
+    let date = new Date(timeNum);
+    // let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let day = date.getDate();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+
+    // 格式化时间
+    let timeText = month + '月' + day + '日 ' + (hour.toString().length>1?hour:'0' + hour) + ':' + (minute.toString().length>1?minute:'0' + minute);
+    return timeText;
+}
 
 // 文字转语音
 const speak = (info:string, voiceNum:number) => {
@@ -210,14 +223,40 @@ const speak = (info:string, voiceNum:number) => {
       });
       if (zh_voices.length > 0) {
         msg.volume = 5; //音量
-        msg.rate = 1.2; //语速
+        msg.rate = 1.1; //语速
         msg.voice = zh_voices[voiceNum]; // 设置语音
         // msg.text = input.value //文字
         window.speechSynthesis.speak(msg); //播放语音
       }
-    }, 10);
+    }, 0);
     }
   };
+
+// 复制文本内容
+const handleCopyText = (text:string,fn:Function) => {
+    navigator.clipboard.writeText(text).then(function() {
+        console.log('Text copied to clipboard');
+        fn({
+            show:true,
+            // message:"网络异常，请稍后再试",
+            message:"复制成功",
+            status:"success"
+        })
+      }).catch(function(err) {
+        // 这会捕获任何可能的错误
+        console.error('Could not copy text: ', err);
+        fn({
+            show:true,
+            // message:"网络异常，请稍后再试",
+            message:"复制失败,稍后再试",
+            status:"error"
+        })
+      });
+}
+
+
+
+
 //导出函数
 export {
     debounce,
@@ -227,5 +266,7 @@ export {
     exitFullScreen,
     openBox,
     getTimeText,
-    speak
+    speak,
+    handleCopyText,
+    getTimeText2
 }

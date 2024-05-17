@@ -1,13 +1,7 @@
 import React, { useEffect, useState, memo } from "react";
 import styles from "./styles.module.less";
-import { IonIcon } from "@ionic/react";
 import HttpRequire from "@/http/require";
-import {
-  bookOutline,
-  colorWand,
-  calendar,
-  checkmarkCircle,
-} from "ionicons/icons";
+
 const apiKey = "beac683c911d3facd1e6f802ddd7b972"; // 替换成你的OpenWeatherMap API密钥
 const city = "Renshou"; // 替换成你想要查询的城市
 const TimeWeather = ({ cardSize }) => {
@@ -16,10 +10,10 @@ const TimeWeather = ({ cardSize }) => {
   useEffect(() => {
     if(cardSize!='small'){
       const http = new HttpRequire("weather");
-    // const apiUrl = `http://localhost:3000/api/weather`;
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=zh_cn`;
+    const apiUrl = `http://localhost:3000/api/weather`;
+    // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=zh_cn`;
     http
-      .get(apiUrl)
+      .get(apiUrl,{city,apiKey})
       .then((res) => {
         // console.log("res------",res)
         if (res.cod === 200) {
