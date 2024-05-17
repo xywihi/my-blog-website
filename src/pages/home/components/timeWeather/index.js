@@ -19,8 +19,8 @@ const TimeWeather = ({weatherInfo}) => {
             <div className={`${styles.item2_inner3_inner2_inner3} gray`}>{currentDate.getFullYear()}/{currentDate.getMonth()+1}/{currentDate.getDate()}</div>
             {weatherInfo && 
                 <div className={`${styles.item2_inner3_inner2_inner3} gray flexS`}>
-                    <span className="maR6">{weatherInfo.weather[0].description.split('，')[0]}</span>
-                    <img className={styles.weatherIcon} src={`https://openweathermap.org/img/w/${weatherInfo.weather[0].icon}.png`}></img>
+                    <span className="maR6">{weatherInfo.weather?.[0].description.split('，')[0]}</span>
+                    <img className={styles.weatherIcon} src={`https://openweathermap.org/img/w/${weatherInfo.weather?.[0].icon}.png`}></img>
                 </div>
             }
         </div>
