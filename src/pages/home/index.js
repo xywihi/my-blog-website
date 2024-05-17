@@ -35,7 +35,7 @@ const banners = [
         id:0
     },
 ]
-const Home = ({showStatusBox}) => {
+const Home = ({showStatusBox,weatherInfo}) => {
     const [currentDate,setCurrentDate] = useState(new Date())
     const [selectedOption,setSelectedOption] = useState('zh')
     const [wallImage,setWallImage] = useState(null)
@@ -137,7 +137,7 @@ const Home = ({showStatusBox}) => {
                                     <span className="fontSmall">疯狂努力拼搏中...</span>
                                 </div>
                             </div>
-                            <TimeWeather/>
+                            <TimeWeather weatherInfo={weatherInfo}/>
                         </div>
                     </div>
                     <div className="newsBox waterfall-item borderR12 item3" >
@@ -237,9 +237,12 @@ const Home = ({showStatusBox}) => {
 }
 
 
+const mapStateToProps = (state) => ({
+    weatherInfo: state.reducer.weatherInfo,
+  });
 const mapDispatchToProps = {
     showStatusBox
 };
 
 
-export default connect(null,mapDispatchToProps)(Home)
+export default connect(mapStateToProps,mapDispatchToProps)(Home)
