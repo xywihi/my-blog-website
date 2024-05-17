@@ -15,7 +15,7 @@ export default function CardCreator({
   unitWidth,
   children,
   background = true,
-  change = false,
+  change = null,
   // backgroundImage = "",
   dragStart,
   attributes,
@@ -76,7 +76,7 @@ export default function CardCreator({
         </div>
       )}
       {change && (
-        <div className={`${styles.rightTopBox} bg3`} onClick={()=>setActiveChange(!activeChange)}>
+        <div className={`${styles.rightTopBox} bg_blue`} onClick={()=>setActiveChange(!activeChange)}>
           <div className="cursor icon_hover icon">
             <IonIcon icon={colorWand} size="36px"></IonIcon>
           </div>
@@ -88,16 +88,21 @@ export default function CardCreator({
         : React.createElement(children, {wNum, hNum, ...props })}
       {activeChange && (
         <div className={`${styles.changeWHBox} bg3`}>
-          <div
+          {
+            change.v && <div
             className={`${styles.changeHeight} bg_gray`}
             draggable={true}
             onDrag={changeHeight}
           ></div>
-          <div
+          }
+          {
+            change.h && <div
             className={`${styles.changeWidth} bg_gray`}
             draggable={true}
             onDrag={changeHeight}
           ></div>
+          }
+          
         </div>
       )}
     </div>

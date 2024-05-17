@@ -710,6 +710,14 @@ button {
     text-overflow: ellipsis;
 }
 
+/* 二行省略 */
+.ellipsis-twoLine {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 /* 三行省略 */
 .ellipsis-multiline {
     display: -webkit-box;

@@ -106,20 +106,22 @@ export const cardsData = [
         wNum: 5,
         hNum: 3,
         padding: 24,
+        minHNum: 3,
+        minWNum: 5,
       },
     },
-    {
-      name: "smoothedLine",
-      label: "折线图",
-      icon: "ios-pie",
-      component: SmoothedLine,
-      props: {
-        wNum: 4,
-        hNum: 3,
-        height:windowW/areaHNum *4,
-        width:windowW/areaHNum*3,
-      },
-    },
+    // {
+    //   name: "smoothedLine",
+    //   label: "折线图",
+    //   icon: "ios-pie",
+    //   component: SmoothedLine,
+    //   props: {
+    //     wNum: 4,
+    //     hNum: 3,
+    //     height:windowW/areaHNum *4,
+    //     width:windowW/areaHNum*3,
+    //   },
+    // },
     {
       name: "personalAvatar",
       label: "个人头像",
@@ -178,7 +180,7 @@ export const cardsData = [
       icon: "ios-calculator",
       component: CalculatorBox,
       props: {
-        wNum: 4,
+        wNum: 3,
         hNum: 4,
         padding:24,
         unitWidth: windowW / areaHNum,
@@ -231,7 +233,10 @@ export const cardsData = [
         hNum: 5,
         padding:24,
         unitWidth: windowW / areaHNum,
-        change:true
+        change:{
+          v:true,
+          h:false
+        }
       },
     },
     {
@@ -271,19 +276,23 @@ export const cardsData = [
         kinds:[
           {
             icon:'fat',
-            name:'你胖了'
+            name:'你胖了',
+            color:'colorRed'
           },
           {
             icon:'add',
-            name:'中午加餐'
+            name:'中午加餐',
+            color:'colorGreen'
           },
           {
             icon:'fang',
-            name:'方便面来一桶'
+            name:'方便面来一桶',
+            color:'colorOrange'
           },
           {
             icon:'movie',
-            name:'周末看电影'
+            name:'周末看电影',
+            color:'colorBlue'
           },
         ]
       },

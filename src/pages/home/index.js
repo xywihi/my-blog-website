@@ -15,9 +15,9 @@ import { showStatusBox } from "@/store/actions";
 const banners = [
     {
         url:"https://images.unsplash.com/photo-1599272585578-03bfc70032b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE4fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-        title:"平淡人生，浮躁心态",
-        subtitle:"平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
-        time:"2023/09/01",
+        title:"愿你走出半生，归来仍是少年",
+        subtitle:"希望人生,不管经历过多少人生坎坷与挫折,依然能够保持着少年人的赤子之心,积极乐观,自信坦荡。",
+        time:"2024/05/07",
         id:0
     },
     {
@@ -29,8 +29,8 @@ const banners = [
     },
     {
         url:"https://images.unsplash.com/photo-1517462035531-76bc910a6903?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
-        title:"平淡人生，浮躁心态",
-        subtitle:"平淡人生，浮躁心态，梦想的美好是建立在残酷的现实之上。",
+        title:"愿你走出半生，归来仍是少年",
+        subtitle:"希望人生,不管经历过多少人生坎坷与挫折,依然能够保持着少年人的赤子之心,积极乐观,自信坦荡。",
         time:"2023/09/10",
         id:0
     },
@@ -87,7 +87,7 @@ const Home = ({showStatusBox}) => {
                                         {wallImage[currentImageIndex].title}
                                     </h1>
                                     <h5>
-                                        <p className="maB12">{wallImage[currentImageIndex].copyright}</p>
+                                        <p className="maB12 ellipsis-twoLine">{wallImage[currentImageIndex].copyright}</p>
                                         <p className="gray">{wallImage[currentImageIndex].startdate}</p>
                                     </h5>
                                 </div>
@@ -188,7 +188,7 @@ const Home = ({showStatusBox}) => {
                             最新数据走势
                         </h3>
                         <div className="smoothedLine">
-                            <SmoothedLine/>
+                            <SmoothedLine />
                         </div>
                        
                     </div>

@@ -17,8 +17,9 @@ function HeaderNav({direction,routes}){
     const [activeNavIndex,setActiveNavIndex]=useState(null)
     const [currentRoute,setCurrentRoute]=useState('/')
     useEffect(()=>{
-        // console.log("location.hash",location.hash.replace("#/",""))
-        setCurrentRoute(location.hash.replace("#",""))
+        console.log("location.hash",location.hash,location.hash.replace("#",""))
+        let currentPath = location.hash.replace("#","")
+        setCurrentRoute(currentPath!==''?currentPath:'/')
         // console.log("location.hash------------",location.hash)
     },[])
 

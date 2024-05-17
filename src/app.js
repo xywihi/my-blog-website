@@ -233,7 +233,6 @@ const App = ({ notices,noticeList, statusBoxData, handleHiddeNotices,showStatusB
               {/* 通知信息框 */}
               <div className="notice_out_box">
                 {showNotice && <MaskElement pointerEvents={true} />}
-                
                 <div className="notice_box height0 width0 bg1" >
                   <div className="scrollbarBox">
                     <ul>

@@ -2,7 +2,7 @@ import * as echarts from 'echarts';
 import React,{useEffect, useRef} from 'react';
 import HttpRequire from "@/http/require";
 import echartsData from '@/assets/data/echart.json'
-const SmoothedLine = ({height=0,width=0}) => {
+const SmoothedLine = ({height="100%",width="100%"}) => {
     const ref = useRef()
     // var ROOT_PATH = 'https://echarts.apache.org/examples';
     var myChart
@@ -96,16 +96,6 @@ const SmoothedLine = ({height=0,width=0}) => {
         };
         myChart.setOption(options);
       }
-    return (<div ref={ref} id="smoothedLine" className='pa24' style={{ width: height+'px', height: width+'px' }}></div>)
-}
-
-function areEqual(prevProps, nextProps) {
-  // console.log('echarts update:',prevProps)
-  return false;
-  /*
-  return true if passing nextProps to render would return
-  the same result as passing prevProps to render,
-  otherwise return false
-  */
+    return (<div ref={ref} id="smoothedLine" style={{ width, height }}></div>)
 }
 export default SmoothedLine;
