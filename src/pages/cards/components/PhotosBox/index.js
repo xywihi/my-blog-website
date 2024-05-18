@@ -9,43 +9,9 @@ import React, {
 import styles from "./index.module.less";
 import Image from "@/components/Image";
 import HttpRequire from "@/http/require";
-const photos = [
-  {
-    url: "https://images.unsplash.com/photo-1599272585578-03bfc70032b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE4fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",
-    title: "愿你走出半生，归来仍是少年",
-    subtitle: "一年之计,莫如树谷:十年之计,莫如树木;终身之计,莫如树人。",
-    time: "2024/05/07",
-    id: 0,
-  },
-  {
-    url: "https://loremflickr.com/473/370/sky",
-    title: "不是智者才能获得成功,努力奋斗的人依旧也可以。",
-    subtitle: "不是智者才能获得成功,努力奋斗的人依旧也可以。",
-    time: "2024/05/07",
-    id: 1,
-  },
-  {
-    url: "https://loremflickr.com/473/370/city",
-    title: "愿你走出半生，归来仍是少年",
-    subtitle:
-      "常常告诫自己不要在一棵树上吊死,结果常常是还没有进入树林就已经迷了路。",
-    time: "2024/05/07",
-    id: 2,
-  },
-  {
-    url: "https://loremflickr.com/473/370/sea",
-    title: "愿你走出半生，归来仍是少年",
-    subtitle: "人生就像钟表,可以回到起点,却已不是昨天!",
-    time: "2024/05/07",
-    id: 3,
-  },
-];
 let wallImage = [];
 let timer = null;
 export default function PhotosBox({
-  wNum,
-  hNum,
-  unitWidth,
   cardSize,
   auto = true,
   time = 5000,
@@ -157,14 +123,14 @@ export default function PhotosBox({
           )}
         </ul>
       </div>
-      <div className={styles.photosBox_btns_box}>
+      <div className={`${styles.photosBox_btns_box} controller`}>
         <ul className={`${styles.photosBox_btns} flexB`}>
           {wallImage.map((item, index) => (
             <li
               key={"unknown" + index}
               className={
                 moveNum === index
-                  ? `${styles.photosBox_btn_active} bg_blue`
+                  ? `${styles.photosBox_btn_active} photosBox_btn_active bg_blue`
                   : `${styles.photosBox_btn} bg1`
               }
               onClick={() => {

@@ -124,11 +124,13 @@ function CalendarBox({ cardSize, plans,...props }) {
                   {checkExitPlan(index - getMonthDays(currentDate, "week") + 1) && (
                     <span
                       className={`${styles.exitPlan} ${
-                        checkExitPlan(index - getMonthDays(currentDate, "week") + 1).status === 2
-                          ? "bg_blue"
-                          : checkExitPlan(index - getMonthDays(currentDate, "week") + 1).status === 1
+                        checkExitPlan(index - getMonthDays(currentDate, "week") + 1).status === '3'
+                          ? "bg_gray" :
+                        checkExitPlan(index - getMonthDays(currentDate, "week") + 1).status === '2'
+                          ? "bg_red"
+                          : checkExitPlan(index - getMonthDays(currentDate, "week") + 1).status === '1'
                           ? "bg_orange"
-                          : "bg_gray"
+                          : "bg_blue"
                       }`}
                     ></span>
                   )}

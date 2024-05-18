@@ -1,6 +1,6 @@
 
 const initialState = {
-    layoutNum:0,
+    layoutNum:1,
   };
   
   const homeReducer = (state = initialState, action) => {

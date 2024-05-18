@@ -1,0 +1,43 @@
+.person_news_box {
+    padding: 60px 120px;
+}
+
+
+.searchBox {
+    margin-bottom: 45px;
+    position: sticky;
+    top: 24px;
+    z-index: 20;
+    input {
+        line-height: 32px;
+    }
+}
+
+
+
+
+.search_btn{
+    position: absolute;
+    right:24px;
+    top: calc(50% - 12px);
+}
+
+
+@media screen and (max-width: 640px) {
+    .person_news_box {
+        padding: 12px;
+        min-height: calc(100vh - 62px);
+    }
+    ul{
+        margin-top: 70px;
+    }
+
+    .searchBox{
+        margin-bottom: 45px;
+        position: fixed;
+        top: 87px;
+        z-index: 20;
+        width: calc(100% - 48px);
+    }
+}
+    

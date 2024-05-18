@@ -19,4 +19,9 @@ export const handleChangeWeather = (data) => ({
   data
 });
   
+export const handleChangePlans = (data) => ({
+  type: 'HANDLECHANGEPLANS',
+  data
+});
+  
   

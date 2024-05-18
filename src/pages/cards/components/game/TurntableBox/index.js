@@ -33,7 +33,7 @@ export default function TurntableBox({ kinds = [] }) {
         {kinds.map((item, index) => (
           radomNum == index &&<li
             key={item + index}
-            className={`${styles.kindItemBox} textCenter ${item.color}`}
+            className={`${styles.kindItemBox} textCenter ${item.color} colorWhite borderR12 flexC column heightFull`}
           >
             <div>
               <IonIcon icon={icons[index]} size="18px"></IonIcon>

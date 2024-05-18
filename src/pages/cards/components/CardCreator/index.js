@@ -23,6 +23,7 @@ export default function CardCreator({
   gridsArr,
   changHeight,
   cardsArrFinal,
+  handleChangeCardName,
   ...props
 }) {
   const [activeChange, setActiveChange] = useState(false);
@@ -85,8 +86,8 @@ export default function CardCreator({
       )}
 
       {typeof children === "function"
-        ? children({ wNum, hNum, unitWidth, ...props })
-        : React.createElement(children, {wNum, hNum, ...props })}
+        ? children({ wNum, hNum, unitWidth,handleChangeCardName, ...props })
+        : React.createElement(children, {wNum, hNum,handleChangeCardName, ...props })}
       {activeChange && (
         <div className={`${styles.changeWHBox} bg3`}>
           {

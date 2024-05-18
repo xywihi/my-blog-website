@@ -1,0 +1,74 @@
+.dateBox {
+    position: relative;
+
+    &::after {
+        content: '';
+        display: block;
+        clear: both;
+        width: 0;
+        height: 0;
+        border-bottom: 32px solid transparent;
+        border-left: 32px solid transparent;
+        border-bottom: 32px solid #ffffffab;
+        position: absolute;
+        right: 0;
+        bottom: 3px;
+    }
+}
+
+.textContentBox{
+    letter-spacing: 4px;
+    font-size: 14px;
+}
+
+.imgsBox{
+    &>div{
+        margin: 0 6px;
+    }
+    &>div:first-child{
+        margin-left: 0;
+    }
+    &>div:last-child{
+        margin-right: 0;
+    }
+}
+
+
+
+.deviseBox{
+    margin: 90px 0;
+    .deviseLine{
+        height: 1px;
+        width: calc(50% - 12px);
+    }
+    .devisePoint{
+        width: 2px;
+        height: 2px;
+        margin: 0 6px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .person_news_box {
+        padding: 12px;
+    }
+    .titleBox{
+        flex-direction: column;
+        align-items: start;
+        h1{
+            margin-bottom: 24px;
+        }
+    }
+    .imgsBox{
+        flex-direction: column;
+        &>div{
+            margin: 6px 0 ;
+        }
+        &>div:first-child{
+            margin-top: 0;
+        }
+        &>div:last-child{
+            margin-bottom: 0;
+        }
+    }
+}

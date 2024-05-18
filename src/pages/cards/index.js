@@ -50,12 +50,12 @@ const createGrids = (xCount, yCount, cardsArr) => {
 const Cards = ({ showStatusBox,layoutNum }) => {
   const [gridsArr, setGridsArr] = useState([]);
   const [cardsArrFinal, setCardsArrFinal] = useState([]);
-
+  const [currentCardName, setCurrentCardName] = useState(null);
   // console.log("windowW", windowW);
   const childTranslate = createRef(null);
   let finalComputedCard = [];
   useEffect(() => {
-    existCardsArr = cardsData.map((item, index) => <CardCreator key={item.name} dragStart={handleStartDrag} changHeight={handleChangeHeight} {...item.props}>{item.component}</CardCreator>);
+    existCardsArr = cardsData.map((item, index) => <CardCreator key={item.name} cardName={item.name} handleChangeCardName={(cardName)=>setCurrentCardName(cardName)} dragStart={handleStartDrag} changHeight={handleChangeHeight} {...item.props}>{item.component}</CardCreator>);
     const arr = computeOrder(existCardsArr, layoutNum);
     finalComputedCard = computeCardsOrder(arr, windowW, areaHNum, areaVNum).map(
       (item, index) => {
@@ -555,7 +555,6 @@ const Cards = ({ showStatusBox,layoutNum }) => {
     // console.log("grids", grids);
     // setGridsArr(grids);
     // gridsArr = grids;
-    console.log("grids-----------", grids);
     setGridsArr(grids);
     
 
@@ -585,6 +584,7 @@ const Cards = ({ showStatusBox,layoutNum }) => {
         attributes={item.attributes}
         styles={item.styles}
         handleStartDrag={handleStartDrag}
+        zIndex={currentCardName==item.component.props.cardName?100:0}
         // children={item.component}
       >
         <div>{
@@ -639,15 +639,17 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cards);
 
-const CardItem = ({ attributes, styles, handleStartDrag, children }) => {
+const CardItem = ({ attributes, styles, zIndex=0, children }) => {
+  // const [zIndex, setZIndex] = useState(0);
   useEffect(() => {
     // console.log("styles", styles);
   }, [attributes]);
+  
   return (
     <div
       key="dragEle2"
       className="testCard"
-      style={styles}
+      style={{...styles,zIndex}}
       attributes={attributes}
       // draggable={true}
     >

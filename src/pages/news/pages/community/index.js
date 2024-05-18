@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  HashRouter,
-  Navigate,
-  Route,
-  Routes,
   useNavigate,
 } from "react-router-dom";
 import {
@@ -16,6 +12,7 @@ import {
 } from "ionicons/icons";
 import { IonIcon } from "@ionic/react";
 import "./index.less";
+import styles from './styles.module.less'
 import { scrollToTop, debounce, getTimeText } from "@/util";
 import DetailNews from "../../components/DetailNews";
 const newDebounce = debounce(function (fn) {
@@ -242,7 +239,7 @@ function Community() {
 
   return (
     <div
-      className={`community_out_box ${
+      className={`${styles.community_out_box} ${
         screenWidth <= 640 && (selectItem ? "paT48" : "paT64")
       }`}
     >
@@ -286,7 +283,7 @@ function Community() {
                   />
                   <div></div>
                 </div>
-                <div className="hotestNews_content_box scrollbarBox">
+                <div className="hotestNews_content_box scrollbarBox scrollbarBox_hidden">
                   <h2 className="maB6 fontB">
                     科技前沿 | 《流浪地球2》的这项“黑科技”,获工信部支持
                   </h2>
@@ -360,12 +357,6 @@ function Community() {
           <div className="newest_news_box">
             <div className="header_box flexBS maB12">
               <h2>社区动态</h2>
-              <div className="flexB">
-                <input className="pa12" placeholder="通过关键词搜索..." />
-                <div className="search_btn bg4 widthFull paH12 textColorWhite">
-                  搜索
-                </div>
-              </div>
             </div>
             <div className="borderR12 newest_news_box_content_outbox scrollbarBox scrollbarBox_hidden">
               <ul className="borderR6 newest_news_box_content_box">

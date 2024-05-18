@@ -155,19 +155,19 @@ function OpenAiBox({ weatherInfo, showStatusBox, plans }) {
   const handleSpeak = (content) => {
     if (aiAnswer.noQuestions.status && !content) {
       setAiAnswer((old) => {
+        const getDiffRadadomNum = (min, max) => {
+          let radomNum = Math.floor(Math.random() * (max - min));
+          return radomNum;
+        };
+        let newAnswerNum = getDiffRadadomNum(0, robotAnswers.length);
         let newAnswerNum2;
         if (old.answers.value.length > 0) {
-          const getDiffRadadomNum = (min, max) => {
-            let radomNum = Math.floor(Math.random() * (max - min));
-            return radomNum;
-          };
-          let newAnswerNum = getDiffRadadomNum(0, robotAnswers.length);
           newAnswerNum2 =
             old.value == robotAnswers[newAnswerNum]
               ? getDiffRadadomNum(0, 4)
               : newAnswerNum;
         }
-        let firstAnswer = robotAnswers[newAnswerNum2] || robotAnswers[0];
+        let firstAnswer = robotAnswers[newAnswerNum2] || robotAnswers[newAnswerNum] || robotAnswers[0];
         speak(firstAnswer, 7);
         return {
           ...old,
@@ -225,15 +225,18 @@ function OpenAiBox({ weatherInfo, showStatusBox, plans }) {
     let answerListEle = answerListRef.current;
     if (text && index < text.length) {
       const element = document.getElementById(elementId);
-      element.innerHTML += text[index]=='/'?'<br/>':text[index]=='&'? '<hr/>':text[index];
-      clearTimeout(oldTimer);
-      if (answerListEle)
-        answerListEle.scrollTop = answerListEle?.scrollHeight + 40;
-      let timer = setTimeout(
-        () => wordByWordOutput(text, index+1, elementId),
-        100,
-        timer
-      ); // 100毫秒后输出下一个字符
+      if(element){
+        element.innerHTML += text[index]=='/'?'<br/>':text[index]=='&'? '<hr/>':text[index];
+        clearTimeout(oldTimer);
+        if (answerListEle)
+          answerListEle.scrollTop = answerListEle?.scrollHeight + 40;
+        let timer = setTimeout(
+          () => wordByWordOutput(text, index+1, elementId),
+          100,
+          timer
+        ); // 100毫秒后输出下一个字符
+      }
+     
     } else {
       // 滚动到底部
     }
@@ -307,7 +310,7 @@ function OpenAiBox({ weatherInfo, showStatusBox, plans }) {
                 )}
                 {weatherInfo.name && (
                   <li
-                    className="fontSmall borderR12 border paH6"
+                    className="fontSmall borderR12 border paH6 maT6"
                     onClick={() => handleSpeak({type:"plans",value:plans})}
                   >
                     最近有什么日程安排吗？

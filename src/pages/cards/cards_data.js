@@ -194,17 +194,17 @@ export const cardsData = [
     //     unitWidth: windowW / areaHNum,
     //   },
     // },
-    {
-      name: "videoBox",
-      label: "视频",
-      icon: "ios-videocam",
-      component: VideoBox,
-      props: {
-        wNum: 4,
-        hNum: 3,
-        unitWidth: windowW / areaHNum,
-      },
-    },
+    // {
+    //   name: "videoBox",
+    //   label: "视频",
+    //   icon: "ios-videocam",
+    //   component: VideoBox,
+    //   props: {
+    //     wNum: 4,
+    //     hNum: 3,
+    //     unitWidth: windowW / areaHNum,
+    //   },
+    // },
     {
       name: "timerBox",
       label: "计时器",
@@ -273,22 +273,22 @@ export const cardsData = [
           {
             icon:'fat',
             name:'你胖了',
-            color:'colorRed'
+            color:'bg_red'
           },
           {
             icon:'add',
             name:'中午加餐',
-            color:'colorGreen'
+            color:'bg_purple'
           },
           {
             icon:'fang',
             name:'方便面来一桶',
-            color:'colorOrange'
+            color:'bg_orange'
           },
           {
             icon:'movie',
             name:'周末看电影',
-            color:'colorBlue'
+            color:'bg_blue'
           },
         ]
       },
