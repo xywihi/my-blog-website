@@ -50,7 +50,7 @@ function NewsItemBox({ newItem, newIndex, arrLength }) {
           : "..."}
         {handleContentText(newItem.content)[1].length > 3 && (
           <span
-            className="cursor icon_hover maT12 gray"
+            className={`cursor icon_hover maT12 gray ${styles.showDeatilBtn}`}
             onClick={() => setShowDeatil(!showDeatil)}
           >
             {!showDeatil ? "查看详细内容" : "收起详细内容"}

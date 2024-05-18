@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./index.module.less";
 import news_data from "./news_data.json";
-import HttpRequire from "@/http/require";
 import {  debounce } from "@/util";
 import {
   closeCircle,
@@ -16,12 +15,7 @@ function Person() {
   const [searchValue, setSearchValue] = useState('');
   const [searchedList, setSearchedList] = useState([]);
   useEffect(() => {
-    const http = new HttpRequire("news");
-    const apiUrl = `http://localhost:3008/news_data.json`;
-    // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=zh_cn`;
-    http.get(apiUrl).then((res) => {
-      setNewsData([...res]);
-    });
+    setNewsData(news_data);
     // setNewsData(news_data);
     return () => {
       // console.log('我被销毁了')
