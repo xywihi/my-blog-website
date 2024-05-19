@@ -33,10 +33,11 @@ function HeaderNav({ direction,handleLogin,routes }) {
   const [activeNavIndex, setActiveNavIndex] = useState(null);
   const [currentRoute, setCurrentRoute] = useState("/");
   useEffect(() => {
-    console.log("location.hash", location.hash, location.hash.replace("#", ""));
     let currentPath = location.hash.replace("#", "");
     setCurrentRoute(currentPath !== "" ? currentPath : "/");
     !newLocalStorage.get("token") && navigate("/login");
+    console.log("location.hash", newLocalStorage.get("token"));
+    
     
     // console.log("location.hash------------",location.hash)
   }, []);

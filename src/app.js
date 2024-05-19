@@ -1,5 +1,5 @@
 import React, { Suspense, useMemo, useEffect, useState } from "react";
-import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes,useNavigate } from "react-router-dom";
 import { LocalStorage, scrollToTop, speak } from "./util";
 import RouteGuard from "./util/route_guard";
 import HeaderNav from "./components/HeaderNav";
@@ -56,7 +56,8 @@ const App = ({
   const [showNotice, setShowNotice] = useState(false);
   useEffect(() => {
     // console.log("app_page");
-    newLocalStorage.get("token") && handleLogin({status:true,token:newLocalStorage.get("token")});
+    newLocalStorage.get("token") && handleLogin({status:true,token:newLocalStorage.get("token")})
+    const token = newLocalStorage.get("token")
     getLocation();
     // 路由跳转
     // console.log(window.location.pathname);
@@ -108,7 +109,6 @@ const App = ({
         (error) => {}
       );
     });
-    console.log("location-----", location);
     const http = new HttpRequire("weather");
     // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${apiKey}&lang=zh_cn`;
     const apiUrl = `http://localhost:3000/api/weather`;
@@ -218,6 +218,16 @@ const App = ({
     //   handleOpenNoticeBox()
     // }
   };
+
+  const IsLogin = ()=>{
+    const navigate= useNavigate();
+    useEffect(() => {
+      if (!logged.token) {
+        navigate('/login')
+      }
+    },[])
+    return logged.token ? <div className="flexCenter">Loading...</div> : null;
+  }
   const mainContent = useMemo(
     () => (
       <main className="flexBS bg2_blue">
@@ -233,7 +243,7 @@ const App = ({
 
         <div className="contentBox flexFull scrollbarBox scrollbarBox_hidden relative">
           <Notices manageNotices={notices.hidde} />
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<IsLogin/>}>
             <Routes>
               <Route
                 exact
