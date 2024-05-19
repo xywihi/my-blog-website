@@ -23,5 +23,9 @@ export const handleChangePlans = (data) => ({
   type: 'HANDLECHANGEPLANS',
   data
 });
+export const handleLogin = (data) => ({
+  type: 'HANDLELOGIN',
+  data
+});
   
   

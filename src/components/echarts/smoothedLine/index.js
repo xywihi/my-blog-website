@@ -1,6 +1,6 @@
 import * as echarts from 'echarts';
 import React,{useEffect, useRef} from 'react';
-import HttpRequire from "@/http/require";
+import {HttpRequire} from "@/http/require";
 import echartsData from '@/assets/data/echart.json'
 const SmoothedLine = ({height="100%",width="100%"}) => {
     const ref = useRef()

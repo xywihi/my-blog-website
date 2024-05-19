@@ -1,6 +1,6 @@
 import React, {useEffect, useState, forwardRef, useImperativeHandle} from "react"
 import CryptoJS from "crypto-js"
-import HttpRequire from "@/http/require"
+import {HttpRequire} from "@/http/require"
 import styles from './style.module.less'
 import {IonIcon} from "@ionic/react"
 import { arrowForward } from 'ionicons/icons';

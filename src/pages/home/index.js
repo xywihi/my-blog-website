@@ -10,7 +10,7 @@ import Translate from "../../components/translate"
 import SmoothedLine from "../../components/echarts/smoothedLine"
 import {connect} from "react-redux"
 import ChatAi from "../../components/chatAi"
-import HttpRequire from "../../http/require";
+import {HttpRequire} from "../../http/require";
 import { showStatusBox } from "@/store/actions";
 const banners = [
     {

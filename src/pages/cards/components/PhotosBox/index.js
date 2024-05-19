@@ -8,7 +8,7 @@ import React, {
 
 import styles from "./index.module.less";
 import Image from "@/components/Image";
-import HttpRequire from "@/http/require";
+import {HttpRequire} from "@/http/require";
 let wallImage = [];
 let timer = null;
 export default function PhotosBox({

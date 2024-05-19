@@ -64,6 +64,9 @@ function NewsItemBox({ newItem, newIndex, arrLength }) {
           </div>
         ))}
       </div>
+      {/* <div className={styles.aceEditorBox}>
+        <AceEditorBox setCode={setCode} height="200px"/>
+        </div> */}
       <p className="flexB gray fontSmall">
         <span>字数：{newItem.content.length}</span>
       </p>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, memo } from "react";
 import styles from "./styles.module.less";
-import HttpRequire from "@/http/require";
+import {HttpRequire} from "@/http/require";
 
 const apiKey = "beac683c911d3facd1e6f802ddd7b972"; // 替换成你的OpenWeatherMap API密钥
 const city = "Renshou"; // 替换成你想要查询的城市

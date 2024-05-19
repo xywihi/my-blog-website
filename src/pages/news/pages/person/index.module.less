@@ -22,7 +22,38 @@
     top: calc(50% - 12px);
 }
 
+.newsNavBox{
+    position: fixed;
+    right: 24px;
+    top:92px;
+}
 
+.aceEditorBox{
+    min-height: 100px;
+    max-height: 420px;
+    &>div{
+        border-radius: 12px;
+        border: 2px solid #3333333f;
+    }
+}
+
+.createNewBtn{
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 20;
+}
+
+.newsListBox{
+    margin-top: 70px;
+}
+
+.newsItemBox{
+    margin-bottom: 24px;
+    &:last-child{
+        margin-bottom: 0;
+    }
+}
 @media screen and (max-width: 640px) {
     .person_news_box {
         padding: 14px;
@@ -38,6 +69,9 @@
         top: 87px;
         z-index: 20;
         width: calc(100% - 48px);
+        input {
+            font-size: 1.1em;
+        }
     }
 }
     

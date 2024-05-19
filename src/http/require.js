@@ -1,11 +1,13 @@
-// 定义一个回调函数来处理 XMLHttpRequest 的状态变化
+import { generateSalt, createHash } from "./tools";
 
-class HttpRequire {
+// 定义一个回调函数来处理 XMLHttpRequest 的状态变化
+const API_URL = "http://localhost:3000/api/";
+export class HttpRequire {
   constructor(prop) {
     this.type = prop;
     this.xhr = new XMLHttpRequest();
   }
-  get(url, params = {}) {
+  async get(url, params = {}) {
     const queryString = Object.keys(params)
       .map(
         (key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`
@@ -13,9 +15,9 @@ class HttpRequire {
       .join("&");
 
     const requestURL = `${url}?${queryString}`;
-    return fetch(requestURL,params).then((response) => {
+    return fetch(requestURL, params).then((response) => {
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error("似乎没有启动服务，请检查");
       }
       return response.json(); // 或者 response.text()，取决于响应的内容类型
     });
@@ -41,26 +43,17 @@ class HttpRequire {
       };
     });
   }
-  post(url, params) {
-    const formData = new URLSearchParams();
-    for (const key in params) {
-      formData.append(key, params[key]);
-    }
-
-    const requestBody = formData.toString();
-    return fetch(url, {
+  async post(apiUrl, params,header) {
+    const requestBody = JSON.stringify(params);
+    return fetch(apiUrl, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+      headers:header,
       body: requestBody,
     }).then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json(); // 或者 response.text()，取决于响应的内容类型
-    })
-    ;
+      return response.json(); // 或者 response.text()，取决于响应的内容类型
+    }).catch((error) => {
+      console.error("Error:", error);
+    });
   }
 
   // post(url,params){
@@ -79,5 +72,23 @@ class HttpRequire {
   //       });
   // }
 }
-
-export default HttpRequire;
+const http = new HttpRequire();
+export const login = async (params) => {
+  // 示例用法（需要处理Promise）
+  const password = params.password;
+  // const salt = await generateSalt();
+  const hashedPassword = await createHash(password);
+  // console.log("Salt:", salt);
+  console.log("Hashed Password:", hashedPassword);
+  return http.post(API_URL + "login", {...params, password: hashedPassword},{"Content-Type": "application/json"})
+};
+export const register = async (params) => {
+  // 示例用法（需要处理Promise）
+  const password = params.password;
+  // const salt = await generateSalt();
+  const hashedPassword = await createHash(password);
+  // console.log("Salt:", salt);
+  console.log("register Hashed Password:", hashedPassword);
+  return http.post(API_URL + "register", {...params, password: hashedPassword},{"Content-Type": "application/json"})
+};
+export const uploadImg = (params) => http.post(API_URL + "upload", params);

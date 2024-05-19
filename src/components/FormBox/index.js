@@ -1,21 +1,21 @@
 import React, { useEffect } from "react";
 import styles from "./index.module.less";
-export default function FormBox({ formTitle, handleSubmit, handleCancle,handleResetFormItemData, children }) {
+export default function FormBox({ formTitle, handleSubmit, handleCancle,handleResetFormItemData,haveResetBtn,subBtn, children }) {
   useEffect(() => {
     return () => {};
   }, []);
   return (
-    <div className={`${styles.formBox} pa24 bg1 borderR12 flexC`}>
-      <form onSubmit={(e,values)=>handleSubmit(e,values)}>
+    <div className={`${styles.formBox} pa24 borderR12 flexC`}>
+      <form onSubmit={handleSubmit}>
         <p className="fontB font16 maB12">{formTitle}</p>
         {children}
-        <div className="maT24">
+        <div className="maT24 flexC">
           <button className="bg_blue maH6" type="submit">
-            提交
+            {subBtn || '提交'}
           </button>
-          <button className="bg1 maH6 border border_black colorBlack" type="reset" onClick={handleResetFormItemData}>
+          {haveResetBtn && <button className="maH6 border border_black colorBlack" type="reset" onClick={handleResetFormItemData}>
             重置
-          </button>
+          </button>}
           <button className="bg4 maH6" type="button" onClick={handleCancle}>
             取消
           </button>

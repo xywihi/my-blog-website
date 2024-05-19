@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import styles from "./index.module.less";
-import HttpRequire from "@/http/require";
+import {HttpRequire} from "@/http/require";
 const banners = [
   {
     url: "https://images.unsplash.com/photo-1599272585578-03bfc70032b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE4fHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60",

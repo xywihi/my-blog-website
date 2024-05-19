@@ -1,0 +1,89 @@
+.loginBox {
+    background-image: url("https://cn.bing.com/th?id=OHR.BlueCityIndia_ZH-CN4275229255_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp");
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.formBox {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 50;
+    background-color: #00000073;
+
+    &>div>div:first-child {
+        background-color: #457fa066;
+
+
+        form>p {
+            color: #fff;
+        }
+
+        input {
+            background-color: #293b40b3;
+            color: #ffffff !important;
+            border: none;
+        }
+    }
+
+    .form_item {
+        height: 100%;
+        line-height: 35px;
+        padding: 0 16px;
+        font-size: 14px;
+        color: #333;
+        border: none;
+        border-radius: 0;
+        background-color: #00000073;
+
+        &:first-child {
+            border-right: 1px solid #e5e5e5b2;
+        }
+    }
+
+
+    .togglePassword {
+        position: absolute;
+        right: 6px;
+        top: 50%;
+        transform: translateY(0%);
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .togglePassword::before {
+        content: "👁️";
+        /* 使用Emoji作为图标，你可以替换成自己的图标 */
+        font-size: 1.2em;
+    }
+    .togglePassword:checked::before {
+        content: "😴";
+        /* 使用Emoji作为图标，你可以替换成自己的图标 */
+        font-size: 1.2em;
+    }
+
+    .togglePasswordChecker:checked {
+        display: none;
+        .togglePassword::before {
+            content: "😴";
+            /* 使用Emoji作为图标，你可以替换成自己的图标 */
+            font-size: 1.2em;
+        }
+    }
+    .togglePassword::before, .togglePassword::after {
+        display: none;
+    }
+
+       .passwordInput {
+            /* 当checkbox被选中时，显示明文密码 */
+            text-security: none;
+        }
+}

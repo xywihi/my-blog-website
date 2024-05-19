@@ -62,7 +62,7 @@ const NoticesBox =({manageNotices}) => {
     }
     return (
         <div className={`${manageNotices?styles.hidde:""}`}>
-            <div className={styles.box} onMouseEnter={()=>handleControllUpdate(true)} onMouseLeave={()=>handleControllUpdate(false)}>
+            {/* <div className={styles.box} onMouseEnter={()=>handleControllUpdate(true)} onMouseLeave={()=>handleControllUpdate(false)}>
                 <div>
                     <IonIcon className={styles.clear_btn+' '+"bg1 pa6 borderR50 maR12"} icon={close} size="18px" onClick={handleClearNotices}></IonIcon>
                     <IonIcon className={styles.clear_btn+' '+"bg1 pa6 borderR50"} icon={arrowForward} size="18px" onClick={()=>handleHiddeNotices(!hiddeNotices)}></IonIcon>
@@ -70,7 +70,7 @@ const NoticesBox =({manageNotices}) => {
                 <div className="scrollbarBox scrollbarBox_hidden paV12 paL24 heightFull">
                     {notices.map((item,index)=><NoticesItem key={item.id} index={index} stopUpdateNotice={stopUpdateNotice} notices={notices} handleControllUpdate={handleControllUpdate} data={item}/>)}
                 </div>
-            </div>
+            </div> */}
         </div>
         
     )

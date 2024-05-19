@@ -2,13 +2,16 @@ import homeReducer from '../pages/home/store/reducer';
 import cardsReducer from '../pages/cards/store/reducer';
 import { combineReducers } from 'redux';
 const initialState = {
+  logged:{
+    status:false,
+    userInfo:undefined,
+  },
   notices: {
     hidde:true,
     length:0
   },
   noticeList:[],
   stopUpdateNotice:false,
-  userInfo:undefined,
   statusBoxData:{
     show:false,
     message:undefined,
@@ -55,6 +58,8 @@ let text=(data)=>{
 }
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'HANDLELOGIN':
+      return { ...state, logged:action.data};
     case 'UPDATENOTICENUM':
       return { ...state, notices:{...state.notices,length:action.data}};
     case 'HIDDENOTICES':
