@@ -1,5 +1,4 @@
-import { generateSalt, createHash } from "./tools";
-
+import CryptoJS from 'crypto-js';
 // 定义一个回调函数来处理 XMLHttpRequest 的状态变化
 const API_URL = "http://localhost:3000/api/";
 export class HttpRequire {
@@ -77,7 +76,7 @@ export const login = async (params) => {
   // 示例用法（需要处理Promise）
   const password = params.password;
   // const salt = await generateSalt();
-  const hashedPassword = await createHash(password);
+  const hashedPassword = CryptoJS.SHA256(password).toString();
   // console.log("Salt:", salt);
   console.log("Hashed Password:", hashedPassword);
   return http.post(API_URL + "login", {...params, password: hashedPassword},{"Content-Type": "application/json"})
@@ -86,7 +85,7 @@ export const register = async (params) => {
   // 示例用法（需要处理Promise）
   const password = params.password;
   // const salt = await generateSalt();
-  const hashedPassword = await createHash(password);
+  const hashedPassword = CryptoJS.SHA256(password).toString();
   // console.log("Salt:", salt);
   console.log("register Hashed Password:", hashedPassword);
   return http.post(API_URL + "register", {...params, password: hashedPassword},{"Content-Type": "application/json"})

@@ -50,7 +50,7 @@ function Login({ logged, handleLogin, showStatusBox }) {
           username: formData.username.value,
           password: formData.password.value,
         }).then((res) => {
-          if (res.code === 200) {
+          if (res?.code === 200) {
             handleLogin({
               status: true,
               userInfo: res.userInfo,
@@ -62,7 +62,7 @@ function Login({ logged, handleLogin, showStatusBox }) {
             showStatusBox({
               show: true,
               // message:"网络异常，请稍后再试",
-              message: res.error,
+              message: res?.error,
               status: "warning",
             });
           }
@@ -73,13 +73,13 @@ function Login({ logged, handleLogin, showStatusBox }) {
           email: formData.email.value,
           password: formData.password.value,
         }).then((res) => {
-          if (res.code === 200) {
+          if (res?.code === 200) {
             setType(true);
           } else {
             showStatusBox({
               show: true,
               // message:"网络异常，请稍后再试",
-              message: res.error,
+              message: res?.error,
               status: "warning",
             });
           }

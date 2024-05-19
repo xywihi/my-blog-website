@@ -57,7 +57,7 @@ const App = ({
   useEffect(() => {
     // console.log("app_page");
     newLocalStorage.get("token") && handleLogin({status:true,token:newLocalStorage.get("token")})
-    const token = newLocalStorage.get("token")
+    
     getLocation();
     // 路由跳转
     // console.log(window.location.pathname);
@@ -222,7 +222,7 @@ const App = ({
   const IsLogin = ()=>{
     const navigate= useNavigate();
     useEffect(() => {
-      if (!logged.token) {
+      if (!newLocalStorage.get("token")) {
         navigate('/login')
       }
     },[])

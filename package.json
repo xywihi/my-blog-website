@@ -42,7 +42,7 @@
     "@vercel/speed-insights": "^1.0.10",
     "ace-builds": "^1.33.2",
     "ckeditor5-custom-build": "file:C:/Users/anln/Downloads/ckeditor5-custom-build",
-    "crypto-js": "^4.1.1",
+    "crypto-js": "^4.2.0",
     "echarts": "^5.4.3",
     "fs": "^0.0.1-security",
     "less": "^4.2.0",
