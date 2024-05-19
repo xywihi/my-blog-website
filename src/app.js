@@ -138,15 +138,16 @@ const App = ({
     setShowNotice((old) => {
       // handleOpenNoticeBox()
       const notice = document.querySelector(".notice_out_box");
-      if (Array.from(notice.classList).includes("notice_out_box_open")) {
-        notice.classList.toggle("notice_out_box_open");
+      if(notice){
+        if (Array.from(notice.classList).includes("notice_out_box_open")) {
+          notice.classList.toggle("notice_out_box_open");
+        }
       }
       return !old;
     });
     // //设置nav高度
     // 获取nav计算后的高度
-    const navHeight = nav.offsetHeight;
-    nav.classList.toggle("mobile_Nav_out_box_open");
+    nav && nav.classList.toggle("mobile_Nav_out_box_open");
   };
 
   const handleOpenNoticeBox = (e) => {
@@ -155,12 +156,15 @@ const App = ({
     // 获取html
 
     const notice = document.querySelector(".notice_out_box");
-    notice.classList.toggle("notice_out_box_open");
+    notice && notice.classList.toggle("notice_out_box_open");
     setShowNotice((old) => {
       const nav = document.querySelector(".mobile_Nav_out_box");
-      if (Array.from(nav.classList).includes("mobile_Nav_out_box_open")) {
-        nav.classList.toggle("mobile_Nav_out_box_open");
+      if(nav){
+        if (Array.from(nav.classList).includes("mobile_Nav_out_box_open")) {
+          nav.classList.toggle("mobile_Nav_out_box_open");
+        }
       }
+      
       return !old;
     });
     handleHiddeNotices([
