@@ -114,8 +114,7 @@ const App = ({
           resolve(position.coords);
         },
         (error) => {
-    debugger
-
+          console.log(error);
         }
       );
     });
