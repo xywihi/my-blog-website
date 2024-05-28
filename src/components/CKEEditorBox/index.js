@@ -1,14 +1,14 @@
 import React from "react";
 import styles from "./index.module.less";
 import {CKEditor} from "@ckeditor/ckeditor5-react";
-// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import CustomEditor from 'ckeditor5-custom-build/build/ckeditor';  // 引入自定义的CKEditor5
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import CustomEditor from 'ckeditor5-custom-build/build/ckeditor';  // 引入自定义的CKEditor5
 import MyUploadAdapter from "./MyUploadAdapter";
 const CKEEditorBox = ({ getData,data }) => {
   return (
     <div className={`${styles.textareaBox}`}>
         <CKEditor
-          editor={CustomEditor}
+          editor={ClassicEditor}
           placeholder="请输入内容"
           data={data}
           onInit={(editor) => {

@@ -1,6 +1,6 @@
 import React, { useEffect,useMemo } from "react";
 import styles from "./index.module.less";
-import SmoothedLine from "@/components/echarts/SmoothedLine";
+// import SmoothedLine from "@/components/echarts/SmoothedLine";
 import LineBox from './components/LineBox'
 export default function RealTimeBox({ data }) {
   const total = useMemo(()=>data.lineData.reduce((pre, cur) => pre + cur, 0), [data])
