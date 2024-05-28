@@ -1,0 +1,25 @@
+.heathyBox{
+    position: relative;
+    .grassBox{
+        position: absolute;
+        top: calc(50% - 80px);
+        left: calc(50% - 50px);
+        &::after{
+            content: attr(data-text);
+            position: absolute;
+            width: max-content;
+            top: 18px;
+            left: 36px;
+            z-index: 1;
+        }
+        
+    }
+    .heathyValue{
+        position: absolute;
+        top: calc(50% - 20px);
+        left:0;
+        z-index: 1;
+        font-size: 2rem;
+        text-align: center;
+    }
+}

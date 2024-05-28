@@ -44,9 +44,14 @@ main{
 }
 
 aside{
-    width:15vw;
-    min-width: 48px;
+    width: 46px;
+    transition: width .4s ease-in-out, visibility 0.3s ease-in-out 0.4s;
     height: calc(100vh - 110px);
+    overflow: hidden;
+    span{
+        // visibility: hidden;
+        transition: width .4s ease-in-out, visibility 0.3s ease-in-out 4s;
+    }
 }
 .mobile_Nav_out_box,.mobile_Nav_out_box_open{
     

@@ -1,9 +1,9 @@
 import React,{useEffect} from "react";
 import styles from "./index.module.less";
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link, useParams } from "react-router-dom";
 const NewsNavBox = ({ navList}) => {
   const route = location.hash.split("=")[1];
+  const {type} = useParams();
   useEffect(() => {
     // 获取路由参数
     console.log("route", route);
@@ -15,9 +15,9 @@ const NewsNavBox = ({ navList}) => {
     <ul className={`${styles.navBox} bg1 borderR12 pa24`}>
       {navList.map((item, index) => {
         return (
-          <li key={item.value} className={`maV12 ${route ===item.value  && styles.activeItem}`}>
+          <li key={item.value} className={`maV12 ${type ===item.value  && styles.activeItem}`}>
             <Link
-              to={'?type='+item.value}
+              to={'/news/person/'+item.value}
               className="flexS"
             >
               <span className="maL12">{item.name}</span>

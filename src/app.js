@@ -1,8 +1,15 @@
 import React, { Suspense, useMemo, useEffect, useState } from "react";
-import { HashRouter, Navigate, Route, Routes,useNavigate } from "react-router-dom";
+import {
+  HashRouter,
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import { LocalStorage, scrollToTop, speak } from "./util";
 import RouteGuard from "./util/route_guard";
 import HeaderNav from "./components/HeaderNav";
+import MobileNav from "./components/MobileNav";
 import "./global.css";
 import "./style.less";
 
@@ -35,6 +42,8 @@ const Home = React.lazy(() => import("./pages/home"));
 const News = React.lazy(() => import("./pages/news?:id"));
 const User = React.lazy(() => import("./pages/user"));
 const Works = React.lazy(() => import("./pages/works"));
+const Data = React.lazy(() => import("./pages/data"));
+const Authority = React.lazy(() => import("./pages/authority"));
 const Cards = React.lazy(() => import("./pages/cards"));
 const EditNew = React.lazy(() =>
   import("./pages/news/pages/edit/CreateNewBox")
@@ -55,9 +64,6 @@ const App = ({
   const [theme, setTheme] = useState("light");
   const [showNotice, setShowNotice] = useState(false);
   useEffect(() => {
-    // console.log("app_page");
-    newLocalStorage.get("token") && handleLogin({status:true,token:newLocalStorage.get("token")})
-    
     getLocation();
     // 路由跳转
     // console.log(window.location.pathname);
@@ -102,16 +108,21 @@ const App = ({
   // 获取当前位置信息
   const getLocation = async () => {
     const location = await new Promise((resolve, reject) => {
+
       navigator.geolocation.getCurrentPosition(
         (position) => {
           resolve(position.coords);
         },
-        (error) => {}
+        (error) => {
+    debugger
+
+        }
       );
     });
+
     const http = new HttpRequire("weather");
     // const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=${apiKey}&lang=zh_cn`;
-    const apiUrl = `http://localhost:3000/api/weather`;
+    const apiUrl = `weather`;
     try {
       const weather = await http.get(apiUrl, {
         lat: location.latitude,
@@ -138,7 +149,7 @@ const App = ({
     setShowNotice((old) => {
       // handleOpenNoticeBox()
       const notice = document.querySelector(".notice_out_box");
-      if(notice){
+      if (notice) {
         if (Array.from(notice.classList).includes("notice_out_box_open")) {
           notice.classList.toggle("notice_out_box_open");
         }
@@ -159,12 +170,12 @@ const App = ({
     notice && notice.classList.toggle("notice_out_box_open");
     setShowNotice((old) => {
       const nav = document.querySelector(".mobile_Nav_out_box");
-      if(nav){
+      if (nav) {
         if (Array.from(nav.classList).includes("mobile_Nav_out_box_open")) {
           nav.classList.toggle("mobile_Nav_out_box_open");
         }
       }
-      
+
       return !old;
     });
     handleHiddeNotices([
@@ -219,31 +230,20 @@ const App = ({
     // }
   };
 
-  const IsLogin = ()=>{
-    const navigate= useNavigate();
-    useEffect(() => {
-      if (!newLocalStorage.get("token")) {
-        navigate('/login')
-      }
-    },[])
-    return logged.token ? <div className="flexCenter">Loading...</div> : null;
-  }
-  const mainContent = useMemo(
-    () => (
-      <main className="flexBS bg2_blue">
-        {logged.token && (
-          <aside className="maR24 paH12 paV24 bg1 borderR12">
-            <HeaderNav
-              changeTheme={changeTheme}
-              handleLogin={handleLogin}
-              direction="vertical"
-            />
-          </aside>
-        )}
+  const mainContent = useMemo(() => {
+    return (
+      <main className="flexBS bg3">
+        <aside className="maR24 paV24 bg1 borderR12">
+          <HeaderNav
+            changeTheme={changeTheme}
+            handleLogin={handleLogin}
+            direction="vertical"
+          />
+        </aside>
 
-        <div className="contentBox flexFull scrollbarBox scrollbarBox_hidden relative">
+        <div className="contentBox flexFull scrollbarBox scrollbarBox_hidden relative" id="contentBoxId">
           <Notices manageNotices={notices.hidde} />
-          <Suspense fallback={<IsLogin/>}>
+          <Suspense fallback={<div className="flexCenter">Loading...</div>}>
             <Routes>
               <Route
                 exact
@@ -255,7 +255,7 @@ const App = ({
                 Component={() => RouteGuard(<News key="news" />)}
               ></Route>
               <Route
-                path="/news/edit"
+                path="/news/edit/:id"
                 Component={() => <EditNew key="editNew" />}
               ></Route>
               <Route path="/user" Component={() => <User key="user" />}></Route>
@@ -268,6 +268,14 @@ const App = ({
                 Component={() => <Cards key="cards" />}
               ></Route>
               <Route
+                path="/data/*"
+                Component={() => RouteGuard(<Data key="data" />)}
+              ></Route>
+              <Route
+                path="/authority"
+                Component={() => <Authority key="authority" />}
+              ></Route>
+              <Route
                 path="/login"
                 Component={() => <Login key="login" />}
               ></Route>
@@ -276,9 +284,8 @@ const App = ({
           </Suspense>
         </div>
       </main>
-    ),
-    [logged]
-  );
+    );
+  },[])
   const handleScrollToTop = (e) => {
     scrollToTop(0);
   };
@@ -286,7 +293,7 @@ const App = ({
     <HashRouter basename="/">
       <ErrorBoundary>
         <div className={theme}>
-          <div className="bg2_blue project textColor appOutBox">
+          <div className="bg3 project textColor appOutBox">
             <header className="flexB pa16 bg1">
               <div
                 className="logo textColorWhite flexS"
@@ -309,8 +316,7 @@ const App = ({
                 className="widthFull heightFull"
                 onClick={handleScrollToTop}
               ></div>
-              {logged.status && (
-                <div className="flexB">
+              <div className="flexB">
                   {/* <HeaderNav  theme={theme}/> */}
                   <div className={`flexB relative maR24`}>
                     <SmallMusicPlayer />
@@ -326,17 +332,17 @@ const App = ({
                     ></IonIcon>
                   </div>
                 </div>
-              )}
             </header>
-            {logged.status && (
-              <>
+            <>
                 {/* 移动端导航栏 */}
                 <div className="mobile_Nav_out_box">
                   {showNotice && <MaskElement pointerEvents={true} />}
                   <div className="mobile_Nav_box bg1">
-                    <HeaderNav
+                    <MobileNav
                       changeTheme={changeTheme}
-                      handleLogin={handleLogin}
+                      handleShowNavigation={()=>{
+                        setShowNotice(false)
+                      }}
                       direction="vertical"
                     />
                   </div>
@@ -384,7 +390,6 @@ const App = ({
                   </div>
                 </div>
               </>
-            )}
             {mainContent}
           </div>
         </div>

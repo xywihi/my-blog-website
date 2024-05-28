@@ -3,14 +3,16 @@ input{
     background: none;
     
 }
+.searchBox{
+    position: sticky;
+    top: 0;
+}
 .mobile_search{
     // display: none;
     // position: relative;
     display: grid;
     grid-template-columns: 1fr auto;
-    position: fixed;
-    top: 90px;
-    width: calc(100% - 352px);
+    width: 100%;
     border-radius: 6px;
     z-index: 50;
     .input{
@@ -54,7 +56,7 @@ input{
     grid-template-columns: 65% auto;
     grid-template-rows: 100%;
     column-gap: 24px;
-    
+    padding-top: 24px;
     .hotestNews_box{
         display: grid;
         grid-template-columns: auto 300px;

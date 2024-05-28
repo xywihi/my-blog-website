@@ -76,7 +76,7 @@ module.exports = {
         // },
         static: path.join(__dirname, 'public'),
         open:true, // 开启服务器时，自动打开页面
-        port: 3008,
+        // port: 80,
             
     },
     mode: "development",

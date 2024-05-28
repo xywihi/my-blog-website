@@ -1,3 +1,15 @@
+
+.newsBox{
+    .bottomBox>div{
+        visibility: hidden;
+    }
+    &:hover{
+        .bottomBox>div{
+            visibility: visible;
+        }
+    }
+   
+}
 .dateBox {
     position: relative;
 
@@ -19,6 +31,12 @@
 .textContentBox{
     letter-spacing: 4px;
     font-size: 14px;
+    // 子元素设置float，父级元素高度失效的解决方法
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+      }
 }
 .showDeatilBtn{
     display:block
@@ -49,6 +67,8 @@
         margin: 0 6px;
     }
 }
+
+
 
 @media screen and (max-width: 640px) {
     .person_news_box {

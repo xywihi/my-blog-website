@@ -21,9 +21,9 @@ export default function Banner() {
     }, 10000);
     const require = new HttpRequire();
     require
-      .get("http://127.0.0.1:3000/api/bing_img")
+      .get("bing_img")
       .then((res) => {
-        setWallImage(res.images);
+        setWallImage(res.Images);
         wallImage &&
           setCurrentImageIndex(
             Math.floor(Math.random() * (wallImage.length - 1))

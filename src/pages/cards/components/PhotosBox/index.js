@@ -26,13 +26,13 @@ export default function PhotosBox({
   useEffect(() => {
     const require = new HttpRequire();
     require
-      .get("http://127.0.0.1:3000/api/bing_img")
+      .get("bing_img")
       .then((res) => {
-        // setWallImage(res.images);
-        wallImage = res.images;
-        setNewPhotos([res.images[moveNum], res.images[moveNum + 1]]);
+        // setWallImage(res.Images);
+        wallImage = res.Images;
+        setNewPhotos([res.Images[moveNum], res.Images[moveNum + 1]]);
         // debugger
-        // boxStyles() && autoMovePhotos(currentPhotoIndex,moveNum,res.images);
+        // boxStyles() && autoMovePhotos(currentPhotoIndex,moveNum,res.Images);
         // wallImage.length>0 &&
         //   setCurrentImageIndex(
         //     Math.floor(Math.random() * (wallImage.length - 1))

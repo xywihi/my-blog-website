@@ -1,5 +1,6 @@
 import homeReducer from '../pages/home/store/reducer';
 import cardsReducer from '../pages/cards/store/reducer';
+import newsReducer from '../pages/news/store/reducer';
 import { combineReducers } from 'redux';
 const initialState = {
   logged:{
@@ -85,6 +86,7 @@ const reducers = combineReducers({
   reducer,
   home: homeReducer,
   cards: cardsReducer,
+  news: newsReducer,
 });
 
 export default reducers;

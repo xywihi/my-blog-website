@@ -1,27 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.less";
+import "./index.less";
 import Image from "@/components/Image";
+import { create, trash } from "ionicons/icons";
+import { IonIcon } from "@ionic/react";
+import { deleteNewsItem } from "@/http/require";
+import { useNavigate } from "react-router-dom";
+import { showStatusBox } from "@/store/actions";
+function NewsItemBox({ newItem, newIndex, arrLength, handleDeleteSelf }) {
+  const navigate = useNavigate();
+  useEffect(() => {
+    console.log("newItem", newItem);
+  });
 
-function NewsItemBox({ newItem, newIndex, arrLength }) {
-  const [showDeatil, setShowDeatil] = useState(false);
-  const handleContentText = (content) => {
-    return [content[0], content.slice(1).split("\n")];
+  const handleDeleteItem = () => {
+    deleteNewsItem({ id: newItem.ID }).then((res) => {
+      debugger;
+      if (res.code === 200) {
+        //删除成功
+        showStatusBox({
+          show: true,
+          message: "文章删除成功",
+          status: "success",
+        });
+        //删除数组中的元素
+        handleDeleteSelf(newItem.ID);
+      }
+    });
   };
   return (
-    <>
+    <div className={styles.newsBox}>
       <div className={`flexB maB24 ${styles.titleBox}`}>
-        <h1 className="fontB">{newItem.title}</h1>
+        <h1 className="fontB">{newItem.Title}</h1>
         <p className={styles.dateBox}>
           <span className="font16 fontB colorGray">
-            {new Date(newItem.date).getMonth() + 1}.{" "}
+            {new Date(newItem.CreatedAt).getMonth() + 1}.{" "}
           </span>
           <span className="font36 fontB">
-            {new Date(newItem.date).getDate()}
+            {new Date(newItem.CreatedAt).getDate().toString()}
           </span>
         </p>
       </div>
-      <p className={styles.textContentBox}>
-        <span className="fontB font24">
+      <p
+        className={styles.textContentBox}
+        dangerouslySetInnerHTML={{ __html: newItem.Content }}
+      >
+        {/* {newItem.Content} */}
+        {/* <span className="fontB font24">
           {handleContentText(newItem.content)[0]}
         </span>
         {handleContentText(newItem.content)[1]
@@ -55,29 +80,52 @@ function NewsItemBox({ newItem, newIndex, arrLength }) {
           >
             {!showDeatil ? "查看详细内容" : "收起详细内容"}
           </span>
-        )}
+        )} */}
       </p>
-      <div className={`maV24 flexB ${styles.imgsBox}`}>
-        {newItem.imgs.map((it, i) => (
-          <div className="widthFull" key={i}>
-            <Image src={it} width="100%" height="320px" borderR="12px" />
-          </div>
-        ))}
-      </div>
+      {newItem.imgs && (
+        <div className={`maV24 flexB ${styles.imgsBox}`}>
+          {newItem.imgs.map((it, i) => (
+            <div className="widthFull" key={i}>
+              <Image src={it} width="100%" height="320px" borderR="12px" />
+            </div>
+          ))}
+        </div>
+      )}
       {/* <div className={styles.aceEditorBox}>
         <AceEditorBox setCode={setCode} height="200px"/>
         </div> */}
-      <p className="flexB gray fontSmall">
-        <span>字数：{newItem.content.length}</span>
-      </p>
-      {newIndex !== arrLength-1 && (
+      <br />
+      <div className={`flexB gray maV12 fontSmall ${styles.bottomBox}`}>
+        <span>
+          作者：
+          {newItem.Author?.split("@")[0].slice(0, 1).toUpperCase() +
+            newItem.Author?.split("@")[0].slice(1) || "未知"}
+        </span>
+        <div className="flexB">
+          <div
+            className={`${styles.search_btn} font24 colorGray maR12 icon_hover cursor action`}
+            data-content="编辑内容"
+            onClick={() => navigate(`/news/edit/${newItem.ID}`)}
+          >
+            <IonIcon icon={create} size="36px"></IonIcon>
+          </div>
+          <div
+            className={`${styles.search_btn} font24 colorGray icon_hover cursor action`}
+            data-content="删除此篇文章"
+            onClick={handleDeleteItem}
+          >
+            <IonIcon icon={trash} size="36px"></IonIcon>
+          </div>
+        </div>
+      </div>
+      {newIndex !== arrLength - 1 && (
         <div className={`${styles.deviseBox} flexB`}>
           <div className={`${styles.deviseLine} bg4`}></div>
           <div className={`${styles.devisePoint} bg_gray`}></div>
           <div className={`${styles.deviseLine} bg4`}></div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

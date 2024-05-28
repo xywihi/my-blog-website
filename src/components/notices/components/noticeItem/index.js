@@ -23,7 +23,7 @@ const NoticesItem =({data,index,notices,handleControllUpdate,stopUpdateNotice}) 
                 !data.unmont && 
                 <>
                     <div>
-                        <p className="maB6 fontSmall flexB textColorGgray2">
+                        <p className="maB6 fontSmall flexB colorGray">
                            <span> {data.type}</span>
                            <span> {data.time}</span>
                         </p>

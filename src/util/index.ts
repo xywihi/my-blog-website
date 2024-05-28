@@ -13,6 +13,7 @@ import {
     getTimeText2
 } from './tools';
 import {ListenScroll,scrollToTop,addNum} from './domFuncs';
+import {exportToExcel} from "./downFile"
 // module.exports = {LocalStorage,RouteGuard,debounce,handleTime}
 // export default {LocalStorage,RouteGuard,debounce,handleTime}
 export {
@@ -30,5 +31,6 @@ export {
     ListenScroll,
     speak,
     handleCopyText,
-    getTimeText2
+    getTimeText2,
+    exportToExcel
 }

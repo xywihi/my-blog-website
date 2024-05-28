@@ -9,6 +9,7 @@ function debounce( fn:Function,delay:number) {
         if(timer){
             clearTimeout(timer);
             // return;
+            console.log(timer)
         }
         //重新设置新的延时器
         timer = setTimeout(() => {
@@ -42,7 +43,6 @@ const handleTimeToNumber = (timeStr:string)=>{
     let seconds = Number(newTime[0])*60+Number(newTime[1]);
     return seconds;
 }
-
 
 
 // 函数用于进入全屏

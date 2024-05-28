@@ -62,6 +62,7 @@ input{
     margin: 0;
     border: none;
     outline: none;
+    background: none;
     /* 其他样式 */
 }
 
@@ -141,7 +142,9 @@ textarea {
     justify-content: space-between;
     align-items: start;
 }
-
+.column{
+    flex-direction: column;
+}
 .heightFull {
     height: 100%;
 }
@@ -221,10 +224,6 @@ button {
 
 .row {
     flex-direction: row;
-}
-
-.column {
-    flex-direction: column;
 }
 
 .flexFull {
@@ -436,6 +435,10 @@ button {
     padding-bottom: 0;
 }
 
+.paV3 {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
 .pa6 {
     padding: 6px;
 }
@@ -471,6 +474,13 @@ button {
     padding: 8px;
 }
 
+.pa10 {
+    padding: 10px;
+}
+.paV10 {
+    padding-top: 10px;
+    padding-left: 10px;
+}
 .pa12 {
     padding: 12px;
 }
@@ -498,6 +508,13 @@ button {
 .paR16 {
     padding-right: 16px;
 }
+.paT16 {
+    padding-top: 16px;
+}
+
+.paB16 {
+    padding-bottom: 16px;
+}
 
 .pa24 {
     padding: 24px;
@@ -519,6 +536,13 @@ button {
 
 .paR24 {
     padding-right: 24px;
+}
+.paT24 {
+    padding-top: 24px;
+}
+
+.paB24 {
+    padding-bottom: 24px;
 }
 
 .paV12 {
@@ -581,6 +605,9 @@ button {
     font-size: 24px;
 }
 
+.font32 {
+    font-size: 32px;
+}
 .font36 {
     font-size: 36px;
 }
@@ -682,6 +709,9 @@ button {
 .textRight {
     text-align: right;
 }
+.lineFull {
+    line-height: 100%;
+}
 
 /* 当需要暂停动画时，添加一个类并设置animation-play-state为paused */
 .paused {
@@ -718,6 +748,47 @@ button {
     text-overflow: ellipsis;
 }
 
+
+
+.action{
+    position: relative;
+    
+    &:hover{
+        &::after{
+            visibility: visible;
+        }
+    }
+    &::after{
+        visibility: hidden;
+        content: attr(data-content);
+        position: absolute;
+        width: max-content;
+        height: auto;
+        left: calc(-100% - 32px);
+        top: -100%;
+        background: rgb(243, 243, 243);
+        border-radius: 12px;
+        color: #333;
+        z-index: 1;
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
+
+
+
+
+
+
+
+/* 一省略 */
+.ellipsis-line {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 /* 二行省略 */
 .ellipsis-twoLine {
     display: -webkit-box;
@@ -741,6 +812,12 @@ html,
     /* IE 10+ */
     overflow-x: hidden;
     overflow-y: auto;
+    scroll-behavior: smooth;
+}
+.scrollbarBoxX {
+    /* IE 10+ */
+    overflow-x: auto;
+    overflow-y: hidden;
     scroll-behavior: smooth;
 }
 
@@ -777,4 +854,29 @@ html,
 .scrollbarBox_x {
     overflow-x: auto;
     overflow-y: hidden;
+}
+
+
+/* 移除表格的边框和间距 */
+table {
+    border-collapse: collapse; /* 合并相邻的边框 */
+    border-spacing: 0; /* 移除单元格之间的空白 */
+    width: 100%; /* 表格宽度设为100% */
+    margin: 0; /* 移除外边距 */
+    padding: 0; /* 移除内边距 */
+}
+
+/* 移除表头和单元格的默认样式 */
+table th,
+table td {
+    border: none; /* 移除边框 */
+    padding: 8px; /* 你可以根据需要设置内边距 */
+    text-align: left; /* 文本左对齐 */
+    vertical-align: top; /* 垂直顶部对齐 */
+    background-color: transparent; /* 背景色透明 */
+}
+
+/* 如果需要，你还可以为表头添加样式 */
+table th {
+    font-weight: bold; /* 粗体 */
 }

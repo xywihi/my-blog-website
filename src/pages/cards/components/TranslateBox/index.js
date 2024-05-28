@@ -45,7 +45,7 @@ function TranslateBox({showStatusBox}) {
             </label>
           </div>
           <div
-            className="maL16 paV6 paH12 borderR12 bg2_blue icon_hover cursor flexB"
+            className="maL16 paV6 paH12 borderR12 bg3 icon_hover cursor flexB"
             onClick={handleTranslate}
           >
             <IonIcon icon={language} size="36px"></IonIcon>

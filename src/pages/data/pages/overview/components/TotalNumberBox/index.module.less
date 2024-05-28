@@ -1,0 +1,21 @@
+.totalNumberBox{
+    display: grid;
+    grid-template-rows: auto 32px;
+    .titleBox{
+        &>p:first-child{
+            font-size: 1.7rem;
+        }
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .totalNumberBox{
+        display: flex;
+        flex-direction: column;
+        .titleBox{
+            &>p:first-child{
+                font-size: 1.7rem;
+            }
+        }
+    }
+}

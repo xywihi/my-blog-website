@@ -7,7 +7,7 @@ import ExamCountdown from "./components/examCountdown"
 import TimeWeather from "./components/timeWeather"
 import MusicPlayer from "../../components/musicPlayer"
 import Translate from "../../components/translate"
-import SmoothedLine from "../../components/echarts/smoothedLine"
+// import SmoothedLine from "../../components/echarts/smoothedLine"
 import {connect} from "react-redux"
 import ChatAi from "../../components/chatAi"
 import {HttpRequire} from "../../http/require";
@@ -49,8 +49,8 @@ const Home = ({showStatusBox,weatherInfo}) => {
             setCurrentImageIndex(Math.floor(Math.random()*7))
         },10000)
         const require = new HttpRequire();
-        require.get('http://127.0.0.1:3000/api/bing_img').then(res=>{
-            setWallImage(res.images);
+        require.get('bing_img').then(res=>{
+            setWallImage(res.Images);
             wallImage && setCurrentImageIndex(Math.floor(Math.random()*(wallImage.length-1)))
         }).catch(err=>{
             console.log(err)
@@ -69,7 +69,7 @@ const Home = ({showStatusBox,weatherInfo}) => {
     }
     console.log('home_page')
     return (
-        <div className="bg2_blue">
+        <div className="bg3">
             <div id="waterfall-container">
                     <div className="waterfall-item borderR12 item1 bg1 cardBox" >
                         {
@@ -119,7 +119,7 @@ const Home = ({showStatusBox,weatherInfo}) => {
                             </div>
                         </div>
                         <div className="screen_mid_inner2">
-                        <TimeWeather/>
+                        <TimeWeather  weatherInfo={weatherInfo}/>
                         </div>
                     </div>
                     <div className="waterfall-item borderR12 item2" >
@@ -183,7 +183,7 @@ const Home = ({showStatusBox,weatherInfo}) => {
                             </div>
                         </div>
                     </div>
-                    <div className="waterfall-item borderR12 item4 bg1 pa24 cardBox" >
+                    {/* <div className="waterfall-item borderR12 item4 bg1 pa24 cardBox" >
                         <h3 className="title maB12">
                             最新数据走势
                         </h3>
@@ -191,7 +191,7 @@ const Home = ({showStatusBox,weatherInfo}) => {
                             <SmoothedLine />
                         </div>
                        
-                    </div>
+                    </div> */}
                     <div className="waterfall-item borderR12 item5 bg1 pa24 cardBox maR0" >
                         <div className="flexB maB24">
                             <h3 className="title">
@@ -223,7 +223,7 @@ const Home = ({showStatusBox,weatherInfo}) => {
                                     中文
                                 </label>
                                 </div>
-                                <div className="maL16 paV6 paH12 borderR12 bg2_blue icon_hover cursor flexB" onClick={handleTranslate}>
+                                <div className="maL16 paV6 paH12 borderR12 bg3 icon_hover cursor flexB" onClick={handleTranslate}>
                                     <IonIcon icon={language} size="36px"></IonIcon>
                                     <span className="maL12">翻译</span>
                                 </div>

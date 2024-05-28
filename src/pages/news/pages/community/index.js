@@ -243,7 +243,7 @@ function Community() {
         screenWidth <= 640 && (selectItem ? "paT48" : "paT64")
       }`}
     >
-      <div>
+      <div className="searchBox">
         <div
           className={`flexB mobile_search bg4 ${
             selectItem ? "paV4 paH12" : "pa12"
@@ -327,7 +327,7 @@ function Community() {
                         <div className="widthFull">
                           <div className="flexB">
                             <div>
-                              <p className="name textColorGgray2">
+                              <p className="name colorGray">
                                 {item.user}
                               </p>
                               <p className="content flexB">{item.content}</p>

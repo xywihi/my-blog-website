@@ -12,7 +12,7 @@ function News(){
     return (
         <Routes>
             <Route  path="community" Component={()=><Community key="community"/>}></Route>
-            <Route  path="person" Component={()=><Person key="person"/>}></Route>
+            <Route  path="/person/:type" Component={()=><Person key="person"/>}></Route>
         </Routes>
     )
 }

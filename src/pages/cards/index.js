@@ -9,7 +9,8 @@ import { computeOrder, computeCardsOrder } from "./tool";
 import CardCreator from "./components/CardCreator";
 import LayoutBtnBox from "./components/LayoutBtnBox";
 // const LayoutBtnBox = React.lazy(() => import("./components/LayoutBtnBox"));
-const windowW = window.innerWidth - 352;
+// const windowW = window.innerWidth - 352;
+const windowW = window.innerWidth - 46;
 const areaHNum = windowW > 1400 ? 20 : windowW > 640 ? 10 : 1;
 const areaVNum = windowW > 1400 ? 20 : windowW > 640 ? 40 : 1;
 
@@ -561,9 +562,9 @@ const Cards = ({ showStatusBox,layoutNum }) => {
   };
 
   return (
-    windowW + 352 >1400 ? (
+    windowW + 46 >1400 ? (
     <div ref={childTranslate} className={styles.topAreaNox} style={{ position: "relative" }}>
-      <div className="bg2_blue flexS flexWrap" id="cardsArea">
+      <div className="bg3 flexS flexWrap" id="cardsArea">
         {gridsArr.map((item, index) => (
           <div
             key={index + 1}

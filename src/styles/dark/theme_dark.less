@@ -35,6 +35,9 @@
     .colorOrange {
         color: rgb(126, 79, 34);
     }
+    .colorYellow2 {
+        color: @b_yellow2;
+    }
     
     .colorPurple{
         color:@b_purple
@@ -97,6 +100,18 @@
     .bg_purple{
         background-color: @b_purple;
     }
+    .bg_green{
+        background-color: @b_green;
+    }
+    .bg_yellow{
+        background-color: @b_yellow;
+    }
+    .bg_yellow_lightest{
+        background-color: @b_yellow-lightest;
+    }
+    .bg_greenLighter{
+        background-color: @b_green-lighter;
+    }
     table {
         background-color: #36383b;
     }
@@ -127,7 +142,9 @@
             color: #1a5050
         }
     }
-
+    .active{
+        color:#1a5050
+    }
     .cardBox {
         .title {
             font-weight: bold;
@@ -207,7 +224,7 @@
     }
 
     .activeNavOld {
-        background-color: #1c2625;
+        // background-color: #1c2625;
         transform: translateX(12px);
         transition: all 0.5s ease-out;
         width: calc(100% - 12px);
@@ -226,12 +243,13 @@
         }
     }
 
-    .activeNavOldNoB {
-        background-color: #1c2625;
-        transform: translateX(12px);
-        transition: all 0.5s ease-out;
-        width: calc(100% - 12px);
-        padding-left: 24px;
+    .activeNavOldNoB{
+        &>div{
+            background-color: rgb(243, 243, 243);
+            padding: 12px 16px;
+            border-radius: 6px;
+            line-height: 100%;
+        }
     }
 
     // .activeNav{

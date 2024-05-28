@@ -32,13 +32,13 @@ const Translate =({type,showStatusBox}, ref) => {
         // 将散列值转换为16进制字符串
         const md5HashHex = md5Hash.toString(CryptoJS.enc.Hex);
         let api = 20230907001808710
-        let api_key = "Pw93lz2oNgd95rJzMOns"
+        let api_key = "kih47i5Rj0ODiq4o_zpA"
         let random = '5486985412'
         // console.log(md5HashHex);
 
         let MD5 = CryptoJS.MD5(api+str+random+api_key);
         let NEW_URL = URL + `?q=${encodeURIComponent(str)}&from=${type}&to=${type=='zh' ? 'en' : 'zh'}&appid=${api}&salt=${random}&sign=${MD5}`
-        require.post('http://localhost:3000/api/translate',{q:str,from:type,to:type=='zh' ? 'en' : 'zh',appid:api,salt:random,sign:MD5}).then(res=>{
+        require.post('translate',{q:str,from:type,to:type=='zh' ? 'en' : 'zh',appid:api,salt:random,sign:MD5}).then(res=>{
             console.log("trans",res)
             setLoading(false)
             if(res.error_code){

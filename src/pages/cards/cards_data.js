@@ -15,7 +15,7 @@ const ExamCountdown = React.lazy(() => import("./components/examCountdown"));
 const TimeWeather = React.lazy(() => import("./components/timeWeather"));
 const MusicPlayer = React.lazy(() => import("../../components/musicPlayer"));
 const TranslateBox = React.lazy(() => import("./components/TranslateBox"));
-const SmoothedLine = React.lazy(() => import("../../components/echarts/smoothedLine"));
+// const SmoothedLine = React.lazy(() => import("../../components/echarts/smoothedLine"));
 const FarmBox = React.lazy(() => import("./components/FarmBox"));
 
 const TurntableBox = React.lazy(() => import("./components/game/TurntableBox"));
@@ -33,7 +33,7 @@ const MemorandumBox = React.lazy(() => import("./components/MemorandumBox"));
 
 
 
-const windowW = window.innerWidth - 352;
+const windowW = window.innerWidth - 46;
 const areaHNum = windowW > 1400 ? 20 : windowW > 640 ? 10 : 1;
 const areaVNum = windowW > 1400 ? 20 : windowW > 640 ? 40 : 1;
 

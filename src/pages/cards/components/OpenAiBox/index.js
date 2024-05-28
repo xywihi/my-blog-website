@@ -77,13 +77,13 @@ function OpenAiBox({ weatherInfo, showStatusBox, plans }) {
 
   useEffect(() => {
     console.log("weatherInfo", weatherInfo);
-    if (weatherInfo.name) {
-      let answer = `今天${weatherInfo.name}的气温是${Math.floor(
-        weatherInfo.main.temp - 273.15
-      )}摄氏度，${weatherInfo.weather[0].description}，天气${
-        weatherInfo.main.temp > 27 + 273.15 ? "炎热" : "凉爽"
+    if (weatherInfo?.Name) {
+      let answer = `今天${weatherInfo.Name}的气温是${Math.floor(
+        weatherInfo.Main.temp - 273.15
+      )}摄氏度，${weatherInfo.Weather[0].description}，天气${
+        weatherInfo.Main.temp > 27 + 273.15 ? "炎热" : "凉爽"
       }，${
-        weatherInfo.main.temp > 30 + 273.15
+        weatherInfo.Main.temp > 30 + 273.15
           ? "可以在家学习打发时光。"
           : "你有什么出行计划吗？"
       }`;
@@ -300,7 +300,7 @@ function OpenAiBox({ weatherInfo, showStatusBox, plans }) {
                 )}
               </div>
               <ul className={styles.questionsBox}>
-                {weatherInfo.name && (
+                {weatherInfo?.Name && (
                   <li
                     className="fontSmall borderR12 border paH6"
                     onClick={() => handleSpeak({type:"weather"})}
@@ -308,7 +308,7 @@ function OpenAiBox({ weatherInfo, showStatusBox, plans }) {
                     今天天气如何？
                   </li>
                 )}
-                {weatherInfo.name && (
+                {weatherInfo?.Name && (
                   <li
                     className="fontSmall borderR12 border paH6 maT6"
                     onClick={() => handleSpeak({type:"plans",value:plans})}

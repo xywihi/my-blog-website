@@ -47,7 +47,7 @@ function Login({ logged, handleLogin, showStatusBox }) {
     switch (type) {
       case true:
         login({
-          username: formData.username.value,
+          email: formData.username.value,
           password: formData.password.value,
         }).then((res) => {
           if (res?.code === 200) {
@@ -56,8 +56,8 @@ function Login({ logged, handleLogin, showStatusBox }) {
               userInfo: res.userInfo,
               token: res.token,
             });
-            newLocalStorage.set("token", "Ber " + res.token);
-            navigate("/");
+            // navigate("/");
+            history.back()
           } else {
             showStatusBox({
               show: true,

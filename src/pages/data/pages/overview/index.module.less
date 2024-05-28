@@ -1,0 +1,177 @@
+.overviewBox {
+    display: grid;
+    // grid-template-rows: auto 261px;
+    row-gap: 35px;
+
+    .totalNumbersBox {
+        display: grid;
+        grid-template-columns: repeat(4, calc(25% - 15px));
+        column-gap: 20px;
+        height: calc(100% - 34px);
+    }
+
+
+
+    .leftCenterBox {
+        display: grid;
+        grid-template-columns: repeat(2, calc(50% - 10px));
+        column-gap: 20px;
+
+        &>div>div {
+            height: calc(100% - 33px);
+        }
+    }
+
+    .leftCenterRightBox {
+        display: grid;
+        grid-template-columns: repeat(2, calc(50% - 10px));
+        column-gap: 20px;
+    }
+
+    .leftBottomBox {
+        display: grid;
+        grid-template-columns: auto 360px;
+        column-gap: 40px;
+       .leftBottomLeftBox{
+        display: grid;
+        grid-template-columns: repeat(2, calc(50% - 10px));
+        grid-template-rows: 324px;
+        column-gap: 20px;
+       }
+    }
+
+    .topBox {
+        display: grid;
+        grid-template-columns: auto 360px;
+        // grid-template-rows: calc(100vh - 45vh);
+        column-gap: 40px;
+        &>div:last-child>div {
+            height: calc(100% - 33px);
+        }
+    }
+    .topLeftBox{
+        display: grid;
+        grid-template-rows: auto auto;
+        row-gap: 35px;
+    }
+    .noticeBox{
+        width: 0;
+        overflow: hidden;
+        height: 0;
+        opacity: 0;
+        animation: showNotice 30s ease-in-out 30s infinite;
+    }
+}
+
+
+@keyframes showNotice {
+    0%{
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    100%{
+        width: max-content;
+        height: auto;
+        opacity: 1;
+    }
+}
+
+.showNotice{
+    animation: showNotice 1s;
+}
+
+.hideNotice{
+    animation: showNotice 1s reverse;
+}
+
+.noticeBox{
+    width: 0;
+    overflow: hidden;
+    height: 0;
+}
+
+.noticeBox:hover{
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 640px) {
+    .overviewBox {
+        display: flex;
+        flex-wrap: wrap;
+        
+        .totalNumbersBox >div{
+            margin-bottom: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            width: calc(100vw - 24px);
+        }
+    
+    
+    
+        .leftCenterBox {
+            display: flex;
+            flex-direction: column;
+            // margin-bottom: 24px;
+            &>div:first-child{
+                margin-bottom: 24px;
+            }
+            &>div>div {
+                height: calc(100% - 33px);
+            }
+        }
+    
+        .leftCenterRightBox {
+            display: flex;
+            flex-direction: column;
+            &>div{
+                margin-bottom: 24px;
+            }
+        }
+    
+        .leftBottomBox {
+            display: flex;
+            flex-direction: column;
+           .leftBottomLeftBox{
+            display: flex;
+            flex-direction: column;
+            &>div{
+                margin-bottom: 24px;
+            }
+           }
+        }
+    
+        .topBox {
+            display: flex;
+            flex-direction: column;
+            &>div:last-child>div {
+                height: calc(100% - 33px);
+            }
+        }
+        .topLeftBox{
+            display: flex;
+            flex-direction: column;
+            row-gap:12px;
+            &>div:first-child>div{
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: start;
+                justify-content: start;
+            }
+        }
+        .noticeBox{
+            width: 0;
+            overflow: hidden;
+            height: 0;
+            opacity: 0;
+            animation: showNotice 30s ease-in-out 30s infinite;
+        }
+    }
+    
+    
+}

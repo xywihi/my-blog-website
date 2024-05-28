@@ -188,7 +188,7 @@ function DetailNews({ selectItem, showStatusBox }) {
     }, 3000);
   };
   return (
-    <div className={`heightFull styles.detailNewsOutBox`}>
+    <div className={`heightFull ${styles.detailNewsOutBox}`}>
       <div className={`${styles.detailNewsBox} heightFull `}>
         <div className="hotestNews paH24">
           <div className="maB12 ">
@@ -239,7 +239,7 @@ function DetailNews({ selectItem, showStatusBox }) {
                   <div className="widthFull">
                     <div className="flexB">
                       <div>
-                        <p className="name textColorGgray2">{item.user}</p>
+                        <p className="name colorGray">{item.user}</p>
                         <p className="content flexB">{item.content}</p>
                       </div>
                       <div className="flexB maL12">
