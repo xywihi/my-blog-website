@@ -1,6 +1,6 @@
 import CryptoJS from "crypto-js";
 // 定义一个回调函数来处理 XMLHttpRequest 的状态变化
-const API_URL = "http://anlnblog.free.idcfengye.com/";
+const API_URL = "	http://myblogserver.free.idcfengye.com/";
 // const API_URL = "http://4008451utsx9.vicp.fun:30737/";
 
 // 读取cookie中的token
